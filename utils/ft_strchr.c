@@ -6,13 +6,13 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:51 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 02:17:22 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:04:29 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int		i;
 	char	ch;

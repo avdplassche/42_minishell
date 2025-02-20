@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # cd src
-gcc src/*.c utils/ft_strncmp.c -o minishell
+gcc src/*.c utils/*.c gnl/*.c -o minishell
 ./minishell

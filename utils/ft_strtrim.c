@@ -6,13 +6,13 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:45:02 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 02:21:44 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:46:26 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	int	ft_in_set(char const c, char const *set)
+static	int	ft_in_set(char c, char *set)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static	int	ft_in_set(char const c, char const *set)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	int		i;
 	int		j;

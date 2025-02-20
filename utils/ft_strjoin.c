@@ -6,13 +6,13 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:22 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 02:11:21 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:04:47 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -36,12 +36,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	dest[i] = '\0';
 	return (dest);
 }
-/*
-int main (void)
-{
-	char *s1 = "aaaaa";
-	char *s2 = "bbbb";
-	printf("%s", ft_strjoin(s1, s2));
-	return (0);
-}
-*/

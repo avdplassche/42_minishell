@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 01:55:41 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 16:50:52 by alvan-de         ###   ########.fr       */
+/*   Created: 2025/02/20 13:50:24 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/02/20 16:14:38 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+#define BUFFER_SIZE 10
+
+enum	e_standard
 {
-	char	*line;
+		STDIN = 0,
+		STDOUT = 1,
+		STDERR = 2,
+};
 
-	printf("\n");
-	while (1)
-	{
-		printf("Prompt minishell ⇰\n");
-		line = get_next_line(STDIN);
-		//put line in history
-		parsing(line);
-	}
-
-
-
-}

@@ -6,13 +6,13 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:49:47 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 02:11:24 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:45:54 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	int		i;
 	char	*s2;

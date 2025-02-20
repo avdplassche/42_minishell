@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 01:55:41 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 16:50:52 by alvan-de         ###   ########.fr       */
+/*   Created: 2025/02/20 16:15:23 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/02/20 16:39:11 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/*
+typedef struct t_cmd
 {
-	char	*line;
-
-	printf("\n");
-	while (1)
-	{
-		printf("Prompt minishell ⇰\n");
-		line = get_next_line(STDIN);
-		//put line in history
-		parsing(line);
-	}
+	char		*bin;
+	char		*arg;
+	bool		builtins;
+	char		**path;  ??
+}				s_cmd;
+*/
 
 
 
-}

@@ -6,13 +6,13 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:44:25 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 02:16:55 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:04:21 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	ft_wordcount(char const *s, char c)
+static int	ft_wordcount(char *s, char c)
 {
 	int	i;
 	int	compt;
@@ -31,14 +31,14 @@ static int	ft_wordcount(char const *s, char c)
 	return (compt);
 }
 
-static int	ft_wordlen(char const *s, char c, int i)
+static int	ft_wordlen(char *s, char c, int i)
 {
 	while (s[i] != c && s[i])
 		i++;
 	return (i);
 }
 
-static char	*ft_fill(char const *s, char c)
+static char	*ft_fill(char *s, char c)
 {
 	int		i;
 	int		j;
@@ -70,7 +70,7 @@ char	**memory(char **str, int j)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	int		i;
 	int		j;
