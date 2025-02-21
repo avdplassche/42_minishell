@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 16:16:40 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:08:07 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
-void		parsing(char *cmd);
+int		parsing(char *cmd);
 
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
