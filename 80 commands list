@@ -1,0 +1,80 @@
+env | "wc" -l
+ls -la | grep "."
+< infile ls -l | wc -l > outfile
+echo -n Hola
+cat < file.txt
+echo "Hello" > output.txt
+echo 'Hello' >> log.txt
+sort < input.txt > sorted.txt
+ls | grep "txt" > result.txt
+wc -l < input.txt
+cat file.txt | sort | uniq
+grep "error" < log.txt > errors.txt
+ls | wc -l >> count.txt
+echo "A line" | tee file.txt
+head -n 10 < file.txt
+echo "data" | cat - >> log.txt
+ls > "output file.txt"
+grep 'pattern' < data.txt
+cat <<EOF > file.txt
+echo "hello" | tr a-z A-Z
+head -n 5 < input.txt
+cut -d':' -f1 < /etc/passwd
+echo "Hello" | cat > newfile.txt
+ls -1 | tee list.txt | wc -l
+tac < input.txt > reversed.txt
+paste < file1.txt < file2.txt
+echo "Line" | tee -a file.txt
+sed 's/foo/bar/' < input.txt > output.txt
+sort < data.txt | uniq > result.txt
+grep -o "word" < text.txt | wc -l
+find . -type f | wc -l > count.txt
+cat <<EOF >> log.txt
+awk '{print $1}' < input.txt > output.txt
+ls -l | awk '{print $9}' > filenames.txt
+ps aux | grep "bash" > processes.txt
+echo -e "First\nSecond" | tee file.txt
+echo "Data" | tee >(wc -c) >(wc -w)
+ls | xargs -I {} mv "{}" "{}.bak"
+seq 1 10 | paste -sd "," > numbers.txt
+grep "ERROR" < log.txt | cut -d' ' -f2-
+awk '{print $NF}' < access.log > urls.txt
+ls | grep "pattern" | tee found.txt
+echo "sample" | sed 's/sample/test/' > out.txt
+cat <<EOF > new.txt
+find /bin -type f | sort > bin_files.txt
+echo "123 456" | awk '{print $2}' > numbers.txt
+echo -n "hello" > output.txt
+grep "text" < file.txt | wc -l > count.txt
+awk '{print $1}' < names.txt | sort | uniq
+cat <<EOF | grep "pattern" > matched.txt
+ls -l | sort -k5 -n > sorted.txt
+echo "Hello" | tr 'a-z' 'A-Z' > uppercase.txt
+grep "hello" < input.txt | sort | uniq > result.txt
+echo "word" | tee >(wc -c) >(wc -w) > word_stats.txt
+find . -name "*.txt" | wc -l > textfile_count.txt
+awk '{print $3}' < data.csv | sort > column3_sorted.txt
+ls -1 | sed 's/.*/"&"/' > quoted_filenames.txt
+ls | grep "log" | xargs -I {} mv "{}" "{}.old"
+ps aux | grep "[b]ash" | wc -l > bash_processes.txt
+seq 1 20 | paste -sd "-" > range.txt
+find . -type f -exec wc -l {} + | sort -n > line_counts.txt
+echo "hello world" | awk '{print $2}' > second_word.txt
+ls -lh | awk '{print $5, $9}' > sizes.txt
+grep -E 'error|warning' < log.txt > filtered_errors.txt
+echo "12345" | rev > reversed.txt
+df -h | grep "/dev/sda" | awk '{print $4}' > free_space.txt
+find /bin -type f | grep "sh" | sort > shell_scripts.txt
+cut -d' ' -f2 < input.txt | sort | uniq > unique_words.txt
+echo "Hello" | sed 's/Hello/Hi/' > greeting.txt
+tr -d '\n' < file.txt > oneline.txt
+du -sh * | sort -hr > disk_usage.txt
+cat <<EOF | tr 'a-z' 'A-Z' > uppercase.txt
+find . -type f -printf "%s %p\n" | sort -n > sorted_sizes.txt
+history | grep "rm" > deleted_files.txt
+ls -lt | awk '{print $9}' | head -n 10 > latest_files.txt
+netstat -tulnp | grep "80" > http_ports.txt
+echo -n "input" | md5sum > checksum.txt
+ls | grep "^[a-z]" > lowercase_filenames.txt
+find /etc -type f -name "*.conf" | wc -l > config_count.txt
+cat <<EOF | grep "data" > filtered_data.txt

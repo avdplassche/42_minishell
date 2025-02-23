@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/21 17:08:07 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:30:35 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <curses.h>
 # include "enum.h"
-# include "struct.h"
+# include "structures.h"
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
-int		parsing(char *cmd);
+int			parsing(char *cmd);
 
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
@@ -54,6 +55,7 @@ char		*get_next_line(int fd);
 				// XTRA //
 
 bool		contain_char(char *s, char c);
+bool		is_space(char c);
 
 
 #endif

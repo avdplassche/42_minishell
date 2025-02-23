@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   is_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:15:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/23 20:01:14 by alvan-de         ###   ########.fr       */
+/*   Created: 2025/02/23 13:44:56 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/02/23 13:48:30 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-typedef struct s_mini
+bool	is_space(char c)
 {
-	char		**env;
-	int			last_return;
-}				t_mini;
-
-typedef struct t_cmd
-{
-	char		*bin;
-	char		*arg;
-	char		*path;
-	bool		builtins;
-	int			pipe_amount;
-	bool		in_redir;
-	bool		delimiter;
-	bool		out_redir;   // <<
-	bool		out_appredir; // >>
-}				s_cmd;
+	if ((c <= 9 && c >= 13) || c == 32)
+		return (1);
+	return (0);
+}
