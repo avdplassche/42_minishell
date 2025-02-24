@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/23 19:57:15 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:29:57 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	parsing(char *line)
 	cmd_amount = count_cmd(line);
 	i = 0;
 
-	if (!check_line_validity(line)) //
-		return (-1);   //maybe change -1 by an error function that writes error message to STDERR
+	// if (!check_line_validity(line)) //
+	// 	return (-1);   //maybe change -1 by an error function that writes error message to STDERR
 	while (i < cmd_amount)
 	{
 		cmd = get_next_cmd_index(*line);  //strdup ?

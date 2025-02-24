@@ -78,3 +78,23 @@ echo -n "input" | md5sum > checksum.txt
 ls | grep "^[a-z]" > lowercase_filenames.txt
 find /etc -type f -name "*.conf" | wc -l > config_count.txt
 cat <<EOF | grep "data" > filtered_data.txt
+ls -l | grep ".txt" | wc -l
+cat file.txt | tr 'a-z' 'A-Z' | tee uppercase.txt
+ps aux | grep "firefox" | awk '{print $2}' | xargs kill -9
+ls -l | awk '{print $9}' | sort | uniq -c
+df -h | grep "/dev/sda" | awk '{print $5}' | cut -d'%' -f1
+find . -type f | grep ".log" | xargs wc -l | sort -n
+ls -1 | grep "config" | tee configs.txt | wc -l
+cat access.log | awk '{print $(NF-1)}' | sort | uniq -c | sort -nr
+history | grep "ssh" | awk '{print $2}' | sort | uniq
+ls -la | grep "^d" | awk '{print $9}' | sort | tee directories.txt
+ps aux | grep "root" | awk '{print $11}' | sort | uniq -c
+find . -type f | xargs ls -lh | awk '{print $9, $5}' | sort -k2 -h
+ls -l | awk '{print $1, $9}' | grep "^d" | wc -l
+grep "ERROR" /var/log/syslog | cut -d' ' -f5- | sort | uniq -c | sort -nr
+ls -l | grep -v "^d" | awk '{print $5, $9}' | sort -n | tee file_sizes.txt
+echo "one two three" | tr ' ' '\n' | sort | uniq -c | sort -nr
+netstat -tulnp | grep "LISTEN" | awk '{print $4}' | cut -d':' -f2 | sort | uniq
+cat file.txt | tr -d '\r' | awk '{print length, $0}' | sort -n | cut -d' ' -f2-
+ls -1 | xargs -I {} echo "{} is a file" | tee file_list.txt | wc -l
+find . -type f | grep -E "\.sh$" | xargs wc -l | sort -nr | head -10
