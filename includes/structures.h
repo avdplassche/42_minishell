@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:15:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/23 20:01:14 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:42:26 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 typedef struct s_mini
 {
-	char		**env;
+	char		**envp;
+	char		*current_line;
 	int			last_return;
+	bool		error;
 }				t_mini;
 
-typedef struct t_cmd
+typedef struct s_cmd
 {
 	char		*bin;
 	char		*arg;
-	char		*path;
+	char		*fd_path;
 	bool		builtins;
 	int			pipe_amount;
 	bool		in_redir;
-	bool		delimiter;
-	bool		out_redir;   // <<
-	bool		out_appredir; // >>
-}				s_cmd;
+	bool		out_redir;   
+	bool		delimiter;     // <<
+	bool		out_appredir;  // >>
+	// t_mini		*mini;
+}				t_cmd;

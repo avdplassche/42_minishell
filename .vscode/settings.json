@@ -4,6 +4,7 @@
 		"get_next_line.h": "c",
 		"wait.h": "c",
 		"signal.h": "c",
-		"enum.h": "c"
+		"enum.h": "c",
+		"curses.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/23 19:30:35 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:07:47 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
-int			parsing(char *cmd);
+int			fill_cmd_structure(t_mini *mini, t_cmd *cmd_struct, int bin_count);
+
+t_cmd		*parsing(t_mini *mini);
+
 
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
