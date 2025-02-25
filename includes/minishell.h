@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/24 17:07:47 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/25 00:58:00 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # include "enum.h"
 # include "structures.h"
 
+
 /* * * * * * * * * PARSING * * * * * * * * */
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd_struct, int bin_count);
-
 t_cmd		*parsing(t_mini *mini);
 
 
@@ -59,6 +59,5 @@ char		*get_next_line(int fd);
 
 bool		contain_char(char *s, char c);
 bool		is_space(char c);
-
 
 #endif

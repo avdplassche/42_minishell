@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/24 17:07:47 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/25 00:47:30 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_cmd	*parsing(t_mini *mini)
 	bin_count = count_cmd(mini->current_line);
 	cmd_struct = (t_cmd *)malloc(sizeof(t_cmd) * bin_count); //can put it in fill_cmd
 	fill_cmd_structure(mini, cmd_struct, bin_count);
-	printf("\nBin : %s$\n", cmd_struct->bin);
+	printf("\nBin : %s$\n\n", cmd_struct->bin);
 
 
 	/*second parse*/
