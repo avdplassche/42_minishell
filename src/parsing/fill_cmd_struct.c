@@ -3,6 +3,23 @@
 #include "../../includes/minishell.h"
 
 
+int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
+{
+	int		i;
+	int		j;
+	char	*arg;
+
+	j = 0;
+	i = cmd_struct->index;
+	while (is_space(cmd_line[i]) == 1)
+		i++;
+	j = i;
+	while (cmd_line[i] && contain_char("|<>", cmd_line[i]))
+		i++;
+	arg = malloc(i - j);
+	return (0);
+}
+
 /** Used to fill the command, stops when it finds a
  * redir, a pipe or a space
  *@param cmd_line : the command line to parse
@@ -13,7 +30,6 @@ int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_struct)
 {
 	int	i;
 	int	j;
-	int	nl;
 
 	i = 0;
 	j = 0;
@@ -25,17 +41,13 @@ int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_struct)
 		i++;
 		j++;
 	}
-	if (contain_char("<>|", cmd_line[i])) //because of weird behaviour, maybe macos
-		nl = 0;
-	else
-		nl = 1;
-	cmd_struct->bin = ft_substr(cmd_line, i - j, j - nl);
+	cmd_struct->bin = ft_substr(cmd_line, i - j, j);
+	cmd_struct->index = i;
 	return (0);
 }
 
 
-/**
- * Fill cmd_struct
+/** Fill cmd_struct
  * @param cmd_struct an empty structure that the function will fill
  * @param bin_count number of structures, used to malloc
  * @return A cmd filled structure
@@ -47,13 +59,16 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd, int bin_count)
 	i = -1;
 	while (++i < bin_count)
 	{
-		cmd->number = i + 1;    //starting from 0 or 1 ?
+		cmd->id = i + 1;
 		fill_cmd_bin(mini->current_line, cmd);
 		// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
 		// if (cmd_struct->builtins == -1)
 		// 	error();
-		// cmd_struct->arg = fill_cmd_arg(cmd_struct);
-		// cmd_struct->fd_path = fill_cmd_fd_path(cmd_struct);
+		if (mini->current_line[cmd->index])
+			fill_cmd_args(mini->current_line, cmd);
+		else
+			return (0);
+		// fill_cmd_fd_path(cmd);
 	}
 	// cmd_struct = fill_cmd_booleans(cmd_struct);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/25 00:58:00 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:06:15 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <curses.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "enum.h"
 # include "structures.h"
 
@@ -36,7 +38,15 @@ t_cmd		*parsing(t_mini *mini);
 
 
 
-/* * * * * * * * * UTILS * * * * * * * * * */
+
+/* * * * * * * * * *PRINT * * * * * * * * * */
+
+void		print_char_table(char **string, char *name);
+void		print_string(char *string, char *name);
+void		print_cmd(t_cmd cmd);
+
+
+/* * * * * * * * * *UTILS * * * * * * * * * */
 
 				// LIBFT //
 
@@ -59,5 +69,7 @@ char		*get_next_line(int fd);
 
 bool		contain_char(char *s, char c);
 bool		is_space(char c);
+int			ft_is_only_spaces(char *s);
+
 
 #endif

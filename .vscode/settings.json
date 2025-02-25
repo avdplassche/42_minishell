@@ -6,6 +6,9 @@
 		"signal.h": "c",
 		"enum.h": "c",
 		"curses.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"structures.h": "c",
+		"readline.h": "c",
+		"fcntl.h": "c"
 	}
 }

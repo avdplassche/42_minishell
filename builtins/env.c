@@ -6,8 +6,11 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:18:44 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/21 16:19:06 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:46:15 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+
+

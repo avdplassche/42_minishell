@@ -6,18 +6,31 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/25 00:47:30 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:50:34 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 
+t_cmd	init_cmd(t_cmd cmd, int i, int bin_amount)
+{
+	cmd.bin = NULL;
+	cmd.args = NULL;
+	cmd.fd_path = NULL;
+	cmd.pipe_amount = bin_amount;
+	cmd.id = i + 1;
+	cmd.builtin = 0;
+	cmd.in_redir = 0;
+	cmd.out_redir = 0;
+	cmd.delimiter = 0;
+	cmd.out_appredir = 0;
+	cmd.index = 0;
+	return (cmd);
+}
 
 
-
-/**
- * Counting commands amout, that will be used for pipes.
+/** Counting commands amount, that will be used for pipes.
  * @param line command line
  * @return - number of comands
  * @note prodeed by countint pipe char '|'
@@ -37,11 +50,13 @@ int	count_cmd(char *line)
 
 t_cmd	*parsing(t_mini *mini)
 {
-	t_cmd	*cmd_struct;
+	t_cmd	*cmd;
 	int		i;
 	int		bin_count;
 
-	i = 0;
+	i = -1;
+	if (strncmp("$?", mini->current_line, 2) == 0)
+		return (printf("%d: command not found\n", mini->last_return), NULL);
 	// lister les erreurs de ce genre
 	// if (line[i] == '|')
 		// error();
@@ -70,10 +85,17 @@ t_cmd	*parsing(t_mini *mini)
 		// if no : printf()
 
 	bin_count = count_cmd(mini->current_line);
-	cmd_struct = (t_cmd *)malloc(sizeof(t_cmd) * bin_count); //can put it in fill_cmd
-	fill_cmd_structure(mini, cmd_struct, bin_count);
-	printf("\nBin : %s$\n\n", cmd_struct->bin);
-
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * bin_count); //can put it in fill_cmd
+	while (++i < bin_count)
+		cmd[i] = init_cmd(cmd[i], i, bin_count);
+	fill_cmd_structure(mini, cmd, bin_count);
+	if (DEBUGG_PARSING == 1)
+	{
+		i = -1;
+		printf("Commands total : %d\n\n", bin_count);
+		while (++i < bin_count)
+			print_cmd(cmd[i]);
+	}
 
 	/*second parse*/
 
@@ -89,7 +111,7 @@ t_cmd	*parsing(t_mini *mini)
 
 
 
-	return (cmd_struct);
+	return (cmd);
 }
 
 
