@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/26 14:03:58 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:09:32 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ int	count_cmd(char *line)
 	return (count);
 }
 
-
-
-
 t_cmd	*parsing(t_mini *mini)
 {
 	t_cmd	*cmd;
@@ -64,18 +61,18 @@ t_cmd	*parsing(t_mini *mini)
 	i = -1;
 	if (ft_strncmp("$?", mini->current_line, 2) == 0)
 		return (printf("%d: command not found\n", mini->last_return), NULL);
+		
 	// lister les erreurs de ce genre
-	// if (line[i] == '|')
+	// if (line[0] == '|')
+	// if (nb of '' or "" % 2 != 0)
+
 		// error();
-
-	// count number of cmd, malloc(size of (t_cmd) * cmd_amount)
-
-	/*\ order is important /*/
 
 	if (mini->current_line[0] == '$')
 	{
 		
 	}
+	
 	/* case line[0] == '$' */
 
 	if (!(contain_char(mini->current_line, ' ')))
@@ -101,12 +98,7 @@ t_cmd	*parsing(t_mini *mini)
 		fill_cmd_structure(mini, cmd, cmd_amount);
 	}
 	if (DEBUGG_PARSING == 1)
-	{
-		i = -1;
-		printf("\nCommand line : %s\n", mini->current_line);
-		while (++i < cmd_amount)
-			print_cmd(cmd[i], mini->current_line);
-	}
+		debug_parsing(mini, cmd, cmd_amount);
 
 	/*second parse*/
 

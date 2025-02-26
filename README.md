@@ -6,6 +6,3 @@ The 3 steps of minishell :
 2 - Parse Command
 3 - Execute Command
 
-Steps :
-
-- Duplicate environment variable

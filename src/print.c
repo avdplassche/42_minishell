@@ -23,12 +23,12 @@ void	print_string(char *string, char *name)
 	printf("%s : %s\n", name, string);
 }
 
+
 void	print_cmd(t_cmd cmd, char *cmd_line)
 {
 	int i;
 
 	i = -1;
-	printf("\n");
 	printf("   Command %d\n\n", cmd.id);
 	printf("	  Bin : %s\n", cmd.command);
 	printf("	  Args  : ");
@@ -39,10 +39,29 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	}
 	else
 		printf("(null)\n");
-	printf("	  Pathname : %s\n", cmd.file_path);
-	if (cmd.type == 1)
-		printf("	  Builtin : YES\n");
+	printf("	  Filename : %s ", cmd.filename);
+	if (cmd.file_path == true)
+		printf("(path)\n");
 	else
-		printf("	  Builtin : NO\n");
-	printf("\n");
+		printf("(filename)\n");
+	if (cmd.type == BIN)
+		printf("	  Type : binary\n");
+	else if ((cmd.type == BUILTIN))
+		printf("	  Type : builtin\n");
+	else
+		printf("	  Type : invalid command\n");
+}
+
+void	debug_parsing(t_mini *mini, t_cmd *cmd, int cmd_amount)
+{
+	int	i;
+
+	i = -1;
+	printf("\nCommand line : %s\n", mini->current_line);
+	while (++i < cmd_amount)
+	{
+		print_cmd(cmd[i], mini->current_line);
+		printf("\n");
+	}
+	printf("---------------------------------\n");
 }

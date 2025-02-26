@@ -1,37 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 01:55:41 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/26 14:05:02 by alvan-de         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * Function for env to be used everywhere and to iterate on its values
- * @param mini an empty t_mini_structure
- * @param envp the terminal env variable
- * @note this is for minishell to have it's own env variable
- *
+
+/** Frees char ** variables
  */
-t_mini	dup_env(t_mini mini, char **envp)
+void	free_double_pointer(char **str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (envp[i])
+	while (str[i])
 		i++;
-	mini.envp = (char **)malloc(sizeof(char *) * (i + 1));
-	i = -1;
-	while (envp[++i])
-		mini.envp[i] = ft_strdup(envp[i]);
-	mini.envp[i] = NULL;
-	return (mini);
+	while (i >= 0)
+	{
+		free(str[i]);
+		i--;
+	}
+	free(str);
+}
+
+/** Frees t_mini mini, used when leaving minishell
+ *maybe when signals exit the program
+ */
+void	free_mini(t_mini *mini)
+{
+	free_double_pointer(mini->envp);
+	free_double_pointer(mini->builtins);
+	free_double_pointer(mini->paths);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -39,9 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	t_mini	mini;
 	t_cmd	*cmd;
 
-	mini = dup_env(mini, envp);
-	mini.builtins = ft_split(BUILTINS, ',');
-	mini.last_return = 0;
+	init_mini(&mini, envp);
 	printf("\n");
 	while (TEST_MODE == 0)
 	{
@@ -53,17 +46,35 @@ int	main(int argc, char **argv, char **envp)
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}
+
+
+/********************** TEST MODE ****************************** */
+
+
 	int fd = open("cmd_testmode", O_RDONLY);
+	// int bs = 10000;
+	char buffer[10000];
+	int i = -1;
+	int c = 0;
+
+	read(fd, buffer, 9999);
+	while (buffer[++i])
+		if (buffer[i] == '\n')
+			c++;
+	close(fd);
+	fd = open("cmd_testmode", O_RDONLY);
 	if (fd == -1)
 		perror("error");
-	while (TEST_MODE == 1)
+	while (TEST_MODE == 1 && c >= 0)
 	{
 		mini.current_line = get_next_line(fd);
 		if (!(ft_is_only_spaces(mini.current_line)))
 			cmd = parsing(&mini);
 		free(mini.current_line);
 		mini.current_line = NULL;
+		c--;
 	}
-
-
+	close(fd);
+	free_mini(&mini);
+	return (0);
 }

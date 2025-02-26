@@ -10,6 +10,7 @@
 		"structures.h": "c",
 		"readline.h": "c",
 		"fcntl.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"type_traits": "c"
 	}
 }

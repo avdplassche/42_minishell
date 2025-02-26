@@ -7,7 +7,7 @@
  * @param cmd_struct the command structure to fill
  * @return error ? not set yet
  */
-int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
+int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
 {
 	int		i;
 	int		j;
@@ -15,61 +15,79 @@ int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
 
 	j = 0;
 	i = cmd_struct->index;
-	while (is_space(cmd_line[i]) == 1)
+	while (is_space(mini->current_line[i]) == 1)
 		i++;
 	j = i;
-	while (cmd_line[i] && contain_char("|<>", cmd_line[i]))
+	while (mini->current_line[i] && contain_char("|<>", mini->current_line[i]))
 		i++;
 	arg = malloc(sizeof(char) * (i - j + 1));
 	return (0);
 }
 
-/** Used to fill the command, stops when it finds a redir, a pipe or a space
+/** Fill cmd type token
+ * @param mini t_mini structure, containing current line to work with
+ * @param cmd cmd struct
+ * @return - 0 (BIN) the command can be found in PATH
+ * @return - 1 (BUILTIN) the command can be found in the 'builtins' dir
+ * @return - -1 (UNVALID) the command is not valid
+ */
+int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
+{
+	
+
+}
+
+
+/** Fill the command token, stops when it finds a redir, a pipe or a space
  *@param cmd_line the command line from the prompt
  *@param cmd_struct the command structure to fill
  *@return not set yet (maybe error)
  */
-int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_s)
+int	fill_cmd_string(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (is_space(cmd_line[i]))
+	while (is_space(mini->current_line[i]))
 		i++;
-	while (cmd_line[i] && !(is_space(cmd_line[i]))
-		&& !(contain_char("<>|", cmd_line[i])))
+	while (mini->current_line[i] && !(is_space(mini->current_line[i]))
+		&& !(contain_char("<>|", mini->current_line[i])))
 	{
 		i++;
 		j++;
 	}
-	cmd_s->command = ft_substr(cmd_line, i - j, j);
-	cmd_s->index = i;
+	cmd->command = ft_substr(mini->current_line, i - j, j);
+	cmd->index = i;
 	return (0);
 }
 
-
-/** Fill command structure, that will be executed
+/** Fill command structure (for 1 command of the command line)
+ * @param mini t_mini structure, containing current line to work with
  * @param cmd_s an empty structure that the function will fill
  * @param bin_count number of structures, used to malloc
  * @return A cmd filled structure
  */
-int	fill_cmd_structure(t_mini *mini, t_cmd *cmd_s, int bin_count)
+int	fill_cmd_structure(t_mini *mini, t_cmd *cmd, int cmd_amount)
 {
 	int	i;
 
 	i = -1;
-	while (++i < bin_count)
+	while (++i < cmd_amount)
 	{
-		fill_cmd_bin(mini->current_line, cmd_s);
+		fill_cmd_string(mini, cmd);
+		if (fill_cmd_type(mini, cmd) == -1)
+		{
+			//error
+		}
 		/* FOLLOWING IS ACTUALLY FILL CMD TYPE*/
 
 			// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
 			// if (cmd_struct->builtins == -1)
 			// 	error();
-		if (mini->current_line[cmd_s->index])
-			fill_cmd_args(mini->current_line, cmd_s);
+		if (mini->current_line[cmd->index])
+			fill_cmd_args(mini, cmd);
 		else
 			return (0);
 		// fill_cmd_fd_path(cmd);

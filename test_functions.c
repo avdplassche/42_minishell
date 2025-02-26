@@ -20,8 +20,10 @@ int	dup_env(char **envp)
 int main(int argc, char **argv, char **envp)
 {
 	int fd;
-
+	char *env;
 	// env = NULL;
 	
-	printf("%d\n", dup_env(envp));
+	env = getenv("PATH");
+	printf("%s\n", env);
+	return (0);
 }

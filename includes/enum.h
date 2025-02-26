@@ -20,5 +20,5 @@ enum	e_binary
 {
 		UNVALID = -1,
 		BIN = 0,
-		BUILT = 1,
+		BUILTIN = 1,
 };

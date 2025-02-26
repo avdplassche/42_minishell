@@ -21,6 +21,12 @@
 #define TEST_MODE 1
 
 
+
+/* * * * * * * * * *INIT * * * * * * * * * */
+
+int			init_mini(t_mini *mini, char **envp);
+
+
 /* * * * * * * * * PARSING * * * * * * * * */
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd_struct, int bin_count);
@@ -39,6 +45,7 @@ void		print_char_table(char **string, char *name);
 void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
 
+void		debug_parsing(t_mini *mini, t_cmd *cmd, int cmd_amount);
 
 /* * * * * * * * * *UTILS * * * * * * * * * */
 
