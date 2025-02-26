@@ -24,8 +24,7 @@ int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
 	return (0);
 }
 
-/** Used to fill the command, stops when it finds a
- * redir, a pipe or a space
+/** Used to fill the command, stops when it finds a redir, a pipe or a space
  *@param cmd_line the command line from the prompt
  *@param cmd_struct the command structure to fill
  *@return not set yet (maybe error)
@@ -45,7 +44,7 @@ int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_s)
 		i++;
 		j++;
 	}
-	cmd_s->bin = ft_substr(cmd_line, i - j, j);
+	cmd_s->command = ft_substr(cmd_line, i - j, j);
 	cmd_s->index = i;
 	return (0);
 }
@@ -64,9 +63,11 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd_s, int bin_count)
 	while (++i < bin_count)
 	{
 		fill_cmd_bin(mini->current_line, cmd_s);
-		// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
-		// if (cmd_struct->builtins == -1)
-		// 	error();
+		/* FOLLOWING IS ACTUALLY FILL CMD TYPE*/
+
+			// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
+			// if (cmd_struct->builtins == -1)
+			// 	error();
 		if (mini->current_line[cmd_s->index])
 			fill_cmd_args(mini->current_line, cmd_s);
 		else

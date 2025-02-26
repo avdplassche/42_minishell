@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/26 02:47:43 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:03:58 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  */
 t_cmd	init_cmd(t_cmd cmd, int i, int bin_amount)
 {
-	cmd.bin = NULL;
+	cmd.command = NULL;
 	cmd.args = NULL;
-	cmd.fd_path = NULL;
-	cmd.pipe_amount = bin_amount;
+	cmd.file_path = NULL;
+	cmd.total_cmd = bin_amount;
 	cmd.id = i + 1;
-	cmd.builtin = 0;
+	cmd.type = -1;
 	cmd.in_redir = 0;
 	cmd.out_redir = 0;
 	cmd.delimiter = 0;
@@ -37,7 +37,7 @@ t_cmd	init_cmd(t_cmd cmd, int i, int bin_amount)
 /** Counting commands amount, that will be used for pipes.
  * @param line command line
  * @return number of comands
- * @note prodeed by countint pipe char '|'
+ * @note proceed by countint pipe char '|'
  */
 int	count_cmd(char *line)
 {
@@ -52,11 +52,14 @@ int	count_cmd(char *line)
 	return (count);
 }
 
+
+
+
 t_cmd	*parsing(t_mini *mini)
 {
 	t_cmd	*cmd;
+	int		cmd_amount;
 	int		i;
-	int		bin_count;
 
 	i = -1;
 	if (ft_strncmp("$?", mini->current_line, 2) == 0)
@@ -71,13 +74,14 @@ t_cmd	*parsing(t_mini *mini)
 
 	if (mini->current_line[0] == '$')
 	{
-
+		
 	}
 	/* case line[0] == '$' */
 
 	if (!(contain_char(mini->current_line, ' ')))
 	{
-
+		//if (cmd_exists cmd->bin
+		//
 	}
 	/* case no spaces */
 
@@ -88,18 +92,19 @@ t_cmd	*parsing(t_mini *mini)
 		// if yes exec
 		// if no : printf()
 
-	bin_count = count_cmd(mini->current_line);
-	cmd = (t_cmd *)malloc(sizeof(t_cmd) * bin_count); //can put it in fill_cmd
-	while (++i < bin_count)
+	cmd_amount = count_cmd(mini->current_line);
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_amount); //can put it in fill_cmd
+	//malloc protection
+	while (++i < cmd_amount)
 	{
-		cmd[i] = init_cmd(cmd[i], i, bin_count);
-		fill_cmd_structure(mini, cmd, bin_count);
+		cmd[i] = init_cmd(cmd[i], i, cmd_amount);
+		fill_cmd_structure(mini, cmd, cmd_amount);
 	}
 	if (DEBUGG_PARSING == 1)
 	{
 		i = -1;
-		printf("\nTotal commands : %d\n", bin_count);
-		while (++i < bin_count)
+		printf("\nCommand line : %s\n", mini->current_line);
+		while (++i < cmd_amount)
 			print_cmd(cmd[i], mini->current_line);
 	}
 

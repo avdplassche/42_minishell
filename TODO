@@ -1,4 +1,21 @@
+Signals
+
+
+Idea for error handling : 
+
+1 - make enum amout errors (ex : MALLOC_EROR)
+2 - store them in cmd.error (and return at the same time)
+3 - check error in main, after parsing
+4 - 
+
+
+
+
+
+
 Do parsing
 
 Talk error handling
 Same for malloc protection
+
+

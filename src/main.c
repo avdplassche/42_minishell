@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:55:41 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/26 02:38:31 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:05:02 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,19 @@ t_mini	dup_env(t_mini mini, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
+	t_cmd	*cmd;
 
 	mini = dup_env(mini, envp);
 	mini.builtins = ft_split(BUILTINS, ',');
 	mini.last_return = 0;
 	printf("\n");
-	while (TEST_MODE == 0) //to change to only 1 when done
+	while (TEST_MODE == 0)
 	{
 		mini.current_line = readline("Prompt minishell ");
 		add_history(mini.current_line);
 		/* put line in history */
 		if (!(ft_is_only_spaces(mini.current_line)))
-			parsing(&mini);
+			cmd = parsing(&mini);
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}
@@ -59,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		mini.current_line = get_next_line(fd);
 		if (!(ft_is_only_spaces(mini.current_line)))
-			parsing(&mini);
+			cmd = parsing(&mini);
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}

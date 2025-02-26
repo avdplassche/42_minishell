@@ -29,8 +29,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 
 	i = -1;
 	printf("\n");
-	printf("   Command %d : %s\n\n", cmd.id, cmd_line);
-	printf("	  Bin : %s\n", cmd.bin);
+	printf("   Command %d\n\n", cmd.id);
+	printf("	  Bin : %s\n", cmd.command);
 	printf("	  Args  : ");
 	if (cmd.args != NULL)
 	{
@@ -39,8 +39,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	}
 	else
 		printf("(null)\n");
-	printf("	  Pathname : %s\n", cmd.fd_path);
-	if (cmd.builtin == 1)
+	printf("	  Pathname : %s\n", cmd.file_path);
+	if (cmd.type == 1)
 		printf("	  Builtin : YES\n");
 	else
 		printf("	  Builtin : NO\n");
