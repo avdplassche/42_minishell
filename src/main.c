@@ -32,17 +32,17 @@ void	free_mini(t_mini *mini)
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
-	t_cmd	*cmd;
+	t_cmd	cmd;
 
 	init_mini(&mini, envp);
+	//malloc protection
 	printf("\n");
 	while (TEST_MODE == 0)
 	{
 		mini.current_line = readline("Prompt minishell ");
 		add_history(mini.current_line);
-		/* put line in history */
 		if (!(ft_is_only_spaces(mini.current_line)))
-			cmd = parsing(&mini);
+			parsing(&mini, &cmd);
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}
@@ -51,25 +51,25 @@ int	main(int argc, char **argv, char **envp)
 /********************** TEST MODE ****************************** */
 
 
-	int fd = open("cmd_testmode", O_RDONLY);
-	// int bs = 10000;
+	int fd = open("TESTMODE", O_RDONLY);
 	char buffer[10000];
 	int i = -1;
 	int c = 0;
+	int r = read(fd, buffer, 9999);
 
-	read(fd, buffer, 9999);
+	buffer[r] = '\0';
 	while (buffer[++i])
 		if (buffer[i] == '\n')
 			c++;
 	close(fd);
-	fd = open("cmd_testmode", O_RDONLY);
+	fd = open("TESTMODE", O_RDONLY);
 	if (fd == -1)
 		perror("error");
 	while (TEST_MODE == 1 && c >= 0)
 	{
 		mini.current_line = get_next_line(fd);
 		if (!(ft_is_only_spaces(mini.current_line)))
-			cmd = parsing(&mini);
+			parsing(&mini, &cmd);
 		free(mini.current_line);
 		mini.current_line = NULL;
 		c--;

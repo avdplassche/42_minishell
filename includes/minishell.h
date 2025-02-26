@@ -15,10 +15,12 @@
 # include "enum.h"
 # include "structures.h"
 
-#define BUILTINS "cd,echo,env,exit,export,pwd,unset"
+#define BUILTINS_STRING "cd,echo,env,exit,export,pwd,unset"
+#define BUILTIN_AMOUNT 7
 #define BUFFER_SIZE 10
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
+
 
 
 
@@ -29,8 +31,8 @@ int			init_mini(t_mini *mini, char **envp);
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
-int			fill_cmd_structure(t_mini *mini, t_cmd *cmd_struct, int bin_count);
-t_cmd		*parsing(t_mini *mini);
+int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+int			parsing(t_mini *mini, t_cmd *cmd);
 
 
 
@@ -45,7 +47,7 @@ void		print_char_table(char **string, char *name);
 void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
 
-void		debug_parsing(t_mini *mini, t_cmd *cmd, int cmd_amount);
+void		debug_parsing(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * *UTILS * * * * * * * * * */
 

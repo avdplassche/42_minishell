@@ -16,6 +16,7 @@ typedef struct s_mini
 	char		**builtins;
 	char		**paths;
 	char		*current_line;
+	int			total_cmd;
 	int			last_return;
 	bool		error;
 }				t_mini;

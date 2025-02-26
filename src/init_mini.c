@@ -1,6 +1,8 @@
 
 #include "../includes/minishell.h"
 
+
+
 /** Function for env to be used everywhere and to iterate on its values
  * @param mini an empty t_mini_structure
  * @param envp the terminal env variable
@@ -31,12 +33,14 @@ int	dup_env(t_mini *mini, char **envp)
  */
 int	init_mini(t_mini *mini, char **envp)
 {
-	mini->builtins = ft_split(BUILTINS, ',');
+	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	//malloc protection
 	mini->last_return = 0;
+	// mini->total_cmd = count_cmd(mini);
 	dup_env(mini, envp);
 	mini->paths = ft_split(getenv("PATH"), ':');
 	//malloc protection
+	return (0);
 }
 
 

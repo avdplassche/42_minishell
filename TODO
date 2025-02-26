@@ -1,3 +1,22 @@
+Fonctions a terminer : 
+
+
+Now : 
+
+reesayer de mettre total cmd
+coder cas double pipe "||"
+fill_cmd_args
+epurstring
+commancer a gerer quotes
+handle $PATH or other $FOO
+
+
+After :
+
+
+fill_cmd_type ()
+
+
 Signals
 
 
@@ -6,7 +25,6 @@ Idea for error handling :
 1 - make enum amout errors (ex : MALLOC_EROR)
 2 - store them in cmd.error (and return at the same time)
 3 - check error in main, after parsing
-4 - 
 
 
 

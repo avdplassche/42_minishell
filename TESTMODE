@@ -1,3 +1,4 @@
 env | "wc" -l
 ls -la | grep "."
 echo -n Hola
+ls -l | grep ".txt" | wc -l

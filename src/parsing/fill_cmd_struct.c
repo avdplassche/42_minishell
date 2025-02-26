@@ -6,6 +6,7 @@
  * @param cmd_line the command line from the prompt
  * @param cmd_struct the command structure to fill
  * @return error ? not set yet
+ * 
  */
 int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
 {
@@ -21,6 +22,10 @@ int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
 	while (mini->current_line[i] && contain_char("|<>", mini->current_line[i]))
 		i++;
 	arg = malloc(sizeof(char) * (i - j + 1));
+	//malloc 
+
+	/* NOT FINISHED*/
+
 	return (0);
 }
 
@@ -30,11 +35,26 @@ int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
  * @return - 0 (BIN) the command can be found in PATH
  * @return - 1 (BUILTIN) the command can be found in the 'builtins' dir
  * @return - -1 (UNVALID) the command is not valid
+ * 
  */
 int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
 {
-	
+	int	i;
 
+	i = -1;
+	while (++i < BUILTIN_AMOUNT)
+	{
+		if (!(ft_strncmp(mini->builtins[i], cmd->command, ft_strlen(cmd->command))))
+		{
+			cmd->type = BUILTIN;
+			return (0);
+		}
+	}
+
+	/* NOT FINISHED*/
+
+
+	cmd->type = BIN;
 }
 
 
@@ -42,6 +62,7 @@ int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
  *@param cmd_line the command line from the prompt
  *@param cmd_struct the command structure to fill
  *@return not set yet (maybe error)
+
  */
 int	fill_cmd_string(t_mini *mini, t_cmd *cmd)
 {
@@ -68,24 +89,22 @@ int	fill_cmd_string(t_mini *mini, t_cmd *cmd)
  * @param cmd_s an empty structure that the function will fill
  * @param bin_count number of structures, used to malloc
  * @return A cmd filled structure
+ * 
  */
-int	fill_cmd_structure(t_mini *mini, t_cmd *cmd, int cmd_amount)
+int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
 	i = -1;
-	while (++i < cmd_amount)
+	while (++i < cmd->total_cmd)
 	{
 		fill_cmd_string(mini, cmd);
 		if (fill_cmd_type(mini, cmd) == -1)
 		{
-			//error
+			// error
+			return (-1);
 		}
-		/* FOLLOWING IS ACTUALLY FILL CMD TYPE*/
 
-			// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
-			// if (cmd_struct->builtins == -1)
-			// 	error();
 		if (mini->current_line[cmd->index])
 			fill_cmd_args(mini, cmd);
 		else
