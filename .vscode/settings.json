@@ -9,6 +9,7 @@
 		"stdlib.h": "c",
 		"structures.h": "c",
 		"readline.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"history.h": "c"
 	}
 }

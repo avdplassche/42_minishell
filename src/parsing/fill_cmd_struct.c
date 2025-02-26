@@ -2,7 +2,11 @@
 
 #include "../../includes/minishell.h"
 
-
+/** Fill cmd arg tokens, a char** that will be used in execve
+ * @param cmd_line the command line from the prompt
+ * @param cmd_struct the command structure to fill
+ * @return error ? not set yet
+ */
 int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
 {
 	int		i;
@@ -16,17 +20,17 @@ int	fill_cmd_args(char *cmd_line, t_cmd *cmd_struct)
 	j = i;
 	while (cmd_line[i] && contain_char("|<>", cmd_line[i]))
 		i++;
-	arg = malloc(i - j);
+	arg = malloc(sizeof(char) * (i - j + 1));
 	return (0);
 }
 
 /** Used to fill the command, stops when it finds a
  * redir, a pipe or a space
- *@param cmd_line : the command line to parse
- *@param cmd_struct : the command structure to fill
+ *@param cmd_line the command line from the prompt
+ *@param cmd_struct the command structure to fill
  *@return not set yet (maybe error)
  */
-int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_struct)
+int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_s)
 {
 	int	i;
 	int	j;
@@ -41,31 +45,30 @@ int	fill_cmd_bin(char *cmd_line, t_cmd *cmd_struct)
 		i++;
 		j++;
 	}
-	cmd_struct->bin = ft_substr(cmd_line, i - j, j);
-	cmd_struct->index = i;
+	cmd_s->bin = ft_substr(cmd_line, i - j, j);
+	cmd_s->index = i;
 	return (0);
 }
 
 
-/** Fill cmd_struct
- * @param cmd_struct an empty structure that the function will fill
+/** Fill command structure, that will be executed
+ * @param cmd_s an empty structure that the function will fill
  * @param bin_count number of structures, used to malloc
  * @return A cmd filled structure
  */
-int	fill_cmd_structure(t_mini *mini, t_cmd *cmd, int bin_count)
+int	fill_cmd_structure(t_mini *mini, t_cmd *cmd_s, int bin_count)
 {
 	int	i;
 
 	i = -1;
 	while (++i < bin_count)
 	{
-		cmd->id = i + 1;
-		fill_cmd_bin(mini->current_line, cmd);
+		fill_cmd_bin(mini->current_line, cmd_s);
 		// cmd_struct->builtins = test_bin(cmd_struct->bin); // 1 pour oui, 0 pour non, -1 pour inex
 		// if (cmd_struct->builtins == -1)
 		// 	error();
-		if (mini->current_line[cmd->index])
-			fill_cmd_args(mini->current_line, cmd);
+		if (mini->current_line[cmd_s->index])
+			fill_cmd_args(mini->current_line, cmd_s);
 		else
 			return (0);
 		// fill_cmd_fd_path(cmd);

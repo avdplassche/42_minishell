@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:55:41 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/25 19:45:03 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/26 02:38:31 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,27 @@ int	main(int argc, char **argv, char **envp)
 	mini.builtins = ft_split(BUILTINS, ',');
 	mini.last_return = 0;
 	printf("\n");
-	while (1)
+	while (TEST_MODE == 0) //to change to only 1 when done
 	{
 		mini.current_line = readline("Prompt minishell ");
 		add_history(mini.current_line);
 		/* put line in history */
-		
 		if (!(ft_is_only_spaces(mini.current_line)))
 			parsing(&mini);
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}
-
+	int fd = open("cmd_testmode", O_RDONLY);
+	if (fd == -1)
+		perror("error");
+	while (TEST_MODE == 1)
+	{
+		mini.current_line = get_next_line(fd);
+		if (!(ft_is_only_spaces(mini.current_line)))
+			parsing(&mini);
+		free(mini.current_line);
+		mini.current_line = NULL;
+	}
 
 
 }

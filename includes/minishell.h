@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 01:52:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/25 19:06:15 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/26 02:37:13 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 # include "enum.h"
 # include "structures.h"
 
+#define BUILTINS "cd,echo,env,exit,export,pwd,unset"
+#define BUFFER_SIZE 10
+#define DEBUGG_PARSING 1
+#define TEST_MODE 1
+
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
@@ -43,7 +48,7 @@ t_cmd		*parsing(t_mini *mini);
 
 void		print_char_table(char **string, char *name);
 void		print_string(char *string, char *name);
-void		print_cmd(t_cmd cmd);
+void		print_cmd(t_cmd cmd, char *cmd_line);
 
 
 /* * * * * * * * * *UTILS * * * * * * * * * */

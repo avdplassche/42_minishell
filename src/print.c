@@ -6,7 +6,7 @@
 /** Print a char **, all strings are separated by a new line
  * @param table the char ** to print
  * @param name the name of the char, also to be printed
- * 
+ *
  */
 void	print_char_table(char **table, char *name)
 {
@@ -23,18 +23,17 @@ void	print_string(char *string, char *name)
 	printf("%s : %s\n", name, string);
 }
 
-void	print_cmd(t_cmd cmd)
+void	print_cmd(t_cmd cmd, char *cmd_line)
 {
 	int i;
 
 	i = -1;
-	printf("\n\n");
-	
-	printf("   Command %d\n\n", cmd.id);
-	printf("	  Bin : '%s'\n", cmd.bin);
+	printf("\n");
+	printf("   Command %d : %s\n\n", cmd.id, cmd_line);
+	printf("	  Bin : %s\n", cmd.bin);
 	printf("	  Args  : ");
 	if (cmd.args != NULL)
-	{ 
+	{
 		while (cmd.args[++i])
 			printf("%s ", cmd.args[i]);
 	}
