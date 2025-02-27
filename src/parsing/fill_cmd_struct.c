@@ -6,9 +6,9 @@
  * @param cmd_line the command line from the prompt
  * @param cmd_struct the command structure to fill
  * @return error ? not set yet
- * 
+ *
  */
-int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
+int	get_cmd_args(t_mini *mini, t_cmd *cmd_struct)
 {
 	int		i;
 	int		j;
@@ -22,7 +22,7 @@ int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
 	while (mini->current_line[i] && contain_char("|<>", mini->current_line[i]))
 		i++;
 	arg = malloc(sizeof(char) * (i - j + 1));
-	//malloc 
+	//malloc
 
 	/* NOT FINISHED*/
 
@@ -35,9 +35,9 @@ int	fill_cmd_args(t_mini *mini, t_cmd *cmd_struct)
  * @return - 0 (BIN) the command can be found in PATH
  * @return - 1 (BUILTIN) the command can be found in the 'builtins' dir
  * @return - -1 (UNVALID) the command is not valid
- * 
+ *
  */
-int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
+int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
@@ -55,6 +55,7 @@ int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
 
 
 	cmd->type = BIN;
+	return (0);
 }
 
 
@@ -64,7 +65,7 @@ int	fill_cmd_type(t_mini *mini, t_cmd *cmd)
  *@return not set yet (maybe error)
 
  */
-int	fill_cmd_string(t_mini *mini, t_cmd *cmd)
+int	get_cmd_string(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 	int	j;
@@ -89,7 +90,7 @@ int	fill_cmd_string(t_mini *mini, t_cmd *cmd)
  * @param cmd_s an empty structure that the function will fill
  * @param bin_count number of structures, used to malloc
  * @return A cmd filled structure
- * 
+ *
  */
 int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
@@ -98,15 +99,15 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	i = -1;
 	while (++i < cmd->total_cmd)
 	{
-		fill_cmd_string(mini, cmd);
-		if (fill_cmd_type(mini, cmd) == -1)
+		get_cmd_string(mini, cmd);
+		if (get_cmd_type(mini, cmd) == -1)
 		{
 			// error
 			return (-1);
 		}
 
 		if (mini->current_line[cmd->index])
-			fill_cmd_args(mini, cmd);
+			get_cmd_args(mini, cmd);
 		else
 			return (0);
 		// fill_cmd_fd_path(cmd);

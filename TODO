@@ -1,26 +1,28 @@
-Fonctions a terminer : 
+Now :
 
+handle $PATH or other $ -> change command if $ in cmd line
 
-Now : 
+FIND GOOD ERROR HANDLING SYSTEM
 
-reesayer de mettre total cmd
-coder cas double pipe "||"
 fill_cmd_args
-epurstring
-commancer a gerer quotes
-handle $PATH or other $FOO
+coder cas double pipe "||"
+commancer a gerer quotes (maybe do case with/without)
+Signals
+
 
 
 After :
 
-
+reesayer de mettre total cmd   //maybe plus tard
 fill_cmd_type ()
 
 
-Signals
+Done :
+
+epurstring
 
 
-Idea for error handling : 
+Idea for error handling :
 
 1 - make enum amout errors (ex : MALLOC_EROR)
 2 - store them in cmd.error (and return at the same time)

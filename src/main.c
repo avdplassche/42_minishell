@@ -41,15 +41,13 @@ int	main(int argc, char **argv, char **envp)
 	{
 		mini.current_line = readline("Prompt minishell ");
 		add_history(mini.current_line);
-		if (!(ft_is_only_spaces(mini.current_line)))
+		if (!(is_spaces_only(mini.current_line)))
 			parsing(&mini, &cmd);
 		free(mini.current_line);
 		mini.current_line = NULL;
 	}
 
-
 /********************** TEST MODE ****************************** */
-
 
 	int fd = open("TESTMODE", O_RDONLY);
 	char buffer[10000];
@@ -68,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	while (TEST_MODE == 1 && c >= 0)
 	{
 		mini.current_line = get_next_line(fd);
-		if (!(ft_is_only_spaces(mini.current_line)))
+		if (!(is_spaces_only(mini.current_line)))
 			parsing(&mini, &cmd);
 		free(mini.current_line);
 		mini.current_line = NULL;

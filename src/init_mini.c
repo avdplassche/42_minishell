@@ -36,7 +36,6 @@ int	init_mini(t_mini *mini, char **envp)
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	//malloc protection
 	mini->last_return = 0;
-	// mini->total_cmd = count_cmd(mini);
 	dup_env(mini, envp);
 	mini->paths = ft_split(getenv("PATH"), ':');
 	//malloc protection

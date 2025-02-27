@@ -3,8 +3,11 @@
 
 #include "../includes/minishell.h"
 
-
-int	ft_is_only_spaces(char *s)
+/** Check if string is composed of spaces only
+ * @return - 1 if only space
+ * @return - 0 if there is other characters
+ */
+int	is_spaces_only(char *s)
 {
 	int	i;
 

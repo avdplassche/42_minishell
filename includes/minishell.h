@@ -31,10 +31,11 @@ int			init_mini(t_mini *mini, char **envp);
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
-int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 int			parsing(t_mini *mini, t_cmd *cmd);
 
+int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
+int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
@@ -71,8 +72,9 @@ char		*get_next_line(int fd);
 				// XTRA //
 
 bool		contain_char(char *s, char c);
+int			contain_string_at_specific_index(char *haystack, char *needle, int i);
 bool		is_space(char c);
-int			ft_is_only_spaces(char *s);
-
+int			is_spaces_only(char *s);
+char		*epurstring(char *src);
 
 #endif

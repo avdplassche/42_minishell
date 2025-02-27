@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/26 19:49:56 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:26:53 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	count_cmd(t_mini *mini)
  * @param mini t_mini containing the amount of comands in the current line
  * @param cmd command structure
  * @param i index of the cmd structure
- * 
+ *
  */
 int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
 {
@@ -57,7 +57,7 @@ int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
 /** Count number of quotes in command line
  * @param mini t_mini containing the command line
  * @return number of quotes in command line
- * @note 34 = ' 
+ * @note 34 = '
  * @note 39 = "
  */
 int	quote_amount(t_mini *mini)
@@ -80,30 +80,29 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	int		i;
 
 	i = -1;
-	if (ft_strncmp("$?", mini->current_line, 2) == 0)
-		return (printf("%d: command not found\n", mini->last_return), 0);
-	if (quote_amount(mini) % 2 == 1)
-		return (printf("quote error\n"), -1); //a revoir
-
-
-		
-	// lister les erreurs de ce genre
-	// if (line[0] == '|')
-	// if (nb of '' or "" % 2 != 0)
-
-		// error();
-
+	mini->current_line = epurstring(mini->current_line);
 	if (mini->current_line[0] == '$')
 	{
-		
+		if (handle_dollar_sign(mini, cmd) == -1)
+		{
+			mini->last_return = 127;
+			return (-1);
+		}
 	}
-	
-	/* case line[0] == '$' */
+
+	/* Those conditions might go to a check_cmd function */
+
+	if (quote_amount(mini) % 2 == 1)
+		return (printf("quote error\n"), -1); //a revoir
+	if (mini->current_line[0] == '|')
+		return (printf("minishell: syntax error near unexpected token `|'\n"), -1);
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 	if (!(contain_char(mini->current_line, ' ')))
 	{
-		//if (cmd_exists cmd->bin
-		//
+
 	}
 	/* case no spaces */
 
@@ -115,7 +114,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		// if no : printf()
 
 	cmd_total = count_cmd(mini);
-	cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_total); //can put it in fill_cmd
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_total);
 	//malloc protection
 	while (++i < cmd_total)
 	{
@@ -124,20 +123,6 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	}
 	if (DEBUGG_PARSING == 1)
 		debug_parsing(mini, cmd);
-
-
-	/*second parse*/
-
-		/* case pipe */
-
-			// count pipe amount ?
-			// find ' | ', not only '|'
-
-
-		/* case 1 spaces no pipes no redirection */
-
-			//count number of comands ?
-
 
 
 	return (0);

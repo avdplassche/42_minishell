@@ -46,7 +46,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		printf("(filename)\n");
 	if (cmd.type == BIN)
 		printf("	  Type : binary\n");
-	else if ((cmd.type == BUILTIN))
+	else if (cmd.type == BUILTIN)
 		printf("	  Type : builtin\n");
 	else
 		printf("	  Type : invalid command\n");
@@ -57,11 +57,11 @@ void	debug_parsing(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	printf("\nCommand line : %s\n", mini->current_line);
+	printf("\nCommand line : %s\n\n", mini->current_line);
 	while (++i < cmd->total_cmd)
 	{
 		print_cmd(cmd[i], mini->current_line);
 		printf("\n");
 	}
-	printf("---------------------------------\n");
+	printf("-----------------------------------------------\n");
 }
