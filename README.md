@@ -6,7 +6,7 @@ The 3 steps of minishell :
 2 - Parse Command
 3 - Execute Command
 
-To run (since Makefile isn't built) : ./exec.sh
+To run (since Makefile isn't built yet) : ./exec.sh
 
 You can change arguments in the exec.sh file
 

@@ -1,11 +1,18 @@
-Now :
+Now (by order of priority) :
 
+handle $PATH or other $
+	-> put variable value if $ in cmd line (actually easy, replace by the actual var)
+	-> if not included in " " ?
+handle quotes
+	-> test with TESTMODE_FILE lines
+
+code a function that will test if a string (that will be contained in cmd.command) is accessible in one of the paths (mini.paths)
+	-> Josephine ?
+	-> I will use the result in cmd.type (0 for yes, -1 for no)
 
 Idea : epur quotes
 
-handle $PATH or other $ -> change command if $ in cmd line
-handle quotes
-	echo 'Nested "quotes" are' "tricky!"
+
 FIND GOOD ERROR HANDLING SYSTEM
 
 
