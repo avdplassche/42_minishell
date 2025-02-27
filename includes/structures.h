@@ -43,10 +43,10 @@ typedef struct s_cmd
 	bool		is_path;
 	int			total_cmd;
 	int			id;
-	bool		in_redir;
-	bool		out_redir;
-	bool		delimiter;
-	bool		out_appredir;
+	int			in_redir_amount;
+	int			out_redir_amount;
+	int			delimiter_amount;
+	int			out_appredir_amount;
 	int			index; //maybe rename by i ?
 	int			error;
 }				t_cmd;

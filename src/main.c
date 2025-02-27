@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 	init_mini(&mini, envp);
 	//malloc protection
 	printf("\n");
-	while (TEST_MODE == 0)
+	while (argc == 1)
 	{
 		mini.line = readline("Prompt minishell ");
 		add_history(mini.line);
@@ -50,33 +50,35 @@ int	main(int argc, char **argv, char **envp)
 
 /************************ TEST MODE/ ****************************** */
 
-	int fd = open(argv[1], O_RDONLY);
-	char buffer[10000];
-	int i = -1;
-	int c = 0;
-	int r = read(fd, buffer, 9999);
-
-	buffer[r] = '\0';
-	while (buffer[++i])
-		if (buffer[i] == '\n')
-			c++;
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		perror("error");
-	c = 0;
-	while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
+	if (argc > 1)
 	{
-		mini.line = ft_strtrim(get_next_line(fd), " 	\n");
-		printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
-		if (!(is_only_spaces(mini.line)))
-			parsing(&mini, &cmd);
-		free(mini.line);
-		mini.line = NULL;
-		c++;
-	}
-	close(fd);
+		int fd = open(argv[1], O_RDONLY);
+		char buffer[10000];
+		int i = -1;
+		int c = 0;
+		int r = read(fd, buffer, 9999);
 
+		buffer[r] = '\0';
+		while (buffer[++i])
+			if (buffer[i] == '\n')
+				c++;
+		close(fd);
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+			perror("error");
+		c = 0;
+		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
+		{
+			mini.line = ft_strtrim(get_next_line(fd), " 	\n");
+			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
+			if (!(is_only_spaces(mini.line)))
+				parsing(&mini, &cmd);
+			free(mini.line);
+			mini.line = NULL;
+			c++;
+		}
+		close(fd);
+	}
 /************************ /TEST MODE ***************************** */
 
 	free_mini(&mini);

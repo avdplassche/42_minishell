@@ -1,5 +1,8 @@
 Now :
 
+
+Idea : epur quotes
+
 handle $PATH or other $ -> change command if $ in cmd line
 handle quotes
 	echo 'Nested "quotes" are' "tricky!"

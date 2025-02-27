@@ -33,15 +33,13 @@ int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
 	cmd->total_cmd = count_cmd(mini);
 	cmd->id = i + 1;
 	cmd->type = -1;
-	cmd->in_redir = 0;
-	cmd->out_redir = 0;
-	cmd->delimiter = 0;
-	cmd->out_appredir = 0;
+	cmd->in_redir_amount = 0;
+	cmd->out_redir_amount = 0;
+	cmd->delimiter_amount = 0;
+	cmd->out_appredir_amount = 0;
 	cmd->index = 0;
 	return (0);
 }
-
-
 
 /** Count number of quotes in command line
  * @param mini t_mini containing the command line
@@ -63,7 +61,7 @@ int	is_valid_quote(t_mini *mini)
 	}
 	if (count % 2 == 1)
 		return (0);
-	else
+	else if (count)
 	{
 		while (!(is_quote(mini->line[i])))
 			i--;
@@ -96,24 +94,19 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		}
 	}
 
-	/* * * * * Those conditions might go to a check_cmd function * * * */
+	/* * * * * Those conditions might go to a check_cmd_validity function * * * */
 
 	if (is_valid_quote(mini) == 0)
 		return (printf("quote error\n-----------------------------------------------\n"), -1); //a revoir
 	if (mini->line[0] == '|')
 		return (printf("minishell: syntax error near unexpected token `|'\n"), -1);
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
-	if (!(contain_char(mini->line, ' ')))
-	{
-
-	}
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	cmd_total = count_cmd(mini);
-	cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_total);
-		//malloc protection
+	if (cmd_total > 1)
+		cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_total);
+			//malloc protection
 	while (++i < cmd_total)
 	{
 		init_cmd(mini, &cmd[i], i);
