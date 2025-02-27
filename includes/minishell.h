@@ -36,6 +36,9 @@ int			parsing(t_mini *mini, t_cmd *cmd);
 int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+int			get_cmd_string(t_mini *mini, t_cmd *cmd);
+int			get_cmd_type(t_mini *mini, t_cmd *cmd);
+int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
@@ -54,6 +57,7 @@ void		debug_parsing(t_mini *mini, t_cmd *cmd);
 
 				// LIBFT //
 
+int			ft_atoi(char *str);
 char		**ft_split(char *s, char c);
 char		*ft_strchr(char *s, int c);
 char		*ft_strdup(char *s1);
@@ -74,7 +78,9 @@ char		*get_next_line(int fd);
 bool		contain_char(char *s, char c);
 int			contain_string_at_specific_index(char *haystack, char *needle, int i);
 bool		is_space(char c);
-int			is_spaces_only(char *s);
+int			is_only_spaces(char *s);
 char		*epurstring(char *src);
+char		*epur_out_of_quotes(char *src);
+int			is_quote(char c);
 
 #endif

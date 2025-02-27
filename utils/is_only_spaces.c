@@ -7,7 +7,7 @@
  * @return - 1 if only space
  * @return - 0 if there is other characters
  */
-int	is_spaces_only(char *s)
+int	is_only_spaces(char *s)
 {
 	int	i;
 

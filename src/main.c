@@ -39,17 +39,18 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n");
 	while (TEST_MODE == 0)
 	{
-		mini.current_line = readline("Prompt minishell ");
-		add_history(mini.current_line);
-		if (!(is_spaces_only(mini.current_line)))
+		mini.line = readline("Prompt minishell ");
+		add_history(mini.line);
+		if (!(is_only_spaces(mini.line)))
 			parsing(&mini, &cmd);
-		free(mini.current_line);
-		mini.current_line = NULL;
+		//exec(&mini, &cmd);
+		free(mini.line);
+		mini.line = NULL;
 	}
 
-/********************** TEST MODE ****************************** */
+/************************ TEST MODE/ ****************************** */
 
-	int fd = open("TESTMODE", O_RDONLY);
+	int fd = open(argv[1], O_RDONLY);
 	char buffer[10000];
 	int i = -1;
 	int c = 0;
@@ -60,19 +61,24 @@ int	main(int argc, char **argv, char **envp)
 		if (buffer[i] == '\n')
 			c++;
 	close(fd);
-	fd = open("TESTMODE", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		perror("error");
-	while (TEST_MODE == 1 && c >= 0)
+	c = 0;
+	while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 	{
-		mini.current_line = get_next_line(fd);
-		if (!(is_spaces_only(mini.current_line)))
+		mini.line = ft_strtrim(get_next_line(fd), " 	\n");
+		printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
+		if (!(is_only_spaces(mini.line)))
 			parsing(&mini, &cmd);
-		free(mini.current_line);
-		mini.current_line = NULL;
-		c--;
+		free(mini.line);
+		mini.line = NULL;
+		c++;
 	}
 	close(fd);
+
+/************************ /TEST MODE ***************************** */
+
 	free_mini(&mini);
 	return (0);
 }

@@ -1,0 +1,26 @@
+echo 'Hello'" World"
+ ls -l | grep 'txt'"$HOME"
+     echo "User: "'$USER'
+echo Today is "'$(date)'"
+find . -name '"*.sh"'
+	echo 'Nested "quotes" are' "tricky!"
+grep 'pattern'" another"' file.txt
+awk '{print "'$1'"}' data.txt
+ls -l | awk "'{print \"$9\"}'"
+echo '"Hello" world' | tr -d '"'
+cat <<EOF | sed 's/foo/'"bar"'/'
+ls -l | grep '"*.log"' | wc -l
+echo 'Single'" and "'double quotes"
+find / -type f -name 'config'".txt"
+echo "User: $USER and "'Home: $HOME'
+grep 'some'" pattern"' file.txt
+echo "Price: "'$10' | awk "{print $1}"
+awk '"{print $1, $2}"' < data.csv
+find . -type f -exec grep "hello"' {} \;'
+
+1 > Hello world
+2 >
+3 > User: $USER
+4 > Today is 'Thu Feb 27 14:49:28 CET 2025'
+
+cat file.txt | grep "error"' | tee log.txt'

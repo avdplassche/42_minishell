@@ -40,7 +40,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	else
 		printf("(null)\n");
 	printf("	  Filename : %s ", cmd.filename);
-	if (cmd.file_path == true)
+	if (cmd.is_path == true)
 		printf("(path)\n");
 	else
 		printf("(filename)\n");
@@ -57,10 +57,10 @@ void	debug_parsing(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	printf("\nCommand line : %s\n\n", mini->current_line);
+	// printf("\nCommand line : %s\n\n", mini->line);
 	while (++i < cmd->total_cmd)
 	{
-		print_cmd(cmd[i], mini->current_line);
+		print_cmd(cmd[i], mini->line);
 		printf("\n");
 	}
 	printf("-----------------------------------------------\n");

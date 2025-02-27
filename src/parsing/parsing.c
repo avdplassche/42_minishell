@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 02:03:42 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/27 02:26:53 by alvan-de         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
@@ -24,8 +13,8 @@ int	count_cmd(t_mini *mini)
 
 	count = 1;
 	i = -1;
-	while (mini->current_line[++i])
-		if (mini->current_line[i] == '|')
+	while (mini->line[++i])
+		if (mini->line[i] == '|')
 			count++;
 	return (count);
 }
@@ -40,7 +29,7 @@ int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
-	cmd->file_path = NULL;
+	cmd->is_path = NULL;
 	cmd->total_cmd = count_cmd(mini);
 	cmd->id = i + 1;
 	cmd->type = -1;
@@ -60,17 +49,33 @@ int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
  * @note 34 = '
  * @note 39 = "
  */
-int	quote_amount(t_mini *mini)
+int	is_valid_quote(t_mini *mini)
 {
 	int	i;
 	int	count;
 
 	i = -1;
 	count = 0;
-	while (mini->current_line[++i])
-		if (mini->current_line[i] == 34 || mini->current_line[i] ==  39)
+	while (mini->line[++i])
+	{
+		if (is_quote(mini->line[i]))
 			count++;
-	return (count);
+	}
+	if (count % 2 == 1)
+		return (0);
+	else
+	{
+		while (!(is_quote(mini->line[i])))
+			i--;
+		count = mini->line[i];
+		i--;
+		while (!(is_quote(mini->line[i])))
+			i--;
+		if (count != mini->line[i] && count == 39)
+			return (0);
+	}
+	return (1);
+
 }
 
 
@@ -80,8 +85,9 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	int		i;
 
 	i = -1;
-	mini->current_line = epurstring(mini->current_line);
-	if (mini->current_line[0] == '$')
+	mini->line = ft_strtrim(mini->line, " 	\n");
+
+	if (mini->line[0] == '$')
 	{
 		if (handle_dollar_sign(mini, cmd) == -1)
 		{
@@ -90,32 +96,24 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		}
 	}
 
-	/* Those conditions might go to a check_cmd function */
+	/* * * * * Those conditions might go to a check_cmd function * * * */
 
-	if (quote_amount(mini) % 2 == 1)
-		return (printf("quote error\n"), -1); //a revoir
-	if (mini->current_line[0] == '|')
+	if (is_valid_quote(mini) == 0)
+		return (printf("quote error\n-----------------------------------------------\n"), -1); //a revoir
+	if (mini->line[0] == '|')
 		return (printf("minishell: syntax error near unexpected token `|'\n"), -1);
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * */
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-	if (!(contain_char(mini->current_line, ' ')))
+	if (!(contain_char(mini->line, ' ')))
 	{
 
 	}
-	/* case no spaces */
-
-		// Exemple : ls
-
-		// check if in buildtin
-		// check if in bin
-		// if yes exec
-		// if no : printf()
 
 	cmd_total = count_cmd(mini);
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * cmd_total);
-	//malloc protection
+		//malloc protection
 	while (++i < cmd_total)
 	{
 		init_cmd(mini, &cmd[i], i);
@@ -123,8 +121,6 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	}
 	if (DEBUGG_PARSING == 1)
 		debug_parsing(mini, cmd);
-
-
 	return (0);
 }
 

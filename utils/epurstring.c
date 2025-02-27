@@ -57,3 +57,25 @@ char *epurstring(char *src)  //may be able to delete the ft_is_only_space lines
 	free(src);
 	return (dest);
 }
+
+
+
+
+// char *epur_out_of_quotes(char *src)
+// {
+// 	int	i;
+// 	int	j;
+// 	bool	single_quote;
+// 	bool	double_quote;
+
+// 	single_quote = 0;
+// 	double_quote = 0;
+// 	j = 0;
+// 	i = 0;
+// 	while (is_space(src[1]) && !(is_quote))
+// 		i++;
+
+
+
+
+// }

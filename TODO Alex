@@ -1,12 +1,13 @@
 Now :
 
 handle $PATH or other $ -> change command if $ in cmd line
-
+handle quotes
+	echo 'Nested "quotes" are' "tricky!"
 FIND GOOD ERROR HANDLING SYSTEM
+
 
 fill_cmd_args
 coder cas double pipe "||"
-commancer a gerer quotes (maybe do case with/without)
 Signals
 
 
