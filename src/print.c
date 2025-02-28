@@ -29,6 +29,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	int i;
 
 	i = -1;
+	if (TEST_MODE == 0)
+		printf("\n");
 	printf("   Command %d\n\n", cmd.id);
 	printf("	  Bin : %s\n", cmd.command);
 	printf("	  Args  : ");

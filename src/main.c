@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		mini.line = readline("Prompt minishell ");
 		add_history(mini.line);
-		if (!(is_only_spaces(mini.line)))
+		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			parsing(&mini, &cmd);
 		//exec(&mini, &cmd);
 		free(mini.line);
