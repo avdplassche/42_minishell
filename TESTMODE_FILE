@@ -1,21 +1,32 @@
-'echo' 'Hello'" World"
-"echo He"llo world
-echo "Hello''world"
-echo "Hello'"world'
-echo 'Hello" "'"world"
-e'cho Hel'lo World
-'echo' 'Hello World'
-e'cho Hel' lo World
+“echo He”llo world
+”echo “Hello World
+"echo" Hello World
+"echo " Hello World
+ech"o Hello World"
+"ech"o Hello World
+e"'ch'o" Hello World
+e'"ch"o' Hello World
+e'c"h'o" Hello World
+"e'c'"h"o" Hello World
+"e'c''h'o" Hello World
+"e'c"h"o'k Hel'l'o World"
+"e"c"ho "Hello World
+e'ch'o" Hello World
 
-
-1 > Hello World
-2 > echo Hello: command not found
-3 > Hello''world
-4 > quote error
-5 > Hello" "world
-6 > echo Hello: command not found
-7 > Hello World
-8 > echo Hel: command not found
+1 > echo Hello
+2 > echo Hello
+3 > echo
+4 > echo
+5 > echo Hello World
+6 > echo
+7 > e'ch'o
+8 > e"ch"o
+9 > error
+10 > e'c'ho
+11 > e'c''h'o
+12 > e'cho'k Hel'l'o World
+13 > echo Hello
+14 > error
 
 ls -l | grep 'txt'"$HOME"
 echo "User: "'$USER'

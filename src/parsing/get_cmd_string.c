@@ -46,7 +46,7 @@ int	get_cmd_string(t_mini *mini, t_cmd *cmd)
 		while (mini->line[i] != '"')
 		{
 			i++;
-			j++;
+			// j++;
 		}
 	}
 	cmd->command = ft_substr(mini->line, i - j, j);

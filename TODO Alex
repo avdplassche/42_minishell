@@ -28,25 +28,9 @@ reesayer de mettre total cmd   //maybe plus tard
 fill_cmd_type ()
 
 
-Done :
-
-epurstring
-
-
 Idea for error handling :
 
 1 - make enum amout errors (ex : MALLOC_EROR)
 2 - store them in cmd.error (and return at the same time)
 3 - check error in main, after parsing
-
-
-
-
-
-
-Do parsing
-
-Talk error handling
-Same for malloc protection
-
 
