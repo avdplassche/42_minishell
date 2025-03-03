@@ -1,7 +1,23 @@
 
 #include "../includes/minishell.h"
 
+/** Count command amount in command line, that will be used for pipes.
+ * @param mini t_mini containing the command line
+ * @return number of commands
+ * @note proceed by countint pipe char '|'
+ */
+int	count_cmd(t_mini *mini)
+{
+	int	i;
+	int	count;
 
+	count = 1;
+	i = -1;
+	while (mini->line[++i])
+		if (mini->line[i] == '|')
+			count++;
+	return (count);
+}
 
 /** Function for env to be used everywhere and to iterate on its values
  * @param mini an empty t_mini_structure

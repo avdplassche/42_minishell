@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	while (argc == 1)
 	{
 		mini.line = readline("Prompt minishell ");
+		mini.cmd_amount = count_cmd(&mini);
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			parsing(&mini, &cmd);
@@ -70,6 +71,7 @@ int	main(int argc, char **argv, char **envp)
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
 			mini.line = ft_strtrim(get_next_line(fd), " 	\n");
+			mini.cmd_amount = count_cmd(&mini);
 			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)))
 				parsing(&mini, &cmd);

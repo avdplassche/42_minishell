@@ -3,6 +3,12 @@
 #include "../../includes/minishell.h"
 
 
+// char	*replace_dollar_sign(char *str)
+// {
+// 	char	*
+
+// }
+
 
 
 /** Fill command structure (for 1 command of the command line)
@@ -15,15 +21,15 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	while (++i < cmd->total_cmd)
+	while (++i < mini->cmd_amount)
 	{
 		get_cmd_string(mini, cmd);
-		if (get_cmd_type(mini, cmd) == -1)  // error
-			return (-1);
-		if (mini->line[cmd->index])
-			get_cmd_args(mini, cmd);
-		else
-			return (0);
+		// if (get_cmd_type(mini, cmd) == -1)  // error
+		// 	return (-1);
+		// if (mini->line[cmd->index])
+		// 	get_cmd_args(mini, cmd);
+		// else
+		// 	return (0);
 		// get_cmd_filename(cmd);
 		// fill_cmd_booleans(cmd_struct);
 	}

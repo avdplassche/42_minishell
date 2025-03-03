@@ -1,56 +1,51 @@
 
 #include "../../includes/minishell.h"
 
-/** Tells if the amount of quotes is even or odd
+/** Tests the validity of quotes with an open/closed boolean system
  * @param mini t_mini containing the command line
- * @return 1 for even, 0 for odd
- * @note ascii 34 = '
- * @note ascii 39 = "
+ * @return 1 for valid quotes, 0 for non valid
+ * @note ascii 34 =  "
+ * @note ascii 39 =  '
  */
-int	even_quote(t_mini *mini)
+int	is_valid_quote(t_mini *mini)  // maybe quotes shouldnt be bools but int, and 2 for cat last and open/close ->for norminette
 {
-	int	i;
-	int	double_count;
-	int	single_count;
+	int		i;
+	bool	s_quote;
+	bool	d_quote;
+	char	last;
 
+	s_quote = 0;
+	d_quote = 0;
 	i = -1;
-	double_count = 0;
-	single_count = 0;
 	while (mini->line[++i])
 	{
-		if (mini->line[i] == 34)
-			double_count++;
-		if (mini->line[i] == 39)
-			single_count++;
+		if (mini->line[i] == 34 && s_quote == 0)
+		{
+			s_quote = 1;
+			last = 's';
+		}
+		else if (mini->line[i] == 34 && s_quote == 1)
+		{
+			s_quote = 0;
+			if (d_quote == 1 && last == 'd')
+				d_quote = 0;
+		}
+		else if (mini->line[i] == 39 && d_quote == 0)
+		{
+			d_quote = 1;
+			last = 'd';
+		}
+		else if (mini->line[i] == 39 && d_quote == 1)
+		{
+			d_quote = 0;
+			if (s_quote == 1 && last == 's')
+				s_quote = 0;
+		}
 	}
-	if (double_count % 2 == 1 || double_count % 2 == 1)
+	if (s_quote == 1 || d_quote == 1)
 		return (0);
 	return (1);
 }
 
-/** Count number of quotes in command line
- * @param mini t_mini containing the command line
- * @return number of quotes in command line
- * @note 34 = '
- * @note 39 = "
- */
-int	is_valid_quote(t_mini *mini)
-{
-	int	i;
-	int	j;
 
-	if (!(contain_char(mini->line, '"')) && !(contain_char(mini->line, 39)))
-		return (1);
-	j = ft_strlen(mini->line);
-	i = 0;
-	while (j > i)   /*  To be continued   */
-	{
-		while (!(is_quote(mini->line[j])))
-			j--;
-		while (!(is_quote(mini->line[i])))
-			i++;
-		if (mini->line[i] != mini->line[j])
-			return (0);
-	}
-	return (1);
-}
+

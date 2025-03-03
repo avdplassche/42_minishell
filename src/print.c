@@ -60,7 +60,7 @@ void	debug_parsing(t_mini *mini, t_cmd *cmd)
 
 	i = -1;
 	// printf("\nCommand line : %s\n\n", mini->line);
-	while (++i < cmd->total_cmd)
+	while (++i < mini->cmd_amount)
 	{
 		print_cmd(cmd[i], mini->line);
 		printf("\n");

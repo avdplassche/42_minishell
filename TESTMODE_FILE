@@ -1,5 +1,5 @@
-“echo He”llo world
-”echo “Hello World
+"echo He"llo world
+"echo "Hello World
 "echo" Hello World
 "echo " Hello World
 ech"o Hello World"
@@ -12,11 +12,14 @@ e'c"h'o" Hello World
 "e'c"h"o'k Hel'l'o World"
 "e"c"ho "Hello World
 e'ch'o" Hello World
+e'ch'o" Hello" World
+e'c'"ho" Hello World
+
 
 1 > echo Hello
 2 > echo Hello
 3 > echo
-4 > echo
+4 > echo 
 5 > echo Hello World
 6 > echo
 7 > e'ch'o
@@ -27,6 +30,8 @@ e'ch'o" Hello World
 12 > e'cho'k Hel'l'o World
 13 > echo Hello
 14 > error
+15 > echo Hello
+16 > echo
 
 ls -l | grep 'txt'"$HOME"
 echo "User: "'$USER'

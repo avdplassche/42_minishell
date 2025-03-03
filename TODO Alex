@@ -1,5 +1,8 @@
 Now (by order of priority) :
 
+Clean quotes
+$
+
 handle $PATH or other $
 	-> put variable value if $ in cmd line (actually easy, replace by the actual var)
 	-> if not included in " " ?
@@ -19,6 +22,7 @@ FIND GOOD ERROR HANDLING SYSTEM
 fill_cmd_args
 coder cas double pipe "||"
 Signals
+
 
 
 

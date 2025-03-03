@@ -27,7 +27,7 @@
 /* * * * * * * * * *INIT * * * * * * * * * */
 
 int			init_mini(t_mini *mini, char **envp);
-
+int			count_cmd(t_mini *mini);
 
 /* * * * * * * * * PARSING * * * * * * * * */
 
@@ -35,11 +35,11 @@ int			parsing(t_mini *mini, t_cmd *cmd);
 
 int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
-int			even_quote(t_mini *mini);
 int			is_valid_quote(t_mini *mini);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+char		*clean_quotes(t_cmd *cmd, char *str);
 int			get_cmd_string(t_mini *mini, t_cmd *cmd);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
@@ -83,11 +83,11 @@ char		*get_next_line(int fd);
 				// XTRA //
 
 bool		contain_char(char *s, char c);
+bool		contain_quotes(char *s);
 int			contain_string_at_specific_index(char *haystack, char *needle, int i);
 bool		is_space(char c);
 int			is_only_spaces(char *s);
 char		*epurstring(char *src);
-char		*epur_out_of_quotes(char *src);
 int			is_quote(char c);
 
 #endif
