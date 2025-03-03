@@ -1,6 +1,15 @@
 
 #include "../../includes/minishell.h"
 
+char	*get_env_value(t_mini *mini, char *variable)
+{
+
+
+
+	
+}
+
+
 
 /** To handle lines starting with '$'
  *

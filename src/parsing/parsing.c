@@ -49,7 +49,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	while (++i < mini->cmd_amount)
 	{
 		init_cmd(&cmd[i], i);
-		fill_cmd_structure(mini, cmd);
+		fill_cmd_structure(mini, &cmd[i]);
 	}
 	if (DEBUGG_PARSING == 1)
 		debug_parsing(mini, cmd);

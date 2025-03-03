@@ -19,6 +19,6 @@ enum	e_characters
 enum	e_binary
 {
 		UNVALID = -1,
-		BIN = 0,
+		N_BUILTIN = 0,
 		BUILTIN = 1,
 };

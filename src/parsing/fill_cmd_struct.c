@@ -21,17 +21,14 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	// while (++i < mini->cmd_amount)
-	// {
-		get_cmd_string(mini, cmd);
-		// if (mini->line[cmd->index])
-		// 	get_cmd_args(mini, cmd);
-		// else
-		// 	return (0);
-		if (get_cmd_type(mini, cmd) == -1)  //need to also check with arg -> (echo -n is built, echo isn't)
-			return (-1);
-		// get_cmd_filename(cmd);
-		// fill_cmd_booleans(cmd_struct);
-	// }
+	get_cmd_bin(mini, cmd);
+	// if (mini->line[cmd->index])
+	// 	get_cmd_args(mini, cmd);
+	// else
+	// 	return (0);
+	if (get_cmd_type(mini, cmd) == -1)  //need to also check with arg -> (echo -n is built, echo isn't)
+		return (-1);
+	// get_cmd_filename(cmd);
+	// fill_cmd_booleans(cmd_struct);
 	return (0);
 }

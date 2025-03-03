@@ -1,6 +1,22 @@
 
 #include "../../includes/minishell.h"
 
+/** Change quote enclosure, taking a char (34 or 39) as argument
+ * 
+*/
+void	quote_enclosure_handle(char c, t_quote *quote)
+{
+	if (c == 34 && quote->dbl == 0)
+		quote->dbl = 1;
+	else if (c == 34 && quote->dbl == 1)
+		quote->dbl = 0;
+	else if (c == 39 && quote->sgl == 0)
+		quote->sgl = 1;
+	else if (c == 39 && quote->sgl == 1)
+		quote->sgl = 0;
+}
+
+
 /** Tests the validity of quotes with an open/closed boolean system
  * @param mini t_mini containing the command line
  * @return 1 for valid quotes, 0 for non valid

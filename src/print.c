@@ -31,19 +31,17 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	i = -1;
 	if (TEST_MODE == 0)
 		printf("\n");
-	printf("   Command %d : %s\n\n", cmd.id, cmd.command);
-	if (cmd.type == BIN)
-		printf("	  Type : binary\n");
+	printf("   Command %d -e : %s$\n\n", cmd.id, cmd.command);
+	if (cmd.type == N_BUILTIN)
+		printf("	  Type : binary or invalid\n");
 	else if (cmd.type == BUILTIN)
 		printf("	  Type : builtin\n");
 	else
-		printf("	  Type : invalid command\n");
+		printf("	  Type : binary or invalid\n");
 	printf("	  Args  : ");
 	if (cmd.args != NULL)
-	{
 		while (cmd.args[++i])
 			printf("%s ", cmd.args[i]);
-	}
 	else
 		printf("(null)\n");
 	printf("	  Filename : %s ", cmd.filename);

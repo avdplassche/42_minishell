@@ -51,3 +51,9 @@ typedef struct s_cmd
 	
 	int			error;
 }				t_cmd;
+
+typedef struct s_quote
+{
+	int			sgl;
+	int			dbl;
+}				t_quote;

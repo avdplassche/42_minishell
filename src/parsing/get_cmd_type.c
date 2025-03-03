@@ -23,7 +23,7 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 			return (0);
 		}
 	}
-
+	
 	/* NOT FINISHED*/
 
 	cmd->type = UNVALID;

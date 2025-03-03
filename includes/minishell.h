@@ -34,10 +34,11 @@ int			parsing(t_mini *mini, t_cmd *cmd);
 int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_quote(t_mini *mini);
+void		quote_enclosure_handle(char c, t_quote *quote);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
-int			get_cmd_string(t_mini *mini, t_cmd *cmd);
+int			get_cmd_bin(t_mini *mini, t_cmd *cmd);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
 
