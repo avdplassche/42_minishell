@@ -81,6 +81,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		close(fd);
 	}
+	// print_char_table(mini.envp, "Env");
+
 /************************ /TEST MODE ***************************** */
 
 	free_mini(&mini);

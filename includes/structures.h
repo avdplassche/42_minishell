@@ -9,6 +9,7 @@
  * @param line current prompt to work with
  * @param cmd_amount amount of commands in the command_line (also amount of pipes)
  * @param last_return sig return of the last cmd (needed for $?)
+ * @param cursor used to remember where we stopped the parsing
  * @param error to be configured
  */
 typedef struct s_mini
@@ -19,6 +20,7 @@ typedef struct s_mini
 	char		*line;
 	int			cmd_amount;
 	int			last_return;
+	int			cursor;
 	bool		error;
 }				t_mini;
 
@@ -33,7 +35,6 @@ typedef struct s_mini
  * @param out_redir is there an output redirection in the command
  * @param delimiter is there a delimiter in the command (<<)
  * @param out_appredir is there an out_appredir in the command (>>)
- * @param index used to remember where we stopped the parsing
  */
 typedef struct s_cmd
 {
@@ -47,6 +48,6 @@ typedef struct s_cmd
 	int			out_redir_amount;
 	int			delimiter_amount;
 	int			out_appredir_amount;
-	int			index; //maybe rename by i ?
+	
 	int			error;
 }				t_cmd;

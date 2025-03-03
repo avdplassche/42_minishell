@@ -14,6 +14,8 @@ e'c"h'o" Hello World
 e'ch'o" Hello World
 e'ch'o" Hello" World
 e'c'"ho" Hello World
+"echo $PATH"
+'echo $PATH'
 
 
 1 > echo Hello

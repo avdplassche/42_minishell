@@ -22,8 +22,6 @@
 #define TEST_MODE 1
 
 
-
-
 /* * * * * * * * * *INIT * * * * * * * * * */
 
 int			init_mini(t_mini *mini, char **envp);
@@ -39,7 +37,6 @@ int			is_valid_quote(t_mini *mini);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
-char		*clean_quotes(t_cmd *cmd, char *str);
 int			get_cmd_string(t_mini *mini, t_cmd *cmd);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);

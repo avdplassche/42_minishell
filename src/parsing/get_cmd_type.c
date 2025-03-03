@@ -11,11 +11,13 @@
 int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
+	int	len;
 
 	i = -1;
+	len = ft_strlen(cmd->command);
 	while (++i < BUILTIN_AMOUNT)
 	{
-		if (!(ft_strncmp(mini->builtins[i], cmd->command, ft_strlen(cmd->command))))
+		if (!(ft_strncmp(mini->builtins[i], cmd->command, len)))
 		{
 			cmd->type = BUILTIN;
 			return (0);
@@ -24,6 +26,6 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 
 	/* NOT FINISHED*/
 
-	cmd->type = BIN;
+	cmd->type = UNVALID;
 	return (0);
 }

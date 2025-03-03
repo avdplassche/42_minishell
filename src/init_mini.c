@@ -32,7 +32,7 @@ int	dup_env(t_mini *mini, char **envp)
 	while (envp[i])
 		i++;
 	mini->envp = (char **)malloc(sizeof(char *) * (i + 1));
-	//malloc protection
+		//malloc protection
 	i = -1;
 	while (envp[++i])
 	{
@@ -50,11 +50,12 @@ int	dup_env(t_mini *mini, char **envp)
 int	init_mini(t_mini *mini, char **envp)
 {
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
-	//malloc protection
+		//malloc protection
 	mini->last_return = 0;
 	dup_env(mini, envp);
 	mini->paths = ft_split(getenv("PATH"), ':');
-	//malloc protection
+		//malloc protection
+	mini->cursor = 0;
 	return (0);
 }
 

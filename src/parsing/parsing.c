@@ -7,7 +7,7 @@
  * @param i index of the cmd structure
  *
  */
-int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
+int	init_cmd(t_cmd *cmd, int i)
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
@@ -18,11 +18,10 @@ int	init_cmd(t_mini *mini, t_cmd *cmd, int i)
 	cmd->out_redir_amount = 0;
 	cmd->delimiter_amount = 0;
 	cmd->out_appredir_amount = 0;
-	cmd->index = 0;
 	return (0);
 }
 
-int	command_validity(t_mini *mini)
+int	is_valid_command(t_mini *mini)
 {
 	if (!(is_valid_quote(mini)))
 		return (printf("quote error\n\n-----------------------------------------------\n")
@@ -39,7 +38,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 
 	i = -1;
 	mini->line = ft_strtrim(mini->line, " 	\n");
-	if (!(command_validity(mini)))
+	if (!(is_valid_command(mini)))
 	{
 		mini->last_return = 127;
 		return (-1);
@@ -49,7 +48,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 			//malloc protection
 	while (++i < mini->cmd_amount)
 	{
-		init_cmd(mini, &cmd[i], i);
+		init_cmd(&cmd[i], i);
 		fill_cmd_structure(mini, cmd);
 	}
 	if (DEBUGG_PARSING == 1)
