@@ -44,11 +44,11 @@ typedef struct s_cmd
 	char		*filename;
 	bool		is_path;
 	int			id;
-	int			in_redir_amount;
-	int			out_redir_amount;
-	int			delimiter_amount;
-	int			out_appredir_amount;
-	
+	int			in_redir_total;
+	int			out_redir_total;
+	int			delimiter_total;
+	int			out_appredir_total;
+
 	int			error;
 }				t_cmd;
 

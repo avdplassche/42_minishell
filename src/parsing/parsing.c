@@ -14,10 +14,10 @@ int	init_cmd(t_cmd *cmd, int i)
 	cmd->is_path = NULL;
 	cmd->id = i + 1;
 	cmd->type = -1;
-	cmd->in_redir_amount = 0;
-	cmd->out_redir_amount = 0;
-	cmd->delimiter_amount = 0;
-	cmd->out_appredir_amount = 0;
+	cmd->in_redir_total = 0;
+	cmd->out_redir_total = 0;
+	cmd->delimiter_total = 0;
+	cmd->out_appredir_total = 0;
 	return (0);
 }
 
