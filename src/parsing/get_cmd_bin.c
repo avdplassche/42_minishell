@@ -117,7 +117,6 @@ int	strlen_quote_cleaned_command(char *str)
 int	clean_command_quotes(t_cmd *cmd, char *str)
 {
 	int		first_quote;
-	int		last_quote;
 	int		i;
 	int		j;
 

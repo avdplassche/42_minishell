@@ -16,6 +16,7 @@
  */
 int	handle_dollar_sign(t_mini *mini, t_cmd *cmd)
 {
+	(void)cmd;
 	/* This isn't the right way to process ,
 	we actually only need to replace '$?' by int error*/
 

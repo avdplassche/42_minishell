@@ -38,6 +38,7 @@ SRCS				=	main.c \
 						quotes.c 
 
 UTILS				=	contain_char.c \
+						contain_quotes.c \
 						contain_string_at_specific_index.c \
 						epurstring.c \
 						ft_atoi.c \
@@ -74,13 +75,14 @@ ALL_OBJ				=	$(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ)
 #------------------INCLUDE FLAGS---------------------#
 
 INCLUDE_FLAGS		=	-I$(DIR_INCLUDE)
+LIBRARIES			=	-l readline
 
 #---------------------TARGETS------------------------#
 
 all:	$(NAME)
 
 $(NAME): $(ALL_OBJ) | $(DIR_BIN)
-	@$(CC) $(ALL_OBJ) $(CFLAGS) -o $@
+	@$(CC) $(ALL_OBJ) $(CFLAGS) $(LIBRARIES) -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/parsing/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@

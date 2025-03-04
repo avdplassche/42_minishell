@@ -1,0 +1,4 @@
+minishell
+*.o
+*.a
+leaks.log
