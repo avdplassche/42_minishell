@@ -14,9 +14,11 @@ e'c"h'o" Hello World
 e'ch'o" Hello World
 e'ch'o" Hello" World
 e'c'"ho" Hello World
+"e'c"'h"o" hello
 "echo $PATH"
 'echo $PATH'
 ls -1 | grep "config" | tee configs.txt | wc -l
+"echo $DISPLAY $PAGER $PA '$PATH'"
 
 
 1 > echo Hello
@@ -35,7 +37,7 @@ ls -1 | grep "config" | tee configs.txt | wc -l
 14 > error
 15 > echo Hello
 16 > echo
-17 >
+17 > error
 18 >
 19 >
 

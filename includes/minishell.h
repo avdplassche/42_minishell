@@ -33,9 +33,9 @@ int			count_cmd(t_mini *mini);
 int			parsing(t_mini *mini, t_cmd *cmd);
 
 int			get_envp_index(t_mini *mini, char *variable);
-int			translate_sigil_sign(t_mini *mini, char *str);
-int			need_sigil_sub(char *str);
-int			handle_sigil_sign(t_mini *mini, t_cmd *cmd);
+char		*translate_dollar_sign(t_mini *mini, char *temp);
+int			dollar_sub_needed(char *str);
+int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_quote(t_mini *mini);
 void		quote_enclosure_handle(char c, t_quote *quote);
@@ -87,6 +87,7 @@ char		*get_next_line(int fd);
 
 bool		contain_char(char *s, char c);
 bool		contain_quotes(char *s);
+char		*enquote_str(char *str, int q);
 int			contain_string_at_specific_index(char *haystack, char *needle, int i);
 bool		is_space(char c);
 int			is_only_spaces(char *s);

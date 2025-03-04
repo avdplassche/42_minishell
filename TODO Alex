@@ -1,23 +1,20 @@
 Now (by order of priority) :
 
-Clean quotes
-$
-
 handle $PATH or other $
-	-> put variable value if $ in cmd line (actually easy, replace by the actual var)
+	-> handle case where single quoted var is double enquoted
 	-> if not included in " " ?
-handle quotes
-	-> test with TESTMODE_FILE lines
+	-> handle case where index == -1
+
 
 code a function that will test if a string (that will be contained in cmd.command) is accessible in one of the paths (mini.paths)
 	-> Josephine ?
 	-> I will use the result in cmd.type (0 for yes, -1 for no)
 
-Idea : epur quotes
-
 
 FIND GOOD ERROR HANDLING SYSTEM
 
+
+After :
 
 fill_cmd_args
 coder cas double pipe "||"
@@ -26,15 +23,13 @@ Signals
 
 
 
-After :
-
-reesayer de mettre total cmd   //maybe plus tard
-fill_cmd_type ()
-
-
 Idea for error handling :
 
 1 - make enum amout errors (ex : MALLOC_EROR)
 2 - store them in cmd.error (and return at the same time)
 3 - check error in main, after parsing
 
+
+
+export EQ"'=U'"AL=equal
+export: not valid in this context: EQ'
