@@ -7,7 +7,7 @@
  * @param i index of the cmd structure
  *
  */
-int	init_cmd(t_cmd *cmd, int i)
+int	init_cmd(t_cmd *cmd, int i)   //change it in void ?
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
@@ -37,7 +37,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	int		i;
 
 	i = -1;
-	mini->line = ft_strtrim(mini->line, " 	\n");
+	mini->line = ft_strtrim(mini->line, SPACE_SET);
 	if (!(is_valid_command(mini)))
 	{
 		mini->last_return = 127;

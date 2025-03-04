@@ -16,6 +16,7 @@
 # include "structures.h"
 
 #define BUILTINS_STRING "cd,echo,env,exit,export,pwd,unset"
+#define SPACE_SET " 	\n"
 #define BUILTIN_AMOUNT 7
 #define BUFFER_SIZE 10
 #define DEBUGG_PARSING 1
@@ -31,17 +32,21 @@ int			count_cmd(t_mini *mini);
 
 int			parsing(t_mini *mini, t_cmd *cmd);
 
-int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
+int			get_envp_index(t_mini *mini, char *variable);
+int			translate_sigil_sign(t_mini *mini, char *str);
+int			need_sigil_sub(char *str);
+int			handle_sigil_sign(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_quote(t_mini *mini);
 void		quote_enclosure_handle(char c, t_quote *quote);
+int			strlen_quote_cleaned_command(char *str);
+int			clean_command_quotes(t_cmd *cmd, char *str);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 int			get_cmd_bin(t_mini *mini, t_cmd *cmd);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
-
 
 
 

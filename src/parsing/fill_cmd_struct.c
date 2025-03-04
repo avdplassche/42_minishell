@@ -3,11 +3,6 @@
 #include "../../includes/minishell.h"
 
 
-// char	*replace_dollar_sign(char *str)
-// {
-// 	char	*
-
-// }
 
 
 

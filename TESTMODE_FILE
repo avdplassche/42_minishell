@@ -16,6 +16,7 @@ e'ch'o" Hello" World
 e'c'"ho" Hello World
 "echo $PATH"
 'echo $PATH'
+ls -1 | grep "config" | tee configs.txt | wc -l
 
 
 1 > echo Hello
@@ -34,6 +35,9 @@ e'c'"ho" Hello World
 14 > error
 15 > echo Hello
 16 > echo
+17 >
+18 >
+19 >
 
 ls -l | grep 'txt'"$HOME"
 echo "User: "'$USER'

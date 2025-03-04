@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:45:02 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 13:46:26 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:17:57 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ char	*ft_strtrim(char *s1, char *set)
 	while (j >= i)
 		s2[k++] = s1[i++];
 	s2[k] = '\0';
+	free(s1);
 	return (s2);
 }

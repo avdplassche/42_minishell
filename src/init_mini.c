@@ -55,7 +55,7 @@ int	init_mini(t_mini *mini, char **envp)
 	dup_env(mini, envp);
 	mini->paths = ft_split(getenv("PATH"), ':');
 		//malloc protection
-	mini->cursor = 0;
+	// mini->cursor = 0;
 	return (0);
 }
 
