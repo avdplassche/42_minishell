@@ -18,9 +18,9 @@ e'c'"ho" Hello World
 ls -1 | grep "config" | tee configs.txt | wc -l
 "echo $PATH"
 'echo $PATH'
+"echo $DISPLAY $PAGER $PA '$PATH'"
 'echo $DISPLAY "$PAGER" $PA '$PATH''
 "echo $DISPLAY '$PAGER' $PA '$PATH'"
-"echo $DISPLAY $PAGER $PA '$PATH'"
 
 
 1 > echo Hello

@@ -91,20 +91,24 @@ char	*translate_dollar_sign(t_mini *mini, char *temp)
 	char	*variable_name;
 	int		envp_index;
 
-	printf("Variable : %s\n", temp);
+	// printf("Variable : %s\n", temp);
 	j = 0;
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	while (temp[++i] && temp[i] != '$' && quote.sgl == 0)
+	while (temp[++i]) //ici
+	{
 		quote_enclosure_handle(temp[i], &quote);
-	printf("i = %d\n", i);
+		if (temp[i] == '$' && quote.sgl == 0)
+			break ;
+	}
+ 	printf("i = %d\n\n", i);
 	while (temp[++i] && temp[i] != ' ' && temp[i] != 34)
 		j++;
 	variable_name = ft_substr(temp, i - j, j + 1);
+	printf("Variable : %s\n\n", variable_name);
 	variable_name[j] = '=';
 	variable_name[j + 1] = '\0';
-	printf("Variable : %s\n", variable_name);
 	envp_index = get_envp_index(mini, variable_name);
 	free(variable_name);
 	variable_name = replace_env_variable(mini, temp, envp_index);	// example : $USER becomes "alvan-de", not alvan-de
@@ -129,8 +133,8 @@ int	dollar_sub_needed(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '$' && (quote.sgl == 0 || (quote.sgl && quote.dbl)))
-			return (printf("\n"), 1);
+		if (str[i] == '$' && quote.sgl == 0)
+			return (1);
 		quote_enclosure_handle(str[i], &quote);
 	}
 	return (0);

@@ -42,10 +42,12 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 	printf("Substring before $ substitution : %s$\n\n", temp);
 	while (dollar_sub_needed(temp))
 	{
+		printf("Temp : %s\n\n", temp);
 		// printf("temp : %s\n",temp);
 		// temp = clean_envp_quotes(temp);
 		temp = translate_dollar_sign(mini, temp); //is there quotes in env ?
 			//if (!temp)
+		printf("Substitution : %s\n\n", temp);
 	}
 	printf("Substring before cleaning quotes : %s$\n\n", temp);
 	if (!contain_quotes(temp))
