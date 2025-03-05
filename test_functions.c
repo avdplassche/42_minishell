@@ -14,7 +14,6 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-
 char	*enquote_str(char *str, int q)
 {
 	int		i;

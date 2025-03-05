@@ -28,8 +28,8 @@ static int	count_len_dest(char *src)
 
 /** Epur string by deleting all multiple spaces
  * @return an epured string
- */
-char *epurstring(char *src)  //may be able to delete the ft_is_only_space lines
+*/
+char *epurstring(char *src)
 {
 	char	*dest;
 	int		i;
@@ -54,28 +54,8 @@ char *epurstring(char *src)  //may be able to delete the ft_is_only_space lines
 	if (is_space(src[i - 1]))
 		j--;
 	dest[j] = '\0';
-	free(src);
+	// free(src);
 	return (dest);
 }
 
 
-
-
-// char *epur_out_of_quotes(char *src)
-// {
-// 	int	i;
-// 	int	j;
-// 	bool	single_quote;
-// 	bool	double_quote;
-
-// 	single_quote = 0;
-// 	double_quote = 0;
-// 	j = 0;
-// 	i = 0;
-// 	while (is_space(src[1]) && !(is_quote))
-// 		i++;
-
-
-
-
-// }

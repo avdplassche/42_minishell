@@ -25,7 +25,7 @@ int	is_valid_command(t_mini *mini)
 {
 	if (!(is_valid_quote(mini)))
 		return (printf("quote error\n\n-----------------------------------------------\n")
-			, 0); //a revoir
+			, 0); //maybe checking valid quote is a bit obsolete ?
 	if (mini->line[0] == '|')
 		return (printf("minishell: syntax error near unexpected token `|'\n"), 0);
 	return (1);

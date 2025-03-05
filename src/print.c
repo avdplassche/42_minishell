@@ -27,6 +27,8 @@ void	print_string(char *string, char *name)
 void	print_cmd(t_cmd cmd, char *cmd_line)
 {
 	int i;
+	(void)cmd_line;
+
 
 	i = -1;
 	if (TEST_MODE == 0)

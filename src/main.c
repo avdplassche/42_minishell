@@ -44,8 +44,10 @@ int	main(int argc, char **argv, char **envp)
 		mini.cursor = 0;
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
+		{
 			parsing(&mini, &cmd);
-		//exec(&mini, &cmd);
+			//exec(&mini, &cmd);
+		}
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -77,8 +79,10 @@ int	main(int argc, char **argv, char **envp)
 			add_history(mini.line);
 			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
+			{
 				parsing(&mini, &cmd);
-			//exec(&mini, &cmd);
+				//exec(&mini, &cmd);
+			}
 			free(mini.line);
 			mini.line = NULL;
 			c++;

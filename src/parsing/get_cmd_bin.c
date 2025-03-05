@@ -20,7 +20,7 @@ int	get_last_index(t_mini *mini)
 	{
 		if (contain_char(charset, mini->line[i]))
 			if (!quote.sgl && !quote.dbl && i)
-				return (printf("i=%d\n",i), i);
+				return (i);
 		quote_enclosure_handle(mini->line[i], &quote);
 		i++;
 	}
@@ -53,7 +53,6 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 		cmd->command = ft_strdup(temp);
 	else
 		clean_command_quotes(cmd, temp);
-	printf("Substring after cleaning quotes : %s$\n\n", temp);
 	return (free(temp), 0);
 }
 

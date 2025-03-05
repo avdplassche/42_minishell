@@ -19,6 +19,7 @@ char	*trim_var_name(t_mini *mini, int index)
 	while (mini->envp[index][++i])
 		j++;
 	trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
+	//malloc protection (malloc in enquote_str)
 	return (trimmed_str);
 }
 
@@ -40,8 +41,11 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	while (temp1[++i] && temp1[i] != '$' && quote.sgl == 0)
+	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || quote.dbl == 1))
+	{
+		// printf("%c ", temp1[i]);
 		quote_enclosure_handle(temp1[i], &quote);
+	}
 	// if (envp_index < 0)
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes

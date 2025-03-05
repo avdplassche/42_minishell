@@ -15,7 +15,8 @@ char	*enquote_str(char *str, int q)
 
 	j = -1;
 	enquoted_str = malloc(sizeof(char) * (ft_strlen(str) + 3));
-		//malloc protection
+	if (!enquoted_str)
+		return (NULL);
 	enquoted_str[++j] = q;
 	i = -1;
 	while (str[++i])
