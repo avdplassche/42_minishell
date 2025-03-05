@@ -48,6 +48,7 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 		temp = translate_dollar_sign(mini, temp); //is there quotes in env ?
 			//if (!temp)
 		printf("Substitution : %s\n\n", temp);
+		printf("Need another ? %d\n\n", dollar_sub_needed(temp));
 	}
 	printf("Substring before cleaning quotes : %s$\n\n", temp);
 	if (!contain_quotes(temp))

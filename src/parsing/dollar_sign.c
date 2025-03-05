@@ -133,9 +133,9 @@ int	dollar_sub_needed(char *str)
 	i = -1;
 	while (str[++i])
 	{
+		quote_enclosure_handle(str[i], &quote);
 		if (str[i] == '$' && quote.sgl == 0)
 			return (1);
-		quote_enclosure_handle(str[i], &quote);
 	}
 	return (0);
 }

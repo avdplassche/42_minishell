@@ -74,7 +74,6 @@ int	main(int argc, char **argv, char **envp)
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
 			mini.line = ft_strtrim(get_next_line(fd), " 	\n");
-			printf("CP\n");
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
 			add_history(mini.line);

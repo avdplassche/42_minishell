@@ -18,7 +18,7 @@
 #define BUILTINS_STRING "cd,echo,env,exit,export,pwd,unset"
 #define SPACE_SET " 	\n"
 #define BUILTIN_AMOUNT 7
-#define BUFFER_SIZE 100000
+#define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
 
