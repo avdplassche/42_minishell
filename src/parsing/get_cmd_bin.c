@@ -32,7 +32,6 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 	int		i;
 	char	*temp;
 	int		len;
-	int		dollar_amount;
 
 	i = mini->cursor;
 	len = get_last_index(mini);
@@ -40,15 +39,15 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 	while (contain_char(SPACE_SET, mini->line[len]))
 		len++;
 	mini->cursor = len;
-	printf("Substring before cleaning quotes : %s$\n\n", temp);
-	dollar_amount = dollar_sub_needed(temp);
-	printf("Need %d translation(s)\n\n", dollar_amount);
-	while (dollar_sub_needed(temp)) //maybe calculate how many $signs are to be replaced
+	printf("Substring before $ substitution : %s$\n\n", temp);
+	while (dollar_sub_needed(temp))
 	{
+		// printf("temp : %s\n",temp);
+		// temp = clean_envp_quotes(temp);
 		temp = translate_dollar_sign(mini, temp); //is there quotes in env ?
 			//if (!temp)
 	}
-	printf("Substring after $ substitution : %s$\n\n", temp);
+	printf("Substring before cleaning quotes : %s$\n\n", temp);
 	if (!contain_quotes(temp))
 		cmd->command = ft_strdup(temp);
 	else

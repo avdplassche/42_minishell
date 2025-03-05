@@ -19,11 +19,9 @@ char	*trim_var_name(t_mini *mini, int index)
 	while (mini->envp[index][++i])
 		j++;
 	trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
-	//malloc protection (malloc in enquote_str)
+		//malloc protection (malloc in enquote_str)
 	return (trimmed_str);
 }
-
-
 
 /** Replace $VAR by it's value and return new cleaned string
  * @param mini t_mini struct containind envp
@@ -41,11 +39,8 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || quote.dbl == 1))
-	{
-		// printf("%c ", temp1[i]);
+	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1)))
 		quote_enclosure_handle(temp1[i], &quote);
-	}
 	// if (envp_index < 0)
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
@@ -96,17 +91,20 @@ char	*translate_dollar_sign(t_mini *mini, char *temp)
 	char	*variable_name;
 	int		envp_index;
 
+	printf("Variable : %s\n", temp);
 	j = 0;
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
 	while (temp[++i] && temp[i] != '$' && quote.sgl == 0)
 		quote_enclosure_handle(temp[i], &quote);
-	while (temp[++i] && (temp[i] != ' ') && temp[i] != 34)
+	printf("i = %d\n", i);
+	while (temp[++i] && temp[i] != ' ' && temp[i] != 34)
 		j++;
 	variable_name = ft_substr(temp, i - j, j + 1);
 	variable_name[j] = '=';
 	variable_name[j + 1] = '\0';
+	printf("Variable : %s\n", variable_name);
 	envp_index = get_envp_index(mini, variable_name);
 	free(variable_name);
 	variable_name = replace_env_variable(mini, temp, envp_index);	// example : $USER becomes "alvan-de", not alvan-de
@@ -131,32 +129,10 @@ int	dollar_sub_needed(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '$' && quote.sgl == 0)
-			return (1);
+		if (str[i] == '$' && (quote.sgl == 0 || (quote.sgl && quote.dbl)))
+			return (printf("\n"), 1);
 		quote_enclosure_handle(str[i], &quote);
 	}
 	return (0);
 }
 
-
-
-
-
-// /** To handle lines starting with '$'
-//  *
-//  */
-// int	handle_dollar_sign(t_mini *mini, t_cmd *cmd)
-// {
-// 	/* This isn't the right way to process ,
-// 	we actually only need to replace '$?' by int error*/
-
-// 	if (ft_strlen(mini->line) == 1)   // line = $
-// 		return (printf("command not found\n"), -1);
-// 	if (ft_strncmp("$?", mini->line, 2) == 0)
-// 		return (printf("%d: command not found\n", mini->last_return), 0);
-// 	if (contain_string_at_specific_index(mini->line, "$? ", 0))
-// 		return (printf("%d command not found\n", mini->last_return));
-// 	if (contain_string_at_specific_index(mini->line, "$?", 0))
-// 		return (printf("%d: command not found\n", mini->last_return), 0);
-// 	return (0);
-// }

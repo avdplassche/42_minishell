@@ -18,7 +18,7 @@
 #define BUILTINS_STRING "cd,echo,env,exit,export,pwd,unset"
 #define SPACE_SET " 	\n"
 #define BUILTIN_AMOUNT 7
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 100000
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
 
@@ -41,6 +41,7 @@ int			is_valid_quote(t_mini *mini);
 void		quote_enclosure_handle(char c, t_quote *quote);
 int			strlen_quote_cleaned_command(char *str);
 int			clean_command_quotes(t_cmd *cmd, char *str);
+char		*clean_envp_quotes(char *str);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);

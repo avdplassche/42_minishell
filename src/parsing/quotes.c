@@ -1,6 +1,80 @@
 
 #include "../../includes/minishell.h"
 
+/** This function calculate the necessary lenght of the new string after deleting the quotes
+ * @param str the string to delete the quote from
+ * @return a total amount of char, to be used for malloc
+*/
+int	strlen_quote_cleaned_command(char *str)
+{
+	int	i;
+	int	j;
+	int	first_quote;
+
+	i = -1;
+	j = 0;
+	while (str[++i])
+	{
+		while (str[i++] && !(is_quote(str[i])))
+			j++;
+		if (is_quote(str[i]))
+			first_quote = str[i];
+		while (str[++i] && str[i] != first_quote)
+			j++;
+	}
+	return (j);
+}
+
+// int	strlen_inbetween_quote_with_dollar_command(char *str)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	first_quote;
+
+// 	i = -1;
+// 	j = 0;
+// 	while (str[++i])
+// 	{
+// 		while (str[i++] && str[i] != 34)
+// 			j++;
+// 		// if (is_quote(str[i]))
+// 		// 	first_quote = str[i];
+// 		while (str[++i] && str[i] != first_quote)
+// 			j++;
+// 	}
+// 	return (j);
+// }
+
+// char	*clean_envp_quotes(char *str)
+// {
+// 	int		first_quote;
+// 	int		i;
+// 	int		j;
+// 	char	*dest;
+
+// 	if (str[0] != 34 || str[ft_strlen(str) - 1] != 34)
+// 		return (str);
+// 	strlen_inbetween_quote_with_dollar_command(str);
+// 	dest = malloc(sizeof(char) * (j + 1));
+// 		//malloc protection
+// 	i = -1;
+// 	j = 0;
+// 	while (str[++i])
+// 	{
+// 		while (str[i] && !(is_quote(str[i])))
+// 			dest[j++] = str[i++];
+// 		if (is_quote(str[i]))
+// 			first_quote = str[i];
+// 		while (str[++i] && str[i] != first_quote)
+// 			dest[j++] = str[i];
+// 	}
+// 	dest[j] = '\0';
+// 	free(str);
+// 	return (dest);
+// }
+
+
+
 /** Fill command structure (for 1 command of the command line)
  * @param cmd the cmd structure containing cmd->commandto fill
  * @param str the string used to epure from (will be freed after the function)
@@ -30,29 +104,6 @@ int	clean_command_quotes(t_cmd *cmd, char *str)
 	return (0);
 }
 
-/** This function calculate the necessary lenght of the new string after deleting the quotes
- * @param str the string to delete the quote from
- * @return a total amount of char, to be used for malloc
-*/
-int	strlen_quote_cleaned_command(char *str)
-{
-	int	i;
-	int	j;
-	int	first_quote;
-
-	i = -1;
-	j = 0;
-	while (str[++i])
-	{
-		while (str[i++] && !(is_quote(str[i])))
-			j++;
-		if (is_quote(str[i]))
-			first_quote = str[i];
-		while (str[++i] && str[i] != first_quote)
-			j++;
-	}
-	return (j);
-}
 
 /** Change quote enclosure, taking a char (34 or 39) as argument
  * 
