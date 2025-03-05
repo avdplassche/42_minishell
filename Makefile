@@ -9,7 +9,6 @@ DIR_INCLUDE		=	./includes
 DIR_SRC			=	./src
 DIR_BUILTINS	=	./builtins
 DIR_UTILS		=	./utils
-DIR_LIBFT		=	$(DIR_INCLUDE)/libft
 
 #-----------------COMP FLAGS------------------------#
 
@@ -44,7 +43,19 @@ UTILS				=	contain_char.c \
 						epurstring.c \
 						is_only_spaces.c \
 						is_quote.c \
-						is_space.c 
+						is_space.c \
+						ft_atoi.c \
+						ft_calloc.c \
+						ft_split.c \
+						ft_strchr.c \
+						ft_strdup.c \
+						ft_strjoin.c \
+						ft_strlen.c \
+						ft_strncmp.c \
+						ft_strnstr.c \
+						ft_strtrim.c \
+						ft_substr.c \
+						get_next_line.c
 
 BUILTINS			=	cd.c \
 						echo.c \
@@ -63,18 +74,21 @@ ALL_OBJ				=	$(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ)
 
 #------------------INCLUDE FLAGS---------------------#
 
-INCLUDE_FLAGS		=	-I$(DIR_INCLUDE) -I$(DIR_LIBFT)/include
-LIBRARY_PATH		=	-L$(DIR_LIBFT)
-LIBRARIES			=	 -lft -l readline
+INCLUDE_FLAGS		=	-I$(DIR_INCLUDE)
+LIBRARIES			=	-lreadline
+
+# For macOS, add readline paths if needed
+ifeq ($(UNAME), Darwin)
+LIBRARIES += -L/usr/local/opt/readline/lib
+INCLUDE_FLAGS += -I/usr/local/opt/readline/include
+endif
 
 #---------------------TARGETS------------------------#
 
 all:	$(NAME)
 
 $(NAME): $(ALL_OBJ) | $(DIR_BIN)
-	@make -s -C $(DIR_LIBFT)
-	@make -s bonus -C $(DIR_LIBFT)
-	@$(CC) $(ALL_OBJ) $(CFLAGS) $(LIBRARY_PATH) $(LIBRARIES) -o $@
+	@$(CC) $(ALL_OBJ) $(CFLAGS) $(LIBRARIES) -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/parsing/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
@@ -103,11 +117,9 @@ $(DIR_BIN)/builtins:
 #-----------------------clean functions------------------------#
 
 clean:
-	@make -s clean -C $(DIR_LIBFT)
 	@rm -rf $(DIR_BIN)
 
 fclean: clean
-	@make -s fclean -C $(DIR_LIBFT)
 	@rm -rf $(NAME)
 
 re: fclean all
