@@ -42,6 +42,7 @@ void		quote_enclosure_handle(char c, t_quote *quote);
 int			strlen_quote_cleaned_command(char *str);
 int			clean_command_quotes(t_cmd *cmd, char *str);
 char		*clean_envp_quotes(char *str);
+char		last_quote(char *str, int i);
 
 
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);

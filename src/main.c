@@ -76,16 +76,16 @@ int	main(int argc, char **argv, char **envp)
 			mini.line = ft_strtrim(get_next_line(fd), " 	\n");
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
-			add_history(mini.line);
+			// add_history(mini.line);
 			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, &cmd);
 				//exec(&mini, &cmd);
 			}
+			free(cmd.command);
 			free(mini.line);
 			mini.line = NULL;
-
 			c++;
 		}
 		close(fd);

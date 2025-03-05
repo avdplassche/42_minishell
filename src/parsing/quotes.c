@@ -25,54 +25,21 @@ int	strlen_quote_cleaned_command(char *str)
 	return (j);
 }
 
-// int	strlen_inbetween_quote_with_dollar_command(char *str)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	first_quote;
-
-// 	i = -1;
-// 	j = 0;
-// 	while (str[++i])
-// 	{
-// 		while (str[i++] && str[i] != 34)
-// 			j++;
-// 		// if (is_quote(str[i]))
-// 		// 	first_quote = str[i];
-// 		while (str[++i] && str[i] != first_quote)
-// 			j++;
-// 	}
-// 	return (j);
-// }
-
-// char	*clean_envp_quotes(char *str)
-// {
-// 	int		first_quote;
-// 	int		i;
-// 	int		j;
-// 	char	*dest;
-
-// 	if (str[0] != 34 || str[ft_strlen(str) - 1] != 34)
-// 		return (str);
-// 	strlen_inbetween_quote_with_dollar_command(str);
-// 	dest = malloc(sizeof(char) * (j + 1));
-// 		//malloc protection
-// 	i = -1;
-// 	j = 0;
-// 	while (str[++i])
-// 	{
-// 		while (str[i] && !(is_quote(str[i])))
-// 			dest[j++] = str[i++];
-// 		if (is_quote(str[i]))
-// 			first_quote = str[i];
-// 		while (str[++i] && str[i] != first_quote)
-// 			dest[j++] = str[i];
-// 	}
-// 	dest[j] = '\0';
-// 	free(str);
-// 	return (dest);
-// }
-
+/** What is the type of the last quote before i ?
+ * @return 's' for single
+ * @return 'd' for double
+ */
+char	last_quote(char *str, int i)
+{
+	while (--i >= 0)
+	{
+		if (str[i] == 39)
+			return ('s');
+		if (str[i] == 34)
+			return ('d');
+	}
+	return (0);
+}
 
 
 /** Fill command structure (for 1 command of the command line)
@@ -127,7 +94,7 @@ void	quote_enclosure_handle(char c, t_quote *quote)
  * @note ascii 34 =  "
  * @note ascii 39 =  '
  */
-int	is_valid_quote(t_mini *mini)  // maybe quotes shouldnt be bools but int, and 2 for cat last and open/close ->for norminette
+int	is_valid_quote(t_mini *mini)  // use last_quote
 {
 	int		i;
 	char	last;

@@ -20,6 +20,7 @@ char	*trim_var_name(t_mini *mini, int index)
 		j++;
 	trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
 		//malloc protection (malloc in enquote_str)
+	printf("trimed : %s$\n\n", trimmed_str);
 	return (trimmed_str);
 }
 
@@ -41,10 +42,16 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	i = -1;
 	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1)))
 		quote_enclosure_handle(temp1[i], &quote);
+	printf("sq %d dq %d i %d\n\n", quote.sgl, quote.dbl, i);
 	// if (envp_index < 0)
+	//trim 
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
+	{
+		if (quote.sgl == 1 && temp1[i] == 39)
+			break ;
 		quote_enclosure_handle(temp1[i], &quote);
+	}
 	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
 	free(temp2);
 	return (dest);
@@ -90,25 +97,32 @@ char	*translate_dollar_sign(t_mini *mini, char *temp)
 	t_quote	quote;
 	char	*variable_name;
 	int		envp_index;
+	int		start;
 
-	// printf("Variable : %s\n", temp);
 	j = 0;
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	while (temp[++i]) //ici
+	while (temp[++i])
 	{
 		quote_enclosure_handle(temp[i], &quote);
-		if (temp[i] == '$' && quote.sgl == 0)
+		if (temp[i] == '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1 && last_quote(temp, i) == 's')))
 			break ;
 	}
  	printf("i = %d\n\n", i);
 	while (temp[++i] && temp[i] != ' ' && temp[i] != 34)
+	{
 		j++;
-	variable_name = ft_substr(temp, i - j, j + 1);
-	printf("Variable : %s\n\n", variable_name);
+		quote_enclosure_handle(temp[i], &quote);
+	}
+	start = i - j;
+	if (quote.dbl == 1 && temp[i-1] == 39)
+		j--;
+	variable_name = ft_substr(temp, start, j + 1);
 	variable_name[j] = '=';
 	variable_name[j + 1] = '\0';
+	printf("Variable : %s\n", variable_name);
+	printf("temp : %s\n\n", temp);
 	envp_index = get_envp_index(mini, variable_name);
 	free(variable_name);
 	variable_name = replace_env_variable(mini, temp, envp_index);	// example : $USER becomes "alvan-de", not alvan-de
@@ -116,10 +130,11 @@ char	*translate_dollar_sign(t_mini *mini, char *temp)
 	return (variable_name);
 }
 
-/** Do the string needs a dollar sign substitution ?
+
+/** Index where a sub is needed
  * @param str the string to scan
- * @return 1 yes
- * @return 0 no
+ * @return index where to sub
+ * @return -1 no need
 */
 int	dollar_sub_needed(char *str)
 {
@@ -127,16 +142,16 @@ int	dollar_sub_needed(char *str)
 	t_quote	quote;
 
 	if (!(contain_char(str, '$')))
-		return (0);
+		return (-1);
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
 	while (str[++i])
 	{
 		quote_enclosure_handle(str[i], &quote);
-		if (str[i] == '$' && quote.sgl == 0)
-			return (1);
+		if (str[i] == '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1 && last_quote(str, i) == 's')))
+			return (printf("Need Substitution at : %d\n\n", i), i);
 	}
-	return (0);
+	return (-1);
 }
 
