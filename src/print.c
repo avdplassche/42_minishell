@@ -46,7 +46,10 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 			printf("%s ", cmd.args[i]);
 	else
 		printf("(null)\n");
-	printf("	  Filename : %s ", cmd.filename);
+	if (cmd.filename != NULL)
+		printf("	  Filename : %s ", cmd.filename);
+	else
+		printf("(null)\n");
 	if (cmd.is_path == true)
 		printf("(path)\n");
 	else

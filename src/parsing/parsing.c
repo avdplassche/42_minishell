@@ -11,9 +11,10 @@ int	init_cmd(t_cmd *cmd, int i)   //change it in void ?
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
-	cmd->is_path = NULL;
+	cmd->filename = NULL;
 	cmd->id = i + 1;
 	cmd->type = -1;
+	cmd->is_path = 0;
 	cmd->in_redir_total = 0;
 	cmd->out_redir_total = 0;
 	cmd->delimiter_total = 0;

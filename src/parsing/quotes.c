@@ -1,25 +1,39 @@
 
 #include "../../includes/minishell.h"
 
+int	find_first_quote(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (is_quote(str[i]))
+			return (str[i]);
+	return (0);
+}
+
+
 /** This function calculate the necessary lenght of the new string after deleting the quotes
  * @param str the string to delete the quote from
  * @return a total amount of char, to be used for malloc
 */
 int	strlen_quote_cleaned_command(char *str)
 {
-	int	i;
-	int	j;
-	int	first_quote;
+	int		i;
+	int		j;
+	t_quote	quote;
 
+	quote.dbl = 0;
+	quote.sgl = 0;
 	i = -1;
 	j = 0;
 	while (str[++i])
 	{
-		while (str[i++] && !(is_quote(str[i])))
-			j++;
-		if (is_quote(str[i]))
-			first_quote = str[i];
-		while (str[++i] && str[i] != first_quote)
+		quote_enclosure_handle(str[i], &quote);
+		printf("%c : sq = %d, dq = %d\n", str[i], quote.sgl, quote.dbl);
+		if (!is_quote(str[i])
+			|| (str[i] == 34 && quote.sgl == 1)
+			|| (str[i] == 39 && quote.dbl == 1))
 			j++;
 	}
 	return (j);
@@ -49,23 +63,28 @@ char	last_quote(char *str, int i)
 */
 int	clean_command_quotes(t_cmd *cmd, char *str)
 {
-	int		first_quote;
 	int		i;
 	int		j;
+	t_quote	quote;
 
 	j = strlen_quote_cleaned_command(str);
+	printf("Len : %d\n", j);
 	cmd->command = malloc(sizeof(char) * (j + 1));
 		//malloc protection
 	i = -1;
 	j = 0;
+	quote.dbl = 0;
+	quote.sgl = 0;
 	while (str[++i])
 	{
-		while (str[i] && !(is_quote(str[i])))
-			cmd->command[j++] = str[i++];
-		if (is_quote(str[i]))
-			first_quote = str[i];
-		while (str[++i] && str[i] != first_quote)
-			cmd->command[j++] = str[i];
+		quote_enclosure_handle(str[i], &quote);
+		if (!is_quote(str[i])
+			|| (str[i] == 34 && quote.sgl == 1)
+			|| (str[i] == 39 && quote.dbl == 1))
+		{
+			cmd->command[j] = str[i];
+			j++;
+		}
 	}
 	cmd->command [j] = '\0';
 	return (0);
@@ -73,15 +92,15 @@ int	clean_command_quotes(t_cmd *cmd, char *str)
 
 
 /** Change quote enclosure, taking a char (34 or 39) as argument
- * 
+ *
 */
 void	quote_enclosure_handle(char c, t_quote *quote)
 {
-	if (c == 34 && quote->dbl == 0)
+	if (c == 34 && quote->dbl == 0 && quote->sgl == 0)
 		quote->dbl = 1;
 	else if (c == 34 && quote->dbl == 1)
 		quote->dbl = 0;
-	else if (c == 39 && quote->sgl == 0)
+	else if (c == 39 && quote->sgl == 0 && quote->dbl == 0)
 		quote->sgl = 1;
 	else if (c == 39 && quote->sgl == 1)
 		quote->sgl = 0;

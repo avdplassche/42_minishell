@@ -48,6 +48,8 @@ int	main(int argc, char **argv, char **envp)
 			parsing(&mini, &cmd);
 			//exec(&mini, &cmd);
 		}
+		if (cmd.command != NULL)
+			free(cmd.command);
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -83,7 +85,8 @@ int	main(int argc, char **argv, char **envp)
 				parsing(&mini, &cmd);
 				//exec(&mini, &cmd);
 			}
-			free(cmd.command);
+			// if (cmd.command != NULL)
+			// free(cmd.command);
 			free(mini.line);
 			mini.line = NULL;
 			c++;

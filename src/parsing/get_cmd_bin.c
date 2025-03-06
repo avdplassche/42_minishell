@@ -11,7 +11,7 @@ int	get_last_index(t_mini *mini)
 {
 	int		i;
 	t_quote	quote;
-	char	charset[4] = " <>|";
+	char	charset[5] = " <>|";
 
 	i = 0;
 	quote.dbl = 0;
