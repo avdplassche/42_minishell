@@ -20,7 +20,6 @@ char	*trim_var_name(t_mini *mini, int index)
 		j++;
 	trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
 		//malloc protection (malloc in enquote_str)
-	printf("trimed : %s$\n\n", trimmed_str);
 	return (trimmed_str);
 }
 
@@ -42,17 +41,31 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	i = -1;
 	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1)))
 		quote_enclosure_handle(temp1[i], &quote);
-	printf("sq %d dq %d i %d\n\n", quote.sgl, quote.dbl, i);
-	// if (envp_index < 0)
-	//trim 
+	if (envp_index < 0)
+	{
+		temp2 = ft_substr(temp1, 0, i);
+		i++;
+		while (temp1[i] && temp1[i] != ' ')
+			i++;
+		dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
+		return (dest);
+	}
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
+	printf("temp 2 : %s\n", temp2);
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
 	{
-		if (quote.sgl == 1 && temp1[i] == 39)
+		// printf("temp[%d] : %c, sq : %d, dq : %d\n", i, temp1[i], quote.sgl, quote.dbl);
+		// if (quote.sgl == 1 && temp1[i] == 39)
+		if (quote.dbl == 1 && temp1[i] == 39)
+		{
 			break ;
+		}
 		quote_enclosure_handle(temp1[i], &quote);
 	}
+	printf("temp1 : %s\n", temp1);
+	printf("i = %d end : %zu\n", i, ft_strlen(temp1));
 	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
+	printf("dest : %s\n", dest);
 	free(temp2);
 	return (dest);
 }
@@ -69,14 +82,15 @@ int	get_envp_index(t_mini *mini, char *variable)
 	int	k;
 	int	len;
 
+	printf("Variable : %s\n", variable);
 	i = 0;
 	len = ft_strlen(variable);
 	while (mini->envp[i])
 	{
 		j = 0;
-		k = 0;
-		while (variable[k])
-			if (mini->envp[i][j++] != variable[k++])
+		k = -1;
+		while (variable[++k])
+			if (mini->envp[i][j++] != variable[k] && variable[k])
 				break ;
 		if (k == len)
 			return (i);
@@ -90,14 +104,14 @@ int	get_envp_index(t_mini *mini, char *variable)
  * @param temp the string to change dollar sign if needed
  * @return errors
 */
-char	*translate_dollar_sign(t_mini *mini, char *temp)
+char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 {
 	int		i;
 	int		j;
 	t_quote	quote;
 	char	*variable_name;
 	int		envp_index;
-	int		start;
+	// int		start;
 
 	j = 0;
 	quote.sgl = 0;
@@ -109,21 +123,19 @@ char	*translate_dollar_sign(t_mini *mini, char *temp)
 		if (temp[i] == '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1 && last_quote(temp, i) == 's')))
 			break ;
 	}
- 	printf("i = %d\n\n", i);
 	while (temp[++i] && temp[i] != ' ' && temp[i] != 34)
 	{
+		printf("temp[%d] = %c, sq = %d, dq = %d\n", i, temp[i], quote.sgl, quote.dbl);
+		// if (temp[i] == 39 && last_quote(temp, i) == 's' && quote.sgl == 0)
+		// 	break;
 		j++;
 		quote_enclosure_handle(temp[i], &quote);
 	}
-	start = i - j;
-	if (quote.dbl == 1 && temp[i-1] == 39)
-		j--;
-	variable_name = ft_substr(temp, start, j + 1);
-	variable_name[j] = '=';
-	variable_name[j + 1] = '\0';
-	printf("Variable : %s\n", variable_name);
-	printf("temp : %s\n\n", temp);
-	envp_index = get_envp_index(mini, variable_name);
+	variable_name = ft_substr(temp, sub_index + 1, j);
+	// printf("variable : %s\n", variable_name);
+	// variable_name[j] = '=';
+	// variable_name[j + 1] = '\0';
+	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
 	free(variable_name);
 	variable_name = replace_env_variable(mini, temp, envp_index);	// example : $USER becomes "alvan-de", not alvan-de
 	free(temp);

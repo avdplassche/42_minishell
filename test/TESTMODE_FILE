@@ -16,13 +16,14 @@ e'ch'o" Hello World
 e'ch'o" Hello" World
 e'c'"ho" Hello World
 "e'c"'h"o" hello
-ls -1 | grep "config" | tee configs.txt | wc -l
 "echo $PATH"
 'echo $PATH'
-"echo $DISPLAY $PAGER $PA '$PATH'"
-'echo $DISPLAY " $PAGER" $PA '$PATH''
-"echo $DISPLAY '$PAGER' $PA '$PATH'"
+"echo $LANG $PAGER $PA '$PWD'"
+'echo $LANG " $PAGER" $PA '$PWD''
+"echo $LANG '$PAGER' $PA '$PWD'"
 
+
+ls -1 | grep "config" | tee configs.txt | wc -l
 
 1 > echo Hello
 2 > echo Hello
@@ -44,6 +45,10 @@ ls -1 | grep "config" | tee configs.txt | wc -l
 18 >
 19 >
 
+
+"echo $DISPLAY $PAGER $PA '$PATH'"
+'echo $DISPLAY " $PAGER" $PA '$PATH''
+"echo $DISPLAY '$PAGER' $PA '$PATH'"
 ls -l | grep 'txt'"$HOME"
 echo "User: "'$USER'
 

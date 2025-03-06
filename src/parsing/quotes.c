@@ -30,7 +30,6 @@ int	strlen_quote_cleaned_command(char *str)
 	while (str[++i])
 	{
 		quote_enclosure_handle(str[i], &quote);
-		printf("%c : sq = %d, dq = %d\n", str[i], quote.sgl, quote.dbl);
 		if (!is_quote(str[i])
 			|| (str[i] == 34 && quote.sgl == 1)
 			|| (str[i] == 39 && quote.dbl == 1))
@@ -68,7 +67,6 @@ int	clean_command_quotes(t_cmd *cmd, char *str)
 	t_quote	quote;
 
 	j = strlen_quote_cleaned_command(str);
-	printf("Len : %d\n", j);
 	cmd->command = malloc(sizeof(char) * (j + 1));
 		//malloc protection
 	i = -1;
