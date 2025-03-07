@@ -40,18 +40,12 @@ int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 		len++;
 	mini->cursor = len;
 	printf("Substring before $ substitution : %s$\n\n", temp);
-	// printf("Need substitution ? %d\n\n", dollar_sub_needed(temp));
-	while (dollar_sub_needed(temp) != -1)
+	while (need_dollar_substitution(temp) != -1)
 	{
-		printf("Temp : %s\n\n", temp);
-		// printf("temp : %s\n",temp);
-		// temp = clean_envp_quotes(temp);
-		temp = translate_dollar_sign(mini, temp, dollar_sub_needed(temp)); //is there quotes in env ?
-			//if (!temp)
-		printf("Substitution : %s\n\n", temp);
-		// printf("Need another ? %d\n\n", dollar_sub_needed(temp));
+		printf("Need Substitution at : %d\n\n", need_dollar_substitution(temp)),
+		temp = translate_dollar_sign(mini, temp, need_dollar_substitution(temp)); //is there quotes in env ?
+		// printf("temp : %s\n\n", temp);
 	}
-	printf("Substring before cleaning quotes : %s$\n\n", temp);
 	if (!contain_quotes(temp))
 		cmd->command = ft_strdup(temp);
 	else

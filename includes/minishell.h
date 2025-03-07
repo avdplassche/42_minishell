@@ -34,7 +34,7 @@ int			parsing(t_mini *mini, t_cmd *cmd);
 
 int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
-int			dollar_sub_needed(char *str);
+int			need_dollar_substitution(char *str);
 int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_quote(t_mini *mini);

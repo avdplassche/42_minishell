@@ -48,8 +48,6 @@ int	main(int argc, char **argv, char **envp)
 			parsing(&mini, &cmd);
 			//exec(&mini, &cmd);
 		}
-		if (cmd.command != NULL)
-			free(cmd.command);
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -83,9 +81,8 @@ int	main(int argc, char **argv, char **envp)
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, &cmd);
-				//exec(&mini, &cmd);
+				// exec(&mini, &cmd);
 			}
-			// if (cmd.command != NULL)
 			// free(cmd.command);
 			free(mini.line);
 			mini.line = NULL;
