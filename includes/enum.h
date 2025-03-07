@@ -9,12 +9,12 @@ enum	e_standard
 		STDERR = 2,
 };
 
-enum	e_characters
-{
-		PIPE = '|',
-		IN_REDIR = '<',
-		OUT_REDIR = '>',
-};
+// enum	e_redirections
+// {
+// 		PIPE = '|',
+// 		IN_REDIR = '<',
+// 		OUT_REDIR = '>',
+// };
 
 enum	e_binary
 {

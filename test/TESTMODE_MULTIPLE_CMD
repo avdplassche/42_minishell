@@ -1,5 +1,5 @@
 echo 'Hello'" World"
- ls -l | grep 'txt'"$HOME"
+echo 'txt'"$HOME"| grep   txt
      echo "User: "'$USER'
 echo Today is "'$(date)'"
 find . -name '"*.sh"'
@@ -17,6 +17,9 @@ grep 'some'" pattern"' file.txt
 echo "Price: "'$10' | awk "{print $1}"
 awk '"{print $1, $2}"' < data.csv
 find . -type f -exec grep "hello"' {} \;'
+
+
+Pipex : < file1 cmd1 | cmd2 > file2
 
 1 > Hello world
 2 >

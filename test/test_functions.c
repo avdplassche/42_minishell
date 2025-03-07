@@ -1,6 +1,6 @@
 
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 /*This file is used to test if created functions are working as intended */
 
@@ -50,11 +50,18 @@ int main(int argc, char **argv, char **envp)
 	char needle[] = "vd";
 	char haystack[] = "Alexvd";
 
-	printf("string : %s\n", enquote_str(haystack, 34));
+	char pathname[] = "/bin/cat";
+	char *args[] = {pathname, "execfile", NULL};
+
+	if (execve(pathname, args, envp) == -1)
+		perror("Error");
+	// printf("string : %s\n", enquote_str(haystack, 34));
 	// printf("%d\n", contain_string_at_specific_index(haystack, needle, 4));
 	// printf("%d\n", contain_string_at_specific_index(haystack, needle, 3));
 	// printf("%s\n", epurstring(str));
 	// env = getenv("PATH");    //keep those
 	// printf("%s\n", env);
+
+
 	return (0);
 }

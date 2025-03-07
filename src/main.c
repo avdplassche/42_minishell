@@ -32,22 +32,24 @@ void	free_mini(t_mini *mini)
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
-	t_cmd	cmd;
+	t_cmd	*cmd;
 
 	init_mini(&mini, envp);
 	//malloc protection
 	printf("\n");
 	while (argc == 1)
 	{
-		mini.line = readline("Prompt minishell ");
+		cmd = NULL;
+		mini.line = ft_strtrim(readline("Prompt minishell "), SPACE_SET);
 		mini.cmd_amount = count_cmd(&mini);
 		mini.cursor = 0;
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 		{
-			parsing(&mini, &cmd);
+			parsing(&mini, cmd);
 			//exec(&mini, &cmd);
 		}
+		free(cmd);
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -62,6 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		int c = 0;
 		int r = read(fd, buffer, 9999);
 
+		cmd = NULL;
 		buffer[r] = '\0';
 		while (buffer[++i])
 			if (buffer[i] == '\n')
@@ -73,17 +76,18 @@ int	main(int argc, char **argv, char **envp)
 		c = 0;
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
-			mini.line = ft_strtrim(get_next_line(fd), " 	\n");
+			mini.line = ft_strtrim(get_next_line(fd), SPACE_SET);
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
 			// add_history(mini.line);
 			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
-				parsing(&mini, &cmd);
+				parsing(&mini, cmd);
 				// exec(&mini, &cmd);
 			}
 			// free(cmd.command);
+			free(cmd);
 			free(mini.line);
 			mini.line = NULL;
 			c++;

@@ -7,19 +7,18 @@
  * @param i index of the cmd structure
  *
  */
-int	init_cmd(t_cmd *cmd, int i)   //change it in void ?
+void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
 	cmd->filename = NULL;
 	cmd->id = i + 1;
 	cmd->type = -1;
-	cmd->is_path = 0;
+	cmd->pipe = 0;
 	cmd->in_redir_total = 0;
 	cmd->out_redir_total = 0;
-	cmd->delimiter_total = 0;
+	cmd->in_delimiter_total = 0;
 	cmd->out_appredir_total = 0;
-	return (0);
 }
 
 int	is_valid_command(t_mini *mini)
@@ -32,28 +31,31 @@ int	is_valid_command(t_mini *mini)
 	return (1);
 }
 
+int	set_return_value(t_mini *mini, int value)
+{
+	mini->last_return = value;
+	if (value == 127)  //when to return (1) ?
+		return (-1);
+	return (0);
+}
 
 int	parsing(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
 
 	i = -1;
-	mini->line = ft_strtrim(mini->line, SPACE_SET);
 	if (!(is_valid_command(mini)))
-	{
-		mini->last_return = 127;
+		return (set_return_value(mini, 127));
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_amount);
+	if (!cmd)//malloc protection
 		return (-1);
-	}
-	if (mini->cmd_amount > 1)
-		cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_amount);
-			//malloc protection
 	while (++i < mini->cmd_amount)
 	{
 		init_cmd(&cmd[i], i);
 		fill_cmd_structure(mini, &cmd[i]);
 	}
 	if (DEBUGG_PARSING == 1)
-		debug_parsing(mini, cmd);
+		debug_parsing_print(mini, cmd);
 	return (0);
 }
 

@@ -13,9 +13,6 @@
 */
 int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
-	// int	i;
-
-	// i = -1;
 	// get_cmd_total_redir(mini, cmd);
 	get_cmd_bin(mini, cmd);
 	// if (mini->line[mini->cursor])

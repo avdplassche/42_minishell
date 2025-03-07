@@ -125,7 +125,7 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 		j++;
 		quote_enclosure_handle(temp[i], &quote);
 	}
-	sleep(1);
+	usleep(700);
 	printf("\n");
 	variable_name = ft_substr(temp, sub_index + 1, j);
 	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));

@@ -28,12 +28,13 @@ typedef struct s_mini
  * @param command the name of the binary to execute
  * @param type BUILT if in builtins dir, BIN if in PATH, UNVALID else
  * @param args arguments given to the binary
- * @param filename file name if needed by the command (needed for redir)
- * @param is_path bool to know if filename is a path or not
  * @param id id of the command (1 == first exec)
+ * @param filename file name if needed by the command line(needed for redir)
+ * @param is_path bool to know if filename is a path or not
+ * @param pipe will the command be redirected by a pipe ?
  * @param in_redir is there an input redirection in the command
  * @param out_redir is there an output redirection in the command
- * @param delimiter is there a delimiter in the command (<<)
+ * @param in_delimiter is there a delimiter in the command (<<)
  * @param out_appredir is there an out_appredir in the command (>>)
  */
 typedef struct s_cmd
@@ -41,12 +42,12 @@ typedef struct s_cmd
 	char		*command;
 	int			type;
 	char		**args;
-	char		*filename;
-	bool		is_path;
 	int			id;
+	char		*filename;
+	int			pipe;
 	int			in_redir_total;
 	int			out_redir_total;
-	int			delimiter_total;
+	int			in_delimiter_total;
 	int			out_appredir_total;
 
 	int			error;

@@ -63,7 +63,7 @@ void		print_char_table(char **string, char *name);
 void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
 
-void		debug_parsing(t_mini *mini, t_cmd *cmd);
+void		debug_parsing_print(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * *UTILS * * * * * * * * * */
 
