@@ -19,7 +19,7 @@ e'c'"ho" Hello World
 "echo $PATH"
 'echo $PATH'
 "echo $LANG $PAGER $PA '$PWD'"
-'echo $LANG " $PAGER" $PA '$PWD''
+'echo $LANG " $PAGER" $PA ' $PWD''
 "echo $LANG '$PAGER' $PA '$PWD'"
 
 

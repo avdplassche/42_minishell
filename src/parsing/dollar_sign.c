@@ -39,7 +39,6 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	printf("temp : %s\nenvp index : %d\n\n", temp1, envp_index);
 	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1)))
 		quote_enclosure_handle(temp1[i], &quote);
 	if (envp_index < 0)
@@ -52,7 +51,6 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 		return (dest);
 	}
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
-	printf("Temp 2 : %s\ni = %d\n", temp2, i);
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
 	{
 		if (quote.dbl == 1 && temp1[i] == 39)
@@ -109,24 +107,17 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
+	while (++i < sub_index)
+		quote_enclosure_handle(temp[i], &quote);
 	while (temp[++i])
 	{
 		quote_enclosure_handle(temp[i], &quote);
-		if (temp[i] == '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1 && last_quote(temp, i) == 's')))
-			break ;
-	}
-	while (temp[++i])
-	{
-		printf("temp[%d] = %c, sq = %d, dq = %d\n", i, temp[i], quote.sgl, quote.dbl);
-		if ((temp[i] == ' ' && quote.sgl == 0)
-			|| (quote.dbl == 1 && (temp[i] == 39 || temp[i] == 34))
-			|| (temp[i] == 39 && last_quote(temp, i) == 's'))
+		if ((!quote.sgl && (is_quote(temp[i]) || temp[i] == ' '))
+			|| (quote.dbl && (temp[i] == ' ' || temp[i] == 34)))
 			break ;
 		j++;
-		quote_enclosure_handle(temp[i], &quote);
 	}
-	usleep(700);
-	printf("\n");
+	// dest = replace_variable(mini, temp, sub_index, j)
 	variable_name = ft_substr(temp, sub_index + 1, j);
 	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
 	free(variable_name);
@@ -134,7 +125,6 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 	free(temp);
 	return (variable_name);
 }
-
 
 /** Index where a sub is needed
  * @param str the string to scan
@@ -154,7 +144,7 @@ int	need_dollar_substitution(char *str)
 	while (str[++i])
 	{
 		quote_enclosure_handle(str[i], &quote);
-		if (str[i] == '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1 && last_quote(str, i) == 's')))
+		if (str[i] == '$' && (!quote.sgl || (quote.sgl && quote.dbl && last_quote(str, i) == 's')))
 			return (i);
 	}
 	return (-1);

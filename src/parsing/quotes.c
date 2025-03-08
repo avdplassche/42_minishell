@@ -94,13 +94,13 @@ int	clean_command_quotes(t_cmd *cmd, char *str)
 */
 void	quote_enclosure_handle(char c, t_quote *quote)
 {
-	if (c == 34 && quote->dbl == 0 && quote->sgl == 0)
+	if (c == 34 && !quote->dbl && !quote->sgl)
 		quote->dbl = 1;
-	else if (c == 34 && quote->dbl == 1)
+	else if (c == 34 && quote->dbl)
 		quote->dbl = 0;
-	else if (c == 39 && quote->sgl == 0 && quote->dbl == 0)
+	else if (c == 39 && !quote->sgl && !quote->dbl)
 		quote->sgl = 1;
-	else if (c == 39 && quote->sgl == 1)
+	else if (c == 39 && quote->sgl)
 		quote->sgl = 0;
 }
 

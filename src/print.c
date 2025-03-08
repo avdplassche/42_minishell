@@ -28,12 +28,18 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 {
 	int i;
 	(void)cmd_line;
+	// int comp;
 
-
+	// comp = 0;
 	i = -1;
 	if (TEST_MODE == 0)
 		printf("\n");
+	// comp = ft_strncmp(get_next_line(fd), cmd.command, ft_strlen(cmd.command));
+	// printf("comp : %d\n", comp);
+	// if (cmd.id <= 9 && !comp)
+	// 	printf(GREEN);
 	printf("   Command %d -e : %s$\n\n", cmd.id, cmd.command);
+	// printf(RESET);
 	if (cmd.type == N_BUILTIN)
 		printf("	  Type : binary or invalid\n");
 	else if (cmd.type == BUILTIN)
@@ -48,23 +54,28 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		printf("(null)\n");
 	if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
 		if (cmd.filename)
-			printf("	  Filename : %s ", cmd.filename);
-	printf("	  In redir ? : %d ", cmd.in_redir_total);
-	printf("	  Out redir ? : %d ", cmd.out_redir_total);
-	printf("	  In delimiter ? : %d ", cmd.in_delimiter_total);
-	printf("	  Out appredir ? : %d ", cmd.out_appredir_total);
+			printf("	  Filename : %s\n", cmd.filename);
+	printf("	  In redir ? : %d\n", cmd.in_redir_total);
+	printf("	  Out redir ? : %d\n", cmd.out_redir_total);
+	printf("	  In delimiter ? : %d\n", cmd.in_delimiter_total);
+	printf("	  Out appredir ? : %d\n", cmd.out_appredir_total);
 }
 
 void	debug_parsing_print(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
+	// int	fd;
 
 	i = -1;
 	// printf("\nCommand line : %s\n\n", mini->line);
+	// fd = open("test/out_cmd", O_RDONLY);
+	// if (fd == -1)
+		// perror("fdes");
 	while (++i < mini->cmd_amount)
 	{
 		print_cmd(cmd[i], mini->line);
 		printf("\n");
 	}
 	printf("-----------------------------------------------\n");
+	// close(fd);
 }

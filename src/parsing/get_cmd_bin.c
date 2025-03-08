@@ -18,10 +18,10 @@ int	get_last_index(t_mini *mini)
 	quote.sgl = 0;
 	while (mini->line[i])
 	{
-		if (contain_char(charset, mini->line[i]))
-			if (!quote.sgl && !quote.dbl && i)
-				return (i);
 		quote_enclosure_handle(mini->line[i], &quote);
+		if (contain_char(charset, mini->line[i]))
+			if (!quote.sgl && !quote.dbl)
+				return (i);
 		i++;
 	}
 	return (i);
@@ -29,22 +29,22 @@ int	get_last_index(t_mini *mini)
 
 int	get_cmd_bin(t_mini *mini, t_cmd *cmd)
 {
-	int		i;
 	char	*temp;
 	int		len;
+	int		i;
 
-	i = mini->cursor;
 	len = get_last_index(mini);
-	temp = ft_substr(mini->line, i, len);   //replace i by cursor ?
+	temp = ft_substr(mini->line, mini->cursor, len);
 	while (contain_char(SPACE_SET, mini->line[len]))
 		len++;
 	mini->cursor = len;
 	printf("Substring before $ substitution : %s$\n\n", temp);
-	while (need_dollar_substitution(temp) != -1)
+	i = need_dollar_substitution(temp);
+	while (i != -1)
 	{
-		printf("Need Substitution at : %d\n\n", need_dollar_substitution(temp)),
-		temp = translate_dollar_sign(mini, temp, need_dollar_substitution(temp)); //is there quotes in env ?
-		// printf("temp : %s\n\n", temp);
+		printf("Need Substitution at : %d\n\n", i);
+		temp = translate_dollar_sign(mini, temp, i); //is there quotes in env ?
+		i = need_dollar_substitution(temp);
 	}
 	if (!contain_quotes(temp))
 		cmd->command = ft_strdup(temp);
