@@ -29,7 +29,7 @@ char	*trim_var_name(t_mini *mini, int index)
  * @param envp_index index where to find the variable (if -1, no existing variable, replace by blank)
  * @return temp2 : a string with the value instead of the variable name
  */
-char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
+char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_index)
 {
 	char	*temp2;
 	char	*dest;
@@ -39,14 +39,14 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index)
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
-	while (temp1[++i] && temp1[i] != '$' && (quote.sgl == 0 || (quote.sgl == 1 && quote.dbl == 1)))
+	while (++i < sub_index)
 		quote_enclosure_handle(temp1[i], &quote);
 	if (envp_index < 0)
 	{
 		temp2 = ft_substr(temp1, 0, i);
-		i++;
-		while (temp1[i] && temp1[i] != ' ')
-			i++;
+		while (temp1[++i])
+			if (temp1[i] == ' ' || (temp1[i] == 34 && !quote.dbl))
+				break ;
 		dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
 		return (dest);
 	}
@@ -90,6 +90,21 @@ int	get_envp_index(t_mini *mini, char *variable)
 	return (-1);
 }
 
+char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
+{
+	char	*variable_name;
+	int		envp_index;
+	char	*dest;
+
+	variable_name = ft_substr(temp, sub_index + 1, j);
+	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
+	free(variable_name);
+	printf("Before replace : temp = %s env = %d\n", temp, envp_index);
+	dest = replace_env_variable(mini, temp, envp_index, sub_index);
+	return (dest);
+}
+
+
 /** Used to change every dollar sign to elements of env variable
  * @param mini t_mini struct where envp is stored
  * @param temp the string to change dollar sign if needed
@@ -100,8 +115,7 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 	int		i;
 	int		j;
 	t_quote	quote;
-	char	*variable_name;
-	int		envp_index;
+	char	*dest;
 
 	j = 0;
 	quote.sgl = 0;
@@ -117,13 +131,9 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 			break ;
 		j++;
 	}
-	// dest = replace_variable(mini, temp, sub_index, j)
-	variable_name = ft_substr(temp, sub_index + 1, j);
-	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
-	free(variable_name);
-	variable_name = replace_env_variable(mini, temp, envp_index);	// example : $USER becomes "alvan-de", not alvan-de
+	dest = replace_variable(mini, temp, sub_index, j);
 	free(temp);
-	return (variable_name);
+	return (dest);
 }
 
 /** Index where a sub is needed

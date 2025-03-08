@@ -21,6 +21,9 @@ e'c'"ho" Hello World
 "echo $LANG $PAGER $PA '$PWD'"
 'echo $LANG " $PAGER" $PA ' $PWD''
 "echo $LANG '$PAGER' $PA '$PWD'"
+'echo $LANG '$SHEL"L"
+"echo $LNG $SHEL '$sL'"
+"echo $LNG $SHEL "'$sL'
 
 
 ls -1 | grep "config" | tee configs.txt | wc -l
