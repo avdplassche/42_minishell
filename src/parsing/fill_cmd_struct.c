@@ -14,7 +14,7 @@
 int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
 	// get_cmd_total_redir(mini, cmd);
-	get_cmd_bin(mini, cmd);
+	cmd->command = get_cmd_bin(mini);
 	// if (mini->line[mini->cursor])
 	// {
 	// 	get_cmd_args(mini, cmd);

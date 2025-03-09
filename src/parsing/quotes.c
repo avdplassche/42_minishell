@@ -60,14 +60,15 @@ char	last_quote(char *str, int i)
  * @param str the string used to epure from (will be freed after the function)
  * @return not set yet, errors
 */
-int	clean_command_quotes(t_cmd *cmd, char *str)
+char	*clean_command_quotes(char *str)
 {
 	int		i;
 	int		j;
 	t_quote	quote;
+	char	*dest;
 
 	j = strlen_quote_cleaned_command(str);
-	cmd->command = malloc(sizeof(char) * (j + 1));
+	dest = malloc(sizeof(char) * (j + 1));
 		//malloc protection
 	i = -1;
 	j = 0;
@@ -77,15 +78,15 @@ int	clean_command_quotes(t_cmd *cmd, char *str)
 	{
 		quote_enclosure_handle(str[i], &quote);
 		if (!is_quote(str[i])
-			|| (str[i] == 34 && quote.sgl == 1)
-			|| (str[i] == 39 && quote.dbl == 1))
+			|| (str[i] == 34 && quote.sgl)
+			|| (str[i] == 39 && quote.dbl))
 		{
-			cmd->command[j] = str[i];
+			dest[j] = str[i];
 			j++;
 		}
 	}
-	cmd->command [j] = '\0';
-	return (0);
+	dest[j] = '\0';
+	return (dest);
 }
 
 

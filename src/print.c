@@ -31,31 +31,31 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	// int comp;
 
 	// comp = 0;
-	i = -1;
+	i = 0;
 	if (TEST_MODE == 0)
 		printf("\n");
 	// comp = ft_strncmp(get_next_line(fd), cmd.command, ft_strlen(cmd.command));
 	// printf("comp : %d\n", comp);
 	// if (cmd.id <= 9 && !comp)
-	// 	printf(GREEN);
+	printf(CYAN);
 	printf("   Command %d -e : %s$\n\n", cmd.id, cmd.command);
-	// printf(RESET);
+	printf(RESET);
 	if (cmd.type == N_BUILTIN)
 		printf("	  Type : binary or invalid\n");
 	else if (cmd.type == BUILTIN)
 		printf("	  Type : builtin\n");
 	else
 		printf("	  Type : binary or invalid\n");
-	printf("	  Args  : ");
+	// printf("	  Args  : ");
 	if (cmd.args != NULL)
 		while (cmd.args[++i])
-			printf("%s ", cmd.args[i]);
+			printf("	  Arg[%d] %s \n", i, cmd.args[i]);
 	else
 		printf("(null)\n");
 	if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
 		if (cmd.filename)
-			printf("	  Filename : %s\n", cmd.filename);
-	printf("	  In redir ? : %d\n", cmd.in_redir_total);
+			printf("	  Filename : %s", cmd.filename);
+	printf("\n	  In redir ? : %d\n", cmd.in_redir_total);
 	printf("	  Out redir ? : %d\n", cmd.out_redir_total);
 	printf("	  In delimiter ? : %d\n", cmd.in_delimiter_total);
 	printf("	  Out appredir ? : %d\n", cmd.out_appredir_total);

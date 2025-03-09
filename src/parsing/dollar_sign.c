@@ -23,6 +23,20 @@ char	*trim_var_name(t_mini *mini, int index)
 	return (trimmed_str);
 }
 
+char	*empty_expand(char *temp1, t_quote quote, int i)
+{
+	char	*temp2;
+	char	*dest;
+
+	temp2 = ft_substr(temp1, 0, i);
+	while (temp1[++i])
+		if (temp1[i] == ' ' || (temp1[i] == 34 && !quote.dbl))
+			break ;
+	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
+	free(temp2);
+	return (dest);
+}
+
 /** Replace $VAR by it's value and return new cleaned string
  * @param mini t_mini struct containind envp
  * @param temp1 string containing $VAR to substitut
@@ -42,14 +56,7 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_in
 	while (++i < sub_index)
 		quote_enclosure_handle(temp1[i], &quote);
 	if (envp_index < 0)
-	{
-		temp2 = ft_substr(temp1, 0, i);
-		while (temp1[++i])
-			if (temp1[i] == ' ' || (temp1[i] == 34 && !quote.dbl))
-				break ;
-		dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
-		return (dest);
-	}
+		return (empty_expand(temp1, quote, i));
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
 	{
@@ -99,7 +106,6 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	variable_name = ft_substr(temp, sub_index + 1, j);
 	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
 	free(variable_name);
-	printf("Before replace : temp = %s env = %d\n", temp, envp_index);
 	dest = replace_env_variable(mini, temp, envp_index, sub_index);
 	return (dest);
 }
