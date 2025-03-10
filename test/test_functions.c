@@ -50,8 +50,9 @@ int main(int argc, char **argv, char **envp)
 	char needle[] = "vd";
 	char haystack[] = "Alexvd";
 
-	char pathname[] = "/bin/cat";
-	char *args[] = {pathname, "execfile", NULL};
+
+	char pathname[] = "/bin/echo";
+	char *args[] = {pathname, "today", "is", NULL};
 
 	if (execve(pathname, args, envp) == -1)
 		perror("Error");

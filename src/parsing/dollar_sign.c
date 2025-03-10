@@ -23,6 +23,13 @@ char	*trim_var_name(t_mini *mini, int index)
 	return (trimmed_str);
 }
 
+
+/** If the $ sign is followed by an invalid variable, this function delete the $VARIABLE
+ * @param temp1 the string to elag
+ * @param quote the quotes state
+ * @param i where the suppression is needed
+ * @return temp1  without $VARIABLE
+ */
 char	*empty_expand(char *temp1, t_quote quote, int i)
 {
 	char	*temp2;
@@ -30,7 +37,8 @@ char	*empty_expand(char *temp1, t_quote quote, int i)
 
 	temp2 = ft_substr(temp1, 0, i);
 	while (temp1[++i])
-		if (temp1[i] == ' ' || (temp1[i] == 34 && !quote.dbl))
+		if (temp1[i] == ' ' || (temp1[i] == 34 && !quote.dbl)
+			|| (temp1[i] == 39 && !quote.sgl))
 			break ;
 	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
 	free(temp2);

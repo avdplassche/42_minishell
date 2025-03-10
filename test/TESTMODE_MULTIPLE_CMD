@@ -8,6 +8,7 @@ grep 'pattern'" another"' file.txt
 awk '{print "'$1'"}' data.txt
 ls -l | awk "'{print \"$9\"}'"
 echo '"Hello" world' | tr -d '"'
+     echo    '"Hello"   world'    |  tr    -d '"'
 cat <<EOF | sed 's/foo/'"bar"'/'
 ls -l | grep '"*.log"' | wc -l
 echo 'Single'" and "'double quotes"

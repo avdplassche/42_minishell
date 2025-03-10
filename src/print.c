@@ -38,7 +38,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	// printf("comp : %d\n", comp);
 	// if (cmd.id <= 9 && !comp)
 	printf(CYAN);
-	printf("   Command %d -e : %s$\n\n", cmd.id, cmd.command);
+	printf("   Command %d : %s␀\n\n", cmd.id, cmd.command);
 	printf(RESET);
 	if (cmd.type == N_BUILTIN)
 		printf("	  Type : binary or invalid\n");
@@ -49,9 +49,9 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	// printf("	  Args  : ");
 	if (cmd.args != NULL)
 		while (cmd.args[++i])
-			printf("	  Arg[%d] %s \n", i, cmd.args[i]);
+			printf("	  Arg[%d] %s␀\n", i, cmd.args[i]);
 	else
-		printf("(null)\n");
+		printf("	  Args  : (null)\n");
 	if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
 		if (cmd.filename)
 			printf("	  Filename : %s", cmd.filename);

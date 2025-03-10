@@ -15,12 +15,10 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
 	// get_cmd_total_redir(mini, cmd);
 	cmd->command = get_cmd_bin(mini);
-	// if (mini->line[mini->cursor])
-	// {
-	// 	get_cmd_args(mini, cmd);
-	// }
-	// else
-	// 	return (0);
+	if (mini->line[mini->cursor])
+		get_cmd_args(mini, cmd);
+	else
+		return (0);
 	if (get_cmd_type(mini, cmd) == -1)  //need to also check with arg -> (echo -n is built, echo isn't)
 		return (-1);
 	// get_cmd_filename(cmd);

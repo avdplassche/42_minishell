@@ -13,7 +13,7 @@ int	get_last_index(t_mini *mini)
 	t_quote	quote;
 	char	charset[5] = " <>|";
 
-	i = -1;
+	i = mini->cursor - 1;
 	quote.dbl = 0;
 	quote.sgl = 0;
 	while (mini->line[++i])
@@ -34,7 +34,7 @@ char	*get_cmd_bin(t_mini *mini)
 	char	*dest;
 
 	len = get_last_index(mini);
-	temp = ft_substr(mini->line, mini->cursor, len);
+	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
 	while (contain_char(SPACE_SET, mini->line[len]))
 		len++;
 	mini->cursor = len;
@@ -48,6 +48,11 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = ft_strdup(temp);
 	else
 		dest = clean_command_quotes(temp);
+	if (contain_char("<>|", mini->line[mini->cursor]))
+		mini->cursor++;
+	while (mini->line[mini->cursor] == ' ')
+		mini->cursor++;
 	return (free(temp), dest);
+
 }
 
