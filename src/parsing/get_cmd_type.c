@@ -15,6 +15,12 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 
 	i = -1;
 	len = ft_strlen(cmd->command);
+	if (!(ft_strncmp(cmd->command, "echo", len)))
+	{
+		// if ()
+
+
+	}
 	while (++i < BUILTIN_AMOUNT)
 	{
 		if (!(ft_strncmp(mini->builtins[i], cmd->command, len)))
@@ -24,7 +30,6 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 		}
 	}
 	
-	/* NOT FINISHED*/
 
 	cmd->type = UNVALID;
 	return (0);

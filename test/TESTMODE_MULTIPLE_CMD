@@ -1,3 +1,4 @@
+ls
 echo 'Hello'" World"
 echo 'txt'"$HOME"| grep   txt
      echo "User: "'$USER'

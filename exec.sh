@@ -3,5 +3,5 @@
 
 make re
 make clean
-./minishell test/TESTMODE_DOLLAR_QUOTES 26
-# ./minishell test/TESTMODE_MULTIPLE_CMD 11
+# ./minishell test/TESTMODE_DOLLAR_QUOTES 26
+./minishell test/TESTMODE_MULTIPLE_CMD 12

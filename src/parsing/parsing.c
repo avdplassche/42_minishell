@@ -11,6 +11,7 @@ void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
+	cmd->arg_amount = 0;
 	cmd->filename = NULL;
 	cmd->id = i + 1;
 	cmd->type = -1;

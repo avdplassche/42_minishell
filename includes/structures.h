@@ -42,6 +42,7 @@ typedef struct s_cmd
 	char		*command;
 	int			type;
 	char		**args;
+	int			arg_amount;
 	int			id;
 	char		*filename;
 	int			pipe;

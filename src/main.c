@@ -29,6 +29,18 @@ void	free_mini(t_mini *mini)
 	free_double_pointer(mini->paths);
 }
 
+// void	free_cmd(t_cmd *cmd)
+// {
+// 	int	i;
+	
+// 	i = -1;
+// 	// if ()
+
+
+
+// }
+
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
