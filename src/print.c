@@ -35,21 +35,16 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	printf(CYAN);
 	printf("   Command %d : %s%s¶\n\n", cmd.id, cmd.command, RESET);
 	// printf(RESET);
-	if (cmd.type == N_BUILTIN)
-		printf("	  Type : binary or invalid\n\n");
+	if (cmd.type == USER)
+		printf("	  Type : USER COMMAND\n\n");
 	else if (cmd.type == BUILTIN)
-		printf("	  Type : builtin\n\n");
+		printf("	  Type : BUILTIN\n\n");
 	else
-		printf("	  Type : binary or invalid\n\n");
+		printf("	  Type : INVALID\n\n");
 	printf("	  Arg Amount : %d\n\n", cmd.arg_amount);
 	if (cmd.args != NULL)
-	{
 		while (cmd.args[++i])
 			printf("	  Arg[%d] %s¶\n", i, cmd.args[i]);
-		// printf("	  Arg[%d] (null)¶\n", i);
-	}
-	// else
-	// 	printf("	  Args  : (null)\n");
 	if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
 		if (cmd.filename)
 			printf("	  Filename : %s¶", cmd.filename);
@@ -62,18 +57,12 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 void	debug_parsing_print(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
-	// int	fd;
 
 	i = -1;
-	// printf("\nCommand line : %s\n\n", mini->line);
-	// fd = open("test/out_cmd", O_RDONLY);
-	// if (fd == -1)
-		// perror("fdes");
 	while (++i < mini->cmd_amount)
 	{
 		print_cmd(cmd[i], mini->line);
 		printf("\n");
 	}
 	printf("-----------------------------------------------\n");
-	// close(fd);
 }

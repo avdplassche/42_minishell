@@ -27,12 +27,6 @@ int	get_arg_amount(t_mini *mini)
 	return (count);
 }
 
-void epur_option_dup(t_cmd *cmd)
-{
-	// DO THIS FUNCTION
-
-}
-
 /** Fill cmd arg tokens, a char** that will be used in execve
  * @param cmd_line the command line from the prompt
  * @param cmd_struct the command structure to fill
@@ -50,8 +44,6 @@ int	get_cmd_args(t_mini *mini, t_cmd *cmd)
 	while (++i <= cmd->arg_amount)
 	{
 		cmd->args[i] = get_cmd_bin(mini);
-		if (cmd->args[i][0] == '-')
-			epur_option_dup(cmd);
 	}
 	cmd->args[i] = NULL;
 	return (0);

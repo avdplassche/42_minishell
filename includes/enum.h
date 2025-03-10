@@ -19,6 +19,6 @@ enum	e_standard
 enum	e_binary
 {
 		UNVALID = -1,
-		N_BUILTIN = 0,
+		USER = 0,
 		BUILTIN = 1,
 };

@@ -63,8 +63,9 @@ int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
+/* * * * * * * * * * FREE * * * * * * * * * */
 
-
+void		free_double_pointer(char **str);
 
 /* * * * * * * * * *PRINT * * * * * * * * * */
 

@@ -52,10 +52,11 @@ int main(int argc, char **argv, char **envp)
 
 
 	char pathname[] = "/bin/echo";
-	char *args[] = {pathname, "today", "is", NULL};
+	char *args[] = {pathname, "-nnnn", "Hello World", NULL};
 
-	if (execve(pathname, args, envp) == -1)
-		perror("Error");
+	printf("%s\n", getenv("date"));
+	// if (execve(pathname, args, envp) == -1)
+	// 	perror("Error");
 	// printf("string : %s\n", enquote_str(haystack, 34));
 	// printf("%d\n", contain_string_at_specific_index(haystack, needle, 4));
 	// printf("%d\n", contain_string_at_specific_index(haystack, needle, 3));

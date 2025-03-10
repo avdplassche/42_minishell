@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:54:31 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/20 15:21:34 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:10:04 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	tests(int fd, char *buffer, char *leftover)
 static char	*set_line(char *leftover)
 {
 	int		i;
-
+	
 	i = 0;
 	while (leftover[i] != '\n' && leftover[i] != '\0')
 		i++;

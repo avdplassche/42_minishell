@@ -1,6 +1,43 @@
 
 #include "../../includes/minishell.h"
 
+/** Check if cmd is echo -n
+ * @return -  1 if echo -n (so type is builtin)
+ * @return - 0 if echo with other args(so type is user command)
+ */
+int	is_builtin_echo(t_cmd *cmd)
+{
+	int	i;
+
+	if (cmd->args[1][0] != '-')
+		return (0);
+	i = 0;
+	while (cmd->args[1][++i])
+		if (cmd->args[1][i] != 'n')
+			return (0);
+	return (1);
+}
+
+int	is_user_command(t_mini *mini, t_cmd *cmd)
+{
+	int		i;
+	char	*temp;
+	char	*path;
+
+	i = -1;
+	while (mini->paths[++i])
+	{
+		temp = ft_strjoin(mini->paths[i], "/");
+		path = ft_strjoin(temp, cmd->command);
+		if (!(access(path, F_OK)) && !(access(path, X_OK)))
+			return (free(temp), free(path), 1);
+		free(temp);
+		free(path);
+	}
+	return (0);
+}
+
+
 /** Fill cmd type token
  * @param mini t_mini structure, containing current line to work with
  * @param cmd cmd struct
@@ -15,22 +52,19 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 
 	i = -1;
 	len = ft_strlen(cmd->command);
-	if (!(ft_strncmp(cmd->command, "echo", len)))
+	if (!(ft_strncmp(cmd->command, "echo", len)) && cmd->arg_amount)
 	{
-		// if ()
-
-
+		if (is_builtin_echo(cmd))
+			return (BUILTIN);
+		else
+			return (USER);
 	}
 	while (++i < BUILTIN_AMOUNT)
 	{
 		if (!(ft_strncmp(mini->builtins[i], cmd->command, len)))
-		{
-			cmd->type = BUILTIN;
-			return (0);
-		}
+			return (BUILTIN);
 	}
-	
-
-	cmd->type = UNVALID;
-	return (0);
+	if (is_user_command(mini, cmd))
+		return (USER);
+	return (UNVALID);
 }

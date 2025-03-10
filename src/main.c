@@ -29,17 +29,6 @@ void	free_mini(t_mini *mini)
 	free_double_pointer(mini->paths);
 }
 
-// void	free_cmd(t_cmd *cmd)
-// {
-// 	int	i;
-	
-// 	i = -1;
-// 	// if ()
-
-
-
-// }
-
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -53,15 +42,15 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = NULL;
 		mini.line = ft_strtrim(readline("Prompt minishell "), SPACE_SET);
+		printf("\n");
 		mini.cmd_amount = count_cmd(&mini);
 		mini.cursor = 0;
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 		{
 			parsing(&mini, cmd);
-			//exec(&mini, &cmd);
 		}
-		free(cmd);
+		// free(cmd);
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -91,14 +80,12 @@ int	main(int argc, char **argv, char **envp)
 			mini.line = ft_strtrim(get_next_line(fd), SPACE_SET);
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
-			// add_history(mini.line);
-			printf("\nCOMMAND LINE %d > %s\n\n", c + 1, mini.line);
+			printf("\nCOMMAND LINE %d > %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, cmd);
-				// exec(&mini, &cmd);
+				// exec(&mini, cmd);
 			}
-			// free(cmd.command);
 			free(cmd);
 			free(mini.line);
 			mini.line = NULL;
@@ -106,7 +93,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		close(fd);
 	}
-	// print_char_table(mini.envp, "Env");
 
 /************************ /TEST MODE ***************************** */
 
