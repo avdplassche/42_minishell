@@ -34,6 +34,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		printf("\n");
 	printf(CYAN);
 	printf("   Command %d : %s%s¶\n\n", cmd.id, cmd.command, RESET);
+	printf("   Path : %s¶\n\n", cmd.path);
 	// printf(RESET);
 	if (cmd.type == USER)
 		printf("	  Type : USER COMMAND\n\n");

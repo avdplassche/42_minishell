@@ -10,18 +10,17 @@
 int	get_last_index(t_mini *mini)
 {
 	int		i;
-	t_quote	quote;
+	t_quote	q;
 	char	charset[5] = " <>|";
 
 	i = mini->cursor - 1;
-	quote.dbl = 0;
-	quote.sgl = 0;
+	q.dbl = 0;
+	q.sgl = 0;
 	while (mini->line[++i])
 	{
-		quote_enclosure_handle(mini->line[i], &quote);
-		if (contain_char(charset, mini->line[i]))
-			if (!quote.sgl && !quote.dbl)
-				return (i);
+		quote_enclosure_handle(mini->line[i], &q);
+		if (contain_char(charset, mini->line[i]) && !q.sgl && !q.dbl)
+			return (i);
 	}
 	return (i);
 }
@@ -34,10 +33,11 @@ char	*get_cmd_bin(t_mini *mini)
 	char	*dest;
 
 	len = get_last_index(mini);
+	printf("len = %d\n", len - mini->cursor);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
-	while (contain_char(SPACE_SET, mini->line[len]))
-		len++;
 	mini->cursor = len;
+	while (contain_char(SPACE_SET, mini->line[len++]))
+		mini->cursor++;
 	i = need_dollar_substitution(temp);
 	while (i > -1)
 	{
@@ -48,11 +48,12 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = ft_strdup(temp);
 	else
 		dest = clean_command_quotes(temp);
-	if (contain_char("<>|", mini->line[mini->cursor]))
-		mini->cursor++;
-	while (mini->line[mini->cursor] == ' ')
-		mini->cursor++;
+	printf("cursor : %d\n", mini->cursor);
+	
+	// if (contain_char("<>|", mini->line[mini->cursor]))
+	// 	mini->cursor++;
+	// while (mini->line[mini->cursor] == ' ')
+	// 	mini->cursor++;
 	return (free(temp), dest);
-
 }
 

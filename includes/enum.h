@@ -9,6 +9,13 @@ enum	e_standard
 		STDERR = 2,
 };
 
+enum	e_error
+{
+		MALLOC_ERR = -1,
+
+
+};
+
 // enum	e_redirections
 // {
 // 		PIPE = '|',

@@ -33,6 +33,7 @@ SRCS				=	main.c \
 						get_cmd_args.c \
 						get_cmd_bin.c \
 						get_cmd_type.c \
+						get_cmd_redirection.c \
 						parsing.c \
 						quotes.c 
 

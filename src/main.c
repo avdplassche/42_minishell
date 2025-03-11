@@ -35,22 +35,21 @@ int	main(int argc, char **argv, char **envp)
 	t_mini	mini;
 	t_cmd	*cmd;
 
-	init_mini(&mini, envp);
-	//malloc protection
+	if (init_mini(&mini, envp) == -1)
+		return (EXIT_FAILURE);
 	printf("\n");
 	while (argc == 1)
 	{
 		cmd = NULL;
+		mini.cursor = 0;
 		mini.line = ft_strtrim(readline("Prompt minishell "), SPACE_SET);
+		// if (!(ft_strncmp(mini.line, "exit", 4)))
+		// 	return (free (mini.line), free_mini(&mini), EXIT_SUCCESS);
 		printf("\n");
 		mini.cmd_amount = count_cmd(&mini);
-		mini.cursor = 0;
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
-		{
 			parsing(&mini, cmd);
-		}
-		// free(cmd);
 		free(mini.line);
 		mini.line = NULL;
 	}

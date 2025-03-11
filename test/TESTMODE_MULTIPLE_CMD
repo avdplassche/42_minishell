@@ -1,6 +1,6 @@
 ls
 echo -nnnn 'Hello'" World"
-echo 'txt'"$HOME"| grep   txt
+echo 'txt'"$HOME"   |  grep   txt
      echo "User: "'$USER'
 echo Today is "'$(date)'"
 find . -name '"*.sh"'

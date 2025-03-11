@@ -26,6 +26,7 @@ typedef struct s_mini
 
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
+ * @param pathname path of the command (needed for execve)
  * @param type BUILT if in builtins dir, USER if in PATH, else, UNVALID 
  * @param args arguments given to the binary
  * @param id id of the command (1 == first exec)
@@ -40,6 +41,7 @@ typedef struct s_mini
 typedef struct s_cmd
 {
 	char		*command;
+	char		*path;
 	int			type;
 	char		**args;
 	int			arg_amount;

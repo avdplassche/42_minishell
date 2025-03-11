@@ -22,17 +22,18 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
 	char	*temp;
-	char	*path;
 
 	i = -1;
 	while (mini->paths[++i])
 	{
 		temp = ft_strjoin(mini->paths[i], "/");
-		path = ft_strjoin(temp, cmd->command);
-		if (!(access(path, F_OK)) && !(access(path, X_OK)))
-			return (free(temp), free(path), 1);
+		cmd->path = ft_strjoin(temp, cmd->command);
+		if (access(cmd->path, F_OK) == 0 && access(cmd->path, X_OK) == 0)
+			return (free(temp), 1);
 		free(temp);
-		free(path);
+		temp = NULL;
+		free(cmd->path);
+		cmd->path = NULL;
 	}
 	return (0);
 }
@@ -57,7 +58,7 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 		if (is_builtin_echo(cmd))
 			return (BUILTIN);
 		else
-			return (USER);
+			return (is_user_command(mini, cmd), USER);
 	}
 	while (++i < BUILTIN_AMOUNT)
 	{

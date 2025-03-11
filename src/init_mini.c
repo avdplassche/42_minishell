@@ -8,14 +8,20 @@
  */
 int	count_cmd(t_mini *mini)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	t_quote	q;
 
 	count = 1;
 	i = -1;
+	q.dbl = 0;
+	q.sgl = 0;
 	while (mini->line[++i])
-		if (mini->line[i] == '|')
+	{
+		quote_enclosure_handle(mini->line[i], &q);
+		if (mini->line[i] == '|' && !q.sgl && !q.dbl)
 			count++;
+	}
 	return (count);
 }
 

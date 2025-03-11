@@ -15,9 +15,9 @@
 # include "enum.h"
 # include "structures.h"
 
-#define BUILTINS_STRING "cd,echo,env,exit,export,pwd,unset"
+#define BUILTINS_STRING "cd,env,exit,export,pwd,unset"
 #define SPACE_SET " 	\n"
-#define BUILTIN_AMOUNT 7
+#define BUILTIN_AMOUNT 6
 #define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
@@ -58,8 +58,7 @@ int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
-
-
+int			get_cmd_redirection(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 

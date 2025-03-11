@@ -11,6 +11,8 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	{
 		if (cmd[i].command != NULL)
 			free(cmd[i].command);
+		if (cmd[i].path != NULL)
+			free(cmd[i].path);
 		if (cmd[i].args != NULL)
 			free_double_pointer(cmd[i].args);
 		if (cmd[i].filename != NULL)
@@ -30,6 +32,7 @@ void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
+	cmd->path = NULL;
 	cmd->arg_amount = 0;
 	cmd->filename = NULL;
 	cmd->id = i + 1;
@@ -67,14 +70,16 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	if (!(is_valid_command(mini)))
 		return (set_return_value(mini, 127));
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_amount);
-	if (!cmd)//malloc protection
-		return (-1);
+	if (!cmd)
+		return (MALLOC_ERR);
 	while (++i < mini->cmd_amount)
 	{
 		init_cmd(&cmd[i], i);
 		fill_cmd_structure(mini, &cmd[i]);
 	}
-	// exec(&mini, cmd);
+
+	/* EXECUTION */
+
 	if (DEBUGG_PARSING == 1)
 		debug_parsing_print(mini, cmd);
 	free_cmd(mini, cmd);

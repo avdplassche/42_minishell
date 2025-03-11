@@ -1,16 +1,18 @@
 Now (by order of priority) :
 
-handle $(date)
-	-> hardcode it ?
+- Error managment (enum errors)
+
+- handle redir count
+- Signals
+- hardcode all 
 
 
 FIND GOOD ERROR HANDLING SYSTEM
 
 
-After :
+After : 
 
 coder cas double pipe "||" (and all metachar)
-Signals
 handle parenthese (subroutine)
 
 
