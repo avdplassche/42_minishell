@@ -46,13 +46,13 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	if (cmd.args != NULL)
 		while (cmd.args[++i])
 			printf("	  Arg[%d] %s¶\n", i, cmd.args[i]);
-	if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
-		if (cmd.filename)
-			printf("	  Filename : %s¶", cmd.filename);
-	printf("\n	  In redir ? : %d\n", cmd.in_redir_total);
-	printf("	  Out redir ? : %d\n", cmd.out_redir_total);
-	printf("	  In delimiter ? : %d\n", cmd.in_delimiter_total);
-	printf("	  Out appredir ? : %d\n", cmd.out_appredir_total);
+	// if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
+	// 	if (cmd.filename)
+	// 		printf("	  Filename : %s¶", cmd.filename);
+	// printf("\n	  In redir ? : %d\n", cmd.in_redir_total);
+	// printf("	  Out redir ? : %d\n", cmd.out_redir_total);
+	// printf("	  In delimiter ? : %d\n", cmd.in_delimiter_total);
+	// printf("	  Out appredir ? : %d\n", cmd.out_appredir_total);
 }
 
 void	debug_parsing_print(t_mini *mini, t_cmd *cmd)

@@ -24,19 +24,22 @@ typedef struct s_mini
 	bool		error;
 }				t_mini;
 
+
+typedef struct s_file
+{
+	char		*path_name;
+	int			type;
+	char		*eof;
+}				t_file;
+
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
  * @param pathname path of the command (needed for execve)
- * @param type BUILT if in builtins dir, USER if in PATH, else, UNVALID 
+ * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID 
  * @param args arguments given to the binary
  * @param id id of the command (1 == first exec)
- * @param filename file name if needed by the command line(needed for redir)
- * @param is_path bool to know if filename is a path or not
- * @param pipe will the command be redirected by a pipe ?
- * @param in_redir is there an input redirection in the command
- * @param out_redir is there an output redirection in the command
- * @param in_delimiter is there a delimiter in the command (<<)
- * @param out_appredir is there an out_appredir in the command (>>)
+ * @param file struct containning file name + type containing all redirections
+ * @param cmd_position where is located the cmd compared to the
  */
 typedef struct s_cmd
 {
@@ -46,13 +49,8 @@ typedef struct s_cmd
 	char		**args;
 	int			arg_amount;
 	int			id;
-	char		*filename;
-	int			pipe;
-	int			in_redir_total;
-	int			out_redir_total;
-	int			in_delimiter_total;
-	int			out_appredir_total;
-
+	t_file		*file;
+	int			cmd_position;
 	int			error;
 }				t_cmd;
 

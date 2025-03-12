@@ -33,7 +33,6 @@ char	*get_cmd_bin(t_mini *mini)
 	char	*dest;
 
 	len = get_last_index(mini);
-	printf("len = %d\n", len - mini->cursor);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
 	mini->cursor = len;
 	while (contain_char(SPACE_SET, mini->line[len++]))
@@ -48,12 +47,7 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = ft_strdup(temp);
 	else
 		dest = clean_command_quotes(temp);
-	printf("cursor : %d\n", mini->cursor);
 	
-	// if (contain_char("<>|", mini->line[mini->cursor]))
-	// 	mini->cursor++;
-	// while (mini->line[mini->cursor] == ' ')
-	// 	mini->cursor++;
 	return (free(temp), dest);
 }
 

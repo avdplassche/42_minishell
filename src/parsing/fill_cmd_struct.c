@@ -2,9 +2,31 @@
 
 #include "../../includes/minishell.h"
 
-// int	is_redirected(t_cmd *cmd)
+// int	count_redirections(t_mini *mini, t_cmd *cmd)
 // {
+// 	int		count;
+// 	int		i;
+// 	t_quote	q;
+// 	// char	redir[] = "<>";
 
+// 	q.sgl = 0;
+// 	q.dbl = 0;
+// 	i = mini->cursor - 1;
+// 	count = 0;
+// 	while (mini->line[++i] && mini->line[i] != '|' && !q.sgl && !q.dbl)
+// 	{
+// 		quote_enclosure_handle(mini->line[i], &q);
+// 		if ((mini->line[i] == '<' || mini->line[i] == '>') && !q.sgl && !q.dbl)
+// 		{
+// 			count++;
+// 			if (mini->line[i + 1] == '<' || mini->line[i + 1] == '>')
+// 				i++;
+
+
+// 		}
+
+
+// 	}
 
 
 // }
@@ -16,24 +38,34 @@
 */
 int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 {
-	// get_cmd_total_redir(mini, cmd);
+	// int	redir_count;
+
+	// redir_count = count_redirections(mini, cmd);
+
+	// while (mini->line[mini->cursor] == '>' || mini->line[mini->cursor] == '<')
+	// 	get_cmd_redirection(mini, cmd);
+	
+
 	cmd->command = get_cmd_bin(mini);
-	if (mini->line[mini->cursor] && mini->line[mini->cursor] != '>' && mini->line[mini->cursor] != '<')
+
+
+
+	if (mini->line[mini->cursor])
 		get_cmd_args(mini, cmd);
+
+	
 	cmd->type = get_cmd_type(mini, cmd);
 	if (cmd->type == -1)
 		return (-1); //unvalid
-	printf("char :%c\n",  mini->line[mini->cursor]);
-	
-	if (contain_char("<>", mini->line[mini->cursor])) // maybe do a while and change tructure to char *outfilename
-		get_cmd_redirection(mini, cmd);
+
+
+
 	else if (mini->line[mini->cursor] == '|')
 	{
 		mini->cursor++;
 		while (mini->line[mini->cursor] == ' ')
 			mini->cursor++;
 	}
-	// get_cmd_filename(cmd);
-	// mini->cursor =
+
 	return (0);
 }

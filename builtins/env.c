@@ -3,4 +3,4 @@
 
 
 
-//print mini.envp
+//print mini->envp

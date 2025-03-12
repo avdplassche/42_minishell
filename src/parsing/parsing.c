@@ -15,8 +15,6 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 			free(cmd[i].path);
 		if (cmd[i].args != NULL)
 			free_double_pointer(cmd[i].args);
-		if (cmd[i].filename != NULL)
-			free(cmd[i].filename);
 	}
 	free(cmd);
 	cmd = NULL;
@@ -34,23 +32,25 @@ void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 	cmd->args = NULL;
 	cmd->path = NULL;
 	cmd->arg_amount = 0;
-	cmd->filename = NULL;
 	cmd->id = i + 1;
 	cmd->type = -1;
-	cmd->pipe = 0;
-	cmd->in_redir_total = 0;
-	cmd->out_redir_total = 0;
-	cmd->in_delimiter_total = 0;
-	cmd->out_appredir_total = 0;
 }
 
 int	is_valid_command(t_mini *mini)
 {
+	// int	err_char;
+
+
 	if (!(is_valid_quote(mini)))
-		return (printf("quote error\n\n-----------------------------------------------\n")
-			, 0); //maybe checking valid quote is a bit obsolete ?
-	if (mini->line[0] == '|')
-		return (printf("minishell: syntax error near unexpected token `|'\n"), 0);
+		return (printf("minishell: quote error\n") , 0); //maybe checking valid quote is a bit obsolete ?
+	if (!is_valid_pipes(mini))
+		return (0);
+	// if (!is_valid_redirections(mini))
+	// 	return (0);
+	// if (err_char == UNEXPECTED_IN_REDIR)
+	// 	return (printf("error near unexpected token `>>'\n"), 0);
+	// else if (err_char == UNEXPECTED_OUT_REDIR)
+	// 	return (printf("error near unexpected token `<<'\n"), 0);
 	return (1);
 }
 
@@ -78,7 +78,9 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		fill_cmd_structure(mini, &cmd[i]);
 	}
 
+
 	/* EXECUTION */
+
 
 	if (DEBUGG_PARSING == 1)
 		debug_parsing_print(mini, cmd);

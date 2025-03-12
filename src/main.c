@@ -24,9 +24,15 @@ void	free_double_pointer(char **str)
  */
 void	free_mini(t_mini *mini)
 {
-	free_double_pointer(mini->envp);
+	if (mini->envp)
+	{
+		free_double_pointer(mini->envp);
+		mini->envp = NULL;
+	}
 	free_double_pointer(mini->builtins);
+	mini->builtins = NULL;
 	free_double_pointer(mini->paths);
+	mini->paths = NULL;
 }
 
 
@@ -45,7 +51,6 @@ int	main(int argc, char **argv, char **envp)
 		mini.line = ft_strtrim(readline("Prompt minishell "), SPACE_SET);
 		// if (!(ft_strncmp(mini.line, "exit", 4)))
 		// 	return (free (mini.line), free_mini(&mini), EXIT_SUCCESS);
-		printf("\n");
 		mini.cmd_amount = count_cmd(&mini);
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')

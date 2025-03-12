@@ -35,7 +35,9 @@ SRCS				=	main.c \
 						get_cmd_type.c \
 						get_cmd_redirection.c \
 						parsing.c \
-						quotes.c 
+						quotes.c \
+						is_valid_redirections.c \
+						is_valid_pipes.c \
 
 UTILS				=	contain_char.c \
 						contain_quotes.c \

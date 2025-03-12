@@ -66,6 +66,11 @@ int			get_cmd_redirection(t_mini *mini, t_cmd *cmd);
 
 void		free_double_pointer(char **str);
 
+/* * * * * * * * * ERRORS * * * * * * * * * */
+
+int			is_valid_pipes(t_mini *mini);
+int			is_valid_redirections(t_mini *mini);
+
 /* * * * * * * * * *PRINT * * * * * * * * * */
 
 void		print_char_table(char **string, char *name);

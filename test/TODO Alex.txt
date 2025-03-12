@@ -1,8 +1,12 @@
+Tous les tokens qui suivent une redirection sont des filename
+
+Idee : faire un tableau de char pour stocker les redirs, et parcourir au besoin
+
 Now (by order of priority) :
 
-- Error managment (enum errors)
 
 - handle redir count
+- Error managment (enum errors)
 - Signals
 - hardcode all 
 
