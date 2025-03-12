@@ -35,7 +35,7 @@ typedef struct s_file
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
  * @param pathname path of the command (needed for execve)
- * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID 
+ * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
  * @param args arguments given to the binary
  * @param id id of the command (1 == first exec)
  * @param file struct containning file name + type containing all redirections
@@ -50,6 +50,7 @@ typedef struct s_cmd
 	int			arg_amount;
 	int			id;
 	t_file		*file;
+	int			redir_amount;
 	int			cmd_position;
 	int			error;
 }				t_cmd;

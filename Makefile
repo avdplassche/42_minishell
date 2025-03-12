@@ -47,6 +47,7 @@ UTILS				=	contain_char.c \
 						is_only_spaces.c \
 						is_quote.c \
 						is_space.c \
+						is_angle_bracket.c \
 						ft_atoi.c \
 						ft_calloc.c \
 						ft_split.c \
@@ -66,7 +67,7 @@ BUILTINS			=	cd.c \
 						exit.c \
 						export.c \
 						pwd.c \
-						unset.c 
+						unset.c
 
 #---------------------OBJECTS------------------------#
 

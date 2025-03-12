@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+
 int	get_arg_amount(t_mini *mini)
 {
 	int		i;
@@ -31,7 +32,6 @@ int	get_arg_amount(t_mini *mini)
  * @param cmd_line the command line from the prompt
  * @param cmd_struct the command structure to fill
  * @return error ? not set yet
- *
  */
 int	get_cmd_args(t_mini *mini, t_cmd *cmd)
 {
@@ -42,9 +42,7 @@ int	get_cmd_args(t_mini *mini, t_cmd *cmd)
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
 	cmd->args[i] = ft_strdup(cmd->command);
 	while (++i <= cmd->arg_amount)
-	{
 		cmd->args[i] = get_cmd_bin(mini);
-	}
 	cmd->args[i] = NULL;
 	return (0);
 }

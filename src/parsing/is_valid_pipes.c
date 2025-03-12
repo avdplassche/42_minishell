@@ -1,21 +1,21 @@
 #include "../../includes/minishell.h"
 
+//to move in  /errors
+
 
 static int	pipe_start_of_line(t_mini *mini)
 {
 	if (mini->line[0] == '|')
 	{
 		if (mini->line[1] == '|')
-			return (printf("minishell: syntax error near unexpected token \'||\'\n"), 0);
+			return (print_unexpected_token("||"), 0);
 		else
-			return (printf("minishell: syntax error near unexpected token \'|\'\n"), 0);
+			return (print_unexpected_token("|"), 0);
 	}
 	if (mini->line[ft_strlen(mini->line) - 1] == '|')
 		return (printf("minishell: pipe error\n") , 0);;
 	return (1);
 }
-
-
 
 int	is_valid_pipes(t_mini *mini)
 {
@@ -30,8 +30,13 @@ int	is_valid_pipes(t_mini *mini)
 	while (mini->line[++i])
 	{
 		quote_enclosure_handle(mini->line[i], &q);
-
-
+		if (mini->line[i] == '|' && !q.sgl && !q.dbl)
+		{
+			i++;
+			if (mini->line[i] == '|')
+				return (print_unexpected_token("|"), 0);
+			i--;
+		}
 	}
 	return (1);
 }

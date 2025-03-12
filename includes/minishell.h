@@ -73,6 +73,7 @@ int			is_valid_redirections(t_mini *mini);
 
 /* * * * * * * * * *PRINT * * * * * * * * * */
 
+void		print_unexpected_token(char *token);
 void		print_char_table(char **string, char *name);
 void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
@@ -109,5 +110,6 @@ bool		is_space(char c);
 int			is_only_spaces(char *s);
 char		*epurstring(char *src);
 int			is_quote(char c);
+int			is_angle_bracket(char c);
 
 #endif

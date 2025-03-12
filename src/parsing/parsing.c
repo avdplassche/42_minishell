@@ -5,7 +5,7 @@
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < mini->cmd_amount)
 	{
@@ -45,8 +45,8 @@ int	is_valid_command(t_mini *mini)
 		return (printf("minishell: quote error\n") , 0); //maybe checking valid quote is a bit obsolete ?
 	if (!is_valid_pipes(mini))
 		return (0);
-	// if (!is_valid_redirections(mini))
-	// 	return (0);
+	if (!is_valid_redirections(mini))
+		return (0);
 	// if (err_char == UNEXPECTED_IN_REDIR)
 	// 	return (printf("error near unexpected token `>>'\n"), 0);
 	// else if (err_char == UNEXPECTED_OUT_REDIR)

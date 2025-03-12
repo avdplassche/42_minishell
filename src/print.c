@@ -23,6 +23,11 @@ void	print_string(char *string, char *name)
 	printf("%s : %s\n", name, string);
 }
 
+void	print_unexpected_token(char *token)
+{
+	printf("minishell: error near unexpected token '%s'\n", token);
+}
+
 
 void	print_cmd(t_cmd cmd, char *cmd_line)
 {
@@ -46,8 +51,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	if (cmd.args != NULL)
 		while (cmd.args[++i])
 			printf("	  Arg[%d] %s¶\n", i, cmd.args[i]);
-	// if (cmd.in_redir_total || cmd.out_redir_total || cmd.in_delimiter_total || cmd.out_appredir_total)
-	// 	if (cmd.filename)
+	printf("\n	  Total redirections : %d\n", cmd.redir_amount);
+			// 	if (cmd.filename)
 	// 		printf("	  Filename : %s¶", cmd.filename);
 	// printf("\n	  In redir ? : %d\n", cmd.in_redir_total);
 	// printf("	  Out redir ? : %d\n", cmd.out_redir_total);
