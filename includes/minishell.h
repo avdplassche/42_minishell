@@ -16,7 +16,7 @@
 # include "structures.h"
 
 #define BUILTINS_STRING "cd,env,exit,export,pwd,unset"
-#define SPACE_SET " 	\n"
+#define SPACES " 	\n"
 #define BUILTIN_AMOUNT 6
 #define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
@@ -57,8 +57,8 @@ char		last_quote(char *str, int i);
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
-int			get_cmd_args(t_mini *mini, t_cmd *cmd_struct);
-int			get_cmd_redirection(t_mini *mini, t_cmd *cmd);
+int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
+int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 

@@ -35,7 +35,7 @@ char	*get_cmd_bin(t_mini *mini)
 	len = get_last_index(mini);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
 	mini->cursor = len;
-	while (contain_char(SPACE_SET, mini->line[len++]))
+	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
 	i = need_dollar_substitution(temp);
 	while (i > -1)
@@ -47,7 +47,6 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = ft_strdup(temp);
 	else
 		dest = clean_command_quotes(temp);
-	
 	return (free(temp), dest);
 }
 

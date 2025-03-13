@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = NULL;
 		mini.cursor = 0;
-		mini.line = ft_strtrim(readline("Prompt minishell "), SPACE_SET);
+		mini.line = ft_strtrim(readline("Prompt minishell "), SPACES);
 		// if (!(ft_strncmp(mini.line, "exit", 4)))
 		// 	return (free (mini.line), free_mini(&mini), EXIT_SUCCESS);
 		mini.cmd_amount = count_cmd(&mini);
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		c = 0;
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
-			mini.line = ft_strtrim(get_next_line(fd), SPACE_SET);
+			mini.line = ft_strtrim(get_next_line(fd), SPACES);
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
 			printf("\nCOMMAND LINE %d > %s¶\n\n", c + 1, mini.line);
