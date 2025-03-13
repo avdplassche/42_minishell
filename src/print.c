@@ -42,8 +42,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	i = 0;
 	if (TEST_MODE == 0)
 		printf("\n");
-	printf(CYAN);
-	printf("   Command %d : %s%s¶\n\n", cmd.id, cmd.command, RESET);
+	// printf(CYAN);
+	printf("   Command %d : %s¶\n\n", cmd.id, cmd.command);
 	printf("   Path : %s¶\n\n", cmd.path);
 	// printf(RESET);
 	if (cmd.type == USER)
@@ -60,10 +60,10 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		printf("\n");
 	}
 	i = 0;
-	printf("	  Total redirections : %d\n", cmd.redir_amount);
+	printf("	  Total redirections : %d\n\n", cmd.redir_amount);
 	if (cmd.redir_amount)
 	{
-		while (i < cmd.redir_amount && cmd.redir[i].type != HERE_DOC)
+		while (i < cmd.redir_amount)
 		{
 			printf("	  Redir[%d] : %s ", i, cmd.redir[i].pathname);
 			if (cmd.redir[i].type == IN_REDIR)

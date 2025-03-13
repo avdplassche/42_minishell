@@ -1,19 +1,10 @@
 
-
-handle
-<< >
-<<>
-<<|
-
-
 Now (by order of priority) :
 
-
-- handle redir count
+- handle << >, <<> and <<|
+- Handle chech path for redirections
 - Error managment (enum errors)
 - Signals
-- hardcode all
-
 
 FIND GOOD ERROR HANDLING SYSTEM
 

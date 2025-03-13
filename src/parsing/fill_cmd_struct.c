@@ -111,7 +111,6 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 
 	if (mini->line[mini->cursor])
 		cmd->arg_amount = count_arguments(mini);
-		printf("arg amount : %d\n", cmd->arg_amount);
 	if (cmd->arg_amount)
 	{
 		cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
@@ -122,7 +121,6 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	while (mini->line[mini->cursor] && mini->line[mini->cursor] != '|'
 		&& (cmd->arg_amount || cmd->redir_amount))
 	{
-		// printf("line[%d] : %c\n", mini->cursor, mini->line[mini->cursor]);
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
 		{
 			get_cmd_redirection(mini, cmd, j);
