@@ -28,6 +28,11 @@ void	print_unexpected_token(char *token)
 	printf("minishell: error near unexpected token '%s'\n", token);
 }
 
+void	print_quote_statement_debug(t_mini *mini, int i, t_quote *q)
+{
+	printf("line[%d] : %c | sq = %d| dq = %d\n", i, mini->line[i], q->sgl, q->dbl);
+}
+
 
 void	print_cmd(t_cmd cmd, char *cmd_line)
 {
@@ -47,17 +52,32 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		printf("	  Type : BUILTIN\n\n");
 	else
 		printf("	  Type : INVALID\n\n");
-	printf("	  Arg Amount : %d\n\n", cmd.arg_amount);
+	printf("	  Total Args : %d\n\n", cmd.arg_amount);
 	if (cmd.args != NULL)
+	{
 		while (cmd.args[++i])
-			printf("	  Arg[%d] %s¶\n", i, cmd.args[i]);
-	printf("\n	  Total redirections : %d\n", cmd.redir_amount);
-			// 	if (cmd.filename)
-	// 		printf("	  Filename : %s¶", cmd.filename);
-	// printf("\n	  In redir ? : %d\n", cmd.in_redir_total);
-	// printf("	  Out redir ? : %d\n", cmd.out_redir_total);
-	// printf("	  In delimiter ? : %d\n", cmd.in_delimiter_total);
-	// printf("	  Out appredir ? : %d\n", cmd.out_appredir_total);
+			printf("	  Arg[%d] : %s¶\n", i, cmd.args[i]);
+		printf("\n");
+	}
+	i = 0;
+	printf("	  Total redirections : %d\n", cmd.redir_amount);
+	if (cmd.redir_amount)
+	{
+		while (i < cmd.redir_amount && cmd.redir[i].type != HERE_DOC)
+		{
+			printf("	  Redir[%d] : %s ", i, cmd.redir[i].pathname);
+			if (cmd.redir[i].type == IN_REDIR)
+				printf("(IN REDIR)¶\n");
+			else if (cmd.redir[i].type == OUT_REDIR)
+				printf("(OUT REDIR)¶\n");
+			else if (cmd.redir[i].type == OUT_APPEND)
+				printf("(OUT APPEND)¶\n");
+			else if (cmd.redir[i].type == HERE_DOC)
+				printf("(HERE_DOC)¶\n");
+			i++;
+		}
+		printf("\n");
+	}
 }
 
 void	debug_parsing_print(t_mini *mini, t_cmd *cmd)

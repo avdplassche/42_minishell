@@ -25,12 +25,12 @@ typedef struct s_mini
 }				t_mini;
 
 
-typedef struct s_file
+typedef struct s_redir
 {
-	char		*path_name;
-	int			type;
+	char		*pathname;
 	char		*eof;
-}				t_file;
+	int			type;
+}				t_redir;
 
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
@@ -51,7 +51,7 @@ typedef struct s_cmd
 	char		**args;
 	int			arg_amount;
 	int			id;
-	t_file		*file;
+	t_redir		*redir;
 	int			redir_amount;
 	int			error;
 }				t_cmd;

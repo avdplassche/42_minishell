@@ -1,6 +1,10 @@
-Tous les tokens qui suivent une redirection sont des filename
 
-Idee : faire un tableau de char pour stocker les redirs, et parcourir au besoin
+
+handle
+<< >
+<<>
+<<|
+
 
 Now (by order of priority) :
 
@@ -8,13 +12,13 @@ Now (by order of priority) :
 - handle redir count
 - Error managment (enum errors)
 - Signals
-- hardcode all 
+- hardcode all
 
 
 FIND GOOD ERROR HANDLING SYSTEM
 
 
-After : 
+After :
 
 coder cas double pipe "||" (and all metachar)
 handle parenthese (subroutine)
