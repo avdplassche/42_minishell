@@ -34,12 +34,14 @@ typedef struct s_file
 
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
- * @param pathname path of the command (needed for execve)
+ * @param path path of the command (needed for execve)
  * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
- * @param args arguments given to the binary
- * @param id id of the command (1 == first exec)
+ * @param args arguments given to the binary (needed for execve)
+ * @param arg_amount amount of arguments in the command
+ * @param id id of the command (1 == first exec) // Is it needed ?
  * @param file struct containning file name + type containing all redirections
- * @param cmd_position where is located the cmd compared to the
+ * @param redir_amount amount of redirections, needed for malloc
+ * @param error not set yet
  */
 typedef struct s_cmd
 {
@@ -51,7 +53,6 @@ typedef struct s_cmd
 	int			id;
 	t_file		*file;
 	int			redir_amount;
-	int			cmd_position;
 	int			error;
 }				t_cmd;
 

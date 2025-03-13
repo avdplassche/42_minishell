@@ -4,6 +4,7 @@
 
 int	get_cmd_redir_type(t_mini *mini)
 {
+	printf("cursor = %d\n", mini->cursor);
 	if (mini->line[mini->cursor] == '<')
 	{
 		if (mini->line[++mini->cursor] == '<')
@@ -28,16 +29,11 @@ int	get_cmd_redir_type(t_mini *mini)
 
 int	get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index)
 {
-	// int	i;
+	printf("Index = %d\n", index);
 
 	cmd->file[index].type = get_cmd_redir_type(mini);
-	// i = mini->cursor;
+	printf("Type= %d\n", cmd->file[index].type);
 	cmd->file[index].path_name = get_cmd_bin(mini);
-	// (void)mini;
-	// (void)cmd;
-	// int	i;
-
-	// i = -1;
 
 
 	return (0);

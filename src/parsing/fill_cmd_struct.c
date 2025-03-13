@@ -98,11 +98,15 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	printf("redirs amount : %d\n", cmd->redir_amount);
 	if (cmd->redir_amount)
 	{
+		printf("passage1\n");
 		cmd->file = malloc(sizeof(cmd->file) * cmd->redir_amount);
 		if (!cmd->file)
 			return (MALLOC_ERR);
 		while (is_angle_bracket(mini->line[mini->cursor]))
+		{
+			printf("passage2\n");
 			get_cmd_redirection(mini, cmd, i++);
+		}
 	}
 	cmd->command = get_cmd_bin(mini);
 
@@ -121,6 +125,7 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	while (mini->line[mini->cursor] && mini->line[mini->cursor] != '|'
 		&& (cmd->arg_amount || cmd->redir_amount))
 	{
+		printf("cursor%c\n", mini->line[mini->cursor]);
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
 			get_cmd_redirection(mini, cmd, i++);
 		else if (cmd->arg_amount)
