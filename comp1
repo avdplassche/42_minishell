@@ -13,6 +13,7 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 	  Arg[1] : hello¶
 
 	  Total redirections : 1
+
 	  Redir[0] : file1.txt (IN REDIR)¶
 
 
@@ -27,6 +28,7 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 	  Arg[1] : errorcat¶
 
 	  Total redirections : 2
+
 	  Redir[0] : input.txt (IN REDIR)¶
 	  Redir[1] : temp.txt (OUT REDIR)¶
 
@@ -42,6 +44,7 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 	  Arg[1] : error¶
 
 	  Total redirections : 2
+
 	  Redir[0] : errors.log (OUT REDIR)¶
 	  Redir[1] : all_logs.log (OUT APPEND)¶
 
@@ -55,6 +58,7 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : sorted_errors.log (OUT APPEND)¶
 
 
@@ -73,6 +77,7 @@ COMMAND LINE 2 > echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> fi
 	  Arg[1] : Hello World¶
 
 	  Total redirections : 2
+
 	  Redir[0] : file1 (OUT REDIR)¶
 	  Redir[1] : file2 (OUT REDIR)¶
 
@@ -88,6 +93,7 @@ COMMAND LINE 2 > echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> fi
 	  Arg[1] : Hello¶
 
 	  Total redirections : 2
+
 	  Redir[0] : file3 (OUT REDIR)¶
 	  Redir[1] : file4 (OUT APPEND)¶
 
@@ -104,6 +110,7 @@ COMMAND LINE 2 > echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> fi
 	  Arg[2] : A-Z¶
 
 	  Total redirections : 1
+
 	  Redir[0] : uppercase.txt (OUT REDIR)¶
 
 
@@ -123,6 +130,7 @@ COMMAND LINE 3 > cut -d, -f2 < data.csv > column2.txt | sort > sorted_column2.tx
 	  Arg[2] : -f2¶
 
 	  Total redirections : 2
+
 	  Redir[0] : data.csv (IN REDIR)¶
 	  Redir[1] : column2.txt (OUT REDIR)¶
 
@@ -136,6 +144,7 @@ COMMAND LINE 3 > cut -d, -f2 < data.csv > column2.txt | sort > sorted_column2.tx
 	  Total Args : 0
 
 	  Total redirections : 2
+
 	  Redir[0] : sorted_column2.txt (OUT REDIR)¶
 	  Redir[1] : sorted_unique.txt (OUT APPEND)¶
 
@@ -149,6 +158,7 @@ COMMAND LINE 3 > cut -d, -f2 < data.csv > column2.txt | sort > sorted_column2.tx
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : final_output.txt (OUT REDIR)¶
 
 
@@ -165,6 +175,7 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 	  Total Args : 0
 
 	  Total redirections : 2
+
 	  Redir[0] : input.txt (IN REDIR)¶
 	  Redir[1] : reversed.txt (OUT REDIR)¶
 
@@ -179,6 +190,7 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 
 	  Total redirections : 0
 
+
    Command 3 : grep¶
 
    Path : /usr/bin/grep¶
@@ -190,6 +202,7 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 	  Arg[1] : pattern¶
 
 	  Total redirections : 2
+
 	  Redir[0] : filtered.txt (OUT REDIR)¶
 	  Redir[1] : final_output.txt (OUT APPEND)¶
 
@@ -207,6 +220,7 @@ COMMAND LINE 5 > cat << EOF > words1.txt > words2.txt | tr ' ' '\n' > split_word
 	  Total Args : 0
 
 	  Total redirections : 3
+
 	  Redir[0] : EOF (HERE_DOC)¶
 	  Redir[1] : words1.txt (OUT REDIR)¶
 	  Redir[2] : words2.txt (OUT REDIR)¶
@@ -224,6 +238,7 @@ COMMAND LINE 5 > cat << EOF > words1.txt > words2.txt | tr ' ' '\n' > split_word
 	  Arg[2] : \n¶
 
 	  Total redirections : 1
+
 	  Redir[0] : split_words.txt (OUT REDIR)¶
 
 
@@ -236,6 +251,7 @@ COMMAND LINE 5 > cat << EOF > words1.txt > words2.txt | tr ' ' '\n' > split_word
 	  Total Args : 0
 
 	  Total redirections : 2
+
 	  Redir[0] : sorted_words.txt (OUT REDIR)¶
 	  Redir[1] : word_freq.txt (OUT APPEND)¶
 
@@ -255,6 +271,7 @@ COMMAND LINE 6 > cat hello                  < file1.txt¶
 	  Arg[1] : hello¶
 
 	  Total redirections : 1
+
 	  Redir[0] : file1.txt (IN REDIR)¶
 
 
@@ -274,6 +291,7 @@ COMMAND LINE 7 > cat     file1.txt  | grep "error"¶
 
 	  Total redirections : 0
 
+
    Command 2 : grep¶
 
    Path : /usr/bin/grep¶
@@ -285,6 +303,7 @@ COMMAND LINE 7 > cat     file1.txt  | grep "error"¶
 	  Arg[1] : error¶
 
 	  Total redirections : 0
+
 
 -----------------------------------------------
 
@@ -299,6 +318,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : file1.txt (IN REDIR)¶
 
 
@@ -314,6 +334,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 
 	  Total redirections : 0
 
+
    Command 3 : awk¶
 
    Path : /usr/bin/awk¶
@@ -325,6 +346,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 	  Arg[1] : {print $2}¶
 
 	  Total redirections : 1
+
 	  Redir[0] : file2.txt (IN REDIR)¶
 
 
@@ -337,6 +359,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : output1.txt (OUT REDIR)¶
 
 
@@ -351,6 +374,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 	  Arg[1] : result.txt¶
 
 	  Total redirections : 1
+
 	  Redir[0] : final_output.txt (OUT REDIR)¶
 
 
@@ -367,6 +391,7 @@ COMMAND LINE 9 > sort < data.txt | grep "important" < more_data.txt | awk '{prin
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : data.txt (IN REDIR)¶
 
 
@@ -381,6 +406,7 @@ COMMAND LINE 9 > sort < data.txt | grep "important" < more_data.txt | awk '{prin
 	  Arg[1] : important¶
 
 	  Total redirections : 1
+
 	  Redir[0] : more_data.txt (IN REDIR)¶
 
 
@@ -396,6 +422,7 @@ COMMAND LINE 9 > sort < data.txt | grep "important" < more_data.txt | awk '{prin
 
 	  Total redirections : 0
 
+
    Command 4 : uniq¶
 
    Path : /usr/bin/uniq¶
@@ -405,6 +432,7 @@ COMMAND LINE 9 > sort < data.txt | grep "important" < more_data.txt | awk '{prin
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : processed_output.txt (OUT REDIR)¶
 
 
@@ -419,6 +447,7 @@ COMMAND LINE 9 > sort < data.txt | grep "important" < more_data.txt | awk '{prin
 	  Arg[1] : final_data.txt¶
 
 	  Total redirections : 1
+
 	  Redir[0] : final_report.txt (OUT REDIR)¶
 
 
@@ -438,6 +467,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 
 	  Total redirections : 0
 
+
    Command 2 : grep¶
 
    Path : /usr/bin/grep¶
@@ -449,6 +479,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 	  Arg[1] : data¶
 
 	  Total redirections : 1
+
 	  Redir[0] : file2.txt (IN REDIR)¶
 
 
@@ -463,6 +494,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 	  Arg[1] : {print $1}¶
 
 	  Total redirections : 1
+
 	  Redir[0] : file3.txt (IN REDIR)¶
 
 
@@ -475,6 +507,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 	  Total Args : 0
 
 	  Total redirections : 1
+
 	  Redir[0] : sorted_data.txt (OUT REDIR)¶
 
 
@@ -489,6 +522,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 	  Arg[1] : output.txt¶
 
 	  Total redirections : 1
+
 	  Redir[0] : final_output.txt (OUT REDIR)¶
 
 
@@ -509,6 +543,7 @@ COMMAND LINE 11 > curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt
 
 	  Total redirections : 0
 
+
    Command 2 : sed¶
 
    Path : /usr/bin/sed¶
@@ -520,6 +555,7 @@ COMMAND LINE 11 > curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt
 	  Arg[1] : s/<[^>]*>//g¶
 
 	  Total redirections : 1
+
 	  Redir[0] : raw_data.txt (IN REDIR)¶
 
 
@@ -533,6 +569,7 @@ COMMAND LINE 11 > curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt
 
 	  Total redirections : 0
 
+
    Command 4 : tee¶
 
    Path : /usr/bin/tee¶
@@ -544,6 +581,7 @@ COMMAND LINE 11 > curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt
 	  Arg[1] : result.txt¶
 
 	  Total redirections : 2
+
 	  Redir[0] : clean_output.txt (OUT REDIR)¶
 	  Redir[1] : processed_data.txt (OUT REDIR)¶
 
