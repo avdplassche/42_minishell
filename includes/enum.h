@@ -2,6 +2,13 @@
 
 #include "minishell.h"
 
+/* typedef enum e_whatever         < ---- NORM for enum
+{
+	ONE,
+	TWO,
+	THREE
+}	t_whatever; */
+
 enum	e_standard
 {
 		STDIN = 0,

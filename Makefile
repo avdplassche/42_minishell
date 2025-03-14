@@ -22,6 +22,7 @@ endif
 #---------------------VPATH------------------------#
 
 vpath %.c $(DIR_SRC):$(DIR_SRC)/parsing
+vpath %.c $(DIR_SRC):$(DIR_SRC)/execution
 
 #---------------------SOURCE------------------------#
 
@@ -38,6 +39,7 @@ SRCS				=	main.c \
 						quotes.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
+						execute_command.c
 
 UTILS				=	contain_char.c \
 						contain_quotes.c \
@@ -95,6 +97,9 @@ $(NAME): $(ALL_OBJ) | $(DIR_BIN)
 	@$(CC) $(ALL_OBJ) $(CFLAGS) $(LIBRARIES) -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/parsing/%.c | $(DIR_BIN)/src
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/src/%.o: $(DIR_SRC)/execution/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/%.c | $(DIR_BIN)/src
