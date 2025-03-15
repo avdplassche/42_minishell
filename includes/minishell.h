@@ -8,6 +8,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
 # include <signal.h>
 # include <curses.h>
 # include <readline/readline.h>
@@ -66,6 +68,8 @@ int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 void	exec_mini(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
+
+int			pwd();
 
 /* * * * * * * * * * FREE * * * * * * * * * */
 
