@@ -2,7 +2,6 @@
 
 #include "../../includes/minishell.h"
 
-// echo 'Nested "quotes" are' "tricky!"¶
 
 int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 {
@@ -14,14 +13,14 @@ int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 		i++;
 	while (mini->line[i])
 	{
-		quote_enclosure_handle(mini->line[i], q);
 		if (contain_char(charset, mini->line[i]) && !q->dbl && !q->sgl)
 			break ;
 		i++;
+		quote_enclosure_handle(mini->line[i], q);
 	}
 	while (contain_char(SPACES, mini->line[i]))
 		i++;
-	return (printf("next i = %d\n", i), i);
+	return (i);
 }
 
 
@@ -61,9 +60,9 @@ int	count_redirections(t_mini *mini)
 
 	q.sgl = 0;
 	q.dbl = 0;
-	i = mini->cursor - 1;
+	i = mini->cursor;
 	count = 0;
-	while (mini->line[++i] && mini->line[i] != '|' && !q.sgl && !q.dbl)
+	while (mini->line[i] && mini->line[i] != '|')
 	{
 		quote_enclosure_handle(mini->line[i], &q);
 		if (mini->line[i] == '<' && !q.sgl && !q.dbl)
@@ -78,6 +77,7 @@ int	count_redirections(t_mini *mini)
 			if (mini->line[i + 1] == '>')
 				i++;
 		}
+		i++;
 	}
 	return (count);
 }
@@ -95,70 +95,53 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	j = 0;
 	i = 0;
 	cmd->redir_amount = count_redirections(mini);
-	printf("redirs amount : %d\n", cmd->redir_amount);
 	if (cmd->redir_amount)
 	{
-		cmd->file = malloc(sizeof(cmd->file) * cmd->redir_amount);
-		if (!cmd->file)
+		cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
+		if (!cmd->redir)
 			return (MALLOC_ERR);
+		i = 0;
 		while (is_angle_bracket(mini->line[mini->cursor]))
-			get_cmd_redirection(mini, cmd, i++);
+		{
+			get_cmd_redirection(mini, cmd, j);
+			j++;
+		}
 	}
 	cmd->command = get_cmd_bin(mini);
 
 	if (mini->line[mini->cursor])
 		cmd->arg_amount = count_arguments(mini);
-	printf("%d args\n",cmd->arg_amount);
 	if (cmd->arg_amount)
 	{
 		cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
 		if (!cmd->args)
 			return (MALLOC_ERR);
-		cmd->args[j++] = ft_strdup(cmd->command);
+		cmd->args[i++] = ft_strdup(cmd->command);
 	}
-	if (!mini->line[mini->cursor])
-		return (0);
 	while (mini->line[mini->cursor] && mini->line[mini->cursor] != '|'
 		&& (cmd->arg_amount || cmd->redir_amount))
 	{
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
-			get_cmd_redirection(mini, cmd, i++);
+		{
+			get_cmd_redirection(mini, cmd, j);
+			j++;
+		}
 		else if (cmd->arg_amount)
-			get_cmd_args(mini, cmd, j++);
+		{
+			get_cmd_args(mini, cmd, i);
+			i++;
+		}
 	}
-	if  (cmd->arg_amount)
-		cmd->args[j] = NULL;
+	if (cmd->arg_amount)
+		cmd->args[i] = NULL;
 	cmd->type = get_cmd_type(mini, cmd);
 	if (cmd->type == -1)
 		return (-1);
 	if (mini->line[mini->cursor] == '|')
 	{
 		mini->cursor++;
-		while (mini->line[mini->cursor] == ' ')
+		while (mini->line[mini->cursor] && mini->line[mini->cursor] == ' ')
 			mini->cursor++;
 	}
 	return (0);
 }
-
-
-// int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
-// {
-
-// 	cmd->redir_amount = count_redirections(mini);
-// 	cmd->command = get_cmd_bin(mini);
-// 	if (mini->line[mini->cursor])
-// 		get_cmd_args(mini, cmd);
-// 	cmd->type = get_cmd_type(mini, cmd);
-// 	if (cmd->type == -1)
-// 		return (-1);
-// 	if (cmd->redir_amount)
-// 		get_cmd_redirection(mini, cmd);
-// 	else if (mini->line[mini->cursor] == '|')
-// 	{
-// 		mini->cursor++;
-// 		while (mini->line[mini->cursor] == ' ')
-// 			mini->cursor++;
-// 	}
-
-// 	return (0);
-// }

@@ -31,7 +31,7 @@ void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 	cmd->command = NULL;
 	cmd->args = NULL;
 	cmd->path = NULL;
-	cmd->file = NULL;
+	cmd->redir = NULL;
 	cmd->arg_amount = 0;
 	cmd->redir_amount = 0;
 	cmd->id = i + 1;
