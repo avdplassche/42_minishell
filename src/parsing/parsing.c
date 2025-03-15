@@ -82,7 +82,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 
 
 	/* EXECUTION */
-
+	exec_mini(mini, cmd);
 
 	if (DEBUGG_PARSING == 1)
 		debug_parsing_print(mini, cmd);

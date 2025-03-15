@@ -1,4 +1,4 @@
 
 #include "../includes/minishell.h"
 
-// carrefull echo
+// echo with option -n

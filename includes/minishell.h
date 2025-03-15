@@ -60,6 +60,10 @@ int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
+/* * * * * * * * * EXECUTION * * * * * * * * */
+
+void	exec_mini(t_mini *mini, t_cmd *cmd);
+
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
 /* * * * * * * * * * FREE * * * * * * * * * */
