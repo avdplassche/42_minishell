@@ -18,9 +18,9 @@
 # include "enum.h"
 # include "structures.h"
 
-#define BUILTINS_STRING "cd,env,exit,export,pwd,unset"
+#define BUILTINS_STRING "echo, cd,env,exit,export,pwd,unset"
 #define SPACES " 	\n"
-#define BUILTIN_AMOUNT 6
+#define BUILTIN_AMOUNT 7
 #define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
@@ -63,7 +63,9 @@ int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
+int			count_arguments(t_mini *mini);
 int			init_redirections(t_mini *mini, t_cmd *cmd);
+int			init_arguments(t_mini *mini, t_cmd *cmd);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
@@ -85,6 +87,7 @@ void		free_mini(t_mini *mini);
 
 int			is_valid_pipes(t_mini *mini);
 int			is_valid_redirections(t_mini *mini);
+int			is_valid_arithmetic(t_mini *mini);
 
 /* * * * * * * * * *PRINT * * * * * * * * * */
 

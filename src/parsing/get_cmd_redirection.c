@@ -2,14 +2,51 @@
 
 #include "../../includes/minishell.h"
 
-// int	init_redirections(t_mini *mini, t_cmd *cmd)
-// {
-// 	cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
-// 	if (!cmd->redir)
-// 		return (MALLOC_ERR);
-// 	while (is_angle_bracket(mini->line[mini->cursor]))
-// 		get_cmd_redirection(mini, cmd, j++);
-// }
+
+/**Count the amount of redirections in order
+ * to malloc t_file structures for each redir
+ */
+int	count_redirections(t_mini *mini, int i)
+{
+	int		count;
+	t_quote	q;
+
+	q.sgl = 0;
+	q.dbl = 0;
+	count = 0;
+	while (mini->line[i] && mini->line[i] != '|')
+	{
+		quote_enclosure_handle(mini->line[i], &q);
+		if (mini->line[i] == '<' && !q.sgl && !q.dbl)
+		{
+			count++;
+			if (mini->line[i + 1] == '<')
+				i++;
+		}
+		if (mini->line[i] == '>' && !q.sgl && !q.dbl)
+		{
+			count++;
+			if (mini->line[i + 1] == '>')
+				i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+int	init_redirections(t_mini *mini, t_cmd *cmd)
+{
+	int	j;
+
+	j = 0;
+	cmd->redir_amount = count_redirections(mini, mini->cursor);
+	cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
+	if (!cmd->redir)
+		return (-1);
+	while (is_angle_bracket(mini->line[mini->cursor]))
+		get_cmd_redirection(mini, cmd, j++);
+	return (j);
+}
 
 
 int	get_cmd_redir_type(t_mini *mini)
@@ -34,7 +71,6 @@ int	get_cmd_redir_type(t_mini *mini)
 int	get_cmd_redirection(t_mini *mini, t_cmd *cmd, int j)
 {
 	int	sign;
-
 
 	sign = get_cmd_redir_type(mini);
 	if (sign != HERE_DOC)

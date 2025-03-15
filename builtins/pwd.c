@@ -6,6 +6,7 @@ int	pwd(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd_env;
+	(void) mini;
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{

@@ -18,8 +18,8 @@ enum	e_standard
 
 enum	e_error
 {
-		MALLOC_ERR = 1,
-		CMD_ERR = 2,
+		MALLOC_ERROR = 1,
+		CMD_NOT_FOUND = 2,
 		
 
 };

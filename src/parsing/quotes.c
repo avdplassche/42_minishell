@@ -12,7 +12,6 @@ int	find_first_quote(char *str)
 	return (0);
 }
 
-
 /** This function calculate the necessary lenght of the new string after deleting the quotes
  * @param str the string to delete the quote from
  * @return a total amount of char, to be used for malloc
@@ -80,10 +79,7 @@ char	*clean_command_quotes(char *str)
 		if (!is_quote(str[i])
 			|| (str[i] == 34 && quote.sgl)
 			|| (str[i] == 39 && quote.dbl))
-		{
-			dest[j] = str[i];
-			j++;
-		}
+			dest[j++] = str[i];
 	}
 	dest[j] = '\0';
 	return (dest);
@@ -115,41 +111,15 @@ void	quote_enclosure_handle(char c, t_quote *quote)
 int	is_valid_quote(t_mini *mini)  // use last_quote
 {
 	int		i;
-	char	last;
 	t_quote	quote;
 
 	quote.sgl = 0;
 	quote.dbl = 0;
 	i = -1;
 	while (mini->line[++i])
-	{
-		if (mini->line[i] == 39 && quote.sgl == 0)
-		{
-			quote.sgl = 1;
-			last = 'd';
-		}
-		else if (mini->line[i] == 39 && quote.sgl == 1)
-		{
-			quote.sgl = 0;
-			if (quote.dbl == 1 && last == 's')
-				quote.dbl = 0;
-		}
-		else if (mini->line[i] == 34 && quote.dbl == 0)
-		{
-			quote.dbl = 1;
-			last = 's';
-		}
-		else if (mini->line[i] == 34 && quote.dbl == 1)
-		{
-			quote.dbl = 0;
-			if (quote.sgl == 1 && last == 'd')
-				quote.sgl = 0;
-		}
-	}
+		quote_enclosure_handle(mini->line[i], &quote);
 	if (quote.sgl == 1 || quote.dbl == 1)
 		return (0);
 	return (1);
 }
-
-
 

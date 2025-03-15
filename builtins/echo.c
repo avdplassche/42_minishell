@@ -1,7 +1,6 @@
 
 #include "../includes/minishell.h"
 
-// echo with option -n
 
 int	echo(t_cmd *cmd)
 {

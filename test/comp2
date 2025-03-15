@@ -4,9 +4,9 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 
    Command 1 : echo¶
 
-   Path : /usr/bin/echo¶
+   Path : (null)¶
 
-	  Type : USER COMMAND
+	  Type : BUILTIN
 
 	  Total Args : 1
 
@@ -68,9 +68,9 @@ COMMAND LINE 2 > echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> fi
 
    Command 1 : echo¶
 
-   Path : /usr/bin/echo¶
+   Path : (null)¶
 
-	  Type : USER COMMAND
+	  Type : BUILTIN
 
 	  Total Args : 1
 

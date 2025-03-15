@@ -1,18 +1,32 @@
-Make file to create 
+
+
+List of errors to handle : 
+
+
+Parse error : 
+<< >
+<<>
+<<|
+&&
+
+No such job :
+%
+%%
+...
 
 
 Now (by order of priority) :
 
 - handle << >, <<> and <<|
 
-- change prompt to pwd ?
+- Make file to create cmd structure for jose
 - Error managment (enum errors)
 - Signals
+- change prompt to pwd ?
 
 - Handle chech path for redirections
 
 
-FIND GOOD ERROR HANDLING SYSTEM
 
 
 After :

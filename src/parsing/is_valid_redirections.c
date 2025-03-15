@@ -28,6 +28,7 @@ int	is_valid_angle_bracket(t_mini *mini, char bracket)
 	return (1);
 }
 
+
 int	is_valid_redirections(t_mini *mini)
 {
 	if (!is_valid_angle_bracket(mini, '<'))

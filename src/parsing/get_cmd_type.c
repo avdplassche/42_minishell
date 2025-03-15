@@ -9,12 +9,13 @@ int	is_builtin_echo(t_cmd *cmd)
 {
 	int	i;
 
-	if (cmd->args[1][0] != '-')
-		return (0);
+	if (!cmd->arg_amount)
+		return (1);
 	i = 0;
-	while (cmd->args[1][++i])
-		if (cmd->args[1][i] != 'n')
-			return (0);
+	if (cmd->args[1][0] == '-')
+		while (cmd->args[1][++i])
+			if (cmd->args[1][i] != 'n')
+				return (0);
 	return (1);
 }
 
@@ -53,7 +54,7 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 
 	i = -1;
 	len = ft_strlen(cmd->command);
-	if (!(ft_strncmp(cmd->command, "echo", len)) && cmd->arg_amount)
+	if (!(ft_strncmp(cmd->command, "echo", len)))
 	{
 		if (is_builtin_echo(cmd))
 			return (BUILTIN);

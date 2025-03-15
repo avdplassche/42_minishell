@@ -68,7 +68,7 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_in
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
 	{
-		if (quote.dbl == 1 && temp1[i] == 39)
+		if (quote.dbl && temp1[i] == 39)
 			break ;
 		quote_enclosure_handle(temp1[i], &quote);
 	}

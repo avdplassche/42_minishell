@@ -64,7 +64,7 @@ int	init_mini(t_mini *mini, char **envp)
 	// mini->cursor = 0;
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));
 	if (!mini->fd_backup)
-		return (MALLOC_ERR);
+		return (MALLOC_ERROR);
 	mini->fd_backup->stdin_backup = -1;
 	mini->fd_backup->stdout_backup = -1;
 	mini->fd_backup->stderr_backup = -1;

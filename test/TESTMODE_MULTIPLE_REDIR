@@ -12,3 +12,4 @@ curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt | sort | tee resu
 cat < file1.txt | grep "error" | awk '{print $3}' < file2.txt | sort > sorted_output.txt | tee final_output.txt > processed_output.txt
 sort < data.csv | awk -F',' '{print $1, $2}' < more_data.txt | grep "important" | uniq > cleaned_data.txt | tee final_clean.txt > result.txt
 cat < log.txt | grep "critical" | cut -d' ' -f2- < additional_logs.txt | awk '{print $1}' | tee filtered_logs.txt > final_log.txt
+< infile ls -l | wc -l > outfile
