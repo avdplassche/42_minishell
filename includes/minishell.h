@@ -60,15 +60,21 @@ int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
+int			init_redirections(t_mini *mini, t_cmd *cmd);
+
+
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
-void	exec_mini(t_mini *mini, t_cmd *cmd);
+void		exec_mini(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
 /* * * * * * * * * * FREE * * * * * * * * * */
 
 void		free_double_pointer(char **str);
+void		free_cmd(t_mini *mini, t_cmd *cmd);
+void		free_mini(t_mini *mini);
+
 
 /* * * * * * * * * ERRORS * * * * * * * * * */
 

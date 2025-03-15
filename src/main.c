@@ -2,38 +2,7 @@
 #include "../includes/minishell.h"
 
 
-/** Frees char ** variables
- */
-void	free_double_pointer(char **str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
-	{
-		free(str[i]);
-		i--;
-	}
-	free(str);
-}
-
-/** Frees t_mini mini, used when leaving minishell
- *maybe when signals exit the program
- */
-void	free_mini(t_mini *mini)
-{
-	if (mini->envp)
-	{
-		free_double_pointer(mini->envp);
-		mini->envp = NULL;
-	}
-	free_double_pointer(mini->builtins);
-	mini->builtins = NULL;
-	free_double_pointer(mini->paths);
-	mini->paths = NULL;
-}
 
 
 int	main(int argc, char **argv, char **envp)

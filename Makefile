@@ -39,7 +39,8 @@ SRCS				=	main.c \
 						quotes.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
-						execute_command.c
+						execute_command.c \
+						free.c
 
 UTILS				=	contain_char.c \
 						contain_quotes.c \

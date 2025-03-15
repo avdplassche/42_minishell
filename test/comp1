@@ -4,7 +4,7 @@ COMMAND LINE 1 > echo hello   <file1.txt | grep "error"cat < input.txt > temp.tx
 
    Command 1 : echo¶
 
-   Path : /bin/echo¶
+   Path : /usr/bin/echo¶
 
 	  Type : USER COMMAND
 
@@ -68,7 +68,7 @@ COMMAND LINE 2 > echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> fi
 
    Command 1 : echo¶
 
-   Path : /bin/echo¶
+   Path : /usr/bin/echo¶
 
 	  Type : USER COMMAND
 
@@ -168,9 +168,9 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 
    Command 1 : tac¶
 
-   Path : (null)¶
+   Path : /usr/bin/tac¶
 
-	  Type : INVALID
+	  Type : USER COMMAND
 
 	  Total Args : 0
 
@@ -180,18 +180,7 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 	  Redir[1] : reversed.txt (OUT REDIR)¶
 
 
-   Command 2 : ¶
-
-   Path : (null)¶
-
-	  Type : BUILTIN
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
-   Command 3 : grep¶
+   Command 2 : grep¶
 
    Path : /usr/bin/grep¶
 
@@ -207,13 +196,28 @@ COMMAND LINE 4 > tac < input.txt > reversed.txt | grep "pattern" > filtered.txt 
 	  Redir[1] : final_output.txt (OUT APPEND)¶
 
 
+   Command 3 : wc¶
+
+   Path : /usr/bin/wc¶
+
+	  Type : USER COMMAND
+
+	  Total Args : 1
+
+	  Arg[1] : -l¶
+
+	  Total redirections : 1
+
+	  Redir[0] : line_count.txt (OUT REDIR)¶
+
+
 -----------------------------------------------
 
 COMMAND LINE 5 > cat << EOF > words1.txt > words2.txt | tr ' ' '\n' > split_words.txt | sort > sorted_words.txt >> word_freq.txt¶
 
    Command 1 : cat¶
 
-   Path : /bin/cat¶
+   Path : /usr/bin/cat¶
 
 	  Type : USER COMMAND
 
@@ -262,7 +266,7 @@ COMMAND LINE 6 > cat hello                  < file1.txt¶
 
    Command 1 : cat¶
 
-   Path : /bin/cat¶
+   Path : /usr/bin/cat¶
 
 	  Type : USER COMMAND
 
@@ -281,7 +285,7 @@ COMMAND LINE 7 > cat     file1.txt  | grep "error"¶
 
    Command 1 : cat¶
 
-   Path : /bin/cat¶
+   Path : /usr/bin/cat¶
 
 	  Type : USER COMMAND
 
@@ -311,7 +315,7 @@ COMMAND LINE 8 > cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt |
 
    Command 1 : cat¶
 
-   Path : /bin/cat¶
+   Path : /usr/bin/cat¶
 
 	  Type : USER COMMAND
 
@@ -457,7 +461,7 @@ COMMAND LINE 10 > cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < f
 
    Command 1 : cat¶
 
-   Path : /bin/cat¶
+   Path : /usr/bin/cat¶
 
 	  Type : USER COMMAND
 

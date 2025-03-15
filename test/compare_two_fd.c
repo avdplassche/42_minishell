@@ -1,5 +1,5 @@
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 
 int	ft_strcmp_fd(char *path1, char *path2)
@@ -28,18 +28,17 @@ int	ft_strcmp_fd(char *path1, char *path2)
 }
 
 
-// int	main(int argc, char **argv)
-// {
-// 	int	comp;
+int	main(int argc, char **argv)
+{
+	int	comp;
 
-// 	if (argc != 3)
-// 		return (printf("Wrong argument count.\n"), EXIT_FAILURE);
-// 	comp = ft_strcmp_fd(argv[1], argv[2]);
-// 	printf("%d\n", comp);
-// 	if (!comp)
-// 		printf("\"%s\" and \"%s\" are identical", argv[1], argv[2]);
-// 	else
-// 		printf("\"%s\" and \"%s\" are different ()", argv[1], argv[2]);
-// 	return (0);
-// }
+	if (argc != 3)
+		return (printf("Wrong argument count.\n"), EXIT_FAILURE);
+	comp = ft_strcmp_fd(argv[1], argv[2]);
+	if (!comp)
+		printf("%s\"%s\" and \"%s\" are identical%s", GREEN, argv[1], argv[2], RESET);
+	else
+		printf("%s\"%s\" and \"%s\" are different (%d)%s", RED,  argv[1], argv[2], comp, RESET);
+	return (0);
+}
 

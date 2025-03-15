@@ -23,7 +23,8 @@ int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 	return (i);
 }
 
-
+/**Count the amount of arguments in order to fill cmd->args
+ */
 int	count_arguments(t_mini *mini)
 {
 	int		count;
@@ -48,19 +49,16 @@ int	count_arguments(t_mini *mini)
 	return (count);
 }
 
-
 /**Count the amount of redirections in order
  * to malloc t_file structures for each redir
  */
-int	count_redirections(t_mini *mini)
+int	count_redirections(t_mini *mini, int i)
 {
 	int		count;
-	int		i;
 	t_quote	q;
 
 	q.sgl = 0;
 	q.dbl = 0;
-	i = mini->cursor;
 	count = 0;
 	while (mini->line[i] && mini->line[i] != '|')
 	{
@@ -94,21 +92,17 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 
 	j = 0;
 	i = 0;
-	cmd->redir_amount = count_redirections(mini);
+	cmd->redir_amount = count_redirections(mini, mini->cursor);
 	if (cmd->redir_amount)
 	{
+		// init_redirections(mini, cmd);
 		cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
 		if (!cmd->redir)
 			return (MALLOC_ERR);
-		i = 0;
 		while (is_angle_bracket(mini->line[mini->cursor]))
-		{
-			get_cmd_redirection(mini, cmd, j);
-			j++;
-		}
+			get_cmd_redirection(mini, cmd, j++);
 	}
 	cmd->command = get_cmd_bin(mini);
-
 	if (mini->line[mini->cursor])
 		cmd->arg_amount = count_arguments(mini);
 	if (cmd->arg_amount)
@@ -122,15 +116,9 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 		&& (cmd->arg_amount || cmd->redir_amount))
 	{
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
-		{
-			get_cmd_redirection(mini, cmd, j);
-			j++;
-		}
+			get_cmd_redirection(mini, cmd, j++);
 		else if (cmd->arg_amount)
-		{
-			get_cmd_args(mini, cmd, i);
-			i++;
-		}
+			get_cmd_args(mini, cmd, i++);
 	}
 	if (cmd->arg_amount)
 		cmd->args[i] = NULL;

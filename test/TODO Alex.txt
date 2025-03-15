@@ -1,12 +1,16 @@
+Make file to create 
+
 
 Now (by order of priority) :
 
 - handle << >, <<> and <<|
 
+- change prompt to pwd ?
 - Error managment (enum errors)
 - Signals
 
 - Handle chech path for redirections
+
 
 FIND GOOD ERROR HANDLING SYSTEM
 

@@ -2,24 +2,6 @@
 #include "../../includes/minishell.h"
 
 
-void	free_cmd(t_mini *mini, t_cmd *cmd)
-{
-	int	i;
-
-	i = -1;
-	while (++i < mini->cmd_amount)
-	{
-		if (cmd[i].command != NULL)
-			free(cmd[i].command);
-		if (cmd[i].path != NULL)
-			free(cmd[i].path);
-		if (cmd[i].args != NULL)
-			free_double_pointer(cmd[i].args);
-	}
-	free(cmd);
-	cmd = NULL;
-}
-
 /** Initialize command tokens
  * @param mini t_mini containing the amount of comands in the current line
  * @param cmd command structure
@@ -82,7 +64,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 
 
 	/* EXECUTION */
-	exec_mini(mini, cmd);
+	// exec_mini(mini, cmd);
 
 	if (DEBUGG_PARSING == 1)
 		debug_parsing_print(mini, cmd);
@@ -90,4 +72,9 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	return (0);
 }
 
+// int	get_function_pointer()
+// {
 
+
+
+// }
