@@ -8,10 +8,13 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
 # include <signal.h>
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <linux/limits.h>
 # include "enum.h"
 # include "structures.h"
 
@@ -68,6 +71,8 @@ int			init_redirections(t_mini *mini, t_cmd *cmd);
 void		exec_mini(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
+
+int			pwd();
 
 /* * * * * * * * * * FREE * * * * * * * * * */
 
