@@ -12,6 +12,7 @@
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <linux/limits.h>
 # include "enum.h"
 # include "structures.h"
 
