@@ -13,14 +13,15 @@ int	is_builtin_echo(t_cmd *cmd)
 	if (!cmd->arg_amount)
 		return (1);
 	i = 0;
-	j = 1;
+	j = 0;
 	while (cmd->args[++j] && cmd->args[j][0] == '-')
 	{
-		while (cmd->args[j][++i] && cmd->args[1][i] == 'n')
+		while (cmd->args[j][++i])
 			if (cmd->args[1][i] != 'n')
 				return (0);
 	}
-	cmd->echo_n_index = j;
+	printf("%d\n", j);
+	// cmd->echo_n_index = j - 1;
 	return (1);
 }
 

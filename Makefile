@@ -54,6 +54,7 @@ UTILS				=	contain_char.c \
 						is_angle_bracket.c \
 						ft_atoi.c \
 						ft_calloc.c \
+						ft_itoa.c \
 						ft_split.c \
 						ft_strchr.c \
 						ft_strdup.c \

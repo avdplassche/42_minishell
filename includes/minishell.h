@@ -50,7 +50,6 @@ int			parsing(t_mini *mini, t_cmd *cmd);
 int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
 int			need_dollar_substitution(char *str);
-int			handle_dollar_sign(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_quote(t_mini *mini);
 void		quote_enclosure_handle(char c, t_quote *quote);
@@ -107,6 +106,7 @@ void		debug_parsing_print(t_mini *mini, t_cmd *cmd);
 				// LIBFT //
 
 int			ft_atoi(char *str);
+char		*ft_itoa(int n);
 char		**ft_split(char *s, char c);
 char		*ft_strchr(char *s, int c);
 char		*ft_strdup(char *s1);

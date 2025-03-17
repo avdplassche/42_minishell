@@ -56,12 +56,13 @@ int	dup_env(t_mini *mini, char **envp)
 int	init_mini(t_mini *mini, char **envp)
 {
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
-		//malloc protection
+	if (!mini->builtins)
+		return (MALLOC_ERROR);
 	mini->last_return = 0;
 	dup_env(mini, envp);
 	mini->paths = ft_split(getenv("PATH"), ':');
-		//malloc protection
-	// mini->cursor = 0;
+	if (!mini->paths)
+		return (MALLOC_ERROR);
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));
 	if (!mini->fd_backup)
 		return (MALLOC_ERROR);

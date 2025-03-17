@@ -1,17 +1,6 @@
 
 #include "../../includes/minishell.h"
 
-int	find_first_quote(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (is_quote(str[i]))
-			return (str[i]);
-	return (0);
-}
-
 /** This function calculate the necessary lenght of the new string after deleting the quotes
  * @param str the string to delete the quote from
  * @return a total amount of char, to be used for malloc
@@ -20,18 +9,18 @@ int	strlen_quote_cleaned_command(char *str)
 {
 	int		i;
 	int		j;
-	t_quote	quote;
+	t_quote	q;
 
-	quote.dbl = 0;
-	quote.sgl = 0;
+	q.dbl = 0;
+	q.sgl = 0;
 	i = -1;
 	j = 0;
 	while (str[++i])
 	{
-		quote_enclosure_handle(str[i], &quote);
+		quote_enclosure_handle(str[i], &q);
 		if (!is_quote(str[i])
-			|| (str[i] == 34 && quote.sgl == 1)
-			|| (str[i] == 39 && quote.dbl == 1))
+			|| (str[i] == 34 && q.sgl)
+			|| (str[i] == 39 && q.dbl))
 			j++;
 	}
 	return (j);
@@ -63,7 +52,7 @@ char	*clean_command_quotes(char *str)
 {
 	int		i;
 	int		j;
-	t_quote	quote;
+	t_quote	q;
 	char	*dest;
 
 	j = strlen_quote_cleaned_command(str);
@@ -71,14 +60,13 @@ char	*clean_command_quotes(char *str)
 		//malloc protection
 	i = -1;
 	j = 0;
-	quote.dbl = 0;
-	quote.sgl = 0;
+	q.dbl = 0;
+	q.sgl = 0;
 	while (str[++i])
 	{
-		quote_enclosure_handle(str[i], &quote);
-		if (!is_quote(str[i])
-			|| (str[i] == 34 && quote.sgl)
-			|| (str[i] == 39 && quote.dbl))
+		quote_enclosure_handle(str[i], &q);
+		if (!is_quote(str[i]) || (str[i] == 34 && q.sgl)
+			|| (str[i] == 39 && q.dbl))
 			dest[j++] = str[i];
 	}
 	dest[j] = '\0';
@@ -89,16 +77,16 @@ char	*clean_command_quotes(char *str)
 /** Change quote enclosure, taking a char (34 or 39) as argument
  *
 */
-void	quote_enclosure_handle(char c, t_quote *quote)
+void	quote_enclosure_handle(char c, t_quote *q)
 {
-	if (c == 34 && !quote->dbl && !quote->sgl)
-		quote->dbl = 1;
-	else if (c == 34 && quote->dbl)
-		quote->dbl = 0;
-	else if (c == 39 && !quote->sgl && !quote->dbl)
-		quote->sgl = 1;
-	else if (c == 39 && quote->sgl)
-		quote->sgl = 0;
+	if (c == 34 && !q->dbl && !q->sgl)
+		q->dbl = 1;
+	else if (c == 34 && q->dbl)
+		q->dbl = 0;
+	else if (c == 39 && !q->sgl && !q->dbl)
+		q->sgl = 1;
+	else if (c == 39 && q->sgl)
+		q->sgl = 0;
 }
 
 
@@ -111,14 +99,14 @@ void	quote_enclosure_handle(char c, t_quote *quote)
 int	is_valid_quote(t_mini *mini)  // use last_quote
 {
 	int		i;
-	t_quote	quote;
+	t_quote	q;
 
-	quote.sgl = 0;
-	quote.dbl = 0;
+	q.sgl = 0;
+	q.dbl = 0;
 	i = -1;
 	while (mini->line[++i])
-		quote_enclosure_handle(mini->line[i], &quote);
-	if (quote.sgl == 1 || quote.dbl == 1)
+		quote_enclosure_handle(mini->line[i], &q);
+	if (q.sgl == 1 || q.dbl == 1)
 		return (0);
 	return (1);
 }
