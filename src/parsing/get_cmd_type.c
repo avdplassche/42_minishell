@@ -8,14 +8,19 @@
 int	is_builtin_echo(t_cmd *cmd)
 {
 	int	i;
+	int	j;
 
 	if (!cmd->arg_amount)
 		return (1);
 	i = 0;
-	if (cmd->args[1][0] == '-')
-		while (cmd->args[1][++i])
+	j = 1;
+	while (cmd->args[++j] && cmd->args[j][0] == '-')
+	{
+		while (cmd->args[j][++i] && cmd->args[1][i] == 'n')
 			if (cmd->args[1][i] != 'n')
 				return (0);
+	}
+	cmd->echo_n_index = j;
 	return (1);
 }
 

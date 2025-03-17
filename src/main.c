@@ -3,7 +3,11 @@
 
 
 
+void	handle_signal(void)
+{
 
+
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -15,6 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n");
 	while (argc == 1)
 	{
+
 		cmd = NULL;
 		mini.cursor = 0;
 		mini.line = ft_strtrim(readline("Prompt minishell "), SPACES);
@@ -24,6 +29,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			parsing(&mini, cmd);
+		// signal(g_sig, handle_signal);
 		free(mini.line);
 		mini.line = NULL;
 	}

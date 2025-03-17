@@ -21,10 +21,10 @@ Now (by order of priority) :
 
 - Make file to create cmd structure for jose
 - Error managment (enum errors)
+- handle 
 - Signals
 - change prompt to pwd ?
 
-- Handle chech path for redirections
 
 
 

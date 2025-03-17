@@ -35,6 +35,9 @@
 # define REDBG "\033[41m"
 
 
+// int	g_sig;
+
+
 /* * * * * * * * * *INIT * * * * * * * * * */
 
 int			init_mini(t_mini *mini, char **envp);
