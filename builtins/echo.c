@@ -6,20 +6,24 @@ static void	print_echo(t_cmd *cmd, int i)
 	while(cmd->args[i])
 	{
 		printf("%s\n", cmd->args[i]);
-		if (cmd->args[i + 1])
-			printf(" ");
 		i++;
+		if (cmd->args[i])
+			printf(" ");
 	}
 }
 
-int	builtin_echo(t_cmd *cmd)
+int	builtin_echo(t_cmd *cmd, t_mini *mini)
 {
+	(void)mini;
+
 	if (cmd->echo_n_index)
 	{
 		print_echo(cmd, cmd->echo_n_index);
-		return (0);
 	}
-	print_echo(cmd, 1);
-	printf("\n");
-	return (1);
+	else
+	{
+		print_echo(cmd, 1);
+		printf("\n");
+	}
+	return (0);
 }

@@ -1,13 +1,43 @@
 
 #include "../includes/minishell.h"
 
+static t_builtin_func	get_builtin_function(char *cmd_name)
+{
+	DEBUG("entered the get_builtin function\n");
+	if (ft_strcmp(cmd_name, "cd") == 0)
+		return (&builtin_cd);
+	else if (ft_strcmp(cmd_name, "echo") == 0)
+		return (&builtin_echo);
+	// else if (ft_strcmp(cmd_name, "env") == 0)
+	// 	return (&builtin_env);
+	// else if (ft_strcmp(cmd_name, "exit") == 0)
+	// 	return (&builtin_exit);
+	// else if (ft_strcmp(cmd_name, "export"))
+	// 	return (&builtin_export);
+	else if (ft_strcmp(cmd_name, "pwd") == 0)
+		return (&builtin_pwd);
+	// else if (ft_strcmp(cmd_name, "unset"))
+	// 	return (&builtin_unset);
+	else
+		return (NULL);
+}
 
 void	exec_mini(t_mini *mini, t_cmd *cmd)
 {
-	if ()
+	t_builtin_func	f;
+	int				i;
+
+	DEBUG("entered the exec_mnini function\n");
+	DEBUG("%s\n command", cmd->command);
+	i = 0;
+	f = get_builtin_function(cmd->command);
+	DEBUG("got here after get builtin\n");
+	i = f(cmd, mini);
+	DEBUG("after the function has done something %d\n", i);
+	return ;
 }
 
-pid_t	exec_child(t_mini *mini, t_cmd cmd)
+/*pid_t	exec_child(t_mini *mini, t_cmd cmd)
 {
 	(void)mini;
 	
@@ -19,4 +49,4 @@ pid_t	exec_child(t_mini *mini, t_cmd cmd)
 		execve(cmd.path, cmd.args, mini->envp);
 	}
 	waitpid(pid, &status, 0);
-}
+}*/

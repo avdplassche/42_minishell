@@ -18,6 +18,7 @@ typedef union u_pipe_ends
 	};	
 }			t_pipe_ends;
 
+
 typedef struct s_redir
 {
 	char		*pathname;
@@ -83,3 +84,8 @@ typedef struct s_cmd
 	t_pipe_ends	pipe_out;
 	pid_t		pid;
 }				t_cmd;
+
+/** A pointer to function for the builtin function 
+ * @param t_builtin_func contains the signature of all the builtin functions
+ */
+typedef int (*t_builtin_func)(t_cmd *, t_mini *);

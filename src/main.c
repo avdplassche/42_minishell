@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, cmd);
-				exec_mini(&mini, cmd);
+				//exec_mini(&mini, cmd);
 			}
 			free(cmd);
 			free(mini.line);

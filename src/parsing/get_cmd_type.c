@@ -20,7 +20,7 @@ int	is_builtin_echo(t_cmd *cmd)
 			if (cmd->args[1][i] != 'n')
 				return (0);
 	}
-	cmd->echo_n_index = j;
+	cmd->echo_n_index = j - 1;
 	return (1);
 }
 

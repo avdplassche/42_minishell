@@ -78,8 +78,13 @@ void		exec_mini(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
-int			builtin_echo(t_cmd *cmd);
-int			builtin_pwd(t_mini *mini);
+int			builtin_cd(t_cmd *cmd, t_mini *mini);
+int			builtin_echo(t_cmd *cmd, t_mini *mini);
+//int			builtin_env(t_cmd *cmd, t_mini *mini);
+//int			builtin_exit(t_cmd *cmd, t_mini *mini);
+//int			builtin_export(t_cmd *cmd, t_mini *mini);
+int			builtin_pwd(t_cmd *cmd, t_mini *mini);
+//int			builtin_unset(t_cmd *cmd, t_mini *mini);
 
 /* * * * * * * * * * FREE * * * * * * * * * */
 
@@ -115,6 +120,7 @@ char		*ft_strdup(char *s1);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlen(char *s);
 int			ft_strncmp(char *s1, char *s2, size_t n);
+int			ft_strcmp(char *s1, char *s2);
 char		*ft_strnstr(char *haystack, char *needle, size_t len);
 char		*ft_strtrim(char *s1, char *set);
 char		*ft_substr(char *s, unsigned int start, size_t len);

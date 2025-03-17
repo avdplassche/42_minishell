@@ -3,9 +3,8 @@
 
 //cd with only a relative or absolute pat
 
-int	cd(t_mini *mini, t_cmd *cmd)
+int	builtin_cd(t_cmd *cmd, t_mini *mini)
 {
-	DIR *dirptr;
 	char	*path;
 
 	path = cmd->args[1];
@@ -14,20 +13,10 @@ int	cd(t_mini *mini, t_cmd *cmd)
 		perror("path is invalid\n");
 		return (-1);
 	}
-	if ((dirptr = opendir(path)) != NULL)
-	{
-		printf("opendir worked\n");
-		closedir(dirptr);
-	}
-	else
-	{
-		perror("The directory does not exist or is not accessile\n");
-		return (-1);
-	}
 	if (chdir(path) == 0)
 	{
 		printf("succesfully changed directory.\n");
-		builtin_pwd(mini);
+		builtin_pwd(cmd, mini);
 	}
 	return (0);
 }

@@ -60,6 +60,7 @@ UTILS				=	contain_char.c \
 						ft_strjoin.c \
 						ft_strlen.c \
 						ft_strncmp.c \
+						ft_strcmp.c \
 						ft_strnstr.c \
 						ft_strtrim.c \
 						ft_substr.c \
