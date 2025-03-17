@@ -119,6 +119,22 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 }
 
 
+char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
+{
+	char	*dest;
+	char	*temp2;
+	int		len;
+
+	len = ft_strlen(temp1);
+	dest = ft_substr(temp1, 0, i);
+	temp2 = ft_strjoin(dest, ft_itoa(mini->last_return));
+	free(dest);
+	dest = ft_strjoin(temp2, ft_substr(temp1, i + 2, len - i));
+	free(temp1);
+	free(temp2);
+	return (dest);
+}
+
 /** Used to change every dollar sign to elements of env variable
  * @param mini t_mini struct where envp is stored
  * @param temp the string to change dollar sign if needed
@@ -128,20 +144,22 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 {
 	int		i;
 	int		j;
-	t_quote	quote;
+	t_quote	q;
 	char	*dest;
 
 	j = 0;
-	quote.sgl = 0;
-	quote.dbl = 0;
+	q.sgl = 0;
+	q.dbl = 0;
 	i = -1;
 	while (++i < sub_index)
-		quote_enclosure_handle(temp[i], &quote);
+		quote_enclosure_handle(temp[i], &q);
+	if (temp[i + 1] == '?')
+		return (replace_env_return_value(mini, temp, i));
 	while (temp[++i])
 	{
-		quote_enclosure_handle(temp[i], &quote);
-		if ((!quote.sgl && (is_quote(temp[i]) || temp[i] == ' '))
-			|| (quote.dbl && (temp[i] == ' ' || temp[i] == 34)))
+		quote_enclosure_handle(temp[i], &q);
+		if ((!q.sgl && (is_quote(temp[i]) || temp[i] == ' '))
+			|| (q.dbl && (temp[i] == ' ' || temp[i] == 34)))
 			break ;
 		j++;
 	}
@@ -158,17 +176,17 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 int	need_dollar_substitution(char *str)
 {
 	int		i;
-	t_quote	quote;
+	t_quote	q;
 
 	if (!(contain_char(str, '$')))
 		return (-1);
-	quote.sgl = 0;
-	quote.dbl = 0;
+	q.sgl = 0;
+	q.dbl = 0;
 	i = -1;
 	while (str[++i])
 	{
-		quote_enclosure_handle(str[i], &quote);
-		if (str[i] == '$' && (!quote.sgl || (quote.sgl && quote.dbl && last_quote(str, i) == 's')))
+		quote_enclosure_handle(str[i], &q);
+		if (str[i] == '$' && (!q.sgl || (q.sgl && q.dbl && last_quote(str, i) == 's')))
 			return (i);
 	}
 	return (-1);

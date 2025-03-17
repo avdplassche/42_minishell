@@ -17,6 +17,7 @@ No such job :
 
 Now (by order of priority) :
 
+- continue is_builtin echo
 - handle << >, <<> and <<|
 
 - Make file to create cmd structure for jose

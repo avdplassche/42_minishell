@@ -24,6 +24,9 @@ e'c'"ho" Hello World
 'echo $LANG '$SHEL"L"
 "echo $LNG $SHEL '$sL'"
 "echo $LNG $SHEL "'$sL'
+'echo $LANG "$SHEL"L'
+  echo    $PATH | "echo $LANG "
+"echo $?"
 
 
 ls -1 | grep "config" | tee configs.txt | wc -l
@@ -59,3 +62,8 @@ env | "wc" -l
 ls -la | grep "."
 echo -n Hola
 ls -l |     grep ".txt" | wc -l
+
+
+
+temp : "  echo    $PATH"
+temp : "echo $LANG "

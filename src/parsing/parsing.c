@@ -3,12 +3,10 @@
 
 
 /** Initialize command tokens
- * @param mini t_mini containing the amount of comands in the current line
  * @param cmd command structure
  * @param i index of the cmd structure
- *
  */
-void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
+void	init_cmd(t_cmd *cmd, int i)
 {
 	cmd->command = NULL;
 	cmd->args = NULL;
@@ -17,6 +15,7 @@ void	init_cmd(t_cmd *cmd, int i)   //change it to void ?
 	cmd->arg_amount = 0;
 	cmd->redir_amount = 0;
 	cmd->id = i + 1;
+	cmd->echo_n_index = 0;
 	cmd->type = -1;
 }
 

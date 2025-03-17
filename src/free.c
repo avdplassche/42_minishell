@@ -51,3 +51,9 @@ void	free_mini(t_mini *mini)
 	free_double_pointer(mini->paths);
 	mini->paths = NULL;
 }
+
+void	minishell_exit(t_mini *mini, t_cmd *cmd)
+{
+	free_cmd(mini, cmd);
+	free_mini(mini);
+}

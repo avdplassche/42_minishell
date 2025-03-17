@@ -32,8 +32,7 @@ int	is_valid_pipes(t_mini *mini)
 		quote_enclosure_handle(mini->line[i], &q);
 		if (mini->line[i] == '|' && !q.sgl && !q.dbl)
 		{
-			i++;
-			if (mini->line[i] == '|')
+			if (mini->line[++i] == '|')
 				return (print_unexpected_token("|"), 0);
 			i--;
 		}
