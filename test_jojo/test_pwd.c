@@ -1,7 +1,7 @@
 
 #include "../includes/minishell.h"
 
-int	pwd(t_mini *mini)
+int	builtin_pwd(t_mini *mini)
 {
 	(void)mini;
 	
@@ -25,6 +25,6 @@ int main()
 {
 	t_mini mini;
 
-	pwd(&mini);
+	builtin_pwd(&mini);
 	return (0);
 }

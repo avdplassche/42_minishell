@@ -3,10 +3,12 @@
 
 //cd with only a relative or absolute pat
 
-int	cd(char	*path)
+int	cd(t_mini *mini, t_cmd *cmd)
 {
 	DIR *dirptr;
-	
+	char	*path;
+
+	path = cmd->args[1];
 	if (path == NULL || ft_strlen(path) == 0)
 	{
 		perror("path is invalid\n");
@@ -25,7 +27,7 @@ int	cd(char	*path)
 	if (chdir(path) == 0)
 	{
 		printf("succesfully changed directory.\n");
-		pwd();
+		builtin_pwd(mini);
 	}
 	return (0);
 }

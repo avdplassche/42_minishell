@@ -59,11 +59,11 @@ int	main(int argc, char **argv, char **envp)
 			mini.line = ft_strtrim(get_next_line(fd), SPACES);
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
-			printf("\nCOMMAND LINE %d > %s¶\n\n", c + 1, mini.line);
+			DEBUG("\nCOMMAND LINE %d > %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, cmd);
-				// exec(&mini, cmd);
+				exec_mini(&mini, cmd);
 			}
 			free(cmd);
 			free(mini.line);
@@ -76,5 +76,15 @@ int	main(int argc, char **argv, char **envp)
 /************************ /TEST MODE ***************************** */
 
 	free_mini(&mini);
+	DEBUG_CLOSE;
 	return (0);
+}
+
+int	get_debug_fd()
+{
+	static int fd = -1;
+
+	if (fd == -1)
+		fd = open("./log/debug.log", O_CREAT | O_RDWR | O_TRUNC, 0664);
+	return (fd);
 }

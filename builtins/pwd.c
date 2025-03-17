@@ -2,7 +2,7 @@
 
 #include "../includes/minishell.h"
 
-int	pwd(t_mini *mini)
+int	builtin_pwd(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd_env;

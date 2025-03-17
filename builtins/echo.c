@@ -12,7 +12,7 @@ static void	print_echo(t_cmd *cmd, int i)
 	}
 }
 
-int	echo(t_cmd *cmd)
+int	builtin_echo(t_cmd *cmd)
 {
 	if (cmd->echo_n_index)
 	{
@@ -21,4 +21,5 @@ int	echo(t_cmd *cmd)
 	}
 	print_echo(cmd, 1);
 	printf("\n");
+	return (1);
 }

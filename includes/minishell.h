@@ -17,6 +17,7 @@
 # include <linux/limits.h>
 # include "enum.h"
 # include "structures.h"
+# include "debug.h"
 
 #define BUILTINS_STRING "echo, cd,env,exit,export,pwd,unset"
 #define SPACES " 	\n"
@@ -77,7 +78,8 @@ void		exec_mini(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
-int			pwd();
+int			builtin_echo(t_cmd *cmd);
+int			builtin_pwd(t_mini *mini);
 
 /* * * * * * * * * * FREE * * * * * * * * * */
 

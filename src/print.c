@@ -13,24 +13,24 @@ void	print_char_table(char **table, char *name)
 	int	i;
 
 	i = -1;
-	printf("\nChar ** table :\n\n");
+	DEBUG("\nChar ** table :\n\n");
 	while (table[++i] != NULL)
-		printf("%s [%d] : %s\n", name, i, table[i]);
+		DEBUG("%s [%d] : %s\n", name, i, table[i]);
 }
 
 void	print_string(char *string, char *name)
 {
-	printf("%s : %s\n", name, string);
+	DEBUG("%s : %s\n", name, string);
 }
 
 void	print_unexpected_token(char *token)
 {
-	printf("minishell: error near unexpected token '%s'\n", token);
+	DEBUG("minishell: error near unexpected token '%s'\n", token);
 }
 
 void	print_quote_statement_debug(t_mini *mini, int i, t_quote *q)
 {
-	printf("line[%d] : %c | sq = %d| dq = %d\n", i, mini->line[i], q->sgl, q->dbl);
+	DEBUG("line[%d] : %c | sq = %d| dq = %d\n", i, mini->line[i], q->sgl, q->dbl);
 }
 
 
@@ -41,42 +41,42 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 
 	i = 0;
 	if (TEST_MODE == 0)
-		printf("\n");
-	// printf(CYAN);
-	printf("   Command %d : %s¶\n\n", cmd.id, cmd.command);
-	printf("   Path : %s¶\n\n", cmd.path);
-	// printf(RESET);
+		DEBUG("\n");
+	// DEBUG(CYAN);
+	DEBUG("   Command %d : %s¶\n\n", cmd.id, cmd.command);
+	DEBUG("   Path : %s¶\n\n", cmd.path);
+	// DEBUG(RESET);
 	if (cmd.type == USER)
-		printf("	  Type : USER COMMAND\n\n");
+		DEBUG("	  Type : USER COMMAND\n\n");
 	else if (cmd.type == BUILTIN)
-		printf("	  Type : BUILTIN\n\n");
+		DEBUG("	  Type : BUILTIN\n\n");
 	else
-		printf("	  Type : INVALID\n\n");
-	printf("	  Total Args : %d\n\n", cmd.arg_amount);
+		DEBUG("	  Type : INVALID\n\n");
+	DEBUG("	  Total Args : %d\n\n", cmd.arg_amount);
 	if (cmd.args != NULL)
 	{
 		while (cmd.args[++i])
-			printf("	  Arg[%d] : %s¶\n", i, cmd.args[i]);
-		printf("\n");
+			DEBUG("	  Arg[%d] : %s¶\n", i, cmd.args[i]);
+		DEBUG("\n");
 	}
 	i = 0;
-	printf("	  Total redirections : %d\n\n", cmd.redir_amount);
+	DEBUG("	  Total redirections : %d\n\n", cmd.redir_amount);
 	if (cmd.redir_amount)
 	{
 		while (i < cmd.redir_amount)
 		{
-			printf("	  Redir[%d] : %s ", i, cmd.redir[i].pathname);
+			DEBUG("	  Redir[%d] : %s ", i, cmd.redir[i].pathname);
 			if (cmd.redir[i].type == IN_REDIR)
-				printf("(IN REDIR)¶\n");
+				DEBUG("(IN REDIR)¶\n");
 			else if (cmd.redir[i].type == OUT_REDIR)
-				printf("(OUT REDIR)¶\n");
+				DEBUG("(OUT REDIR)¶\n");
 			else if (cmd.redir[i].type == OUT_APPEND)
-				printf("(OUT APPEND)¶\n");
+				DEBUG("(OUT APPEND)¶\n");
 			else if (cmd.redir[i].type == HERE_DOC)
-				printf("(HERE_DOC)¶\n");
+				DEBUG("(HERE_DOC)¶\n");
 			i++;
 		}
-		printf("\n");
+		DEBUG("\n");
 	}
 }
 
@@ -88,7 +88,7 @@ void	debug_parsing_print(t_mini *mini, t_cmd *cmd)
 	while (++i < mini->cmd_amount)
 	{
 		print_cmd(cmd[i], mini->line);
-		printf("\n");
+		DEBUG("\n");
 	}
-	printf("-----------------------------------------------\n");
+	DEBUG("-----------------------------------------------\n");
 }
