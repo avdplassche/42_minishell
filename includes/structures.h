@@ -59,7 +59,7 @@ typedef struct s_mini
  * @param command the name of the binary to execute
  * @param path path of the command (needed for execve)
  * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
- * @param echo_n_index if command = echo -n -n 
+ * @param echo_n_index if command = echo -n -n gives the index of the first argument after -n in this case 3
  * @param args arguments given to the binary (needed for execve)
  * @param arg_amount amount of arguments in the command
  * @param id id of the command (1 == first exec) // Is it needed ?

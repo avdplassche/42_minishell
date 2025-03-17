@@ -1,26 +1,24 @@
 
 #include "../includes/minishell.h"
 
+static void	print_echo(t_cmd *cmd, int i)
+{
+	while(cmd->args[i])
+	{
+		printf("%s\n", cmd->args[i]);
+		if (cmd->args[i + 1])
+			printf(" ");
+		i++;
+	}
+}
 
-// int	echo(t_cmd *cmd)
-// {
-// 	int	i;
-// 	int	is_option_n;
-
-// 	is_option_n = 0;
-// 	if (cmd->args[1] && (ft_strcmp(cmd->args[1], "-n") == 0))
-// 	{
-// 		is_option_n = 1;
-// 		i = 2;
-// 	}
-// 	while (cmd->args[i])
-// 	{
-// 		printf("%s\n", cmd->args[i]);
-// 		if (cmd->args[i + 1])
-// 			printf(" ");
-// 		i++;
-// 	}
-// 	if (!is_option_n)
-// 		printf("\n");
-// 	return (0);
-// }
+int	echo(t_cmd *cmd)
+{
+	if (cmd->echo_n_index)
+	{
+		print_echo(cmd, cmd->echo_n_index);
+		return (0);
+	}
+	print_echo(cmd, 1);
+	printf("\n");
+}
