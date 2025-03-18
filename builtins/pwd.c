@@ -12,7 +12,6 @@ int	builtin_pwd(t_cmd *cmd, t_mini *mini)
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		printf("%s\n", cwd);
-		printf("%s\n", getenv("LS_COLORS"));
 	}
 	else
 	{

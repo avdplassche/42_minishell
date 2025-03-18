@@ -25,6 +25,7 @@ vpath %.c $(DIR_SRC):$(DIR_SRC)/parsing
 vpath %.c $(DIR_SRC):$(DIR_SRC)/execution
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/ft_string_ptr
+vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 
 #---------------------SOURCE------------------------#
 
@@ -113,6 +114,15 @@ $(DIR_BIN)/src/%.o: $(DIR_SRC)/execution/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/%.c | $(DIR_BIN)/src
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/utils/%.o: $(DIR_UTILS)/extra/%.c | $(DIR_BIN)/utils
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/utils/%.o: $(DIR_UTILS)/ft_string_ptr/%.c | $(DIR_BIN)/utils
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/utils/%.o: $(DIR_UTILS)/libft/%.c | $(DIR_BIN)/utils
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/utils/%.o: $(DIR_UTILS)/%.c | $(DIR_BIN)/utils
