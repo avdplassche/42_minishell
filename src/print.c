@@ -1,7 +1,7 @@
 
 
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** Print a char **, all strings are separated by a new line
  * @param table the char ** to print

@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 //unset with no options
 

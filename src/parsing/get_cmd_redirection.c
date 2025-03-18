@@ -1,6 +1,6 @@
 
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 
 /**Count the amount of redirections in order

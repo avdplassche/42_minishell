@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static char *build_search_str(char *string_to_find, int variable_len)
 {

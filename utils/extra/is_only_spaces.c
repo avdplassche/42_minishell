@@ -1,7 +1,7 @@
 
 
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** Check if string is composed of spaces only
  * @return - 1 if only space

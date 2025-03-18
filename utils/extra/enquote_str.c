@@ -1,6 +1,6 @@
 
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 
 /** Single or double enquote a string

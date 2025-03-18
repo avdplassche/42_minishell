@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /**
  * To know if a char is present in a string, should be renamed, isnt it ?

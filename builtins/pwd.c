@@ -1,6 +1,6 @@
 
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	builtin_pwd(t_cmd *cmd, t_mini *mini)
 {

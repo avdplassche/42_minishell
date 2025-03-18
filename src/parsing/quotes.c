@@ -1,5 +1,5 @@
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /** This function calculate the necessary lenght of the new string after deleting the quotes
  * @param str the string to delete the quote from

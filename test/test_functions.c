@@ -1,6 +1,6 @@
 
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /*This file is used to test if created functions are working as intended */
 

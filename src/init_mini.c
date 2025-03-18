@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** Count command amount in command line, that will be used for pipes.
  * @param mini t_mini containing the command line

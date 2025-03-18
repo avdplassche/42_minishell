@@ -1,5 +1,5 @@
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /** Check if cmd is echo -n
  * @return -  1 if echo -n (so type is builtin)

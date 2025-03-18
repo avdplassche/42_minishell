@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static t_builtin_func	get_builtin_function(char *cmd_name)
 {

@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static void	print_echo(t_cmd *cmd, int i)
 {

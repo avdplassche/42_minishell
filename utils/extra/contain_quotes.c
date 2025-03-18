@@ -1,4 +1,5 @@
-#include "../includes/minishell.h"
+
+#include "minishell.h"
 
 /**
  * To know there is quote in a specific string

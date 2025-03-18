@@ -1,6 +1,6 @@
 
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 
 /** Get the command's last index, use it to substring

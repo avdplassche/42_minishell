@@ -1,5 +1,5 @@
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** Is c a quote charactere ?
  * @param c a character

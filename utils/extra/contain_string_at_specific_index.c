@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** Find needle in haystack, starting at a specific index
  * @param haystack where to find needle

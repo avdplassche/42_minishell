@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 13:44:56 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/02/27 00:24:05 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:47:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /** @return - 1 if 'c' is a space character
  * @return - 0 otherwise

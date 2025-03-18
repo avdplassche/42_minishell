@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 
 void	free_cmd(t_mini *mini, t_cmd *cmd)

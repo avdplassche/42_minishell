@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 
 int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
