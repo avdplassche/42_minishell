@@ -77,6 +77,7 @@ int			init_arguments(t_mini *mini, t_cmd *cmd);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
+char		*ft_get_env(t_mini *mini, char	*var_name);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
@@ -93,7 +94,7 @@ int			builtin_pwd(t_cmd *cmd, t_mini *mini);
 void		free_double_pointer(char **str);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
-
+void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * ERRORS * * * * * * * * * */
 

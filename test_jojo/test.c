@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 static char *build_search_str(char *string_to_find, int variable_len)
 {
@@ -8,7 +8,7 @@ static char *build_search_str(char *string_to_find, int variable_len)
 	search_str = (char *)malloc(sizeof(char) * variable_len + 2);
 	if (!search_str)
 		return (NULL);
-	ft_strcpy(search_str, string_to_find); // a copy of the string is made, there are still 0s because src is smaller than dest 
+	ft_strcpy(search_str, string_to_find);
 	search_str[variable_len] = '=';
 	search_str[variable_len + 1] = '\0';
 	return (search_str);
@@ -33,7 +33,7 @@ char	*find_string_in_array(char **string_array, char *string_to_find)
 		{
 			free(search_str);
 			search_str = NULL;
-			return (string_array[i] + variable_len + 1);
+			return (string_array[i]);
 		}
 		i++;
 	}
@@ -42,17 +42,34 @@ char	*find_string_in_array(char **string_array, char *string_to_find)
 	return (NULL);
 }
 
+char	*ft_get_env(t_mini *mini, char	*var_name)
+{
+	size_t	var_length;
+	char	*full_path;
+	
+	var_length = ft_strlen(var_name);
+	full_path = find_string_in_array(mini->envp, var_name);
+	if (!full_path)
+		return (NULL);
+	return (full_path + var_length + 1);
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_mini	mini;
+	char	*s;
+	char	**test;
 	(void)argc;
 	(void)argv;
-	char	*path;
 
 	mini.envp = env;
-	path = find_string_in_array(mini.envp, "LS_COLORS");
-	if (!path)
+	s = ft_get_env(&mini, "PATH");
+	if (!s)
+	{
 		return (1);
-	printf("%s\n", path);
+	}
+	//printf("%s\n", s);
+	test = ft_split(s, ':');
+	print_string_array(test);
 	return (0);
 }

@@ -44,6 +44,7 @@ SRCS				=	main.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
 						execute_command.c \
+						ft_get_env.c \
 						free.c
 
 UTILS				=	contain_char.c \
