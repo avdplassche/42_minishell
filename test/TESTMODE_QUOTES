@@ -16,16 +16,6 @@ e'ch'o" Hello World
 e'ch'o" Hello" World
 e'c'"ho" Hello World
 "e'c"'h"o" hello
-"echo $PATH"
-'echo $PATH'
-"echo $LANG $PAGER $PA '$PWD'"
-'echo $LANG " $PAGER" $PA ' $PWD''
-"echo $LANG '$PAGER' $PA '$PWD'"
-'echo $LANG '$SHEL"L"
-"echo $LNG $SHEL '$sL'"
-"echo $LNG $SHEL "'$sL'
-'echo $LANG "$SHEL"L'
-  echo    $PATH | "echo $LANG "
 "echo $?"
 
 

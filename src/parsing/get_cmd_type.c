@@ -64,7 +64,7 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
  * @param cmd cmd struct
  * @return - 0 (BIN) the command can be found in PATH
  * @return - 1 (BUILTIN) the command can be found in the 'builtins' dir
- * @return - -1 (UNVALID) the command is not valid
+ * @return - -1 (INVALID) the command is not valid
 */
 int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 {
@@ -87,5 +87,5 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 	}
 	if (is_user_command(mini, cmd))
 		return (USER);
-	return (UNVALID);
+	return (INVALID);
 }

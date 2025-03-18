@@ -1,40 +1,29 @@
 
+Main Task : 
+
+- Lonely dollar sign (echo $PATH$)
+- Handle # (add it to the end of get_cmd_bin)
+
+-check is_valid_arithmetic
+
+
 
 List of errors to handle : 
 
-
-Parse error : 
-<< >
-<<>
-<<|
-&&
-
-No such job :
-%
-%%
-...
-
-
 Now (by order of priority) :
 
-- continue is_builtin echo
-- handle << >, <<> and <<|
-
-- Make file to create cmd structure for jose
 - Error managment (enum errors)
-- handle 
+
+- expand tilde
+- handle env -i
+- Wildcards
 - Signals
 - change prompt to pwd ?
 
 
+Problem to solve :
 
-
-
-After :
-
-coder cas double pipe "||" (and all metachar)
-handle parenthese (subroutine)
-
+echo #$LANG
 
 
 

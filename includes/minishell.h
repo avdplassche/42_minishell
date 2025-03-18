@@ -25,6 +25,9 @@
 #define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
+
+
+
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"

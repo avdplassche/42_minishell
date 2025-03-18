@@ -1,0 +1,13 @@
+"echo $PATH"
+'echo $PATH'
+"echo $LANG $PAGER $PA '$PWD'"
+'echo $LANG " $PAGER" $PA ' $PWD''
+"echo $LANG '$PAGER' $PA '$PWD'"
+'echo $LANG '$SHEL"L"
+"echo $LNG $SHEL '$sL'"
+"echo $LNG $SHEL "'$sL'
+'echo $LANG "$SHEL"L'
+  echo    $PATH | "echo $LANG "
+  echo "'$LANG'"
+  echo $
+echo "$LANG$" $LOGNAME$

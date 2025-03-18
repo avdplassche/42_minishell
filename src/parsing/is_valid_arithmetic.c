@@ -6,7 +6,7 @@
 int	is_valid_arithmetic(t_mini *mini)
 {
 	int		i;
-	char	set[8] = "!^%&+=-";
+	char	set[8] = "'\'';'";
 	t_quote	q;
 
 	i = -1;
