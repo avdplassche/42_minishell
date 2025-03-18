@@ -12,24 +12,29 @@ int	is_builtin_echo(t_cmd *cmd)
 
 	if (!cmd->arg_amount)
 		return (1);
-	j = 0;
+	j = 1;
+	i = 0;
+	if (cmd->args[1][i] == '-')
+		while (cmd->args[1][++i])
+			if (cmd->args[1][i] != 'n')
+				return(0);
 	while (cmd->args[++j])
 	{
-		i = 0;
-		if (cmd->args[j][i] == '-')
+		i = -1;
+		if (cmd->args[j][++i] != '-')
 		{
-			while (cmd->args[j][++i])
+			cmd->echo_n_index = j;
+			return (1);
+		}
+		while (cmd->args[j][++i])
+		{
+			if (cmd->args[j][i] != 'n')
 			{
-				if (cmd->args[j][i] != 'n' && j == 1)
-					return (0);
-				else if (cmd->args[j][i] != 'n' && j > 1)
-					break ;
+				cmd->echo_n_index = j;
+				return (1);
 			}
 		}
-		// j++;
 	}
-	printf("%d\n", j - 1);
-	cmd->echo_n_index = j - 1;
 	return (1);
 }
 
