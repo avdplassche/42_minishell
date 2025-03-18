@@ -27,4 +27,3 @@ char	*enquote_str(char *str, int q)
 	// free(str) ?
 	return (enquoted_str);
 }
-

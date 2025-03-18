@@ -80,11 +80,3 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-int	get_debug_fd()
-{
-	static int fd = -1;
-
-	if (fd == -1)
-		fd = open("./log/debug.log", O_CREAT | O_RDWR | O_TRUNC, 0664);
-	return (fd);
-}

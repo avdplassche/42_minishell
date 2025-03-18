@@ -23,6 +23,8 @@ endif
 
 vpath %.c $(DIR_SRC):$(DIR_SRC)/parsing
 vpath %.c $(DIR_SRC):$(DIR_SRC)/execution
+vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
+vpath %.c $(DIR_UTILS):$(DIR_UTILS)/ft_string_ptr
 
 #---------------------SOURCE------------------------#
 
@@ -66,7 +68,10 @@ UTILS				=	contain_char.c \
 						ft_strtrim.c \
 						ft_substr.c \
 						ft_strcpy.c \
-						get_next_line.c
+						get_debug_fd.c \
+						get_next_line.c \
+						print_string_array.c \
+						start_with.c
 
 BUILTINS			=	cd.c \
 						echo.c \
@@ -139,3 +144,9 @@ fclean: clean
 re: fclean all
 
 .PHONY: re clean fclean all
+
+
+#------------------------test---------------------------------#
+
+test: $(UTILS_OBJ) $(BUILTINS_OBJ) | $(DIR_BIN)
+	@$(CC) $(UTILS_OBJ) $(BUILTINS_OBJ) ./test_jojo/test.c $(CFLAGS) $(LIBRARIES) -o test.out

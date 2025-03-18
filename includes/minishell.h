@@ -125,6 +125,7 @@ char		*ft_strnstr(char *haystack, char *needle, size_t len);
 char		*ft_strtrim(char *s1, char *set);
 char		*ft_substr(char *s, unsigned int start, size_t len);
 void		*ft_calloc(size_t count, size_t size);
+char		*ft_strcpy(char *dest, char *src);
 
 				// GNL //
 
@@ -141,5 +142,11 @@ int			is_only_spaces(char *s);
 char		*epurstring(char *src);
 int			is_quote(char c);
 int			is_angle_bracket(char c);
+int			start_with(char *string, char *start_string);
+
+/* * * * * * * STRING_ARRAY_FUNCTIONS * * * */
+
+char		*find_string_in_array(char **string_array, char *string_to_find);
+void		print_string_array(char **string_array);
 
 #endif
