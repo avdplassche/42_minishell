@@ -65,6 +65,7 @@ UTILS				=	contain_char.c \
 						ft_strnstr.c \
 						ft_strtrim.c \
 						ft_substr.c \
+						ft_strcpy.c \
 						get_next_line.c
 
 BUILTINS			=	cd.c \

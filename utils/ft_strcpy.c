@@ -14,18 +14,6 @@ char	*ft_strcpy(char *dest, char *src)
 		cursor++;
 		src++;
 	}
+	cursor = '\0';
 	return (dest);
-}
-
-int main()
-{
-	char	str[] = "hello";
-	char	*str2;
-
-	str2 = (char *)malloc(sizeof(*str2) * (1024));
-	if (!str2)
-		return (1);
-	printf("%s\n", ft_strcpy(str2, str));
-	free(str2);
-	return (0);
 }
