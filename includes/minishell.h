@@ -19,13 +19,12 @@
 # include "structures.h"
 # include "debug.h"
 
-#define BUILTINS_STRING "echo, cd,env,exit,export,pwd,unset"
+#define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
 #define SPACES " 	\n"
 #define BUILTIN_AMOUNT 7
 #define BUFFER_SIZE 1
 #define DEBUGG_PARSING 1
 #define TEST_MODE 1
-
 
 
 # define RESET "\033[0m"
@@ -109,7 +108,7 @@ void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
 
 void		print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
-void		debug_parsing_print(t_mini *mini, t_cmd *cmd);
+void		debug_parsing_print(t_mini *mini, t_cmd cmd);
 
 /* * * * * * * * * *UTILS * * * * * * * * * */
 

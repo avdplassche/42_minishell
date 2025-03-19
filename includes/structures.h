@@ -22,7 +22,7 @@ typedef union u_pipe_ends
 typedef struct s_redir
 {
 	char		*pathname;
-	char		*eof; //maybe delete ans use pathname
+	char		*eof; //maybe delete and use pathname
 	int			type;
 }				t_redir;
 

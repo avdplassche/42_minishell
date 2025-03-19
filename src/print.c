@@ -80,15 +80,8 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	}
 }
 
-void	debug_parsing_print(t_mini *mini, t_cmd *cmd)
-{
-	int	i;
-
-	i = -1;
-	while (++i < mini->cmd_amount)
-	{
-		print_cmd(cmd[i], mini->line);
-		DEBUG("\n");
-	}
-	DEBUG("-----------------------------------------------\n");
-}
+// void	debug_parsing_print(t_mini *mini, t_cmd cmd)
+// {
+// 		print_cmd(cmd, mini->line);
+// 		DEBUG("\n");
+// }

@@ -1,0 +1,425 @@
+
+COMMAND LINE 1 > "echo $PATH"¶
+
+"echo $PATH" - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $PATH"
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $PATH"
+Sub_index : 6
+
+"echo "/home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" - Sub at -1
+   Command 1 : echo /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 2 > 'echo $PATH'¶
+
+'echo $PATH' - Sub at -1
+   Command 1 : echo $PATH¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 3 > "echo $LANG $PAGER $PA '$PWD'"¶
+
+"echo $LANG $PAGER $PA '$PWD'" - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $LANG $PAGER $PA '$PWD'"
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $LANG $PAGER $PA '$PWD'"
+Sub_index : 6
+
+"echo "en_US.UTF-8" $PAGER $PA '$PWD'" - Sub at 20
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" $PAGER $PA '$PWD'"
+Sub_index : 20
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" $PAGER $PA '$PWD'"
+Sub_index : 20
+
+"echo "en_US.UTF-8" "less" $PA '$PWD'" - Sub at 27
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" "less" $PA '$PWD'"
+Sub_index : 27
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" "less" $PA '$PWD'"
+Sub_index : 27
+
+"echo "en_US.UTF-8" "less"  '$PWD'" - Sub at 29
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" "less"  '$PWD'"
+Sub_index : 29
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" "less"  '$PWD'"
+Sub_index : 29
+
+"echo "en_US.UTF-8" "less"  '"/home/alvan-de/minishell"'" - Sub at -1
+   Command 1 : echo en_US.UTF-8 less  '/home/alvan-de/minishell'¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 4 > 'echo $LANG " $PAGER" $PA ' $PWD''¶
+
+'echo $LANG " $PAGER" $PA ' - Sub at -1
+$PWD'' - Sub at 0
+
+Translate dollar_sign : 
+Temp : $PWD''
+Sub_index : 0
+
+
+Replace env variable : 
+Temp : $PWD''
+Sub_index : 0
+
+'' - Sub at -1
+   Command 1 : echo $LANG " $PAGER" $PA ¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 1
+
+	  Arg[1] : ¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 5 > "echo $LANG '$PAGER' $PA '$PWD'"¶
+
+"echo $LANG '$PAGER' $PA '$PWD'" - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $LANG '$PAGER' $PA '$PWD'"
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $LANG '$PAGER' $PA '$PWD'"
+Sub_index : 6
+
+"echo "en_US.UTF-8" '$PAGER' $PA '$PWD'" - Sub at 21
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" '$PAGER' $PA '$PWD'"
+Sub_index : 21
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" '$PAGER' $PA '$PWD'"
+Sub_index : 21
+
+"echo "en_US.UTF-8" '"less"' $PA '$PWD'" - Sub at 29
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" '"less"' $PA '$PWD'"
+Sub_index : 29
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" '"less"' $PA '$PWD'"
+Sub_index : 29
+
+"echo "en_US.UTF-8" '"less"'  '$PWD'" - Sub at 31
+
+Translate dollar_sign : 
+Temp : "echo "en_US.UTF-8" '"less"'  '$PWD'"
+Sub_index : 31
+
+
+Replace env variable : 
+Temp : "echo "en_US.UTF-8" '"less"'  '$PWD'"
+Sub_index : 31
+
+"echo "en_US.UTF-8" '"less"'  '"/home/alvan-de/minishell"'" - Sub at -1
+   Command 1 : echo en_US.UTF-8 'less'  '/home/alvan-de/minishell'¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 6 > 'echo $LANG '$SHEL"L"¶
+
+'echo $LANG '$SHEL"L" - Sub at 13
+
+Translate dollar_sign : 
+Temp : 'echo $LANG '$SHEL"L"
+Sub_index : 13
+
+
+Replace env variable : 
+Temp : 'echo $LANG '$SHEL"L"
+Sub_index : 13
+
+'echo $LANG '"L" - Sub at -1
+   Command 1 : echo $LANG L¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 7 > "echo $LNG $SHEL '$sL'"¶
+
+"echo $LNG $SHEL '$sL'" - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $LNG $SHEL '$sL'"
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $LNG $SHEL '$sL'"
+Sub_index : 6
+
+"echo  $SHEL '$sL'" - Sub at 7
+
+Translate dollar_sign : 
+Temp : "echo  $SHEL '$sL'"
+Sub_index : 7
+
+
+Replace env variable : 
+Temp : "echo  $SHEL '$sL'"
+Sub_index : 7
+
+"echo   '$sL'" - Sub at 9
+
+Translate dollar_sign : 
+Temp : "echo   '$sL'"
+Sub_index : 9
+
+
+Replace env variable : 
+Temp : "echo   '$sL'"
+Sub_index : 9
+
+"echo   ''" - Sub at -1
+   Command 1 : echo   ''¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 8 > "echo $LNG $SHEL "'$sL'¶
+
+"echo $LNG $SHEL "'$sL' - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $LNG $SHEL "'$sL'
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $LNG $SHEL "'$sL'
+Sub_index : 6
+
+"echo  $SHEL "'$sL' - Sub at 7
+
+Translate dollar_sign : 
+Temp : "echo  $SHEL "'$sL'
+Sub_index : 7
+
+
+Replace env variable : 
+Temp : "echo  $SHEL "'$sL'
+Sub_index : 7
+
+"echo   "'$sL' - Sub at -1
+   Command 1 : echo   $sL¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 9 > 'echo $LANG "$SHEL"L'¶
+
+'echo $LANG "$SHEL"L' - Sub at -1
+   Command 1 : echo $LANG "$SHEL"L¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 10 > echo    $PATH | "echo $LANG "¶
+
+echo - Sub at -1
+$PATH - Sub at 0
+
+Translate dollar_sign : 
+Temp : $PATH
+Sub_index : 0
+
+
+Replace env variable : 
+Temp : $PATH
+Sub_index : 0
+
+"/home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" - Sub at -1
+"echo $LANG " - Sub at 6
+
+Translate dollar_sign : 
+Temp : "echo $LANG "
+Sub_index : 6
+
+
+Replace env variable : 
+Temp : "echo $LANG "
+Sub_index : 6
+
+"echo "en_US.UTF-8" " - Sub at -1
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
+
+	  Total redirections : 0
+
+
+   Command 2 : echo en_US.UTF-8 ¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 11 > echo "'$LANG'"¶
+
+echo - Sub at -1
+"'$LANG'" - Sub at 2
+
+Translate dollar_sign : 
+Temp : "'$LANG'"
+Sub_index : 2
+
+
+Replace env variable : 
+Temp : "'$LANG'"
+Sub_index : 2
+
+"'"en_US.UTF-8"'" - Sub at -1
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : 'en_US.UTF-8'¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 12 > echo $¶
+
+echo - Sub at -1
+$ - Sub at -1
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : $¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------

@@ -59,7 +59,7 @@ int	main(int argc, char **argv, char **envp)
 			mini.line = ft_strtrim(get_next_line(fd), SPACES);
 			mini.cmd_amount = count_cmd(&mini);
 			mini.cursor = 0;
-			DEBUG("\nCOMMAND LINE %d > %s¶\n\n", c + 1, mini.line);
+			DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, cmd);

@@ -38,11 +38,14 @@ char	*get_cmd_bin(t_mini *mini)
 	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
 	i = need_dollar_substitution(temp);
+	DEBUG("%s - Sub at %d\n", temp, i);
 	while (i > -1)
 	{
 		temp = translate_dollar_sign(mini, temp, i);
 		i = need_dollar_substitution(temp);
+		DEBUG("%s - Sub at %d\n", temp, i);
 	}
+	DEBUG("\n");
 	if (!contain_quotes(temp))
 		dest = ft_strdup(temp);
 	else
