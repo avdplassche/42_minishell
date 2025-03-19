@@ -1,156 +1,30 @@
-
-COMMAND LINE 1 ➤ "echo $PATH"¶
-
-   Command 1 : echo /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 2 ➤ 'echo $PATH'¶
-
-   Command 1 : echo $PATH¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 3 ➤ "echo $LANG $PAGER $PA '$PWD'"¶
-
-   Command 1 : echo en_US.UTF-8 less  '/home/alvan-de/minishell'¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 4 ➤ 'echo $LANG " $PAGER" $PA ' $PWD''¶
-
-   Command 1 : echo $LANG " $PAGER" $PA ¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 1
-
-	  Arg[1] : /home/alvan-de/minishell¶
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 5 ➤ "echo $LANG '$PAGER' $PA '$PWD'"¶
-
-   Command 1 : echo en_US.UTF-8 'less'  '/home/alvan-de/minishell'¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 6 ➤ 'echo $LANG '$SHEL"L"¶
-
-   Command 1 : echo $LANG L¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 7 ➤ "echo $LNG $SHEL '$sL'"¶
-
-   Command 1 : echo   ''¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 8 ➤ "echo $LNG $SHEL "'$sL'¶
-
-   Command 1 : echo   $sL¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 9 ➤ 'echo $LANG "$SHEL"L'¶
-
-   Command 1 : echo $LANG "$SHEL"L¶
-
-   Path : (null)¶
-
-	  Type : INVALID
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 10 ➤ echo    $PATH | "echo $LANG "¶
-
-   Command 1 : echo¶
+   Command 1 : ¶
 
    Path : (null)¶
 
 	  Type : BUILTIN
 
+	  Total Args : 0
+
+	  Total redirections : 1
+
+	  Redir[0] : 0 (HERE_DOC)¶
+
+   Command 2 : cat¶
+
+   Path : /usr/bin/cat¶
+
+	  Type : USER COMMAND
+
 	  Total Args : 1
 
-	  Arg[1] : /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
+	  Arg[1] : -ne¶
 
 	  Total redirections : 0
 
-   Command 2 : echo en_US.UTF-8 ¶
+
+-----------------------------------------------
+   Command 1 : exit¶
 
    Path : (null)¶
 
@@ -162,70 +36,37 @@ COMMAND LINE 10 ➤ echo    $PATH | "echo $LANG "¶
 
 
 -----------------------------------------------
-
-COMMAND LINE 11 ➤ echo "'$LANG'"¶
-
-   Command 1 : echo¶
+   Command 1 : exit¶
 
    Path : (null)¶
 
-	  Type : BUILTIN
+	  Type : INVALID
 
-	  Total Args : 1
-
-	  Arg[1] : 'en_US.UTF-8'¶
+	  Total Args : 0
 
 	  Total redirections : 0
 
 
 -----------------------------------------------
-
-COMMAND LINE 12 ➤ echo $¶
-
-   Command 1 : echo¶
+   Command 1 : exit¶
 
    Path : (null)¶
 
-	  Type : BUILTIN
+	  Type : INVALID
 
-	  Total Args : 1
-
-	  Arg[1] : $¶
+	  Total Args : 0
 
 	  Total redirections : 0
 
 
 -----------------------------------------------
-
-COMMAND LINE 13 ➤ echo "$LANG$" $LOGNAME$¶
-
-   Command 1 : echo¶
+   Command 1 : ./exit¶
 
    Path : (null)¶
 
-	  Type : BUILTIN
+	  Type : INVALID
 
-	  Total Args : 2
-
-	  Arg[1] : en_US.UTF-8$¶
-	  Arg[2] : alvan-de$¶
-
-	  Total redirections : 0
-
-
------------------------------------------------
-
-COMMAND LINE 14 ➤ echo "~~$LANG~~"¶
-
-   Command 1 : echo¶
-
-   Path : (null)¶
-
-	  Type : BUILTIN
-
-	  Total Args : 1
-
-	  Arg[1] : ~~en_US.UTF-8~~¶
+	  Total Args : 0
 
 	  Total redirections : 0
 
