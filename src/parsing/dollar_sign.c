@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int d_debug = 1;
+// int d_debug = 0;
 
 
 /** Cut the var name out of the envp line and return it into quote
@@ -64,6 +64,7 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_in
 	q.sgl = 0;
 	q.dbl = 0;
 	i = -1;
+	DEBUG("\nReplace env variable : \nTemp : %s\nSub_index : %d\n\n", temp1, sub_index);
 	while (++i < sub_index)
 		quote_enclosure_handle(temp1[i], &q);
 	if (envp_index < 0)
@@ -122,23 +123,14 @@ int	is_minishell_special_char(char c)
 }
 
 
-int	find_variable_last_index(char *temp, int j)
+int	find_variable_last_index(char *temp)
 {
-	t_quote	q;
-	int		i;
+	int		len;
 
-	i = -1;
-	q.dbl = 0;
-	q.sgl = 0;
-	while (++i < j)
-		quote_enclosure_handle(temp[i], &q);
-	while (temp[++i])
-	{
-		quote_enclosure_handle(temp[i], &q);
-		if (is_minishell_special_char(temp[i]))
-			return (i - 1);
-	}
-	return (j);
+	len = ft_strlen(temp) - 1;
+	while (is_minishell_special_char(temp[len]) || is_quote(temp[len]))
+		len--;
+	return (DEBUG("j = %d\n", len), len);
 }
 
 
@@ -149,13 +141,13 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	int		envp_index;
 	char	*dest;
 
-	if (d_debug == 1)
-		printf("\nReplace variable : \nTemp : %s\nSub_index : %d\nj : %d\n", temp, sub_index, j);
-	j = find_variable_last_index(temp, j);
-	printf("j = %d\n", j);
-	variable_name = ft_substr(temp, sub_index + 1, j - sub_index);
-	if (d_debug == 1)
-		printf("Variable name : %s\n\n", variable_name);
+	DEBUG("\nReplace variable : \nTemp : %s\nSub_index : %d\nj : %d\n\n", temp, sub_index, j);
+	// i = find_var_first_index(temp);
+	// j = find_variable_last_index(temp);
+	DEBUG("sub + 1 = %d | j - sub = %d - %d\n", sub_index + 1, j, sub_index);
+	// variable_name = ft_substr(temp, sub_index + 1, j - sub_index);
+	variable_name = ft_substr(temp, sub_index + 1, j);
+	DEBUG("Variable name : %s\n\n", variable_name);
 	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
 	free(variable_name);
 	dest = replace_env_variable(mini, temp, envp_index, sub_index);
@@ -191,8 +183,7 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 	t_quote	q;
 	char	*dest;
 
-	if (d_debug == 1)
-		printf("\nTranslate dollar_sign : \nTemp : %s\nSub_index : %d\n\n", temp, sub_index);
+		DEBUG("\nTranslate dollar_sign : \nTemp : %s\nSub_index : %d\n\n", temp, sub_index);
 	j = 0;
 	q.sgl = 0;
 	q.dbl = 0;
@@ -232,8 +223,6 @@ int	need_dollar_substitution(char *str)
 	while (str[++i])
 	{
 		quote_enclosure_handle(str[i], &q);
-		if (d_debug)
-			printf("line[%d] : %c | sq = %d| dq = %d\n", i, str[i], q.sgl, q.dbl);
 		if (str[i] == '$' && (!q.sgl))
 			if (str[i + 1] && str[i + 1] != ' ' && !(is_quote(str[i + 1])))
 				return (i);

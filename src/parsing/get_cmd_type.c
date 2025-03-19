@@ -15,9 +15,15 @@ int	is_builtin_echo(t_cmd *cmd)
 	j = 1;
 	i = 0;
 	if (cmd->args[1][i] == '-')
+	{
 		while (cmd->args[1][++i])
-			if (cmd->args[1][i] != 'n')
+		{
+			if (cmd->args[1][i] == ' ')
+				break ;
+			else if (cmd->args[1][i] != 'n')
 				return(0);
+		}
+	}
 	while (cmd->args[++j])
 	{
 		i = -1;
