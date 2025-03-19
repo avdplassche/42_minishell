@@ -19,7 +19,7 @@
 # include "structures.h"
 # include "debug.h"
 
-#define BUILTINS_STRING "echo, cd,env,exit,export,pwd,unset"
+#define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
 #define SPACES " 	\n"
 #define BUILTIN_AMOUNT 7
 #define BUFFER_SIZE 1
@@ -150,7 +150,9 @@ int			start_with(char *string, char *start_string);
 
 /* * * * * * * STRING_ARRAY_FUNCTIONS * * * */
 
-char		*find_string_in_array(char **string_array, char *string_to_find);
-void		print_string_array(char **string_array);
+char		*search_string_in_array(char **string_array, char *string_to_find);
+void		string_array_print(char **string_array);
+int			string_array_len(char **str);
+
 
 #endif

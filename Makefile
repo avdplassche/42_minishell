@@ -72,7 +72,9 @@ UTILS				=	contain_char.c \
 						ft_strcpy.c \
 						get_debug_fd.c \
 						get_next_line.c \
-						print_string_array.c \
+						count_array_elements.c \
+						display_string_array.c \
+						search_string_in_array.c \
 						start_with.c
 
 BUILTINS			=	cd.c \

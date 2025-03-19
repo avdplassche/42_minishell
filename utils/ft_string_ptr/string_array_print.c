@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-void	print_string_array(char **string_array)
+void	string_array_print(char **string_array)
 {
 	int	i;
 

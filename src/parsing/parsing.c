@@ -72,7 +72,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	}
 	debug_parsing_print(mini, cmd);
 	/* EXECUTION */
-	// exec_mini(mini, cmd);
+	exec_mini(mini, cmd);
 	free_cmd(mini, cmd);
 	return (0);
 }
