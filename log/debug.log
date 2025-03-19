@@ -1,11 +1,142 @@
 
-COMMAND LINE 1 ➤ echo hello   <file1.txt | grep "error"cat < input.txt > temp.txt | grep "error" > errors.log >> all_logs.log | sort >> sorted_errors.log¶
+COMMAND LINE 1 ➤ "echo $PATH"¶
 
-echo - Sub at -1
+   Command 1 : echo /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
 
-hello - Sub at -1
+   Path : (null)¶
 
-file1.txt - Sub at -1
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 2 ➤ 'echo $PATH'¶
+
+   Command 1 : echo $PATH¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 3 ➤ "echo $LANG $PAGER $PA '$PWD'"¶
+
+   Command 1 : echo en_US.UTF-8 less  '/home/alvan-de/minishell'¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 4 ➤ 'echo $LANG " $PAGER" $PA ' $PWD''¶
+
+   Command 1 : echo $LANG " $PAGER" $PA ¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 1
+
+	  Arg[1] : /home/alvan-de/minishell¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 5 ➤ "echo $LANG '$PAGER' $PA '$PWD'"¶
+
+   Command 1 : echo en_US.UTF-8 'less'  '/home/alvan-de/minishell'¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 6 ➤ 'echo $LANG '$SHEL"L"¶
+
+   Command 1 : echo $LANG L¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 7 ➤ "echo $LNG $SHEL '$sL'"¶
+
+   Command 1 : echo   ''¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 8 ➤ "echo $LNG $SHEL "'$sL'¶
+
+   Command 1 : echo   $sL¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 9 ➤ 'echo $LANG "$SHEL"L'¶
+
+   Command 1 : echo $LANG "$SHEL"L¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 10 ➤ echo    $PATH | "echo $LANG "¶
 
    Command 1 : echo¶
 
@@ -15,86 +146,24 @@ file1.txt - Sub at -1
 
 	  Total Args : 1
 
-	  Arg[1] : hello¶
+	  Arg[1] : /home/alvan-de/bin:/home/alvan-de/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin¶
 
-	  Total redirections : 1
+	  Total redirections : 0
 
-	  Redir[0] : file1.txt (IN REDIR)¶
+   Command 2 : echo en_US.UTF-8 ¶
 
-grep - Sub at -1
+   Path : (null)¶
 
-"error"cat - Sub at -1
-
-input.txt - Sub at -1
-
-temp.txt - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : errorcat¶
-
-	  Total redirections : 2
-
-	  Redir[0] : input.txt (IN REDIR)¶
-	  Redir[1] : temp.txt (OUT REDIR)¶
-
-grep - Sub at -1
-
-"error" - Sub at -1
-
-errors.log - Sub at -1
-
-all_logs.log - Sub at -1
-
-   Command 3 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : error¶
-
-	  Total redirections : 2
-
-	  Redir[0] : errors.log (OUT REDIR)¶
-	  Redir[1] : all_logs.log (OUT APPEND)¶
-
-sort - Sub at -1
-
-sorted_errors.log - Sub at -1
-
-   Command 4 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
+	  Type : INVALID
 
 	  Total Args : 0
 
-	  Total redirections : 1
-
-	  Redir[0] : sorted_errors.log (OUT APPEND)¶
+	  Total redirections : 0
 
 
 -----------------------------------------------
 
-COMMAND LINE 2 ➤ echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> file4 | tr 'a-z' 'A-Z' > uppercase.txt¶
-
-echo - Sub at -1
-
-"Hello World" - Sub at -1
-
-file1 - Sub at -1
-
-file2 - Sub at -1
+COMMAND LINE 11 ➤ echo "'$LANG'"¶
 
    Command 1 : echo¶
 
@@ -104,1016 +173,61 @@ file2 - Sub at -1
 
 	  Total Args : 1
 
-	  Arg[1] : Hello World¶
+	  Arg[1] : 'en_US.UTF-8'¶
 
-	  Total redirections : 2
+	  Total redirections : 0
 
-	  Redir[0] : file1 (OUT REDIR)¶
-	  Redir[1] : file2 (OUT REDIR)¶
 
-grep - Sub at -1
+-----------------------------------------------
 
-"Hello" - Sub at -1
+COMMAND LINE 12 ➤ echo $¶
 
-file3 - Sub at -1
+   Command 1 : echo¶
 
-file4 - Sub at -1
+   Path : (null)¶
 
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
+	  Type : BUILTIN
 
 	  Total Args : 1
 
-	  Arg[1] : Hello¶
+	  Arg[1] : $¶
 
-	  Total redirections : 2
+	  Total redirections : 0
 
-	  Redir[0] : file3 (OUT REDIR)¶
-	  Redir[1] : file4 (OUT APPEND)¶
 
-tr - Sub at -1
+-----------------------------------------------
 
-'a-z' - Sub at -1
+COMMAND LINE 13 ➤ echo "$LANG$" $LOGNAME$¶
 
-'A-Z' - Sub at -1
+   Command 1 : echo¶
 
-uppercase.txt - Sub at -1
+   Path : (null)¶
 
-   Command 3 : tr¶
-
-   Path : /usr/bin/tr¶
-
-	  Type : USER COMMAND
+	  Type : BUILTIN
 
 	  Total Args : 2
 
-	  Arg[1] : a-z¶
-	  Arg[2] : A-Z¶
-
-	  Total redirections : 1
-
-	  Redir[0] : uppercase.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 3 ➤ cut -d, -f2 < data.csv > column2.txt | sort > sorted_column2.txt >> sorted_unique.txt | uniq > final_output.txt¶
-
-cut - Sub at -1
-
--d, - Sub at -1
-
--f2 - Sub at -1
-
-data.csv - Sub at -1
-
-column2.txt - Sub at -1
-
-   Command 1 : cut¶
-
-   Path : /usr/bin/cut¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 2
-
-	  Arg[1] : -d,¶
-	  Arg[2] : -f2¶
-
-	  Total redirections : 2
-
-	  Redir[0] : data.csv (IN REDIR)¶
-	  Redir[1] : column2.txt (OUT REDIR)¶
-
-sort - Sub at -1
-
-sorted_column2.txt - Sub at -1
-
-sorted_unique.txt - Sub at -1
-
-   Command 2 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 2
-
-	  Redir[0] : sorted_column2.txt (OUT REDIR)¶
-	  Redir[1] : sorted_unique.txt (OUT APPEND)¶
-
-uniq - Sub at -1
-
-final_output.txt - Sub at -1
-
-   Command 3 : uniq¶
-
-   Path : /usr/bin/uniq¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : final_output.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 4 ➤ tac < input.txt > reversed.txt | grep "pattern" > filtered.txt >> final_output.txt | wc -l > line_count.txt¶
-
-tac - Sub at -1
-
-input.txt - Sub at -1
-
-reversed.txt - Sub at -1
-
-   Command 1 : tac¶
-
-   Path : /usr/bin/tac¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 2
-
-	  Redir[0] : input.txt (IN REDIR)¶
-	  Redir[1] : reversed.txt (OUT REDIR)¶
-
-grep - Sub at -1
-
-"pattern" - Sub at -1
-
-filtered.txt - Sub at -1
-
-final_output.txt - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : pattern¶
-
-	  Total redirections : 2
-
-	  Redir[0] : filtered.txt (OUT REDIR)¶
-	  Redir[1] : final_output.txt (OUT APPEND)¶
-
-wc - Sub at -1
-
--l - Sub at -1
-
-line_count.txt - Sub at -1
-
-   Command 3 : wc¶
-
-   Path : /usr/bin/wc¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : -l¶
-
-	  Total redirections : 1
-
-	  Redir[0] : line_count.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 5 ➤ cat << EOF > words1.txt > words2.txt | tr ' ' '\n' > split_words.txt | sort > sorted_words.txt >> word_freq.txt¶
-
-cat - Sub at -1
-
-EOF - Sub at -1
-
- - Sub at -1
-
-words1.txt - Sub at -1
-
-words2.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 3
-
-	  Redir[0] : EOF (HERE_DOC)¶
-	  Redir[1] : words1.txt (OUT REDIR)¶
-	  Redir[2] : words2.txt (OUT REDIR)¶
-
-tr - Sub at -1
-
-' ' - Sub at -1
-
-'\n' - Sub at -1
-
-split_words.txt - Sub at -1
-
-   Command 2 : tr¶
-
-   Path : /usr/bin/tr¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 2
-
-	  Arg[1] :  ¶
-	  Arg[2] : \n¶
-
-	  Total redirections : 1
-
-	  Redir[0] : split_words.txt (OUT REDIR)¶
-
-sort - Sub at -1
-
-sorted_words.txt - Sub at -1
-
-word_freq.txt - Sub at -1
-
-   Command 3 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 2
-
-	  Redir[0] : sorted_words.txt (OUT REDIR)¶
-	  Redir[1] : word_freq.txt (OUT APPEND)¶
-
-
------------------------------------------------
-
-COMMAND LINE 6 ➤ cat hello                  < file1.txt¶
-
-cat - Sub at -1
-
-hello - Sub at -1
-
-file1.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : hello¶
-
-	  Total redirections : 1
-
-	  Redir[0] : file1.txt (IN REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 7 ➤ cat     file1.txt  | grep "error"¶
-
-cat - Sub at -1
-
-file1.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : file1.txt¶
-
-	  Total redirections : 0
-
-grep - Sub at -1
-
-"error" - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : error¶
+	  Arg[1] : en_US.UTF-8$¶
+	  Arg[2] : alvan-de$¶
 
 	  Total redirections : 0
 
 
 -----------------------------------------------
 
-COMMAND LINE 8 ➤ cat < file1.txt | grep "error" | awk '{print $2}' < file2.txt | sort > output1.txt | tee result.txt > final_output.txt¶
+COMMAND LINE 14 ➤ echo "~~$LANG~~"¶
 
-cat - Sub at -1
+   Command 1 : echo¶
 
-file1.txt - Sub at -1
+   Path : (null)¶
 
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : file1.txt (IN REDIR)¶
-
-grep - Sub at -1
-
-"error" - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
+	  Type : BUILTIN
 
 	  Total Args : 1
 
-	  Arg[1] : error¶
+	  Arg[1] : ~~en_US.UTF-8~~¶
 
 	  Total redirections : 0
-
-awk - Sub at -1
-
-'{print $2}' - Sub at -1
-
-file2.txt - Sub at -1
-
-   Command 3 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : {print $2}¶
-
-	  Total redirections : 1
-
-	  Redir[0] : file2.txt (IN REDIR)¶
-
-sort - Sub at -1
-
-output1.txt - Sub at -1
-
-   Command 4 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : output1.txt (OUT REDIR)¶
-
-tee - Sub at -1
-
-result.txt - Sub at -1
-
-final_output.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : result.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : final_output.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 9 ➤ sort < data.txt | grep "important" < more_data.txt | awk '{print $1, $3}' | uniq > processed_output.txt | tee final_data.txt > final_report.txt¶
-
-sort - Sub at -1
-
-data.txt - Sub at -1
-
-   Command 1 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : data.txt (IN REDIR)¶
-
-grep - Sub at -1
-
-"important" - Sub at -1
-
-more_data.txt - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : important¶
-
-	  Total redirections : 1
-
-	  Redir[0] : more_data.txt (IN REDIR)¶
-
-awk - Sub at -1
-
-'{print $1, $3}' - Sub at -1
-
-   Command 3 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : {print $1, $3}¶
-
-	  Total redirections : 0
-
-uniq - Sub at -1
-
-processed_output.txt - Sub at -1
-
-   Command 4 : uniq¶
-
-   Path : /usr/bin/uniq¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : processed_output.txt (OUT REDIR)¶
-
-tee - Sub at -1
-
-final_data.txt - Sub at -1
-
-final_report.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : final_data.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : final_report.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 10 ➤ cat file1.txt | grep "data" < file2.txt | awk '{print $1}' < file3.txt | sort > sorted_data.txt | tee output.txt > final_output.txt¶
-
-cat - Sub at -1
-
-file1.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : file1.txt¶
-
-	  Total redirections : 0
-
-grep - Sub at -1
-
-"data" - Sub at -1
-
-file2.txt - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : data¶
-
-	  Total redirections : 1
-
-	  Redir[0] : file2.txt (IN REDIR)¶
-
-awk - Sub at -1
-
-'{print $1}' - Sub at -1
-
-file3.txt - Sub at -1
-
-   Command 3 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : {print $1}¶
-
-	  Total redirections : 1
-
-	  Redir[0] : file3.txt (IN REDIR)¶
-
-sort - Sub at -1
-
-sorted_data.txt - Sub at -1
-
-   Command 4 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : sorted_data.txt (OUT REDIR)¶
-
-tee - Sub at -1
-
-output.txt - Sub at -1
-
-final_output.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : output.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : final_output.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 11 ➤ curl -s http://example.com | sed 's/<[^>]*>//g' < raw_data.txt | sort | tee result.txt > clean_output.txt > processed_data.txt¶
-
-curl - Sub at -1
-
--s - Sub at -1
-
-http://example.com - Sub at -1
-
-   Command 1 : curl¶
-
-   Path : /usr/bin/curl¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 2
-
-	  Arg[1] : -s¶
-	  Arg[2] : http://example.com¶
-
-	  Total redirections : 0
-
-sed - Sub at -1
-
-'s/<[^>]*>//g' - Sub at -1
-
-raw_data.txt - Sub at -1
-
-   Command 2 : sed¶
-
-   Path : /usr/bin/sed¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : s/<[^>]*>//g¶
-
-	  Total redirections : 1
-
-	  Redir[0] : raw_data.txt (IN REDIR)¶
-
-sort - Sub at -1
-
-   Command 3 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 0
-
-tee - Sub at -1
-
-result.txt - Sub at -1
-
-clean_output.txt - Sub at -1
-
-processed_data.txt - Sub at -1
-
-   Command 4 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : result.txt¶
-
-	  Total redirections : 2
-
-	  Redir[0] : clean_output.txt (OUT REDIR)¶
-	  Redir[1] : processed_data.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 12 ➤ cat < file1.txt | grep "error" | awk '{print $3}' < file2.txt | sort > sorted_output.txt | tee final_output.txt > processed_output.txt¶
-
-cat - Sub at -1
-
-file1.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : file1.txt (IN REDIR)¶
-
-grep - Sub at -1
-
-"error" - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : error¶
-
-	  Total redirections : 0
-
-awk - Sub at -1
-
-'{print $3}' - Sub at -1
-
-file2.txt - Sub at -1
-
-   Command 3 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : {print $3}¶
-
-	  Total redirections : 1
-
-	  Redir[0] : file2.txt (IN REDIR)¶
-
-sort - Sub at -1
-
-sorted_output.txt - Sub at -1
-
-   Command 4 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : sorted_output.txt (OUT REDIR)¶
-
-tee - Sub at -1
-
-final_output.txt - Sub at -1
-
-processed_output.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : final_output.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : processed_output.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 13 ➤ sort < data.csv | awk -F',' '{print $1, $2}' < more_data.txt | grep "important" | uniq > cleaned_data.txt | tee final_clean.txt > result.txt¶
-
-sort - Sub at -1
-
-data.csv - Sub at -1
-
-   Command 1 : sort¶
-
-   Path : /usr/bin/sort¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : data.csv (IN REDIR)¶
-
-awk - Sub at -1
-
--F',' - Sub at -1
-
-'{print $1, $2}' - Sub at -1
-
-more_data.txt - Sub at -1
-
-   Command 2 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 2
-
-	  Arg[1] : -F,¶
-	  Arg[2] : {print $1, $2}¶
-
-	  Total redirections : 1
-
-	  Redir[0] : more_data.txt (IN REDIR)¶
-
-grep - Sub at -1
-
-"important" - Sub at -1
-
-   Command 3 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : important¶
-
-	  Total redirections : 0
-
-uniq - Sub at -1
-
-cleaned_data.txt - Sub at -1
-
-   Command 4 : uniq¶
-
-   Path : /usr/bin/uniq¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : cleaned_data.txt (OUT REDIR)¶
-
-tee - Sub at -1
-
-final_clean.txt - Sub at -1
-
-result.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : final_clean.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : result.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 14 ➤ cat < log.txt | grep "critical" | cut -d' ' -f2- < additional_logs.txt | awk '{print $1}' | tee filtered_logs.txt > final_log.txt¶
-
-cat - Sub at -1
-
-log.txt - Sub at -1
-
-   Command 1 : cat¶
-
-   Path : /usr/bin/cat¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 0
-
-	  Total redirections : 1
-
-	  Redir[0] : log.txt (IN REDIR)¶
-
-grep - Sub at -1
-
-"critical" - Sub at -1
-
-   Command 2 : grep¶
-
-   Path : /usr/bin/grep¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : critical¶
-
-	  Total redirections : 0
-
-cut - Sub at -1
-
--d' ' - Sub at -1
-
--f2- - Sub at -1
-
-additional_logs.txt - Sub at -1
-
-   Command 3 : cut¶
-
-   Path : /usr/bin/cut¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 2
-
-	  Arg[1] : -d ¶
-	  Arg[2] : -f2-¶
-
-	  Total redirections : 1
-
-	  Redir[0] : additional_logs.txt (IN REDIR)¶
-
-awk - Sub at -1
-
-'{print $1}' - Sub at -1
-
-   Command 4 : awk¶
-
-   Path : /usr/bin/awk¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : {print $1}¶
-
-	  Total redirections : 0
-
-tee - Sub at -1
-
-filtered_logs.txt - Sub at -1
-
-final_log.txt - Sub at -1
-
-   Command 5 : tee¶
-
-   Path : /usr/bin/tee¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : filtered_logs.txt¶
-
-	  Total redirections : 1
-
-	  Redir[0] : final_log.txt (OUT REDIR)¶
-
-
------------------------------------------------
-
-COMMAND LINE 15 ➤ < infile ls -l | wc -l > outfile¶
-
-infile - Sub at -1
-
-ls - Sub at -1
-
--l - Sub at -1
-
-   Command 1 : ls¶
-
-   Path : /usr/bin/ls¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : -l¶
-
-	  Total redirections : 1
-
-	  Redir[0] : infile (IN REDIR)¶
-
-wc - Sub at -1
-
--l - Sub at -1
-
-outfile - Sub at -1
-
-   Command 2 : wc¶
-
-   Path : /usr/bin/wc¶
-
-	  Type : USER COMMAND
-
-	  Total Args : 1
-
-	  Arg[1] : -l¶
-
-	  Total redirections : 1
-
-	  Redir[0] : outfile (OUT REDIR)¶
 
 
 -----------------------------------------------
