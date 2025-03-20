@@ -34,10 +34,6 @@ void	exec_mini(t_mini *mini, t_cmd *cmd)
 		f(cmd, mini);
 		return ;
 	}
-	else if (cmd->type == USER)
-	{
-
-	}
 }
 
 /*pid_t	exec_child(t_mini *mini, t_cmd cmd)

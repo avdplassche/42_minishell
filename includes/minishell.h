@@ -150,9 +150,10 @@ int			start_with(char *string, char *start_string);
 
 /* * * * * * * STRING_ARRAY_FUNCTIONS * * * */
 
-char		*search_string_in_array(char **string_array, char *string_to_find);
+char		*string_array_find_key(char **string_array, char *string_to_find);
 void		string_array_print(char **string_array);
 int			string_array_len(char **str);
+char 		*create_key_format(char *string_to_find, int variable_len);
 
 
 #endif

@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int	count_array_elements(char **str)
+int	string_array_len(char **str)
 {
 	int	i;
 

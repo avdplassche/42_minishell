@@ -1,12 +1,10 @@
-   Command 1 : echo¶
+   Command 1 : pwd¶
 
    Path : (null)¶
 
 	  Type : BUILTIN
 
-	  Total Args : 1
-
-	  Arg[1] : hello¶
+	  Total Args : 0
 
 	  Total redirections : 0
 
@@ -14,3 +12,4 @@
 -----------------------------------------------
 cmd type is 1
 entered the get_builtin function
+entered the pwd function

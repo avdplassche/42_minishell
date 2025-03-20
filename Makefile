@@ -56,6 +56,7 @@ UTILS				=	contain_char.c \
 						is_quote.c \
 						is_space.c \
 						is_angle_bracket.c \
+						start_with.c \
 						ft_atoi.c \
 						ft_calloc.c \
 						ft_itoa.c \
@@ -72,10 +73,10 @@ UTILS				=	contain_char.c \
 						ft_strcpy.c \
 						get_debug_fd.c \
 						get_next_line.c \
-						count_array_elements.c \
-						display_string_array.c \
-						search_string_in_array.c \
-						start_with.c
+						string_array_len.c \
+						string_array_print.c \
+						string_array_find_key.c 
+						
 
 BUILTINS			=	cd.c \
 						echo.c \
