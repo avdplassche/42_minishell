@@ -21,9 +21,6 @@ void	init_cmd(t_cmd *cmd, int i)
 
 int	is_valid_command(t_mini *mini)
 {
-	// int	err_char;
-
-
 	if (!(is_valid_quote(mini)))
 		return (printf("minishell: quote error\n---------------------------\n") , 0);
 	if (!is_valid_pipes(mini))
@@ -69,17 +66,12 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 				&& mini->line[mini->cursor] == ' ')
 				mini->cursor++;
 		}
+		print_cmd(cmd[i], mini->line);
 	}
-	debug_parsing_print(mini, cmd);
+	DEBUG("\n-----------------------------------------------\n");
 	/* EXECUTION */
 	exec_mini(mini, cmd);
 	free_cmd(mini, cmd);
 	return (0);
 }
 
-// int	get_function_pointer()
-// {
-
-
-
-// }

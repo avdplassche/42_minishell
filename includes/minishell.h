@@ -27,7 +27,6 @@
 #define TEST_MODE 1
 
 
-
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"
@@ -110,7 +109,7 @@ void		print_string(char *string, char *name);
 void		print_cmd(t_cmd cmd, char *cmd_line);
 
 void		print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
-void		debug_parsing_print(t_mini *mini, t_cmd *cmd);
+void		debug_parsing_print(t_mini *mini, t_cmd cmd);
 
 /* * * * * * * * * *UTILS * * * * * * * * * */
 

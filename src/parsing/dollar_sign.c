@@ -1,8 +1,41 @@
 
 #include "minishell.h"
 
-// int d_debug = 0;
 
+/** If the $ sign is followed by an invalid variable, this function delete the $VARIABLE
+ * @param temp1 the string to elag
+ * @param quote the quotes state
+ * @param i where the suppression is needed
+ * @return temp1  without $VARIABLE
+ */
+char	*empty_expand(char *temp1, t_quote q, int i)
+{
+	char	*temp2;
+	char	*dest;
+
+	temp2 = ft_substr(temp1, 0, i);
+	while (temp1[++i])
+		if (temp1[i] == ' ' || (temp1[i] == 34 && !q.dbl)
+			|| (temp1[i] == 39 && !q.sgl))
+			break ;
+	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
+	free(temp2);
+	return (dest);
+}
+
+
+int	is_minishell_punct(char c)
+{
+	if (c == '!' || ('#' <= c && c <= '&')
+		|| ('(' <= c && c <= '/')
+		|| c == ':' || c == ';' || c == '='
+		|| c == '?' || c == '@' || c == '['
+		|| c == ']' || c == '^' || c == '_'
+		|| c == '{' || c == '}' || c == '~')
+		return (1);
+	return (0);
+
+}
 
 /** Cut the var name out of the envp line and return it into quote
  * @param mini t_mini containing envp to trim
@@ -26,28 +59,6 @@ char	*trim_var_name(t_mini *mini, int index)
 	return (trimmed_str);
 }
 
-
-/** If the $ sign is followed by an invalid variable, this function delete the $VARIABLE
- * @param temp1 the string to elag
- * @param quote the quotes state
- * @param i where the suppression is needed
- * @return temp1  without $VARIABLE
- */
-char	*empty_expand(char *temp1, t_quote q, int i)
-{
-	char	*temp2;
-	char	*dest;
-
-	temp2 = ft_substr(temp1, 0, i);
-	while (temp1[++i])
-		if (temp1[i] == ' ' || (temp1[i] == 34 && !q.dbl)
-			|| (temp1[i] == 39 && !q.sgl))
-			break ;
-	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
-	free(temp2);
-	return (dest);
-}
-
 /** Replace $VAR by it's value and return new cleaned string
  * @param mini t_mini struct containind envp
  * @param temp1 string containing $VAR to substitut
@@ -64,7 +75,6 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_in
 	q.sgl = 0;
 	q.dbl = 0;
 	i = -1;
-	DEBUG("\nReplace env variable : \nTemp : %s\nSub_index : %d\n\n", temp1, sub_index);
 	while (++i < sub_index)
 		quote_enclosure_handle(temp1[i], &q);
 	if (envp_index < 0)
@@ -72,7 +82,7 @@ char	*replace_env_variable(t_mini *mini, char *temp1, int envp_index, int sub_in
 	temp2 = ft_strjoin(ft_substr(temp1, 0, i), trim_var_name(mini, envp_index));
 	while (temp1[++i] && temp1[i] != ' ')  //can maybe cause problem because of quotes
 	{
-		if (q.dbl && temp1[i] == 39)
+		if ((q.dbl && temp1[i] == 39) || is_minishell_punct(temp1[i]))
 			break ;
 		quote_enclosure_handle(temp1[i], &q);
 	}
@@ -109,31 +119,6 @@ int	get_envp_index(t_mini *mini, char *variable)
 	return (-1);
 }
 
-int	is_minishell_special_char(char c)
-{
-	if (c == '!' || ('#' <= c && c <= '&')
-		|| ('(' <= c && c <= '/')
-		|| c == ':' || c == ';' || c == '='
-		|| c == '?' || c == '@' || c == '['
-		|| c == ']' || c == '^' || c == '_'
-		|| c == '{' || c == '}' || c == '~')
-		return (1);
-	return (0);
-
-}
-
-
-int	find_variable_last_index(char *temp)
-{
-	int		len;
-
-	len = ft_strlen(temp) - 1;
-	while (is_minishell_special_char(temp[len]) || is_quote(temp[len]))
-		len--;
-	return (DEBUG("j = %d\n", len), len);
-}
-
-
 
 char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 {
@@ -141,13 +126,7 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	int		envp_index;
 	char	*dest;
 
-	DEBUG("\nReplace variable : \nTemp : %s\nSub_index : %d\nj : %d\n\n", temp, sub_index, j);
-	// i = find_var_first_index(temp);
-	// j = find_variable_last_index(temp);
-	DEBUG("sub + 1 = %d | j - sub = %d - %d\n", sub_index + 1, j, sub_index);
-	// variable_name = ft_substr(temp, sub_index + 1, j - sub_index);
 	variable_name = ft_substr(temp, sub_index + 1, j);
-	DEBUG("Variable name : %s\n\n", variable_name);
 	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
 	free(variable_name);
 	dest = replace_env_variable(mini, temp, envp_index, sub_index);
@@ -183,7 +162,6 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 	t_quote	q;
 	char	*dest;
 
-		DEBUG("\nTranslate dollar_sign : \nTemp : %s\nSub_index : %d\n\n", temp, sub_index);
 	j = 0;
 	q.sgl = 0;
 	q.dbl = 0;
@@ -194,11 +172,12 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 		return (replace_env_return_value(mini, temp, i));
 	while (temp[++i])
 	{
-		quote_enclosure_handle(temp[i], &q);
 		if ((!q.sgl && (is_quote(temp[i]) || temp[i] == ' '))
-			|| (q.dbl && (temp[i] == ' ' || temp[i] == 34)))
+			|| (q.dbl && (temp[i] == ' ' || temp[i] == 34))
+			|| (!q.sgl && is_minishell_punct(temp[i])))
 			break ;
 		j++;
+		quote_enclosure_handle(temp[i], &q);
 	}
 	dest = replace_variable(mini, temp, sub_index, j);
 	free(temp);
@@ -206,25 +185,25 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
 }
 
 /** Index where a sub is needed
- * @param str the string to scan
+ * @param temp the string to scan
  * @return index where to sub
  * @return -1 no need
 */
-int	need_dollar_substitution(char *str)
+int	need_dollar_substitution(char *temp)
 {
 	int		i;
 	t_quote	q;
 
-	if (!(contain_char(str, '$')))
+	if (!(contain_char(temp, '$')))
 		return (-1);
 	q.sgl = 0;
 	q.dbl = 0;
 	i = -1;
-	while (str[++i])
+	while (temp[++i])
 	{
-		quote_enclosure_handle(str[i], &q);
-		if (str[i] == '$' && (!q.sgl))
-			if (str[i + 1] && str[i + 1] != ' ' && !(is_quote(str[i + 1])))
+		quote_enclosure_handle(temp[i], &q);
+		if (temp[i] == '$' && (!q.sgl))
+			if (temp[i + 1] && temp[i + 1] != ' ' && !(is_quote(temp[i + 1])))
 				return (i);
 	}
 	return (-1);

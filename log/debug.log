@@ -1,4 +1,4 @@
-   Command 1 : pwd¶
+   Command 1 : ¶
 
    Path : (null)¶
 
@@ -6,10 +6,69 @@
 
 	  Total Args : 0
 
+	  Total redirections : 1
+
+	  Redir[0] : 0 (HERE_DOC)¶
+
+   Command 2 : cat¶
+
+   Path : /usr/bin/cat¶
+
+	  Type : USER COMMAND
+
+	  Total Args : 1
+
+	  Arg[1] : -ne¶
+
 	  Total redirections : 0
 
 
 -----------------------------------------------
-cmd type is 1
-entered the get_builtin function
-entered the pwd function
+   Command 1 : exit¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+   Command 1 : exit¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+   Command 1 : exit¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+   Command 1 : ./exit¶
+
+   Path : (null)¶
+
+	  Type : INVALID
+
+	  Total Args : 0
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
