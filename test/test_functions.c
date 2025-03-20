@@ -1,8 +1,43 @@
 
 
-#include "minishell.h"
-
+// #include "minishell.h"
+#include <dirent.h>
+#include <unistd.h>
+#include <stdio.h>
 /*This file is used to test if created functions are working as intended */
+
+
+
+int main (void)
+{
+	DIR * folder;
+	char buffer[256];
+	int i = -1;
+	char *dirname = getcwd(buffer, 256);
+	struct dirent *s_dir;
+
+	printf("f = %s\n", dirname);
+	folder = opendir(dirname);
+	while (1)
+	{
+		s_dir = readdir(folder);
+		if (!s_dir)
+			break ;
+		printf("%s\n", s_dir->d_name);
+		printf("%d\n", s_dir->d_type);
+		printf("\n");
+	}
+	// perror("stream : ");
+	return (0);
+}
+
+
+
+
+
+
+
+
 
 // size_t	ft_strlen(char *s)
 // {
