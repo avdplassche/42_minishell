@@ -7,13 +7,21 @@
 char *create_key_format(char *variable, int variable_len)
 {
 	char	*key_format_variable;
+	char	*current;
 	
-	key_format_variable = (char *)malloc(sizeof(char) * variable_len + 2);
+	key_format_variable = (char *)malloc(sizeof(char) * (variable_len + 2));
 	if (!key_format_variable)
 		return (NULL);
-	ft_strcpy(key_format_variable, variable);
-	key_format_variable[variable_len] = '=';
-	key_format_variable[variable_len + 1] = '\0';
+	current = key_format_variable;
+	while (*variable)
+	{
+		*current = *variable;
+		current++;
+		variable++;
+	}
+	*current = '=';
+	current++;
+	*(current) = '\0';
 	return (key_format_variable);
 }
 

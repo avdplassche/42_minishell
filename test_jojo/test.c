@@ -4,12 +4,30 @@
 static	void build_path(char **new_ptr, char *variable, char *path)
 {
 	char	*key_format_variable;
-	(void)new_ptr;
-	(void)path;
+	char	**temp;
+	char	*curr;
+	char	*curr2;
 
 	key_format_variable = create_key_format(variable, ft_strlen(variable));
 	printf("the key format of the variable is %s\n", key_format_variable);
-	//return (key_format_variable);
+	temp = new_ptr;
+	curr = *temp ;
+	curr2 = key_format_variable;
+	while (*key_format_variable)
+	{
+		*curr = *curr2;
+		curr++;
+		curr2++;
+	}
+	while (*path)
+	{
+		*curr = *path;
+		curr++;
+		path++;
+	}
+	*curr = '\0';
+	free(key_format_variable);
+	key_format_variable = NULL;
 }
 
 /*
@@ -17,7 +35,7 @@ static	void build_path(char **new_ptr, char *variable, char *path)
 	2. malloc for the new path variable
 	3. fill the array wiht the variable and the new path, this is the ifnalised pointer 
 */
-static void get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
+static char	*get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
 {
 	char		cwd[PATH_MAX];
 	char		*ptr_cwd;
@@ -30,13 +48,16 @@ static void get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
 		perror("get_cwd() failed\n");
 		mini->last_return = MALLOC_ERROR;
 	}
-	new_ptr = (char *)malloc(sizeof(char) * (ft_strlen(variable + 1) + ft_strlen(ptr_cwd) + 1));
+	new_ptr = (char *)malloc(sizeof(char) * (ft_strlen(variable) + 1 + ft_strlen(ptr_cwd) + 1));
 	if (!new_ptr)
 	{
 		mini->last_return = MALLOC_ERROR;
-		return ;
+		return (NULL);
 	}
 	build_path(&new_ptr, variable, ptr_cwd);
+	free(ptr_cwd);
+	printf("new_ptr is now worth %s\n", new_ptr);
+	return (new_ptr);
 }	
 
 /*
@@ -46,11 +67,26 @@ static void get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
 */
 void replace_in_double_array(t_mini *mini, t_cmd *cmd, char *variable)
 {
-	//char	*old_path_pointer;
-	//char	*new_path_pointer;
+	char	*key_format_pointer;
+	char	*new_path_pointer;
+	int		i;
 
-	//old_path_pointer = string_array_find_key(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
-	get_cwd(mini, cmd, variable);
+	key_format_pointer = string_array_find_key(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
+	new_path_pointer = get_cwd(mini, cmd, variable);
+	i =0;
+	while (mini->envp[i])
+	{
+		if (start_with(mini->envp[i], key_format_pointer))
+		{
+			free(mini->envp[i]);
+			mini->envp[i] = new_path_pointer;
+			free(key_format_pointer);
+			return ;
+		}
+		i++;
+	}
+	free(key_format_pointer);
+	
 }
 
 int main(int argc, char **argv, char **env)
