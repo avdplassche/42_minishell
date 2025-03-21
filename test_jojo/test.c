@@ -1,103 +1,51 @@
 
 #include "../includes/minishell.h"
 
-static	void build_path(char **new_ptr, char *variable, char *path)
+static void get_new_pwd(t_mini *mini, char *variable)
 {
-	char	*key_format_variable;
-	char	**temp;
-	char	*curr;
-	char	*curr2;
+	char	*new_cwd_ptr;
+	char	buffer[PATH_MAX + 1];
+	char	*key_formated_variable;
 
-	key_format_variable = create_key_format(variable, ft_strlen(variable));
-	printf("the key format of the variable is %s\n", key_format_variable);
-	temp = new_ptr;
-	curr = *temp ;
-	curr2 = key_format_variable;
-	while (*key_format_variable)
+	key_formated_variable = create_env_key_format(variable, ft_strlen(variable));
+	printf("key formated variable is %s\n", key_formated_variable);
+	new_cwd_ptr = getcwd(buffer, PATH_MAX + 1);
+	printf("new cwd is %s\n", new_cwd_ptr);
+	if (!new_cwd_ptr)
 	{
-		*curr = *curr2;
-		curr++;
-		curr2++;
+		mini->last_return = MALLOC_ERROR;
+		return ;
 	}
-	while (*path)
-	{
-		*curr = *path;
-		curr++;
-		path++;
-	}
-	*curr = '\0';
-	free(key_format_variable);
-	key_format_variable = NULL;
 }
 
-/*
-	1. get the current working directory
-	2. malloc for the new path variable
-	3. fill the array wiht the variable and the new path, this is the ifnalised pointer 
-*/
-static char	*get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
+
+void	string_array_replace(t_mini *mini, t_cmd *cmd, char *variable)
 {
-	char		cwd[PATH_MAX];
-	char		*ptr_cwd;
-	char		*new_ptr;
+	char	*old_pwd;
+	//char	*new_pwd;
 	(void)cmd;
 
-	ptr_cwd = getcwd(cwd, sizeof(cwd));
-	if (!ptr_cwd)
-	{
-		perror("get_cwd() failed\n");
-		mini->last_return = MALLOC_ERROR;
-	}
-	new_ptr = (char *)malloc(sizeof(char) * (ft_strlen(variable) + 1 + ft_strlen(ptr_cwd) + 1));
-	if (!new_ptr)
-	{
-		mini->last_return = MALLOC_ERROR;
-		return (NULL);
-	}
-	build_path(&new_ptr, variable, ptr_cwd);
-	free(ptr_cwd);
-	printf("new_ptr is now worth %s\n", new_ptr);
-	return (new_ptr);
-}	
-
-/*
-	1. get the old pointer 
-	2. once we have built the new ptr like the path variable, we replace it
-	3. if we do not find the old path pointer i need to do a string array push
-*/
-void replace_in_double_array(t_mini *mini, t_cmd *cmd, char *variable)
-{
-	char	*key_format_pointer;
-	char	*new_path_pointer;
-	int		i;
-
-	key_format_pointer = string_array_find_key(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
-	new_path_pointer = get_cwd(mini, cmd, variable);
-	i =0;
-	while (mini->envp[i])
-	{
-		if (start_with(mini->envp[i], key_format_pointer))
-		{
-			free(mini->envp[i]);
-			mini->envp[i] = new_path_pointer;
-			free(key_format_pointer);
-			return ;
-		}
-		i++;
-	}
-	free(key_format_pointer);
-	
+	old_pwd = string_array_find_key(mini->envp, variable);
+	printf("old pwd is worth %s\n", old_pwd);
+	//replace_old_pwd(mini, old_pwd);
+	get_new_pwd(mini, variable);
 }
+
+	//i have the env pointer given to me 
+	// i need to find the pwd pointer in the double array 
+	//this needs to be conserved in the OLD PATH variable 
+	// i need to create the new pointer by getting the variable with the equal sign and then adding the cwd result behind.
+	//once i have this pointer, i need to add the old pwd value as OLDPWD and replace the new one with PWD
 
 int main(int argc, char **argv, char **env)
 {
 	t_mini	mini;
 	t_cmd	cmd;
-	//char	**test;
+
 	(void)argc;
 	(void)argv;
 
 	mini.envp = env;
-	replace_in_double_array(&mini, &cmd, "PATH");
+	string_array_replace(&mini, &cmd, "PWD");
 	return (0);
 }

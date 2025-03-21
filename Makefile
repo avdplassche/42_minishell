@@ -27,8 +27,7 @@ vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/ft_string_ptr
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 
-#---------------------SOURCE------------------------#
-
+#---------------------SOURCE------------------------#s
 SRCS				=	main.c \
 						print.c \
 						init_mini.c \
@@ -45,6 +44,7 @@ SRCS				=	main.c \
 						is_valid_arithmetic.c \
 						execute_command.c \
 						ft_get_env.c \
+						create_env_key_format.c \
 						free.c
 
 UTILS				=	contain_char.c \
@@ -162,5 +162,7 @@ re: fclean all
 
 #------------------------test---------------------------------#
 
-test: $(UTILS_OBJ) $(BUILTINS_OBJ) | $(DIR_BIN)
-	@$(CC) $(UTILS_OBJ) $(BUILTINS_OBJ) ./test_jojo/test.c $(CFLAGS) $(LIBRARIES) -o test.out
+SRC_WITHOUT_MAIN = $(filter-out $(DIR_BIN)/src/main.o, $(SRC_OBJ))
+
+test: $(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ) | $(DIR_BIN)
+	@$(CC) $(SRC_WITHOUT_MAIN) $(UTILS_OBJ) $(BUILTINS_OBJ) ./test_jojo/test.c $(CFLAGS) $(LIBRARIES) -o test.out
