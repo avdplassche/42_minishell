@@ -3,8 +3,10 @@
 
 #include "../includes/minishell.h"
 
-// int	is_valid_sub(struct dirent *s_dir)
+// int	is_valid_sub(struct dirent *s_dir, char *token)
 // {
+// 	if (s_dir->d_name[0] == '.')
+// 		return (0);
 
 
 
@@ -37,30 +39,43 @@ char	*get_wildcard_directory(char *temp, int i)
 	readdir
 */
 
+char	*tokenize_wildcard(char *temp, int start)
+{
+	int		end;
+
+	end = start;
+	while (--start >= 0 && temp[start] != '/')
+		start--;
+	start ++;
+	while (temp[end] && temp[end] != '/')
+		end++;
+	return (ft_substr(temp, start, end - start));
+}
+
 char	*substitute_wildcard(char *temp, int i)
 {
-	DIR		*folder;
-	char	*dirname;
-	struct dirent *s_dir;
+	DIR				*folder;
+	char			*dirname;
+	char 			*token;
+	struct dirent	*s_dir;
 
 	dirname = get_wildcard_directory(temp, i);
 	DEBUG("Dirname : %s\n\n", dirname);
 	folder = opendir(dirname);
 	s_dir = readdir(folder);
+	token = tokenize_wildcard(temp, i);
+	DEBUG("Token : %s\n\n", token);
 	while (1)
 	{
 		s_dir = readdir(folder);
 		if (!s_dir)
 			break ;
-		// if (is_valid_sub(s_dir))
+		// if (is_valid_sub(s_dir, token))
 		DEBUG("Name : %s\n", s_dir->d_name);
 		DEBUG("Type : %d\n", s_dir->d_type);
-
 		DEBUG("\n");
 	}
-	// open
-
-
+	closedir(folder);
 	return (temp);
 }
 
@@ -98,7 +113,7 @@ char	*wildcard_handle(char *temp)
 	i = need_wildcard_substitution(temp);
 	if (i == -1)
 		return (temp);
-	while (i != -1 && ++j <= 3)
+	while (i != -1 && ++j <= 1)
 	{
 		temp = substitute_wildcard(temp, i);
 		i = need_wildcard_substitution(temp);
