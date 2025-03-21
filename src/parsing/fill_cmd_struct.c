@@ -14,6 +14,7 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	int	i;
 	int	j;
 
+	i = 0;
 	j = init_redirections(mini, cmd);
 	if (j < 0)
 		return (MALLOC_ERROR);

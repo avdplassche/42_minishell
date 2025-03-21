@@ -11,11 +11,11 @@ typedef struct	s_fd_backup
 typedef union u_pipe_ends
 {
 	int		fildes[2];
-	struct 
+	struct
 	{
 		int		read;
 		int		write;
-	};	
+	};
 }			t_pipe_ends;
 
 
@@ -85,7 +85,7 @@ typedef struct s_cmd
 	pid_t		pid;
 }				t_cmd;
 
-/** A pointer to function for the builtin function 
+/** A pointer to function for the builtin function
  * @param t_builtin_func contains the signature of all the builtin functions
  */
 typedef int (*t_builtin_func)(t_cmd *, t_mini *);

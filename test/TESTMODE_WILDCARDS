@@ -1,11 +1,13 @@
+echo /*
+echo ../../*
+echo ../*
 echo *
 echo ***
 echo *st
 echo te*
 echo t***t
 echo */
-echo /*
 echo */*.c
 echo */*/*
-echo ../*
 echo ../*/*
+echo */..
