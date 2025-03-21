@@ -16,7 +16,7 @@ char	*string_array_find_key(char **string_array, char *string_to_find)
 		return (NULL);
 	i = 0;
 	variable_len = ft_strlen(string_to_find);
-	search_str = create_env_key_format(string_to_find, variable_len);
+	search_str = string_array_create_key(string_to_find, variable_len);
 	if (!search_str)
 		return (NULL);
 	while (string_array[i])

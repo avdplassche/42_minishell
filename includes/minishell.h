@@ -77,7 +77,6 @@ int			init_arguments(t_mini *mini, t_cmd *cmd);
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char	*var_name);
-char		*create_env_key_format(char *variable, int variable_len);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
@@ -153,7 +152,8 @@ int			start_with(char *string, char *start_string);
 char		*string_array_find_key(char **string_array, char *string_to_find);
 void		string_array_print(char **string_array);
 int			string_array_len(char **str);
-char 		*create_env_key_format(char *string_to_find, int variable_len);
+char 		*string_array_create_key(char *string_to_find, int variable_len);
+char		*string_array_create_key(char *variable, int variable_len);
 
 
 #endif

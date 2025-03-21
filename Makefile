@@ -44,7 +44,6 @@ SRCS				=	main.c \
 						is_valid_arithmetic.c \
 						execute_command.c \
 						ft_get_env.c \
-						create_env_key_format.c \
 						free.c
 
 UTILS				=	contain_char.c \
@@ -75,6 +74,7 @@ UTILS				=	contain_char.c \
 						get_next_line.c \
 						string_array_len.c \
 						string_array_print.c \
+						string_array_create_key.c \
 						string_array_find_key.c 
 						
 

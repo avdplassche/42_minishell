@@ -7,7 +7,7 @@ static void get_new_pwd(t_mini *mini, char *variable)
 	char	buffer[PATH_MAX + 1];
 	char	*key_formated_variable;
 
-	key_formated_variable = create_env_key_format(variable, ft_strlen(variable));
+	key_formated_variable = string_array_create_key(variable, ft_strlen(variable));
 	printf("key formated variable is %s\n", key_formated_variable);
 	new_cwd_ptr = getcwd(buffer, PATH_MAX + 1);
 	printf("new cwd is %s\n", new_cwd_ptr);

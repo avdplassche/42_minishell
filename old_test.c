@@ -8,7 +8,7 @@ static	void build_path(char **new_ptr, char *variable, char *path)
 	char	*curr;
 	char	*curr2;
 
-	key_format_variable = create_env_key_format(variable, ft_strlen(variable));
+	key_format_variable = string_array_create_key(variable, ft_strlen(variable));
 	printf("the key format of the variable is %s\n", key_format_variable);
 	temp = new_ptr;
 	curr = *temp ;

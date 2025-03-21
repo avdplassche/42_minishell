@@ -1,7 +1,10 @@
 
 #include "minishell.h"
 
-char *create_env_key_format(char *variable, int variable_len)
+/*
+	gets the path variable name for ex "PATH" and mallocs to make it into "PATH="
+*/
+char *string_array_create_key(char *variable, int variable_len)
 {
 	char	*key_format_variable;
 	int		i;
