@@ -1,9 +1,15 @@
 
 #include "minishell.h"
 
-/*
-	gets the path variable name for ex "PATH" and mallocs to make it into "PATH="
-*/
+/**
+ * To create the key format of the variable in the env array
+ * @param variable is the name of the variable like "PATH"
+ * @param variablelen is the length (int) of the variable
+ * @return - the new string with the equal sign "PATH=""
+ *
+ * @return - NULL if malloc error 
+ * @note mainly used in execution 
+ */
 char *string_array_create_key(char *variable, int variable_len)
 {
 	char	*key_format_variable;

@@ -1,6 +1,4 @@
 
-
-
 #include "minishell.h"
 
 /** Check if string is composed of spaces only

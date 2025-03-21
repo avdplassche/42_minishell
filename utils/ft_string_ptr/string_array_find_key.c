@@ -1,11 +1,15 @@
 
 #include "minishell.h"
 
-/*
-	1. send the variable to become a key format (PATH --> PATH=)
-	2. strcmp inside the char **env until found
-	3. return the pointer that holds the address of the given path 
-*/
+/**
+ * search for a pointer in an array of pointer and return it if it is found.
+ * @param string_array is the array of pointers to search in
+ * @param string_to_find is the name of the variable, in this case "PATH"
+ * @return is a pointer to char to the corresponding string. 
+ *
+ * @return none, void
+ * @note mainly used in execution 
+ */
 char	*string_array_find_key(char **string_array, char *string_to_find)
 {
 	int		i;

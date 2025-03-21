@@ -75,6 +75,7 @@ UTILS				=	contain_char.c \
 						string_array_len.c \
 						string_array_print.c \
 						string_array_create_key.c \
+						string_build.c \
 						string_array_find_key.c 
 						
 

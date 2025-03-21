@@ -1,36 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/21 17:40:39 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-typedef struct	s_fd_backup
+typedef struct s_fd_backup
 {
-	int		stdin_backup;
-	int		stdout_backup;
-	int		stderr_backup;
-}				t_fd_backup;
+	int	stdin_backup;
+	int	stdout_backup;
+	int	stderr_backup;
+}	t_fd_backup;
 
 typedef union u_pipe_ends
 {
-	int		fildes[2];
-	struct 
+	int	fildes[2];
+	struct
 	{
-		int		read;
-		int		write;
-	};	
-}			t_pipe_ends;
-
+		int	read;
+		int	write;
+	};
+}	t_pipe_ends;
 
 typedef struct s_redir
 {
-	char		*pathname;
-	char		*eof; //maybe delete and use pathname
-	int			type;
-}				t_redir;
+	char	*pathname;
+	char	*eof; //maybe delete
+	int		type;
+}	t_redir;
 
 typedef struct s_quote
 {
-	int			sgl;
-	int			dbl;
-}				t_quote;
+	int	sgl;
+	int	dbl;
+}	t_quote;
 
 /** A structure containing minishell related variables
  * @param envp local environment variables (execve's 3rd parameter for ex)
@@ -54,7 +64,6 @@ typedef struct s_mini
 	bool		error;
 	t_fd_backup	*fd_backup;
 }				t_mini;
-
 
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute

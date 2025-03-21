@@ -1,4 +1,3 @@
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -19,13 +18,12 @@
 # include "structures.h"
 # include "debug.h"
 
-#define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
-#define SPACES " 	\n"
-#define BUILTIN_AMOUNT 7
-#define BUFFER_SIZE 1
-#define DEBUGG_PARSING 1
-#define TEST_MODE 1
-
+# define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
+# define SPACES " \t\n"
+# define BUILTIN_AMOUNT 7
+# define BUFFER_SIZE 1
+# define DEBUGG_PARSING 1
+# define TEST_MODE 1
 
 # define RESET "\033[0m"
 # define RED "\033[31m"
@@ -37,16 +35,14 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
+// int g_sig;
 
-// int	g_sig;
-
-
-/* * * * * * * * * *INIT * * * * * * * * * */
+/* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
 int			init_mini(t_mini *mini, char **envp);
 int			count_cmd(t_mini *mini);
 
-/* * * * * * * * * PARSING * * * * * * * * */
+/* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
 int			parsing(t_mini *mini, t_cmd *cmd);
 
@@ -61,7 +57,6 @@ char		*clean_command_quotes(char *str);
 char		*clean_envp_quotes(char *str);
 char		last_quote(char *str, int i);
 
-
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
@@ -72,36 +67,35 @@ int			count_arguments(t_mini *mini);
 int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);
 
-
-/* * * * * * * * * EXECUTION * * * * * * * * */
+/* * * * * * * * * * * * * * EXECUTION * * * * * * * * * * * * * * * */
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
-char		*ft_get_env(t_mini *mini, char	*var_name);
+char		*ft_get_env(t_mini *mini, char *var_name);
 
-/* * * * * * * * * BUILTINS * * * * * * * * */
+/* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
 int			builtin_cd(t_cmd *cmd, t_mini *mini);
 int			builtin_echo(t_cmd *cmd, t_mini *mini);
-//int			builtin_env(t_cmd *cmd, t_mini *mini);
-//int			builtin_exit(t_cmd *cmd, t_mini *mini);
-//int			builtin_export(t_cmd *cmd, t_mini *mini);
+// int			builtin_env(t_cmd *cmd, t_mini *mini);
+// int			builtin_exit(t_cmd *cmd, t_mini *mini);
+// int			builtin_export(t_cmd *cmd, t_mini *mini);
 int			builtin_pwd(t_cmd *cmd, t_mini *mini);
-//int			builtin_unset(t_cmd *cmd, t_mini *mini);
+// int			builtin_unset(t_cmd *cmd, t_mini *mini);
 
-/* * * * * * * * * * FREE * * * * * * * * * */
+/* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 
 void		free_double_pointer(char **str);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
 void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
-/* * * * * * * * * ERRORS * * * * * * * * * */
+/* * * * * * * * * * * * * * ERRORS * * * * * * * * * * * * * * * * */
 
 int			is_valid_pipes(t_mini *mini);
 int			is_valid_redirections(t_mini *mini);
 int			is_valid_arithmetic(t_mini *mini);
 
-/* * * * * * * * * *PRINT * * * * * * * * * */
+/* * * * * * * * * * * * * * PRINT * * * * * * * * * * * * * * * * * */
 
 void		print_unexpected_token(char *token);
 void		print_char_table(char **string, char *name);
@@ -111,9 +105,9 @@ void		print_cmd(t_cmd cmd, char *cmd_line);
 void		print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
 void		debug_parsing_print(t_mini *mini, t_cmd cmd);
 
-/* * * * * * * * * *UTILS * * * * * * * * * */
+/* * * * * * * * * * * * * * UTILS * * * * * * * * * * * * * * * * * */
 
-				// LIBFT //
+				/* LIBFT */
 
 int			ft_atoi(char *str);
 char		*ft_itoa(int n);
@@ -130,11 +124,11 @@ char		*ft_substr(char *s, unsigned int start, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strcpy(char *dest, char *src);
 
-				// GNL //
+				/* GNL */
 
 char		*get_next_line(int fd);
 
-				// XTRA //
+				/* XTRA */
 
 bool		contain_char(char *s, char c);
 bool		contain_quotes(char *s);
@@ -147,13 +141,12 @@ int			is_quote(char c);
 int			is_angle_bracket(char c);
 int			start_with(char *string, char *start_string);
 
-/* * * * * * * STRING_ARRAY_FUNCTIONS * * * */
+/* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
 char		*string_array_find_key(char **string_array, char *string_to_find);
 void		string_array_print(char **string_array);
 int			string_array_len(char **str);
-char 		*string_array_create_key(char *string_to_find, int variable_len);
 char		*string_array_create_key(char *variable, int variable_len);
-
+void		string_build(char **dest_ptr, char *prefix, char *suffix);
 
 #endif
