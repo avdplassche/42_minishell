@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 10:39:05 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/22 10:54:49 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/22 13:49:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	string_array_replace(t_mini *mini, char	*env_key, char *path_replace)
 			free(mini->envp[i]);
 			mini->envp[i] = path_replace;
 			printf("full path rteplacement is %s and the mini->envp[i] is %s\n", path_replace, mini->envp[i]);
-			free(path_replace);
 			return ;
 		}
 		i++;
 	}
+	free(path_replace);
 }
 
 static char	*get_new_path(t_mini *mini, char *env_key, char *new_path)
@@ -43,17 +43,17 @@ static char	*get_new_path(t_mini *mini, char *env_key, char *new_path)
 		return (NULL);
 	}
 	string_build(&full_new_path, env_key, new_path);
-	printf("in get_new_path, full new path is %s\n");
+	printf("in get_new_path, full new path is %s\n", full_new_path);
 	return (full_new_path);
 }
 
-char	*get_current_workdir(void)
+static char	*get_current_workdir(t_mini *mini)
 {
 	char	buffer[PATH_MAX + 1];
 	char	*new_cwd;
 	
 	new_cwd = getcwd(buffer, PATH_MAX + 1);
-	if (!new_cwd_path)
+	if (!new_cwd)
 	{
 		mini->last_return = MALLOC_ERROR;
 		return (NULL);
@@ -61,23 +61,23 @@ char	*get_current_workdir(void)
 	return (new_cwd);
 }
 
-void	update_pwd_env(t_mini *mini, t_cmd *cmd, char *env_var)
+static void	update_pwd_env(t_mini *mini, t_cmd *cmd, char *env_var)
 {
-	char	*old_pwd_path;
+	//char	*old_pwd_path;
 	char	*full_new_path;
 	char	*env_key_variable;
 	char	*new_cwd;
 	(void)cmd;
 	
 	env_key_variable = string_array_create_key(env_var, ft_strlen(env_var));
-	new_cwd = get_current_workdir();
+	new_cwd = get_current_workdir(mini);
 	full_new_path = get_new_path(mini, env_key_variable, new_cwd); //find the path of the new working directory
-	old_pwd_path = string_array_find_string(mini->envp, env_var);
+	//old_pwd_path = string_array_find_string(mini->envp, env_var);
 	//if (!old_pwd_path)
 	//{
 		//string_array_push(mini, cmd, full_new_path);
 	//}
-	string_array_replace(mini, env_key_variable);
+	string_array_replace(mini, env_key_variable, full_new_path);
 }
 
 int main(int argc, char **argv, char **env)
@@ -88,8 +88,10 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	
-	mini.envp = env;
-	update_pwd(&mini, &cmd, "PWD");
+	if (init_mini(&mini, env) == -1)
+		return (EXIT_FAILURE);
+	update_pwd_env(&mini, &cmd, "PWD");
+	free_mini(&mini);
 	return (0);
 }
 
