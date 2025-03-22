@@ -4,9 +4,9 @@
 int	builtin_cd(t_cmd *cmd, t_mini *mini)
 {
 	char	*path;
-	//char	*old_pwd;
+	char	*old_pwd;
 
-	//old_pwd = get_current_workdir(mini);
+	old_pwd = get_current_workdir(mini);
 	path = cmd->args[1];
 	if (path == NULL)
 	{
@@ -27,7 +27,10 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 	if (chdir(path) == 0)
 	{
 		update_pwd_env(mini, "PWD");
-		//if (old_pwd)
+		if (old_pwd)
+		{
+			update_old_pwd_env(mini, "OLDPWD);
+		}
 		mini->last_return = 0;
 	}
 	else
@@ -35,6 +38,6 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 		printf("Minishell: cd: %s: No such file in directory\n", path);
 		mini->last_return = CMD_NOT_FOUND;
 	}
-	//free(old_pwd);
+	free(old_pwd);
 	return (mini->last_return);
 }

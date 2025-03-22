@@ -52,6 +52,7 @@ SRCS				=	main.c \
 						is_valid_arithmetic.c \
 						execute_command.c \
 						ft_get_env.c \
+						set_env.c \
 						get_current_workdir.c \
 						get_new_path.c \
 						update_pwd_env.c \
@@ -88,7 +89,6 @@ UTILS				=	contain_char.c \
 						string_array_len.c \
 						string_array_print.c \
 						string_array_push.c \
-						string_array_replace.c \
 						string_build.c 
 						
 

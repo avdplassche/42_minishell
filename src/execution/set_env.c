@@ -2,15 +2,15 @@
 #include "minishell.h"
 
 /**
- * Replaces the pointer inside the array of pointers if it starts with a given prefix
- * @param mini is the struct mini (cmd is not needed here)
+ * Replaces the pointer inside the array of pointers if it starts with a given key
+ * @parenv_rows the struct mini (cmd is not needed here)
  * @param env_key is 
  * @return - the new string with the equal sign "PATH=""
  *
  * @return - NULL if malloc error 
  * @note mainly used in execution 
  */
-int	string_array_replace(t_mini *mini, char *prefix, char *new_value)
+int	set_env(t_mini *mini, char *key, char *env_row)
 {
 	int	i;
 
@@ -18,17 +18,18 @@ int	string_array_replace(t_mini *mini, char *prefix, char *new_value)
 	i = 0;
 	while (mini->envp[i])
 	{
-		if (start_with(mini->envp[i], prefix))
+		if (start_with(mini->envp[i], key))
 		{
-			free(mini->envp[i]);
-			mini->envp[i] = new_value;
+	mini->envp[i]);
+			mini->envp[i] = env_row;
 			DEBUG("mini->envp[i] is worth %s", mini->envp[i]);
 			mini->last_return = 0;
 			return (0);
 		}
 		i++;
 	}
-	free(new_value);
+	//string push if it does not work
+	free(env_row);
 	mini->last_return = CMD_NOT_FOUND;
 	return (CMD_NOT_FOUND);
 }
