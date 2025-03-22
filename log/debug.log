@@ -14,3 +14,5 @@
 -----------------------------------------------
 cmd type is 1
 entered the get_builtin function
+the path to replace with is PWD=/Users/josephinerandet/42/cercle_3
+mini->envp[i] is worth PWD=/Users/josephinerandet/42/cercle_3

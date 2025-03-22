@@ -14,14 +14,15 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 		if (path == NULL)
 		{
 			printf("Minishell: cd: HOME not set\n");
-			return (1);
+			mini->last_return = CMD_NOT_FOUND;
+			return (mini->last_return);
 		}
 	}
 	if (string_array_len(cmd->args) > 2)
 	{
 		printf("Minishell: cd: too many arguments\n");
-		//free(old_pwd);
-		return (-1);
+		mini->last_return = CMD_NOT_FOUND;
+		return (mini->last_return);
 	}
 	if (chdir(path) == 0)
 	{
