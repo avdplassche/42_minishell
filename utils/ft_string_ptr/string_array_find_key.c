@@ -10,7 +10,7 @@
  * @return none, void
  * @note mainly used in execution 
  */
-char	*string_array_find_key(char **string_array, char *string_to_find)
+char	*string_array_find_string(char **string_array, char *string_to_find)
 {
 	int		i;
 	char	*search_str;

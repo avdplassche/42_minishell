@@ -162,8 +162,8 @@
       "index": "aS",
       "roundness": null,
       "seed": 595626775,
-      "version": 308,
-      "versionNonce": 1297460921,
+      "version": 318,
+      "versionNonce": 1597945534,
       "isDeleted": false,
       "boundElements": [
         {
@@ -171,7 +171,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1742378898411,
+      "updated": 1742589625163,
       "link": null,
       "locked": false,
       "text": "/** A structure containing minishell related variables\n * @param envp local environment variables (execve's 3rd parameter for ex)\n * @param builtins list of builtins functions (present in builtins dir)\n * @param paths list of path directories to look for binaries\n * @param line current prompt to work with\n * @param cmd_amount amount of commands in the command_line (also\namount of pipes)\n * @param last_return sig return of the last cmd (needed for $?)\n * @param cursor used to remember where we stopped the parsing\n * @param error to be configured\n */\ntypedef struct s_mini\n{\n        char                **envp;\n        char                **builtins;\n        char                **paths;\n        char                *line;\n        int                        cmd_amount;\n        int                        last_return;\n        int                        cursor;\n        bool                error;\n        t_fd_backup        *fd_backup;\n}                                t_mini;",
@@ -1459,10 +1459,10 @@
     {
       "id": "Yuj9RtJVtRxm5Hy6tE80i",
       "type": "arrow",
-      "x": 712.1638002101784,
-      "y": -365.27314449079347,
-      "width": 138.32504272460938,
-      "height": 6.112492879231809,
+      "x": 768.1389602165353,
+      "y": -367.7466500846714,
+      "width": 82.34988271825239,
+      "height": 3.638987285353892,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "#a5d8ff",
@@ -1478,11 +1478,11 @@
         "type": 2
       },
       "seed": 1746574615,
-      "version": 33,
-      "versionNonce": 252400089,
+      "version": 44,
+      "versionNonce": 1173696254,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742378898411,
+      "updated": 1742589625165,
       "link": null,
       "locked": false,
       "points": [
@@ -1491,8 +1491,8 @@
           0
         ],
         [
-          138.32504272460938,
-          -6.112492879231809
+          82.34988271825239,
+          -3.638987285353892
         ]
       ],
       "lastCommittedPoint": null,
@@ -7925,7 +7925,7 @@
       "version": 32,
       "versionNonce": 2125740312,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1742477481139,
       "link": null,
       "locked": false,
@@ -7962,7 +7962,7 @@
       "version": 12,
       "versionNonce": 1853479960,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1742477478793,
       "link": null,
       "locked": false,
@@ -7999,7 +7999,7 @@
       "version": 79,
       "versionNonce": 154142312,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1742477496909,
       "link": null,
       "locked": false,
@@ -8036,7 +8036,7 @@
       "version": 38,
       "versionNonce": 2038227560,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1742477534732,
       "link": null,
       "locked": false,

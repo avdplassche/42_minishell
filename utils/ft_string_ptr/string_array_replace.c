@@ -14,7 +14,7 @@ void	replace_in_double_array(char **env, char *variable)
 	char	*full_path;
 	char	*pwd_string;
 
-	full_path = string_array_find_key(env, variable);
+	full_path = string_array_find_string(env, variable);
 	if (*full_path)
 	{
 		if (ft_strcmp("PWD", variable) == 0)

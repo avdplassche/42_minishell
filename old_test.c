@@ -71,7 +71,7 @@ void replace_in_double_array(t_mini *mini, t_cmd *cmd, char *variable)
 	char	*new_path_pointer;
 	int		i;
 
-	key_format_pointer = string_array_find_key(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
+	key_format_pointer = string_array_find_string(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
 	new_path_pointer = get_cwd(mini, cmd, variable);
 	i = 0;
 	while (mini->envp[i])

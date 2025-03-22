@@ -13,10 +13,15 @@
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <linux/limits.h>
 # include "enum.h"
 # include "structures.h"
 # include "debug.h"
+
+# ifdef __APPLE__
+#  include <limits.h>
+# elif __linux__
+#  include <linux/limits.h>
+# endif
 
 # define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
 # define SPACES " \t\n"
@@ -143,7 +148,7 @@ int			start_with(char *string, char *start_string);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
-char		*string_array_find_key(char **string_array, char *string_to_find);
+char		*string_array_find_string(char **string_array, char *string_to_find);
 void		string_array_print(char **string_array);
 int			string_array_len(char **str);
 char		*string_array_create_key(char *variable, int variable_len);
