@@ -90,6 +90,7 @@ void		exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char *var_name);
 void		update_pwd_env(t_mini *mini, char *env_var);
 char		*get_current_workdir(t_mini *mini);
+char		*get_new_path(t_mini *mini, char *env_key, char *new_path);
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
@@ -164,7 +165,7 @@ int			start_with(char *string, char *start_string);
 
 char		*string_array_find_string(char **string_array, char *string_to_find);
 void		string_array_print(char **string_array);
-int			string_array_len(char **str);
+size_t		string_array_len(char **str);
 char		*string_array_create_key(char *variable, int variable_len);
 void		string_build(char **dest_ptr, char *prefix, char *suffix);
 void		string_array_replace(t_mini *mini, char	*env_key, char *path_replace);

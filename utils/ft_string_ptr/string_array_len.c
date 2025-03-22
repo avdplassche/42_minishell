@@ -1,7 +1,13 @@
 
 #include "minishell.h"
 
-int	string_array_len(char **str)
+/**
+ * get the length of an array of pointers
+ * @param str is the array of pointers you want the size of
+ * @param variablelen is the length (int) of the variable
+ * @return - size (type size_t) of the array of pointers
+ */
+size_t	string_array_len(char **str)
 {
 	int	i;
 

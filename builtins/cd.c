@@ -1,8 +1,6 @@
 
 #include "minishell.h"
 
-//cd with only a relative or absolute pat
-
 int	builtin_cd(t_cmd *cmd, t_mini *mini)
 {
 	char	*path;
@@ -27,7 +25,7 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 	}
 	if (chdir(path) == 0)
 	{
-		update_pwd_env(mini, cmd, "PWD");
+		update_pwd_env(mini, "PWD");
 		//if (old_pwd)
 		mini->last_return = 0;
 	}
