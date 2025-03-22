@@ -1,0 +1,27 @@
+echo ../*
+echo /*
+echo ../../*
+echo *
+echo ***
+echo *st
+echo te*
+echo t***t
+echo */
+echo */*.c
+echo */*/*
+echo ../*/*
+echo */..
+
+1 > *
+2 > *
+3 > *
+4 > *
+5 > *
+6 > *st
+7 > te*
+8 > t***t
+9 > */
+10 > */
+11 > */
+12 > */
+13 > */

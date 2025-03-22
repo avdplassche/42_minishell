@@ -31,14 +31,15 @@ vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 SRCS				=	main.c \
 						print.c \
 						init_mini.c \
-						dollar_sign.c \
+						parsing.c \
 						fill_cmd_struct.c \
-						get_cmd_args.c \
 						get_cmd_bin.c \
+						get_cmd_args.c \
 						get_cmd_type.c \
 						get_cmd_redirection.c \
-						parsing.c \
 						quotes.c \
+						dollar_sign.c \
+						wildcards.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \

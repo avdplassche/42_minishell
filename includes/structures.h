@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/21 17:40:39 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/22 11:00:27 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ typedef union u_pipe_ends
 	int	fildes[2];
 	struct
 	{
-		int	read;
-		int	write;
-	};
-}	t_pipe_ends;
+		int		read;
+		int		write;
+	};	
+}			t_pipe_ends;
+
 
 typedef struct s_redir
 {
@@ -94,7 +95,7 @@ typedef struct s_cmd
 	pid_t		pid;
 }				t_cmd;
 
-/** A pointer to function for the builtin function 
+/** A pointer to function for the builtin function
  * @param t_builtin_func contains the signature of all the builtin functions
  */
 typedef int (*t_builtin_func)(t_cmd *, t_mini *);

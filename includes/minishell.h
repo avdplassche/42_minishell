@@ -51,6 +51,16 @@ int			count_cmd(t_mini *mini);
 
 int			parsing(t_mini *mini, t_cmd *cmd);
 
+int			count_arguments(t_mini *mini);
+int			init_redirections(t_mini *mini, t_cmd *cmd);
+int			init_arguments(t_mini *mini, t_cmd *cmd);
+
+int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+char		*get_cmd_bin(t_mini *mini);
+int			get_cmd_type(t_mini *mini, t_cmd *cmd);
+int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
+int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
+
 int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
 int			need_dollar_substitution(char *str);
@@ -62,6 +72,7 @@ char		*clean_command_quotes(char *str);
 char		*clean_envp_quotes(char *str);
 char		last_quote(char *str, int i);
 
+
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
@@ -72,7 +83,8 @@ int			count_arguments(t_mini *mini);
 int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);
 
-/* * * * * * * * * * * * * * EXECUTION * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * EXECUTION * * * * * * * * */
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char *var_name);

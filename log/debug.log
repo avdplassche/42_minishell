@@ -1,0 +1,1331 @@
+<<<<<<< HEAD
+=======
+
+COMMAND LINE 1 ➤ echo ../*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = ../*
+
+Dirname : ..
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .config
+Type : 4
+
+Name : Music
+Type : 4
+
+Name : alex.vdplassche@hotmail.fr - Google Drive
+Type : 10
+
+Name : C Project
+Type : 4
+
+Name : .vim
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : .thumbnails
+Type : 4
+
+Name : .zcompdump-MacBook Pro de Alexandre-5.9
+Type : 8
+
+Name : .lldb
+Type : 4
+
+Name : minishell_playground
+Type : 4
+
+Name : .CFUserTextEncoding
+Type : 8
+
+Name : Cpp_Projects
+Type : 4
+
+Name : .zshrc
+Type : 8
+
+Name : vedou-website
+Type : 4
+
+Name : .arduinoIDE
+Type : 4
+
+Name : .local
+Type : 4
+
+Name : Python Projects
+Type : 4
+
+Name : Pictures
+Type : 4
+
+Name : .zprofile
+Type : 8
+
+Name : .shadow
+Type : 4
+
+Name : 42
+Type : 4
+
+Name : .zsh_history
+Type : 8
+
+Name : Desktop
+Type : 4
+
+Name : Library
+Type : 4
+
+Name : .lesshst
+Type : 8
+
+Name : ...aa
+Type : 8
+
+Name : .android
+Type : 4
+
+Name : Spitfire
+Type : 4
+
+Name : .zcompdump-MacBook Pro de Alexandre-5.9.zwc
+Type : 8
+
+Name : .cups
+Type : 4
+
+Name : vanderplassche.alexandre@gmail.com - Google Drive
+Type : 10
+
+Name : Programs
+Type : 4
+
+Name : minishell
+Type : 4
+
+Name : .i2pd
+Type : 4
+
+Name : Public
+Type : 4
+
+Name : .dropbox
+Type : 4
+
+Name : minishell_bak
+Type : 4
+
+Name : alexandre.vanderp@gmail.com - Google Drive
+Type : 10
+
+Name : .idlerc
+Type : 4
+
+Name : .sh_history
+Type : 8
+
+Name : .ssh
+Type : 4
+
+Name : Movies
+Type : 4
+
+Name : Applications
+Type : 4
+
+Name : Dropbox
+Type : 4
+
+Name : .Trash
+Type : 4
+
+Name : Splice
+Type : 4
+
+Name : .npm
+Type : 4
+
+Name : Documents
+Type : 4
+
+Name : .mono
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : .swiftpm
+Type : 4
+
+Name : .gk
+Type : 4
+
+Name : .oh-my-zsh
+Type : 4
+
+Name : Downloads
+Type : 4
+
+Name : .python_history
+Type : 8
+
+Name : .cache
+Type : 4
+
+Name : .gitconfig
+Type : 8
+
+Name : .SoulseekQt
+Type : 4
+
+Name : CPP Modules
+Type : 4
+
+Name : .bash_history
+Type : 8
+
+Name : .viminfo
+Type : 8
+
+Name : .zsh_sessions
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : ../*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 2 ➤ echo /*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = /*
+
+Dirname : /
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : home
+Type : 10
+
+Name : usr
+Type : 4
+
+Name : .resolve
+Type : 4
+
+Name : bin
+Type : 4
+
+Name : sbin
+Type : 4
+
+Name : .file
+Type : 8
+
+Name : etc
+Type : 10
+
+Name : var
+Type : 10
+
+Name : Library
+Type : 4
+
+Name : System
+Type : 4
+
+Name : .VolumeIcon.icns
+Type : 10
+
+Name : private
+Type : 4
+
+Name : .vol
+Type : 4
+
+Name : Users
+Type : 4
+
+Name : Applications
+Type : 4
+
+Name : opt
+Type : 4
+
+Name : dev
+Type : 4
+
+Name : Volumes
+Type : 4
+
+Name : .nofollow
+Type : 4
+
+Name : tmp
+Type : 10
+
+Name : cores
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : /*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 3 ➤ echo ../../*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = ../../*
+
+Dirname : ../..
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : alexandrevanderplassche
+Type : 4
+
+Name : .localized
+Type : 8
+
+Name : Shared
+Type : 4
+
+Name : Guest
+Type : 4
+
+Name : root
+Type : 4
+
+Name : reparation
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : ../../*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 4 ➤ echo *¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = *
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : *¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 5 ➤ echo ***¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = ***
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : ***
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : ***¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 6 ➤ echo *st¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = *st
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *st
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : *st¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 7 ➤ echo te*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = te*
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : te*
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : te*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 8 ➤ echo t***t¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = t***t
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : 
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : t***t¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 9 ➤ echo */¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = */
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : */¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 10 ➤ echo */*.c¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = */*.c
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : */*.c¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 11 ➤ echo */*/*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = */*/*
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : */*/*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 12 ➤ echo ../*/*¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = ../*/*
+
+Dirname : ..
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .config
+Type : 4
+
+Name : Music
+Type : 4
+
+Name : alex.vdplassche@hotmail.fr - Google Drive
+Type : 10
+
+Name : C Project
+Type : 4
+
+Name : .vim
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : .thumbnails
+Type : 4
+
+Name : .zcompdump-MacBook Pro de Alexandre-5.9
+Type : 8
+
+Name : .lldb
+Type : 4
+
+Name : minishell_playground
+Type : 4
+
+Name : .CFUserTextEncoding
+Type : 8
+
+Name : Cpp_Projects
+Type : 4
+
+Name : .zshrc
+Type : 8
+
+Name : vedou-website
+Type : 4
+
+Name : .arduinoIDE
+Type : 4
+
+Name : .local
+Type : 4
+
+Name : Python Projects
+Type : 4
+
+Name : Pictures
+Type : 4
+
+Name : .zprofile
+Type : 8
+
+Name : .shadow
+Type : 4
+
+Name : 42
+Type : 4
+
+Name : .zsh_history
+Type : 8
+
+Name : Desktop
+Type : 4
+
+Name : Library
+Type : 4
+
+Name : .lesshst
+Type : 8
+
+Name : ...aa
+Type : 8
+
+Name : .android
+Type : 4
+
+Name : Spitfire
+Type : 4
+
+Name : .zcompdump-MacBook Pro de Alexandre-5.9.zwc
+Type : 8
+
+Name : .cups
+Type : 4
+
+Name : vanderplassche.alexandre@gmail.com - Google Drive
+Type : 10
+
+Name : Programs
+Type : 4
+
+Name : minishell
+Type : 4
+
+Name : .i2pd
+Type : 4
+
+Name : Public
+Type : 4
+
+Name : .dropbox
+Type : 4
+
+Name : minishell_bak
+Type : 4
+
+Name : alexandre.vanderp@gmail.com - Google Drive
+Type : 10
+
+Name : .idlerc
+Type : 4
+
+Name : .sh_history
+Type : 8
+
+Name : .ssh
+Type : 4
+
+Name : Movies
+Type : 4
+
+Name : Applications
+Type : 4
+
+Name : Dropbox
+Type : 4
+
+Name : .Trash
+Type : 4
+
+Name : Splice
+Type : 4
+
+Name : .npm
+Type : 4
+
+Name : Documents
+Type : 4
+
+Name : .mono
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : .swiftpm
+Type : 4
+
+Name : .gk
+Type : 4
+
+Name : .oh-my-zsh
+Type : 4
+
+Name : Downloads
+Type : 4
+
+Name : .python_history
+Type : 8
+
+Name : .cache
+Type : 4
+
+Name : .gitconfig
+Type : 8
+
+Name : .SoulseekQt
+Type : 4
+
+Name : CPP Modules
+Type : 4
+
+Name : .bash_history
+Type : 8
+
+Name : .viminfo
+Type : 8
+
+Name : .zsh_sessions
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : ../*/*¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+
+COMMAND LINE 13 ➤ echo */..¶
+
+(f)Wildcard_handle
+Temp = echo
+
+debug : echo
+(f)Wildcard_handle
+Temp = */..
+
+Dirname : /Users/alexandrevanderplassche/minishell
+
+Token : *
+
+Name : ..
+Type : 4
+
+Name : .DS_Store
+Type : 8
+
+Name : print_string_indexes
+Type : 8
+
+Name : test
+Type : 4
+
+Name : Makefile
+Type : 8
+
+Name : includes
+Type : 4
+
+Name : utils
+Type : 4
+
+Name : builtins
+Type : 4
+
+Name : run.sh
+Type : 8
+
+Name : README.md
+Type : 8
+
+Name : minishell
+Type : 8
+
+Name : .gitignore
+Type : 8
+
+Name : log
+Type : 4
+
+Name : test_jojo
+Type : 4
+
+Name : .git
+Type : 4
+
+Name : .vscode
+Type : 4
+
+Name : compare_fdes.sh
+Type : 8
+
+Name : src
+Type : 4
+
+debug : (null)
+   Command 1 : echo¶
+
+   Path : (null)¶
+
+	  Type : BUILTIN
+
+	  Total Args : 1
+
+	  Arg[1] : */..¶
+
+	  Total redirections : 0
+
+
+-----------------------------------------------
+>>>>>>> main

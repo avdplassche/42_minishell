@@ -6,6 +6,9 @@
 		"readline.h": "c",
 		"stdio.h": "c",
 		"stdlib.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"history.h": "c",
+		"dirent.h": "c",
+		"curses.h": "c"
 	}
 }
