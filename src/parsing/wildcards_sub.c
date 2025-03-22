@@ -2,12 +2,10 @@
 #include "minishell.h"
 
 
-int	count_valid_files(char *dirname, char *token)
+int	count_valid_files(DIR *folder, char *dirname, char *token)
 {
-	DIR				*folder;
 	int				count;
 	struct dirent	*s_dir;
-	// (void) *token;
 
 	count = 0;
 	folder = opendir(dirname);
@@ -16,8 +14,9 @@ int	count_valid_files(char *dirname, char *token)
 	{
 		if (is_valid_filename(token, s_dir, 0, 0))
 			count++;
-		// s_dir = readdir(folder);
+		s_dir = readdir(folder);
 	}
+	closedir(folder);
 	return (count);
 }
 
@@ -72,6 +71,60 @@ char	*tokenize_wildcard(char *temp, int start)
 	return (ft_substr(temp, start, end - start));
 }
 
+char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amount)
+{
+	int				i;
+	struct dirent	*s_dir;
+	char			**filenames;
+
+	filenames = malloc(sizeof(char *) * (file_amount + 1));
+	if (!filenames)
+		return (NULL);
+	i = 0;
+
+	/*
+
+	Should I fill then sort or sort before filling ?
+
+	*/
+
+	/* Fill then sort */
+
+	folder = opendir(dirname);
+	s_dir = readdir(folder);
+	while (s_dir)
+	{
+		if (is_valid_filename(token, s_dir, 0, 0))
+			filenames[i] = s_dir->d_name;
+		s_dir = readdir(folder);
+
+	}
+
+	/* Sort then fill */
+
+
+	// while (i < file_amount)
+	// {
+		// search for 1st entry
+		// fill entry
+	// folder = opendir(dirname);
+	// s_dir = readdir(folder);
+	// while (s_dir)
+	// {
+	// 	if (is_valid_filename(token, s_dir, 0, 0))
+	// 		// filenames[i] = s_dir->d_name;
+	// 	s_dir = readdir(folder);
+	// }
+	// }
+	//search for 1st entry
+	// fill entry
+
+	// un truc comme ça
+
+	closedir(folder);
+	return (filenames);
+}
+
 char	*substitute_wildcard(char *temp, int i)
 {
 	DIR				*folder;
@@ -79,26 +132,29 @@ char	*substitute_wildcard(char *temp, int i)
 	char 			*token;
 	struct dirent	*s_dir;
 	int				file_amount;
+	// char			**filenames;
 
+	folder = NULL;
 	dirname = get_wildcard_directory(temp, i);
-	token = tokenize_wildcard(temp, i);
 	DEBUG("Dirname : %s\n\n", dirname);
+	token = tokenize_wildcard(temp, i);
 	DEBUG("Token : %s\n\n", token);
-	file_amount = count_valid_files(dirname, token);
+	file_amount = count_valid_files(folder, dirname, token);
 	DEBUG("File Amount : %d\n\n", file_amount);
+	// filenames = fill_valid_filename(folder, dirname, token, file_amount);
 	folder = opendir(dirname);
 	while (1)
 	{
 		s_dir = readdir(folder);
 		if (!s_dir)
 			break ;
-		// if (is_valid_sub(s_dir, token))
 		if (s_dir->d_name[0] != '.')
 			DEBUG("%s\n", s_dir->d_name);
-		// DEBUG("Type : %d\n", s_dir->d_type);
 	}
 	DEBUG("\n");
 	closedir(folder);
+	free(token);
+	free(dirname);
 	return (temp);
 }
 
