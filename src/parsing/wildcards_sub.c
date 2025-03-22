@@ -1,32 +1,50 @@
 
 #include "minishell.h"
 
-#include "../includes/minishell.h"
 
-// int	is_valid_sub(struct dirent *s_dir, char *token)
-// {
-// 	if (s_dir->d_name[0] == '.')
-// 		return (0);
+int	count_valid_files(char *dirname, char *token)
+{
+	DIR				*folder;
+	int				count;
+	struct dirent	*s_dir;
+	(void) *token;
 
-
-
-
-// }
+	count = 0;
+	folder = opendir(dirname);
+	s_dir = readdir(folder);
+	while (s_dir)
+	{
+		// if (is_valid_filename(s_dir, token))
+		// 	count++;
+		// s_dir = readdir(folder);
+	}
+	return (count);
+}
 
 char	*get_wildcard_directory(char *temp, int i)
 {
 	char	*dirname;
 	char	buffer[256];
 
-	while (--i >= 0)
+	while (i > 0)
+	{
 		if (temp[i] == '/')
 			break ;
+		i--;
+	}
 	if (i == 0)
-		dirname = ft_strdup("/");
+	{
+		if (temp[i] == '/')
+			dirname = ft_strdup("/");
+		else
+		{
+			getcwd(buffer, 256);
+			dirname = ft_strdup(buffer);
+			return(dirname);
+		}
+	}
 	else if (i > -1)
 		dirname = ft_substr(temp, 0, i );
-	else
-		dirname = getcwd(buffer, 256);
 	return (dirname);
 }
 
@@ -58,23 +76,25 @@ char	*substitute_wildcard(char *temp, int i)
 	char			*dirname;
 	char 			*token;
 	struct dirent	*s_dir;
+	// int				file_amount;
 
 	dirname = get_wildcard_directory(temp, i);
-	DEBUG("Dirname : %s\n\n", dirname);
-	folder = opendir(dirname);
-	s_dir = readdir(folder);
 	token = tokenize_wildcard(temp, i);
+	DEBUG("Dirname : %s\n\n", dirname);
 	DEBUG("Token : %s\n\n", token);
+	// file_amount = count_valid_files(dirname, token);
+	folder = opendir(dirname);
 	while (1)
 	{
 		s_dir = readdir(folder);
 		if (!s_dir)
 			break ;
 		// if (is_valid_sub(s_dir, token))
-		DEBUG("Name : %s\n", s_dir->d_name);
-		DEBUG("Type : %d\n", s_dir->d_type);
-		DEBUG("\n");
+		if (s_dir->d_name[0] != '.')
+			DEBUG("%s\n", s_dir->d_name);
+		// DEBUG("Type : %d\n", s_dir->d_type);
 	}
+	DEBUG("\n");
 	closedir(folder);
 	return (temp);
 }
@@ -102,14 +122,14 @@ int	need_wildcard_substitution(char *temp)
  */
 char	*wildcard_handle(char *temp)
 {
-	t_quote	q;
+	// t_quote	q;
 	char	*dest = NULL;
 	int		i;
 	int		j = 0;
 
 	DEBUG("(f)Wildcard_handle\nTemp = %s\n\n", temp);
-	q.sgl = 0;
-	q.dbl = 0;
+	// q.sgl = 0;
+	// q.dbl = 0;
 	i = need_wildcard_substitution(temp);
 	if (i == -1)
 		return (temp);

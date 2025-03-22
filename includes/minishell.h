@@ -61,6 +61,10 @@ int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
+int			count_arguments(t_mini *mini);
+int			init_redirections(t_mini *mini, t_cmd *cmd);
+int			init_arguments(t_mini *mini, t_cmd *cmd);
+
 int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
 int			need_dollar_substitution(char *str);
@@ -72,17 +76,8 @@ char		*clean_command_quotes(char *str);
 char		*clean_envp_quotes(char *str);
 char		last_quote(char *str, int i);
 
-
-int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
-char		*get_cmd_bin(t_mini *mini);
-int			get_cmd_type(t_mini *mini, t_cmd *cmd);
-int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
-int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
-
-int			count_arguments(t_mini *mini);
-int			init_redirections(t_mini *mini, t_cmd *cmd);
-int			init_arguments(t_mini *mini, t_cmd *cmd);
-
+char		*wildcard_handle(char *temp);
+int			is_valid_filename(struct dirent	*s_dir, char *token);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
@@ -134,6 +129,7 @@ int			ft_atoi(char *str);
 char		*ft_itoa(int n);
 char		**ft_split(char *s, char c);
 char		*ft_strchr(char *s, int c);
+char		*ft_sized_strdup(char *s, int size);
 char		*ft_strdup(char *s1);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlen(char *s);
@@ -157,6 +153,7 @@ char		*enquote_str(char *str, int q);
 int			contain_string_at_specific_index(char *haystack, char *needle, int i);
 bool		is_space(char c);
 int			is_only_spaces(char *s);
+int			is_only_specific_char(char *s, char c);
 char		*epurstring(char *src);
 int			is_quote(char c);
 int			is_angle_bracket(char c);
