@@ -2,22 +2,43 @@
 
 /*
 
-Example : 
+Example :
 
 
 */
 
-// int	is_valid_filename(struct dirent	*s_dir, char *token)
-// {
-// 	int	i;
+int	is_last_asterisk(char *token, int i)
+{
+	while (token[i++])
+		if (token[i] == '*')
+			return (0);
+	return (1);
+}
 
-// 	if (is_only_specific_char(token, '*'))
-// 		if (s_dir->d_name[0] == '.')
-// 			return (0);
-// 	i = -1;
-// 	while(token[i])
-// 	// if (s)
+int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j)
+{
+	int	tok_end;
+	int	file_end;
 
-
-
-// }
+	while (token[i] != '*')
+		if (token[i++] != s_dir->d_name[j++])
+			return (0);
+	while (token[i] == '*')
+		i++;
+	while (s_dir->d_name[j] != token[i])
+		j++;
+	if (!is_last_asterisk(token, i))
+	{
+		if (!is_valid_filename(token, s_dir, i, j))
+			return (0);
+	}
+	else
+	{
+		tok_end = ft_strlen(token) - 1;
+		file_end = ft_strlen(s_dir->d_name) - 1;
+		while (token[tok_end] != '*')
+			if (token[tok_end--] != s_dir->d_name[file_end--])
+				return (0);
+	}
+	return (1);
+}

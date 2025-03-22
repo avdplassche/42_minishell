@@ -7,15 +7,15 @@ int	count_valid_files(char *dirname, char *token)
 	DIR				*folder;
 	int				count;
 	struct dirent	*s_dir;
-	(void) *token;
+	// (void) *token;
 
 	count = 0;
 	folder = opendir(dirname);
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
-		// if (is_valid_filename(s_dir, token))
-		// 	count++;
+		if (is_valid_filename(token, s_dir, 0, 0))
+			count++;
 		// s_dir = readdir(folder);
 	}
 	return (count);
@@ -45,6 +45,8 @@ char	*get_wildcard_directory(char *temp, int i)
 	}
 	else if (i > -1)
 		dirname = ft_substr(temp, 0, i );
+	else
+		dirname = NULL;
 	return (dirname);
 }
 
@@ -76,13 +78,14 @@ char	*substitute_wildcard(char *temp, int i)
 	char			*dirname;
 	char 			*token;
 	struct dirent	*s_dir;
-	// int				file_amount;
+	int				file_amount;
 
 	dirname = get_wildcard_directory(temp, i);
 	token = tokenize_wildcard(temp, i);
 	DEBUG("Dirname : %s\n\n", dirname);
 	DEBUG("Token : %s\n\n", token);
-	// file_amount = count_valid_files(dirname, token);
+	file_amount = count_valid_files(dirname, token);
+	DEBUG("File Amount : %d\n\n", file_amount);
 	folder = opendir(dirname);
 	while (1)
 	{
@@ -122,14 +125,11 @@ int	need_wildcard_substitution(char *temp)
  */
 char	*wildcard_handle(char *temp)
 {
-	// t_quote	q;
 	char	*dest = NULL;
 	int		i;
 	int		j = 0;
 
 	DEBUG("(f)Wildcard_handle\nTemp = %s\n\n", temp);
-	// q.sgl = 0;
-	// q.dbl = 0;
 	i = need_wildcard_substitution(temp);
 	if (i == -1)
 		return (temp);

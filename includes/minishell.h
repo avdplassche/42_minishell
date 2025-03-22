@@ -77,7 +77,7 @@ char		*clean_envp_quotes(char *str);
 char		last_quote(char *str, int i);
 
 char		*wildcard_handle(char *temp);
-int			is_valid_filename(struct dirent	*s_dir, char *token);
+int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 

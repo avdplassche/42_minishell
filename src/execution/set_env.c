@@ -4,11 +4,11 @@
 /**
  * Replaces the pointer inside the array of pointers if it starts with a given key
  * @parenv_rows the struct mini (cmd is not needed here)
- * @param env_key is 
+ * @param env_key is
  * @return - the new string with the equal sign "PATH=""
  *
- * @return - NULL if malloc error 
- * @note mainly used in execution 
+ * @return - NULL if malloc error
+ * @note mainly used in execution
  */
 int	set_env(t_mini *mini, char *key, char *env_row)
 {
