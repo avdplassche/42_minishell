@@ -39,7 +39,8 @@ SRCS				=	main.c \
 						get_cmd_redirection.c \
 						quotes.c \
 						dollar_sign.c \
-						wildcards.c \
+						wildcards_sub.c \
+						wildcards_files.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
@@ -53,6 +54,7 @@ UTILS				=	contain_char.c \
 						enquote_str.c \
 						epurstring.c \
 						is_only_spaces.c \
+						is_only_specific_char.c \
 						is_quote.c \
 						is_space.c \
 						is_angle_bracket.c \
@@ -63,6 +65,7 @@ UTILS				=	contain_char.c \
 						ft_split.c \
 						ft_strchr.c \
 						ft_strdup.c \
+						ft_sized_strdup.c \
 						ft_strjoin.c \
 						ft_strlen.c \
 						ft_strncmp.c \
