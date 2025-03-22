@@ -77,6 +77,7 @@ char		*wildcard_handle(char *temp);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
+char		*ft_get_env(t_mini *mini, char	*var_name);
 
 /* * * * * * * * * BUILTINS * * * * * * * * */
 
@@ -93,7 +94,7 @@ int			builtin_pwd(t_cmd *cmd, t_mini *mini);
 void		free_double_pointer(char **str);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
-
+void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * ERRORS * * * * * * * * * */
 
@@ -149,7 +150,10 @@ int			start_with(char *string, char *start_string);
 
 /* * * * * * * STRING_ARRAY_FUNCTIONS * * * */
 
-char		*find_string_in_array(char **string_array, char *string_to_find);
-void		print_string_array(char **string_array);
+char		*string_array_find_key(char **string_array, char *string_to_find);
+void		string_array_print(char **string_array);
+int			string_array_len(char **str);
+char 		*create_key_format(char *string_to_find, int variable_len);
+
 
 #endif

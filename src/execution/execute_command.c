@@ -25,16 +25,15 @@ static t_builtin_func	get_builtin_function(char *cmd_name)
 void	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
-	int				i;
 
-	DEBUG("entered the exec_mnini function\n");
-	DEBUG("%s\n command", cmd->command);
-	i = 0;
-	f = get_builtin_function(cmd->command);
-	DEBUG("got here after get builtin\n");
-	i = f(cmd, mini);
-	DEBUG("after the function has done something %d\n", i);
-	return ;
+	DEBUG("cmd type is %d\n", cmd->type);
+	if (cmd->type == BUILTIN)
+	{
+		
+		f = get_builtin_function(cmd->command);
+		f(cmd, mini);
+		return ;
+	}
 }
 
 /*pid_t	exec_child(t_mini *mini, t_cmd cmd)

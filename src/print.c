@@ -78,6 +78,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 		}
 		DEBUG("\n");
 	}
+	//DEBUG("	  command amount : %d\n\n", cmd.redir_amount")
 }
 
 // void	debug_parsing_print(t_mini *mini, t_cmd cmd)

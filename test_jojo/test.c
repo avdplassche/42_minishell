@@ -1,58 +1,67 @@
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-static char *build_search_str(char *string_to_find, int variable_len)
+static	void build_path(char **new_ptr, char *variable, char *path)
 {
-	char	*search_str;
-	
-	search_str = (char *)malloc(sizeof(char) * variable_len + 2);
-	if (!search_str)
-		return (NULL);
-	ft_strcpy(search_str, string_to_find); // a copy of the string is made, there are still 0s because src is smaller than dest 
-	search_str[variable_len] = '=';
-	search_str[variable_len + 1] = '\0';
-	return (search_str);
+	char	*key_format_variable;
+	(void)new_ptr;
+	(void)path;
+
+	key_format_variable = create_key_format(variable, ft_strlen(variable));
+	printf("the key format of the variable is %s\n", key_format_variable);
+	//return (key_format_variable);
 }
 
-char	*find_string_in_array(char **string_array, char *string_to_find)
+/*
+	1. get the current working directory
+	2. malloc for the new path variable
+	3. fill the array wiht the variable and the new path, this is the ifnalised pointer 
+*/
+static void get_cwd(t_mini *mini, t_cmd *cmd, char *variable)
 {
-	int		i;
-	char	*search_str;
-	size_t	variable_len;
+	char		cwd[PATH_MAX];
+	char		*ptr_cwd;
+	char		*new_ptr;
+	(void)cmd;
 
-	if (string_array == NULL || string_to_find == NULL)
-		return (NULL);
-	i = 0;
-	variable_len = ft_strlen(string_to_find);
-	search_str = build_search_str(string_to_find, variable_len);
-	if (!search_str)
-		return (NULL);
-	while (string_array[i])
+	ptr_cwd = getcwd(cwd, sizeof(cwd));
+	if (!ptr_cwd)
 	{
-		if (start_with(string_array[i], search_str))
-		{
-			free(search_str);
-			search_str = NULL;
-			return (string_array[i] + variable_len + 1);
-		}
-		i++;
+		perror("get_cwd() failed\n");
+		mini->last_return = MALLOC_ERROR;
 	}
-	free(search_str);
-	search_str = NULL;
-	return (NULL);
+	new_ptr = (char *)malloc(sizeof(char) * (ft_strlen(variable + 1) + ft_strlen(ptr_cwd) + 1));
+	if (!new_ptr)
+	{
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+	build_path(&new_ptr, variable, ptr_cwd);
+}	
+
+/*
+	1. get the old pointer 
+	2. once we have built the new ptr like the path variable, we replace it
+	3. if we do not find the old path pointer i need to do a string array push
+*/
+void replace_in_double_array(t_mini *mini, t_cmd *cmd, char *variable)
+{
+	//char	*old_path_pointer;
+	//char	*new_path_pointer;
+
+	//old_path_pointer = string_array_find_key(mini->envp, variable); //i get the pointer of the PWD variable by finding where it is in the array
+	get_cwd(mini, cmd, variable);
 }
 
 int main(int argc, char **argv, char **env)
 {
 	t_mini	mini;
+	t_cmd	cmd;
+	//char	**test;
 	(void)argc;
 	(void)argv;
-	char	*path;
 
 	mini.envp = env;
-	path = find_string_in_array(mini.envp, "LS_COLORS");
-	if (!path)
-		return (1);
-	printf("%s\n", path);
+	replace_in_double_array(&mini, &cmd, "PATH");
 	return (0);
 }

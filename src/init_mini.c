@@ -60,7 +60,7 @@ int	init_mini(t_mini *mini, char **envp)
 		return (MALLOC_ERROR);
 	mini->last_return = 0;
 	dup_env(mini, envp);
-	mini->paths = ft_split(getenv("PATH"), ':');
+	mini->paths = ft_split(ft_get_env(mini, "PATH"), ':');
 	if (!mini->paths)
 		return (MALLOC_ERROR);
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));

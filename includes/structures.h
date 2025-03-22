@@ -70,11 +70,11 @@ typedef struct s_mini
  */
 typedef struct s_cmd
 {
-	char		**args;
 	char		*command;
 	char		*path;
 	int			type;
 	int			echo_n_index;
+	char		**args;
 	int			arg_amount;
 	int			id;
 	t_redir		*redir;
