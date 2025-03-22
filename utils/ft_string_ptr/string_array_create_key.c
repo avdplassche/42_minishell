@@ -14,7 +14,6 @@ char *string_array_create_key(char *variable, int variable_len)
 {
 	char	*key_format_variable;
 	int		i;
-	//char	*current;
 	
 	i = 0;
 	key_format_variable = (char *)malloc(sizeof(char) * (variable_len + 2));
