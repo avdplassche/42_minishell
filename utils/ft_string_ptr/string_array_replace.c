@@ -1,27 +1,20 @@
 
 #include "minishell.h"
 
-void	replace_pwd_pointer(char ***env, char *old_ptr)
+void	string_array_replace(t_mini *mini, char	*env_key, char *path_replace)
 {
+	int	i;
 
-}
-
-/*
-	in this function, i find the pointer tothe string array 
-*/
-void	replace_in_double_array(char **env, char *variable)
-{
-	char	*full_path;
-	char	*pwd_string;
-
-	full_path = string_array_find_string(env, variable);
-	if (*full_path)
+	i = 0;
+	while (mini->envp[i])
 	{
-		if (ft_strcmp("PWD", variable) == 0)
+		if (start_with(mini->envp[i], env_key))
 		{
-			replace_pwd_pointer(&env, full_path);
+			free(mini->envp[i]);
+			mini->envp[i] = path_replace;
+			return ;
 		}
+		i++;
 	}
-
-	printf("%s\n", full_path);
+	free(path_replace);
 }
