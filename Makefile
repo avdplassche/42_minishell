@@ -52,6 +52,7 @@ SRCS				=	main.c \
 						get_current_workdir.c \
 						get_new_env_row.c \
 						update_pwd_env.c \
+						update_old_pwd_env.c \
 						free.c
 
 UTILS				=	contain_char.c \
