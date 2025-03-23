@@ -49,15 +49,6 @@ char	*get_wildcard_directory(char *temp, int i)
 	return (dirname);
 }
 
-/*
-	Functions :
-	opendir
-	chdir (pour ../)
-	struct dirent (d_name and d_type),
-	getcwd
-	readdir
-*/
-
 char	*tokenize_wildcard(char *temp, int start)
 {
 	int		end;
@@ -86,9 +77,7 @@ char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amo
 
 	Should I fill then sort or sort before filling ?
 
-	*/
-
-	/* Fill then sort */
+	-> Fill then sort */
 
 	folder = opendir(dirname);
 	s_dir = readdir(folder);
@@ -99,27 +88,6 @@ char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amo
 		s_dir = readdir(folder);
 
 	}
-
-	/* Sort then fill */
-
-
-	// while (i < file_amount)
-	// {
-		// search for 1st entry
-		// fill entry
-	// folder = opendir(dirname);
-	// s_dir = readdir(folder);
-	// while (s_dir)
-	// {
-	// 	if (is_valid_filename(token, s_dir, 0, 0))
-	// 		// filenames[i] = s_dir->d_name;
-	// 	s_dir = readdir(folder);
-	// }
-	// }
-	//search for 1st entry
-	// fill entry
-
-	// un truc comme ça
 
 	closedir(folder);
 	return (filenames);
