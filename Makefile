@@ -55,7 +55,7 @@ SRCS				=	main.c \
 						ft_get_env.c \
 						set_env.c \
 						get_current_workdir.c \
-						get_new_path.c \
+						get_new_env_row.c \
 						update_pwd_env.c \
 						free.c
 
@@ -112,8 +112,8 @@ ALL_OBJ				=	$(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ)
 
 #------------------INCLUDE FLAGS---------------------#
 
-INCLUDE_FLAGS		=	-I$(DIR_INCLUDE)
-LIBRARIES			=	-lreadline
+INCLUDE_FLAGS		+=	-I$(DIR_INCLUDE)
+LIBRARIES			+=	-lreadline
 
 #---------------------TARGETS------------------------#
 
