@@ -10,7 +10,7 @@
  * @return - NULL if malloc error
  * @note mainly used in execution
  */
-int	set_env(t_mini *mini, char *key, char *env_row)
+int	set_env(t_mini *mini, char *env_key, char *env_row)
 {
 	int	i;
 

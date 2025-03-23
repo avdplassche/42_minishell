@@ -13,6 +13,5 @@ char	*get_new_env_row(t_mini *mini, char *env_key, char *new_path)
 		return (NULL);
 	}
 	string_build(&env_row, env_key, new_path);
-
 	return (env_row);
 }

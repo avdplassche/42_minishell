@@ -83,7 +83,7 @@ int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char *var_name);
-int			set_env(t_mini *mini, char *key, char *env_row);
+int			set_env(t_mini *mini, char *env_key, char *env_row);
 void		update_pwd_env(t_mini *mini, char *env_var);
 char		*get_current_workdir(t_mini *mini);
 char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
