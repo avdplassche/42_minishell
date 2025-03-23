@@ -16,14 +16,9 @@ UNAME := $(shell uname)
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra -g
 ifeq ($(UNAME), Darwin)
-CFLAGS += -g -fsanitize=address
- ifdef READLINE_PREFIX
-	LIBRARIES += -L$(READLINE_PREFIX)/lib
-	INCLUDE_FLAGS += -I$(READLINE_PREFIX)/include
- else
-	LIBRARIES += -L/usr/local/opt/readline/lib
-	INCLUDE_FLAGS += -I/usr/local/opt/readline/include
- endif
+	CFLAGS += -g -fsanitize=address
+	LIBRARIES += -L/opt/homebrew/Cellar/readline/8.2.13
+	INCLUDE_FLAGS += -I/opt/homebrew/Cellar/readline/8.2.13/include
 endif
 
 #---------------------VPATH------------------------#

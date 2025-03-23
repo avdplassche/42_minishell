@@ -40,7 +40,6 @@ char	*get_cmd_bin(t_mini *mini)
 		mini->cursor++;
 	debug = wildcard_handle(temp);
 	DEBUG("debug : %s\n", debug);
-	temp = wildcard_substitution(temp);
 	i = need_dollar_substitution(temp);
 	while (i > -1)
 	{
