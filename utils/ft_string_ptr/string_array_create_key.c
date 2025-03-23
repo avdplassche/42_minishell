@@ -8,6 +8,7 @@
  * @return - the new string with the equal sign "PATH=""
  *
  * @return - NULL if malloc error 
+ * @note does not free anything as it sends back a new string
  * @note mainly used in execution 
  */
 char *string_array_create_key(char *variable, int variable_len)

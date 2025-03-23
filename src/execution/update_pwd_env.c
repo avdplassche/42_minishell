@@ -1,9 +1,9 @@
 
 #include "minishell.h"
 
-static void handle_error(t_mini *mini, char *env_key)
+static void handle_error(t_mini *mini, char *ptr)
 {
-	free(env_key);
+	free(ptr);
 	mini->last_return = MALLOC_ERROR;
 }
 
@@ -35,29 +35,57 @@ int	update_pwd_env(t_mini *mini, char *env_var)
 	return (mini->last_return);
 }
 
-int	update_old_pwd_env(t_mini *mini)
+static char *get_original_pwd(t_mini *mini)
 {
-	char	*env_row;
-	char	*env_key;
-	char	*original_pwd;
+	char *original_pwd;
 
 	original_pwd = ft_get_env(mini, "PWD");
 	if (!original_pwd)
 	{
 		original_pwd = get_current_workdir(mini);
 		if (!original_pwd)
+		{
 			mini->last_return = MALLOC_ERROR;
+			return (0);
+		}
 	}
-	else
+	return (original_pwd);
+}
+
+int	update_old_pwd_env(t_mini *mini)
+{
+	char	*env_row;
+	char	*env_key;
+	char	*original_pwd;
+	int		status_set_env;
+
+	printf("entered the update old pwd env function\n");
+	original_pwd = get_original_pwd(mini);
+	if (!original_pwd)
 	{
-		original_pwd = ft_strdup(original_pwd);
-		if (!original_pwd)
-			mini->last_return = MALLOC_ERROR;
+		mini->last_return = MALLOC_ERROR;
+		return (mini->last_return);
 	}
 	env_key = string_array_create_key("OLDPWD", 6);
 	if (!env_key)
-		mini->last_return = MALLOC_ERROR;
+	{
+		handle_error(mini, original_pwd);
+		return (mini->last_return);
+	}
 	env_row = get_new_env_row(mini, env_key, original_pwd);
-	
-
+	if (!env_row)
+	{
+		handle_error(mini, env_key);
+		return (mini->last_return);
+	}
+	status_set_env = set_env(mini, env_key, env_row);
+	if (status_set_env != 0)
+	{
+		free(env_key);
+		free(original_pwd);
+		return (mini->last_return);
+	}
+	free(env_key);
+	mini->last_return = 0;
+	return (mini->last_return);
 }

@@ -8,7 +8,6 @@
 int	builtin_pwd(t_cmd *cmd, t_mini *mini)
 {
 	char	cwd[PATH_MAX];
-	(void)mini;
 	(void)cmd;
 
 	DEBUG("entered the pwd function\n");
@@ -19,7 +18,9 @@ int	builtin_pwd(t_cmd *cmd, t_mini *mini)
 	else
 	{
 		perror("get_cwd() failed\n");
-		return (-1);
+		mini->last_return = CMD_NOT_FOUND;
+		return (mini->last_return);
 	}
-	return (0);
+	mini->last_return = 0;
+	return (mini->last_return);
 }
