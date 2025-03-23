@@ -14,13 +14,12 @@ int	set_env(t_mini *mini, char *key, char *env_row)
 {
 	int	i;
 
-	DEBUG("the path to replace with is %s\n", new_value);
 	i = 0;
 	while (mini->envp[i])
 	{
 		if (start_with(mini->envp[i], key))
 		{
-	mini->envp[i]);
+			free(mini->envp[i]);
 			mini->envp[i] = env_row;
 			DEBUG("mini->envp[i] is worth %s", mini->envp[i]);
 			mini->last_return = 0;

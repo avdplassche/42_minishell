@@ -86,7 +86,7 @@ char		*ft_get_env(t_mini *mini, char *var_name);
 void		set_env(t_mini *mini, char	*env_key, char *path_replace);
 void		update_pwd_env(t_mini *mini, char *env_var);
 char		*get_current_workdir(t_mini *mini);
-char		*get_new_path(t_mini *mini, char *env_key, char *new_path);
+char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
