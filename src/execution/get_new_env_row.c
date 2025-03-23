@@ -4,7 +4,7 @@
 char	*get_new_env_row(t_mini *mini, char *env_key, char *new_path)
 {
 	char	*env_row;
-	
+
 	env_row = malloc((ft_strlen(env_key) + ft_strlen(new_path) + 1));
 	if (!env_row)
 	{

@@ -8,8 +8,8 @@ static t_builtin_func	get_builtin_function(char *cmd_name)
 		return (&builtin_cd);
 	else if (ft_strcmp(cmd_name, "echo") == 0)
 		return (&builtin_echo);
-	// else if (ft_strcmp(cmd_name, "env") == 0)
-	// 	return (&builtin_env);
+	else if (ft_strcmp(cmd_name, "env") == 0)
+		return (&builtin_env);
 	// else if (ft_strcmp(cmd_name, "exit") == 0)
 	// 	return (&builtin_exit);
 	// else if (ft_strcmp(cmd_name, "export"))
@@ -29,7 +29,6 @@ void	exec_mini(t_mini *mini, t_cmd *cmd)
 	DEBUG("cmd type is %d\n", cmd->type);
 	if (cmd->type == BUILTIN)
 	{
-		
 		f = get_builtin_function(cmd->command);
 		f(cmd, mini);
 		return ;

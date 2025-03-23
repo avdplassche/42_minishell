@@ -93,7 +93,7 @@ char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 
 int			builtin_cd(t_cmd *cmd, t_mini *mini);
 int			builtin_echo(t_cmd *cmd, t_mini *mini);
-// int			builtin_env(t_cmd *cmd, t_mini *mini);
+int			builtin_env(t_cmd *cmd, t_mini *mini);
 // int			builtin_exit(t_cmd *cmd, t_mini *mini);
 // int			builtin_export(t_cmd *cmd, t_mini *mini);
 int			builtin_pwd(t_cmd *cmd, t_mini *mini);

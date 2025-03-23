@@ -11,11 +11,11 @@
  * @note does not free anything as it sends back a new string
  * @note mainly used in execution 
  */
-char *string_array_create_key(char *variable, int variable_len)
+char	*string_array_create_key(char *variable, int variable_len)
 {
 	char	*env_key;
 	int		i;
-	
+
 	i = 0;
 	env_key = (char *)malloc(sizeof(char) * (variable_len + 2));
 	if (!env_key)
