@@ -14,7 +14,7 @@ static void	execute_file(t_mini *mini, char *filename)
 	line= get_next_line(fd);
 	while (line)
 	{
-		if (!*line)
+		if (!*line || *line == '\n')
 		{
 			free(line);
 			line = get_next_line(fd);
