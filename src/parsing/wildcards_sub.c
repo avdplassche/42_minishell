@@ -12,7 +12,7 @@ int	count_valid_files(DIR *folder, char *dirname, char *token)
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
-		if (is_valid_filename(token, s_dir, 0, 0))
+		if (is_valid_filename(token, s_dir, 0, 0, 0))
 			count++;
 		s_dir = readdir(folder);
 	}
@@ -51,15 +51,19 @@ char	*get_wildcard_directory(char *temp, int i)
 
 char	*tokenize_wildcard(char *temp, int start)
 {
-	int		end;
-
-	end = start;
-	while (--start >= 0 && temp[start] != '/')
+	int		len;
+	
+	DEBUG("(f)Tokenize_wildcard\n-> temp = %s, start = %d\n\n", temp, start);
+	len = start;
+	while (start >= 0 && temp[start] != '/')
 		start--;
 	start ++;
-	while (temp[end] && temp[end] != '/')
-		end++;
-	return (ft_substr(temp, start, end - start));
+	while (temp[len] && temp[len] != '/')
+		len++;
+	if (temp[len] == '/')
+		len ++;
+	DEBUG("Tokenize start = %d, len = %d\n", start, len);
+	return (ft_substr(temp, start, len - start));
 }
 
 char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amount)
@@ -68,27 +72,23 @@ char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amo
 	struct dirent	*s_dir;
 	char			**filenames;
 
-	filenames = malloc(sizeof(char *) * (file_amount + 1));
+	// file_amount = count_valid_files(folder, dirname, token);
+	if (!file_amount)
+		return (NULL);
+	DEBUG("\nFile Amount : %d\n", file_amount);
+	filenames = (char **)malloc(sizeof(char *) * (file_amount + 1));
 	if (!filenames)
 		return (NULL);
-	i = 0;
-
-	/*
-
-	Should I fill then sort or sort before filling ?
-
-	-> Fill then sort */
-
+	i = -1;
 	folder = opendir(dirname);
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
-		if (is_valid_filename(token, s_dir, 0, 0))
-			filenames[i] = s_dir->d_name;
+		if (is_valid_filename(token, s_dir, 0, 0, 0))
+			filenames[++i] = ft_strdup(s_dir->d_name);
 		s_dir = readdir(folder);
-
 	}
-
+	filenames[++i] = NULL;
 	closedir(folder);
 	return (filenames);
 }
@@ -99,25 +99,28 @@ char	*substitute_wildcard(char *temp, int i)
 	char			*dirname;
 	char 			*token;
 	struct dirent	*s_dir;
-	int				file_amount;
-	// char			**filenames;
+	char			**filenames;
+	int				file_amount;  //here because of the case where echo * return nothing
 
 	folder = NULL;
 	dirname = get_wildcard_directory(temp, i);
 	DEBUG("Dirname : %s\n\n", dirname);
 	token = tokenize_wildcard(temp, i);
-	DEBUG("Token : %s\n\n", token);
+	DEBUG("Token : %s\n", token);
 	file_amount = count_valid_files(folder, dirname, token);
-	DEBUG("File Amount : %d\n\n", file_amount);
-	// filenames = fill_valid_filename(folder, dirname, token, file_amount);
+	filenames = fill_valid_filename(folder, dirname, token, file_amount);
+	int k = -1;
+	DEBUG("\n");
+	while (filenames && filenames[++k])
+		DEBUG("Filename[%d] : %s\n", k, filenames[k]);
 	folder = opendir(dirname);
 	while (1)
 	{
 		s_dir = readdir(folder);
 		if (!s_dir)
 			break ;
-		if (s_dir->d_name[0] != '.')
-			DEBUG("%s\n", s_dir->d_name);
+		// if (s_dir->d_name[0] != '.')
+		// 	DEBUG("%s\n", s_dir->d_name);
 	}
 	DEBUG("\n");
 	closedir(folder);
@@ -153,7 +156,7 @@ char	*wildcard_handle(char *temp)
 	int		i;
 	int		j = 0;
 
-	DEBUG("(f)Wildcard_handle\nTemp = %s\n\n", temp);
+	DEBUG("(f)Wildcard_handle\n-> Temp = %s\n\n", temp);
 	i = need_wildcard_substitution(temp);
 	if (i == -1)
 		return (temp);
