@@ -62,7 +62,6 @@ char	*tokenize_wildcard(char *temp, int start)
 		len++;
 	if (temp[len] == '/')
 		len ++;
-	DEBUG("Tokenize start = %d, len = %d\n", start, len);
 	return (ft_substr(temp, start, len - start));
 }
 
@@ -70,14 +69,13 @@ char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amo
 {
 	int				i;
 	struct dirent	*s_dir;
-	char			**filenames;
+	char			**filename;
 
-	// file_amount = count_valid_files(folder, dirname, token);
 	if (!file_amount)
 		return (NULL);
 	DEBUG("\nFile Amount : %d\n", file_amount);
-	filenames = (char **)malloc(sizeof(char *) * (file_amount + 1));
-	if (!filenames)
+	filename = (char **)malloc(sizeof(char *) * (file_amount + 1));
+	if (!filename)
 		return (NULL);
 	i = -1;
 	folder = opendir(dirname);
@@ -85,12 +83,81 @@ char	**fill_valid_filename(DIR *folder, char *dirname, char *token, int file_amo
 	while (s_dir)
 	{
 		if (is_valid_filename(token, s_dir, 0, 0, 0))
-			filenames[++i] = ft_strdup(s_dir->d_name);
+			filename[++i] = ft_strdup(s_dir->d_name);
 		s_dir = readdir(folder);
 	}
-	filenames[++i] = NULL;
+	filename[++i] = NULL;
 	closedir(folder);
-	return (filenames);
+	return (filename);
+}
+
+void	sort_array(char **filename, int len)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	while (len > 0)
+	{
+		i = 0;
+		j = 1;
+		while (j < len)
+		{
+			if (ft_strcmp_alpha(filename[i], filename[j]) > 0)
+			{
+				temp = filename[i];
+				filename[i] = filename[j];
+				filename[j] = temp;
+			}
+			i++;
+			j++;
+		}
+		len --;
+	}
+}
+
+char	*crop_token(char *token)
+{
+	int		i;
+	char	*subtoken;
+
+	i = 0;
+	while (token[i] && token[i] != '/')
+		i++;
+	if (!token[i])
+		return (NULL);
+	else
+		subtoken = ft_substr(token, 0, i);
+	return (subtoken);
+}
+
+
+
+void	add_prefixes_and_suffixes(char **filename, char *dirname, char *token)
+{
+	char	*subtoken;
+	int		len;
+	int		i;
+	char	*temp;
+	char	*dirpath;
+
+	i = -1;
+	len = double_array_len(filename);
+	subtoken = crop_token(token);
+	if (dirname)
+	{
+		dirpath = ft_strjoin(dirname, "/");
+		free(dirname);
+	}
+	while (++i < len)
+	{
+		temp = ft_strjoin(dirpath, filename[i]);
+		free(filename[i]);
+		if (subtoken)
+			filename[i] = ft_strjoin(temp, subtoken);
+		else
+			filename[i] = ft_strdup(temp);
+	}
 }
 
 char	*substitute_wildcard(char *temp, int i)
@@ -99,7 +166,7 @@ char	*substitute_wildcard(char *temp, int i)
 	char			*dirname;
 	char 			*token;
 	struct dirent	*s_dir;
-	char			**filenames;
+	char			**filename;
 	int				file_amount;  //here because of the case where echo * return nothing
 
 	folder = NULL;
@@ -108,11 +175,24 @@ char	*substitute_wildcard(char *temp, int i)
 	token = tokenize_wildcard(temp, i);
 	DEBUG("Token : %s\n", token);
 	file_amount = count_valid_files(folder, dirname, token);
-	filenames = fill_valid_filename(folder, dirname, token, file_amount);
+	filename = fill_valid_filename(folder, dirname, token, file_amount);
 	int k = -1;
 	DEBUG("\n");
-	while (filenames && filenames[++k])
-		DEBUG("Filename[%d] : %s\n", k, filenames[k]);
+	while (filename && filename[++k])
+		DEBUG("Filename[%d] : %s\n", k, filename[k]);
+	sort_array(filename, double_array_len(filename));
+	DEBUG("\n");
+	k = -1;
+	while (filename && filename[++k])
+		DEBUG("Filename[%d] : %s\n", k, filename[k]);
+	add_prefixes_and_suffixes(filename, dirname, token);
+	DEBUG("\n");
+	k = -1;
+	while (filename && filename[++k])
+		DEBUG("Filename[%d] : %s\n", k, filename[k]);
+
+	/* to delete ?*/
+
 	folder = opendir(dirname);
 	while (1)
 	{
@@ -122,6 +202,9 @@ char	*substitute_wildcard(char *temp, int i)
 		// if (s_dir->d_name[0] != '.')
 		// 	DEBUG("%s\n", s_dir->d_name);
 	}
+
+	/* /to delete ?*/
+
 	DEBUG("\n");
 	closedir(folder);
 	free(token);

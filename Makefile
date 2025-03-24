@@ -59,6 +59,8 @@ UTILS				=	contain_char.c \
 						contain_string_at_specific_index.c \
 						enquote_str.c \
 						epurstring.c \
+						double_array_len.c \
+						ft_strcmp_alpha.c \
 						is_only_spaces.c \
 						is_only_specific_char.c \
 						is_quote.c \
@@ -80,6 +82,7 @@ UTILS				=	contain_char.c \
 						ft_strtrim.c \
 						ft_substr.c \
 						ft_strcpy.c \
+						ft_toupper.c \
 						get_debug_fd.c \
 						get_next_line.c \
 						string_array_create_key.c \

@@ -24,10 +24,8 @@ int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j, int id)
 	if (token[0] != '.' && s_dir->d_name[0] == '.')
 		return (0);
 	while (token[i] && token[i] != '*')
-	{
 		if (token[i++] != s_dir->d_name[j++])
 			return (0);
-	}
 	while (token[i] == '*')
 		i++;
 	while (s_dir->d_name[j] && s_dir->d_name[j] != token[i])

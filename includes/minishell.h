@@ -140,6 +140,7 @@ char		*ft_strtrim(char *s1, char *set);
 char		*ft_substr(char *s, unsigned int start, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strcpy(char *dest, char *src);
+int			ft_toupper(int c);
 
 				/* GNL */
 
@@ -158,6 +159,8 @@ char		*epurstring(char *src);
 int			is_quote(char c);
 int			is_angle_bracket(char c);
 int			start_with(char *string, char *start_string);
+int			double_array_len(char **table);
+int			ft_strcmp_alpha(char *s1, char *s2);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
