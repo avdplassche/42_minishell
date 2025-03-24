@@ -5,7 +5,7 @@ static void	print_echo(t_cmd *cmd, int i)
 {
 	while (cmd->args[i])
 	{
-		printf("%s\n", cmd->args[i]);
+		printf("%s", cmd->args[i]);
 		i++;
 		if (cmd->args[i])
 			printf(" ");

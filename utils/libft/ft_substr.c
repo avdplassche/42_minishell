@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:54:45 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/03/18 15:48:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:21:36 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	char	*dest;
 	size_t	i;
 
+	if (!s)
+		return (NULL);
 	i = -1;
 	if (start >= ft_strlen(s))
 	{

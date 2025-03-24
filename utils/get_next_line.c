@@ -3,88 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:54:31 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/03/18 15:48:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:22:57 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	tests(int fd, char *buffer, char *leftover)
+char	*free_and_return_null(char **stash)
 {
-	if (!buffer)
-		return (0);
-	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd < 0)
-		return (free(buffer), free(leftover), 0);
-	return (1);
-}
-
-static char	*set_line(char *leftover)
-{
-	int		i;
-	
-	i = 0;
-	while (leftover[i] != '\n' && leftover[i] != '\0')
-		i++;
-	return (ft_substr(leftover, 0, i + 1));
-}
-
-static char	*set_left(char *leftover)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (leftover[i] != '\n' && leftover[i] != '\0')
-		i++;
-	temp = ft_substr(leftover, i + 1, ft_strlen(leftover) - (i + 1));
-	free(leftover);
-	leftover = temp;
-	return (leftover);
-}
-
-static char	*fill_left(int fd, char *buffer, char *leftover)
-{
-	char	*temp;
-	int		count;
-
-	count = 0;
-	while (1)
+	if (*stash)
 	{
-		if (ft_strchr(leftover, '\n'))
-			break ;
-		count = read(fd, buffer, BUFFER_SIZE);
-		if (count <= -1)
-			return (NULL);
-		buffer[count] = '\0';
-		if (count == 0)
-			break ;
-		temp = ft_strjoin(leftover, buffer);
-		free(leftover);
-		leftover = ft_strdup(temp);
-		free(temp);
+		free(*stash);
+		*stash = NULL;
 	}
-	return (leftover);
+	return (NULL);
+}
+
+char	*updated_stash(char **old_stash)
+{
+	char	*new_stash;
+	int		len;
+
+	len = 0;
+	if (!*old_stash)
+		return (NULL);
+	while ((*old_stash)[len] && (*old_stash)[len] != '\n')
+		len++;
+	if ((*old_stash)[len] == '\0')
+		return (free_and_return_null(old_stash));
+	len++;
+	new_stash = ft_substr(*old_stash, len, ft_strlen(*old_stash) - len);
+	if (!new_stash)
+		return (free_and_return_null(old_stash));
+	free(*old_stash);
+	*old_stash = new_stash;
+	return (new_stash);
+}
+
+char	*extract_line(char *stash)
+{
+	int		len;
+	char	*line;
+
+	len = 0;
+	if (!stash)
+		return (NULL);
+	while (stash[len] && stash[len] != '\n')
+		len++;
+	if (stash[len] == '\n')
+		len++;
+	line = ft_substr(stash, 0, len);
+	return (line);
+}
+
+char	*read_and_append(char *stash, int fd)
+{
+	int		bytes_read;
+	char	buff[BUFFER_SIZE + 1];
+	char	*temp;
+
+	bytes_read = read(fd, buff, BUFFER_SIZE);
+	while (bytes_read > 0)
+	{
+		buff[bytes_read] = '\0';
+		temp = ft_strjoin(stash, buff);
+		if (!temp)
+			return (free_and_return_null(&stash));
+		free(stash);
+		stash = temp;
+		if (ft_strchr(stash, '\n'))
+			break ;
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+	}
+	if (bytes_read == -1)
+		return (free_and_return_null(&stash));
+	return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*leftover;
-	char		*buffer;
+	static char	*stash;
 	char		*line;
 
-	buffer = malloc (sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tests(fd, buffer, leftover))
-		return (NULL);
-	if (!leftover)
-		leftover = ft_strdup("");
-	leftover = fill_left(fd, buffer, leftover);
-	line = set_line(leftover);
-	leftover = set_left(leftover);
-	free(buffer);
-	if (!line)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (free_and_return_null(&stash));
+	if (!stash || !*stash)
+	{
+		stash = ft_strdup("");
+		if (!stash)
+			return (NULL);
+	}
+	stash = read_and_append(stash, fd);
+	if (!stash || !*stash)
+		return (free_and_return_null(&stash));
+	line = extract_line(stash);
+	if (!line || line[0] == '\0')
+		return (free_and_return_null(&stash));
+	stash = updated_stash(&stash);
 	return (line);
 }
