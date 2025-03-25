@@ -1,7 +1,10 @@
+echo *
 echo ../*
 echo /*
+echo */..
+echo t*/
+echo s*/
 echo ../../*
-echo *
 echo ***
 echo *st
 echo te*
@@ -10,8 +13,6 @@ echo */
 echo */*.c
 echo */*/*
 echo ../*/*
-echo */..
-echo s*/
 echo .*/
 echo *.c
 

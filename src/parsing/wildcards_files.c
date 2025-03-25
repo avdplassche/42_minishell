@@ -1,11 +1,5 @@
 #include "minishell.h"
 
-/*
-
-Example :
-
-
-*/
 
 int	is_last_asterisk(char *token, int i)
 {
@@ -15,12 +9,11 @@ int	is_last_asterisk(char *token, int i)
 	return (1);
 }
 
-int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j, int id)
+int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j)
 {
 	int	tok_end;
 	int	file_end;
 
-	// DEBUG("Out1 %s\n", s_dir->d_name),
 	if (token[0] != '.' && s_dir->d_name[0] == '.')
 		return (0);
 	while (token[i] && token[i] != '*')
@@ -32,7 +25,7 @@ int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j, int id)
 		j++;
 	if (!is_last_asterisk(token, i))
 	{
-		if (!is_valid_filename(token, s_dir, i, j, id))
+		if (!is_valid_filename(token, s_dir, i, j))
 			return (0);
 	}
 	else

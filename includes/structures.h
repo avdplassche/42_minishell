@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/22 11:00:27 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:14:39 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,3 +99,14 @@ typedef struct s_cmd
  * @param t_builtin_func contains the signature of all the builtin functions
  */
 typedef int (*t_builtin_func)(t_cmd *, t_mini *);
+
+
+typedef struct s_wildcard
+{
+	char			*dirname;
+	char			*token;
+	struct dirent	*s_dir;
+	char			*prefix;
+	char			*suffix;
+	bool			current;
+}					t_wildcard;

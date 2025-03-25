@@ -10,6 +10,10 @@
 		"history.h": "c",
 		"dirent.h": "c",
 		"curses.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"wait.h": "c",
+		"types.h": "c",
+		"stdbool.h": "c",
+		"debug.h": "c"
 	}
 }

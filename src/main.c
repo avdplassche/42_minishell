@@ -9,11 +9,25 @@ void	handle_signal(void)
 
 }
 
+// void	loading()
+// {
+// 	int i;
+
+// 	i = -1;
+// 	while (++i < 20)
+// 	{
+// 		printf("■");
+// 		usleep(30 * 1000);
+// 	}
+// 	printf("\n");
+// }
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 	t_cmd	*cmd;
 
+	// loading();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
 	printf("\n");

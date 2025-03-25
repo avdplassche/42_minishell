@@ -13,7 +13,7 @@ void	print_char_table(char **table, char *name)
 	int	i;
 
 	i = -1;
-	DEBUG("\nChar ** table :\n\n");
+	DEBUG("\nchar **%s :\n\n", name);
 	while (table[++i] != NULL)
 		DEBUG("%s [%d] : %s\n", name, i, table[i]);
 }
