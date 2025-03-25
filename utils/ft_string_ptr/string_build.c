@@ -10,9 +10,10 @@
  * @return is void because i edit the pointer directly
  *
  * @return none, void
+ * @note does not free anything
  * @note mainly used in execution 
  */
-void string_build(char **dest_ptr, char *prefix, char *suffix)
+void	string_build(char **dest_ptr, char *prefix, char *suffix)
 {
 	int	i;
 	int	j;

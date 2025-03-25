@@ -5,7 +5,7 @@
  * search for a pointer in an array of pointer and return it if it is found.
  * @param string_array is the array of pointers to search in
  * @param string_to_find is the name of the variable, in this case "PATH"
- * @return is a pointer to char to the corresponding string. 
+ * @return pointer directly located in ENV DO NOT FREE THIS
  *
  * @return none, void
  * @note mainly used in execution 

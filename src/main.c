@@ -1,7 +1,38 @@
 
 #include "minishell.h"
 
+static void	execute_file(t_mini *mini, char *filename)
+{
+	t_cmd 	*cmd;
+	int		fd;
+	char	*line;
 
+	cmd = NULL;
+	fd = open(filename, O_RDONLY, 0666);
+	if (fd == -1)
+		return ;
+	line= get_next_line(fd);
+	while (line)
+	{
+		if (!*line || *line == '\n')
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue;
+		}
+		mini->line = ft_strtrim(line, SPACES);
+		free(line);
+		line = NULL;
+		mini->cmd_amount = count_cmd(mini);
+		mini->cursor = 0;
+		if (!(is_only_spaces(mini->line)) || mini->line[0] != '#')
+			parsing(mini, cmd);
+		free(cmd);
+		free(mini->line);
+		mini->line = NULL;
+		line = get_next_line(fd);
+	}
+}
 
 void	handle_signal(void)
 {
@@ -30,7 +61,6 @@ int	main(int argc, char **argv, char **envp)
 	// loading();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
-	printf("\n");
 	while (argc == 1)
 	{
 
@@ -49,8 +79,11 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 /************************ TEST MODE/ ****************************** */
-
-	if (argc > 1)
+	if (argc == 2)
+	{
+		execute_file(&mini, argv[1]);
+	}
+	if (argc == 3)
 	{
 		int fd = open(argv[1], O_RDONLY);
 		char buffer[10000];
@@ -93,4 +126,3 @@ int	main(int argc, char **argv, char **envp)
 	DEBUG_CLOSE;
 	return (0);
 }
-

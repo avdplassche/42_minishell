@@ -1,14 +1,30 @@
 
 #include "minishell.h"
 
+/**
+ * To create the key format of the variable in the env array
+ * @param mini
+ * @param var_name like PATH
+ * @return - a copy of the path without "PATH=""
+ *
+ * @return - NULL if malloc error 
+ * @note the path reference found with sring_array_find is a reference to env directly do not free
+ */
 char	*ft_get_env(t_mini *mini, char	*var_name)
 {
 	size_t	var_length;
-	char	*full_path;
-	
+	char	*path_ref;
+	char	*value_copy;
+
 	var_length = ft_strlen(var_name);
-	full_path = string_array_find_string(mini->envp, var_name);
-	if (!full_path)
+	path_ref = string_array_find_string(mini->envp, var_name);
+	if (!path_ref)
 		return (NULL);
-	return (full_path + var_length + 1);
+	value_copy = ft_strdup(path_ref + var_length + 1);
+	if (!value_copy)
+	{
+		mini->last_return = MALLOC_ERROR;
+		return (NULL);
+	}
+	return (value_copy);
 }

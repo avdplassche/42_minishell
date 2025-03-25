@@ -83,8 +83,9 @@ int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 
 void		exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char *var_name);
-int			set_env(t_mini *mini, char *key, char *env_row);
-void		update_pwd_env(t_mini *mini, char *env_var);
+int			set_env(t_mini *mini, char *env_key, char *env_row);
+int			update_pwd_env(t_mini *mini, char *env_var);
+int			update_old_pwd_env(t_mini *mini);
 char		*get_current_workdir(t_mini *mini);
 char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 
@@ -92,7 +93,7 @@ char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 
 int			builtin_cd(t_cmd *cmd, t_mini *mini);
 int			builtin_echo(t_cmd *cmd, t_mini *mini);
-// int			builtin_env(t_cmd *cmd, t_mini *mini);
+int			builtin_env(t_cmd *cmd, t_mini *mini);
 // int			builtin_exit(t_cmd *cmd, t_mini *mini);
 // int			builtin_export(t_cmd *cmd, t_mini *mini);
 int			builtin_pwd(t_cmd *cmd, t_mini *mini);
@@ -126,21 +127,34 @@ void		debug_parsing_print(t_mini *mini, t_cmd cmd);
 				/* LIBFT */
 
 int			ft_atoi(char *str);
+void		ft_bzero(void *s, size_t n);
+void		*ft_calloc(size_t count, size_t size);
 char		*ft_itoa(int n);
+void		*ft_memchr(const void *s, int c, size_t n);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+void		*ft_memmove(void *dst, const void *src, size_t n);
+void		*ft_memset(void	*b, int c, size_t len);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putnbr_fd(int n, int fd);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_sized_strdup(char *s, int size);
 char		**ft_split(char *s, char c);
 char		*ft_strchr(char *s, int c);
-char		*ft_sized_strdup(char *s, int size);
+int			ft_strcmp(char *s1, char *s2);
+char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *s1);
 char		*ft_strjoin(char *s1, char *s2);
-size_t		ft_strlen(char *s);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t		ft_strlen(const char *s);
 int			ft_strncmp(char *s1, char *s2, size_t n);
-int			ft_strcmp(char *s1, char *s2);
 char		*ft_strnstr(char *haystack, char *needle, size_t len);
 char		*ft_strtrim(char *s1, char *set);
-char		*ft_substr(char *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strcpy(char *dest, char *src);
 int			ft_toupper(int c);
+int			ft_tolower(int c);
 
 				/* GNL */
 
@@ -169,5 +183,9 @@ void		string_array_print(char **string_array);
 size_t		string_array_len(char **str);
 char		*string_array_create_key(char *variable, int variable_len);
 void		string_build(char **dest_ptr, char *prefix, char *suffix);
+
+/* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
+
+void	print_error(const char *format, const char *path);
 
 #endif

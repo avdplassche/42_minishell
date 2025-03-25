@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 19:40:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 13:03:32 by jrandet          ###   ########.fr       */
+/*   Created: 2024/10/07 21:11:09 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/25 15:00:29 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char	*_dst;
-	char	*_src;
+	const char	*src_start;
 
-	if (!dst && !src)
-		return (0);
-	_src = (char *)src;
-	_dst = (char *)dst;
-	if (_dst < _src)
-	{
-		while (n--)
-			*(_dst++) = *(_src++);
-	}
-	else if (_dst > _src)
-	{
-		_src += n;
-		_dst += n;
-		while (n--)
-			*(--_dst) = *(--_src);
-	}
-	return (dst);
+	src_start = src;
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (--dstsize && *src)
+		*dst++ = *src++;
+	*dst = '\0';
+	return (ft_strlen(src_start));
 }

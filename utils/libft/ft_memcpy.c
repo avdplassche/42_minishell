@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 19:40:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 13:03:32 by jrandet          ###   ########.fr       */
+/*   Created: 2024/10/04 23:37:02 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/25 12:52:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*_dst;
-	char	*_src;
+	unsigned char		*dst1;
+	const unsigned char	*src1;
 
 	if (!dst && !src)
-		return (0);
-	_src = (char *)src;
-	_dst = (char *)dst;
-	if (_dst < _src)
-	{
-		while (n--)
-			*(_dst++) = *(_src++);
-	}
-	else if (_dst > _src)
-	{
-		_src += n;
-		_dst += n;
-		while (n--)
-			*(--_dst) = *(--_src);
-	}
+		return (NULL);
+	dst1 = (unsigned char *)dst;
+	src1 = (const unsigned char *)src;
+	while (n--)
+		*dst1++ = *src1++;
 	return (dst);
 }

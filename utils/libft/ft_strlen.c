@@ -6,13 +6,13 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:37:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/03/18 15:48:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:01:35 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 

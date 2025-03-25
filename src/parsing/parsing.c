@@ -69,8 +69,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		print_cmd(cmd[i], mini->line);
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	/* EXECUTION */
-	// exec_mini(mini, cmd);
+	exec_mini(mini, cmd);
 	free_cmd(mini, cmd);
 	return (0);
 }

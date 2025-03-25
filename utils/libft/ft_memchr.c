@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 19:40:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 13:03:32 by jrandet          ###   ########.fr       */
+/*   Created: 2024/10/10 13:08:45 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/25 13:54:59 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	*_dst;
-	char	*_src;
+	unsigned char	*testpointer;
+	unsigned char	chr;
 
-	if (!dst && !src)
-		return (0);
-	_src = (char *)src;
-	_dst = (char *)dst;
-	if (_dst < _src)
+	testpointer = (unsigned char *)s;
+	chr = (char)c;
+	while (n--)
 	{
-		while (n--)
-			*(_dst++) = *(_src++);
+		if (*testpointer == chr)
+			return (testpointer);
+		testpointer++;
 	}
-	else if (_dst > _src)
-	{
-		_src += n;
-		_dst += n;
-		while (n--)
-			*(--_dst) = *(--_src);
-	}
-	return (dst);
+	return (NULL);
 }

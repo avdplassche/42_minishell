@@ -9,7 +9,7 @@
  */
 size_t	string_array_len(char **str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])

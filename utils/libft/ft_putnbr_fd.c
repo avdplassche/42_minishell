@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 19:40:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 13:03:32 by jrandet          ###   ########.fr       */
+/*   Created: 2024/10/16 19:07:05 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/25 13:55:08 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*_dst;
-	char	*_src;
+	char	c;
 
-	if (!dst && !src)
-		return (0);
-	_src = (char *)src;
-	_dst = (char *)dst;
-	if (_dst < _src)
+	if (n == -2147483648)
 	{
-		while (n--)
-			*(_dst++) = *(_src++);
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	else if (_dst > _src)
+	if (n < 0)
 	{
-		_src += n;
-		_dst += n;
-		while (n--)
-			*(--_dst) = *(--_src);
+		write (fd, "-", 1);
+		n = -n;
 	}
-	return (dst);
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	c = (n % 10) + '0';
+	write(fd, &c, 1);
 }

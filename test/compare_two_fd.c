@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-
 int	ft_strcmp_fd(char *path1, char *path2)
 {
 	int	fd1;

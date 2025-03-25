@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 19:40:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 13:03:32 by jrandet          ###   ########.fr       */
+/*   Created: 2024/10/16 18:50:34 by jrandet           #+#    #+#             */
+/*   Updated: 2025/03/25 12:52:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*_dst;
-	char	*_src;
-
-	if (!dst && !src)
-		return (0);
-	_src = (char *)src;
-	_dst = (char *)dst;
-	if (_dst < _src)
-	{
-		while (n--)
-			*(_dst++) = *(_src++);
-	}
-	else if (_dst > _src)
-	{
-		_src += n;
-		_dst += n;
-		while (n--)
-			*(--_dst) = *(--_src);
-	}
-	return (dst);
+	if (!s)
+		return ;
+	while (*s)
+		write(fd, s++, 1);
 }
