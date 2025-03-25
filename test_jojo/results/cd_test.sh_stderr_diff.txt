@@ -1,4 +1,4 @@
---- ./test_jojo/logs/minishell_error.log
-+++ ./test_jojo/logs/BASH_ERR.log
+--- ./test_jojo/logs/minishell_error.log	2025-03-25 12:01:15.575131786 +0100
++++ ./test_jojo/logs/bash_err.log	2025-03-25 12:01:16.107153264 +0100
 @@ -0,0 +1 @@
 +./test_jojo/tests/cd_test.sh: line 6: cd: ./nonexistentfile.txt: No such file or directory

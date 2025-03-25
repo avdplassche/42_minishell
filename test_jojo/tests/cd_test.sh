@@ -4,3 +4,4 @@ cd .
 cd ./log
 cd ..
 cd ./nonexistentfile.txt
+cd

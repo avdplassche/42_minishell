@@ -8,7 +8,6 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 	if (cmd->arg_amount == 0 || cmd->args[1] == NULL)
 	{
 		path = ft_get_env(mini, "HOME");
-		printf("HOME value: %s\n", path);
 		if (!path)
 		{
 			printf("Minishell: cd: HOME not set\n");

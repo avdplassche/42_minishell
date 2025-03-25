@@ -11,7 +11,7 @@ LEAKS_CMD+=" --leak-check=full"
 LEAKS_CMD+=" --track-fds=yes"
 LEAKS_CMD+=" --show-leak-kinds=all"
 LEAKS_CMD+=" --track-origins=yes"
-LEAKS_CMD+=" --log-file=log/leaks.log"
+LEAKS_CMD+=" --log-file=./test_jojo/logs/leaks.log"
 LEAKS_CMD+=" --trace-children=yes"
 
 mkdir -p "$TEST_DIR" "$RESULTS_DIR" "$LOG_DIR"
@@ -33,35 +33,68 @@ warning(){
 }
 
 run_test() {
-	local TEST_FILE="$1"
-	local TEST_NAME=$(basename "$TEST_FILE")
-	local OUTPUT_MINI_LOG="$LOG_DIR/minishell.log"
-	local OUTPUT_MINI_ERR_LOG="$LOG_DIR/minishell_error.log"
-	local BASH_LOG="$LOG_DIR/bash.log"
-	local BASH_ERR="$LOG_DIR/BASH_ERR.log"
-	local DIFF_STDOUT="$RESULTS_DIR/${TEST_NAME}_stdout_diff.txt"
-	local DIFF_STDERR="$RESULTS_DIR/${TEST_NAME}_stderr_diff.txt"
+	local test_file="$1"
+	local test_name=$(basename "$test_file")
+	local output_standard_file="$LOG_DIR/minishell.log"
+	local erroroutput_standard_file="$LOG_DIR/minishell_error.log"
+	local bash_log="$LOG_DIR/bash.log"
+	local bash_err="$LOG_DIR/bash_err.log"
+	local diff_stdout="$RESULTS_DIR/${test_name}_stdout_diff.txt"
+	local diff_stderr="$RESULTS_DIR/${test_name}_stderr_diff.txt"
 	
-	info "Testing $TEST_NAME"
+	info "Testing $test_name"
 	
+	# Create necessary directories
 	mkdir -p "$LOG_DIR" "$RESULTS_DIR"
 
 	info "Running tests in Minishell and bash..."
-	$LEAKS_CMD $MINISHELL $TEST_FILE > $OUTPUT_MINI_LOG 2> $OUTPUT_MINI_ERR_LOG
-	bash $TEST_FILE > "$BASH_LOG" 2> "$BASH_ERR"
+	$LEAKS_CMD $MINISHELL $test_file > $output_standard_file 2> $erroroutput_standard_file
+	bash $test_file > "$bash_log" 2> "$bash_err"
 
 	info "Comparing outputs..."
 
-	diff -u "$OUTPUT_MINI_LOG" "$BASH_LOG" > "$DIFF_STDOUT"
-	diff -u "$OUTPUT_MINI_ERR_LOG" "$BASH_ERR" > "$DIFF_STDERR"
-		if [ -s "$DIFF_STDOUT" ] || [ -s "$DIFF_STDERR" ]; then
-		error "Test failed: Differences found"
-		[ -s "$DIFF_STDOUT" ] && warning "Standard output differences:" && cat "$DIFF_STDOUT"
-		[ -s "$DIFF_STDERR" ] && warning "Standard error differences:" && cat "$DIFF_STDERR"
-		return 1
+	# Create simplified comparison output
+	if ! cmp -s "$output_standard_file" "$bash_log"; then
+		error "STDOUT DIFFERENCES DETECTED:"
+		echo ""
+		echo "=== MINISHELL OUTPUT ==="
+		cat "$output_standard_file"
+		echo ""
+		echo "=== BASH OUTPUT ==="
+		cat "$bash_log"
+		echo ""
+		# Still create the diff file for reference
+		diff -u "$output_standard_file" "$bash_log" > "$diff_stdout"
 	else
-		success "Test passed: No differences found"
+		success "✓ Standard output matches"
+	fi
+	
+	if ! cmp -s "$erroroutput_standard_file" "$bash_err"; then
+		error "STDERR DIFFERENCES DETECTED:"
+		echo ""
+		echo "=== MINISHELL ERROR OUTPUT ==="
+		cat "$erroroutput_standard_file"
+		echo ""
+		echo "=== BASH ERROR OUTPUT ==="
+		cat "$bash_err"
+		echo ""
+		# Still create the diff file for reference
+		diff -u "$erroroutput_standard_file" "$bash_err" > "$diff_stderr"
+	else
+		success "✓ Standard error output matches"
+	fi
+	
+	# Show the test commands for context
+	info "Test commands executed:"
+	cat "$test_file" | grep -v "^#" | sed '/^$/d' | sed 's/^/  /'
+	
+	# Overall test result
+	if cmp -s "$output_standard_file" "$bash_log" && cmp -s "$erroroutput_standard_file" "$bash_err"; then
+		success "✓ Test passed: All outputs match"
 		return 0
+	else
+		error "✗ Test failed: Differences found"
+		return 1
 	fi
 }
 
