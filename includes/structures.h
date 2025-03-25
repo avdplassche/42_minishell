@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 15:14:39 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:31:53 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_mini
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
  * @param path path of the command (needed for execve)
+ * @param export is it an export command
  * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
  * @param echo_n_index if command = echo -n -n gives the index of the first argument after -n in this case 3
  * @param args arguments given to the binary (needed for execve)
@@ -82,6 +83,7 @@ typedef struct s_cmd
 {
 	char		*command;
 	char		*path;
+	bool		export;
 	int			type;
 	int			echo_n_index;
 	char		**args;
@@ -108,5 +110,6 @@ typedef struct s_wildcard
 	struct dirent	*s_dir;
 	char			*prefix;
 	char			*suffix;
+	char			*final_sub;
 	bool			current;
 }					t_wildcard;

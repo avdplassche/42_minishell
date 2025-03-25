@@ -1,7 +1,8 @@
 
 #include "minishell.h"
 
-
+/** Count valid files in order to malloc a char table 
+ */
 int	count_valid_files(DIR *folder, t_wildcard w)
 {
 	int				count;
@@ -20,11 +21,10 @@ int	count_valid_files(DIR *folder, t_wildcard w)
 	return (count);
 }
 
-
-
 char	*tokenize_wildcard(char *temp, int start)
 {
 	int		len;
+	char	*token;
 	
 	DEBUG("(f)Tokenize_wildcard\n-> temp = %s, start = %d\n\n", temp, start);
 	len = start;
@@ -35,7 +35,9 @@ char	*tokenize_wildcard(char *temp, int start)
 		len++;
 	if (temp[len] == '/')
 		len ++;
-	return (ft_substr(temp, start, len - start));
+	token = ft_substr(temp, start, len - start);
+	//malloc protection
+	return (token);
 }
 
 char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
@@ -64,48 +66,6 @@ char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
 	return (file_list);
 }
 
-void	sort_array(char **filename, int len)
-{
-	int		i;
-	int		j;
-	char	*temp;
-
-	if (len <= 1)
-		return ;
-	while (len > 0)
-	{
-		i = 0;
-		j = 1;
-		while (j < len)
-		{
-			if (ft_strcmp_alpha(filename[i], filename[j]) > 0)
-			{
-				temp = filename[i];
-				filename[i] = filename[j];
-				filename[j] = temp;
-			}
-			i++;
-			j++;
-		}
-		len --;
-	}
-}
-
-char	*crop_token(char *token)
-{
-	int		i;
-	char	*subtoken;
-
-	i = 0;
-	while (token[i] && token[i] != '/')
-		i++;
-	if (!token[i])
-		return (NULL);
-	else
-		subtoken = ft_substr(token, 0, i);
-	return (subtoken);
-}
-
 void	get_prefix(t_wildcard *w, char *temp, int i)
 {
 	while (i >= 0 && temp[i] != '/')
@@ -125,57 +85,64 @@ void	get_suffix(t_wildcard *w, char *temp, int i)
 	len = ft_strlen(temp) - 1;
 	while (i <= len && temp[i] != '/')
 		i++;
-	if (temp[i] == '/' && i < len)
+	if (temp[len] == '/')
+		w->suffix = ft_strdup("/");
+	else if (temp[i] == '/' && i < len)
 		w->suffix = ft_substr(temp, i, len - i + 1);
 }
 
-
-
-void	change_affixes(char **filename, char *temp, t_wildcard w, int i)
+char	*join_three_strings(char *s1, char *s2, char *s3)
 {
-	// char	*subtoken;
-	int		len;
-	int			j;
-	// char	*temp;
-	// char	*prefix;
-	// char	*dirpath;
-	(void)i;
+	char	*temp1;
+	char	*temp2;
 
-	DEBUG("\n(f)Change affixes\n-> dirname = %s, token = %s\n", w.dirname, w.token);
+	temp1 = NULL;
+	temp2 = NULL;
+	if (!s1 && !s2 && !s3)
+		return (NULL);
+	if (!s1 && !s2)
+		return (ft_strdup(s3));
+	else if (!s1 && !s3)
+		return (ft_strdup(s2));
+	else if (!s2 && !s3)
+		return (ft_strdup(s1));
+	else if (!s1)
+		return (ft_strjoin(s2, s3));
+	else if (!s2)
+		return (ft_strjoin(s1, s3));
+	else if (!s3)
+		return (ft_strjoin(s1, s2));
+	else
+	{
+		temp1 = ft_strjoin(s1, s2);
+		temp2 = ft_strjoin(temp1, s3);
+		return (free(temp1), temp2);
+	}
+}
+
+
+void	change_affixes(char **file_list, char *temp1, t_wildcard *w, int i)
+{
+	int		len;
+	int		j;
+	char	*temp2;
+
 	j = -1;
-	len = double_array_len(filename);
-	// subtoken = crop_token(w.token);
-	// DEBUG("Subtoken : %s\n", subtoken);
-	get_prefix(&w, temp, i);
-	get_suffix(&w, temp, i);
-	// DEBUG("Preffix : %s\n", w.prefix);
-	// DEBUG("Suffix : %s\n", w.suffix);
+	len = double_array_len(file_list);
+	get_prefix(w, temp1, i);
+	get_suffix(w, temp1, i);
+	DEBUG("\nPrefix = %s\nSuffix : %s\n\n", w->prefix, w->suffix);
 	while (++j < len)
 	{
-		DEBUG("Filename[%d] : %s%s%s\n", j, w.prefix, filename[j], w.suffix);
+		temp2 = ft_strdup(file_list[j]);
+		free(file_list[j]);
+		file_list[j] = join_three_strings(w->prefix, temp2, w->suffix);
+		free(temp2);
 	}
-	// if (w.dirname[0] == '/')
-	// 	dirpath = ft_strdup(w.dirname);
-	// else if (w.dirname)
-	// {
-	// 	dirpath = ft_strjoin(w.dirname, "/");
-	// 	free(w.dirname);
-	// }
-	// while (++j < len)
-	// {
-	// 	if (dirpath)
-	// 		temp = ft_strjoin(dirpath, filename[j]);
-	// 	free(filename[j]);
-	// 	if (subtoken)
-	// 		filename[j] = ft_strjoin(temp, subtoken);
-	// 	else
-	// 		filename[j] = ft_strdup(temp);
-	// }
 }
 
 void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
 {
-	// char	*dirname;
 	char	buffer[PATH_MAX];
 
 	while (i > 0)
@@ -211,6 +178,49 @@ void	init_wildcard_struct(t_wildcard *w)
 	w->current = false;
 }
 
+void	free_wildcard_struct(t_wildcard *w)
+{
+	if (w->dirname)
+		free(w->dirname);
+	if (w->token)
+		free(w->token);
+	if (w->s_dir)
+		free(w->s_dir);
+	if (w->prefix)
+		free(w->prefix);
+	if (w->suffix)
+		free(w->suffix);
+}
+
+// char	*join_n_string(char **table, int len)
+// {
+// 	char	*str;
+// 	int		i;
+// 	int		j;
+// 	char	*temp1;
+// 	char	*temp2;
+
+// 	i = 0;
+// 	j = 1;
+// 	if (len = 1)
+// 		return (table[0]);
+// 	while (j < len)
+// 	{
+// 		temp1 = ft_strjoin(table[i], " ");
+// 		temp2 = ft_strjoin(temp1, table[j]);
+// 		free(temp1);
+// 		i++;
+// 		j++;
+// 	}
+
+// }
+
+// void	set_final_substitution(t_wildcard *w, char **file_list)
+// {
+
+	
+// }
+
 char	*substitute_wildcard(char *temp, int i)
 {
 	t_wildcard		w;
@@ -226,31 +236,21 @@ char	*substitute_wildcard(char *temp, int i)
 	DEBUG("Token : %s\n", w.token);
 	DEBUG("Index : %d\n", i);
 	file_amount = count_valid_files(folder, w);
+	if (!file_amount)
+		return (free_wildcard_struct(&w), temp);  //Should I also write on stderr
+	DEBUG("Count : %d\n", file_amount);
 	file_list = fill_file_list(folder, w, file_amount);
 	print_char_table(file_list, "file_list");
 	sort_array(file_list, double_array_len(file_list));
 	print_char_table(file_list, "file_list");
-	change_affixes(file_list, temp, w, i);
-	// print_char_table(file_list, "file_list");
-
-	/* to delete*/
-
-	folder = opendir(w.dirname);
-	while (1)
-	{
-		w.s_dir = readdir(folder);
-		if (!w.s_dir)
-			break ;
-		// if (s_dir->d_name[0] != '.')
-		// 	DEBUG("%s\n", s_dir->d_name);
-	}
-
-	/* /to delete ?*/
+	change_affixes(file_list, temp, &w, i);
+	print_char_table(file_list, "file_list");
+	// set_final_substitution(&w, file_list);
+	// temp = 
 
 	DEBUG("\n");
 	closedir(folder);
-	free(w.token);
-	free(w.dirname);
+	free_wildcard_struct(&w);
 	return (temp);
 }
 
@@ -273,7 +273,6 @@ int	need_wildcard_substitution(char *temp)
 	return (-1);
 }
 /**Go through the command and do all the substitutions
- *
  */
 char	*wildcard_handle(char *temp)
 {

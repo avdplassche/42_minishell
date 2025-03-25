@@ -14,6 +14,7 @@
 		"wait.h": "c",
 		"types.h": "c",
 		"stdbool.h": "c",
-		"debug.h": "c"
+		"debug.h": "c",
+		"typeinfo": "c"
 	}
 }

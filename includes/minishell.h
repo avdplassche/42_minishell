@@ -163,6 +163,7 @@ char		*get_next_line(int fd);
 				/* XTRA */
 
 bool		contain_char(char *s, char c);
+void		sort_array(char **filename, int len);
 bool		contain_quotes(char *s);
 char		*enquote_str(char *str, int q);
 int			contain_string_at_specific_index(char *haystack, char *needle, int i);

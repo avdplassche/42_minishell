@@ -69,6 +69,7 @@ UTILS				=	contain_char.c \
 						is_angle_bracket.c \
 						print_error.c \
 						start_with.c \
+						sort_array.c \
 						ft_atoi.c \
 						ft_bzero.c \
 						ft_calloc.c \
@@ -94,7 +95,6 @@ UTILS				=	contain_char.c \
 						ft_strnstr.c \
 						ft_strtrim.c \
 						ft_substr.c \
-						ft_strcpy.c \
 						ft_toupper.c \
 						ft_tolower.c \
 						get_debug_fd.c \

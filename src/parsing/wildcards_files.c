@@ -14,6 +14,8 @@ int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j)
 	int	tok_end;
 	int	file_end;
 
+	if (is_only_specific_char(s_dir->d_name, '.'))
+		return (0);
 	if (token[0] != '.' && s_dir->d_name[0] == '.')
 		return (0);
 	while (token[i] && token[i] != '*')
