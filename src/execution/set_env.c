@@ -29,7 +29,7 @@ int	set_env(t_mini *mini, char *env_key, char *env_row)
 		i++;
 	}
 	//string push if it does not work
-	free(env_row);
+	free(env_row); // needs to do the string push
 	mini->last_return = CMD_NOT_FOUND;
 	return (mini->last_return);
 }

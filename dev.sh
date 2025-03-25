@@ -127,13 +127,4 @@ EOF
 
 make re
 
-if [ "$1" = "test" ] && [ -n "$2" ]; then
-	run_command_test "$2"
-else
-	if [ -f "$1" ]; then
-		run_TEST_FILE "$1"
-	else
-		error "Usage: $0 [test COMMAND] or $0 [TEST_FILE]"
-		exit 1
-	fi
-fi
+run_command_test $@
