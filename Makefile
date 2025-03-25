@@ -65,22 +65,34 @@ UTILS				=	contain_char.c \
 						is_quote.c \
 						is_space.c \
 						is_angle_bracket.c \
+						print_error.c \
 						start_with.c \
 						ft_atoi.c \
+						ft_bzero.c \
 						ft_calloc.c \
 						ft_itoa.c \
+						ft_memchr.c \
+						ft_memcmp.c \
+						ft_memcpy.c \
+						ft_memmove.c \
+						ft_memset.c \
+						ft_putchar_fd.c \
+						ft_putnbr_fd.c \
+						ft_putstr_fd.c \
+						ft_sized_strdup.c \
 						ft_split.c \
 						ft_strchr.c \
+						ft_strcmp.c \
+						ft_strcpy.c \
 						ft_strdup.c \
-						ft_sized_strdup.c \
 						ft_strjoin.c \
+						ft_strlcpy.c \
 						ft_strlen.c \
 						ft_strncmp.c \
-						ft_strcmp.c \
 						ft_strnstr.c \
 						ft_strtrim.c \
 						ft_substr.c \
-						ft_strcpy.c \
+						ft_tolower.c \
 						get_debug_fd.c \
 						get_next_line.c \
 						string_array_create_key.c \

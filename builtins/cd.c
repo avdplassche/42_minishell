@@ -10,14 +10,14 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 		path = ft_get_env(mini, "HOME");
 		if (!path)
 		{
-			printf("Minishell: cd: HOME not set\n");
+			ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
 			mini->last_return = CMD_NOT_FOUND;
 			return (mini->last_return);
 		}
 	}
 	else if (cmd->arg_amount > 1)
 	{
-		printf("Minishell: cd: too many arguments\n");
+		ft_putstr_fd("Minishell: cd: too many arguments\n", 2);
 		mini->last_return = CMD_NOT_FOUND;
 		return (mini->last_return);
 	}
@@ -33,7 +33,7 @@ int	builtin_cd(t_cmd *cmd, t_mini *mini)
 	}
 	else
 	{
-		printf("Minishell: cd: %s: No such file in directory\n", path);
+		print_error("Minishell: cd: %s: No such file or directory\n", path);
 		mini->last_return = CMD_NOT_FOUND;
 	}
 	return (mini->last_return);

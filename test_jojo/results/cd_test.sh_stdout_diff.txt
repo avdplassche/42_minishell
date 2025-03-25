@@ -1,4 +1,1 @@
---- ./test_jojo/logs/minishell.log	2025-03-25 12:01:16.085152376 +0100
-+++ ./test_jojo/logs/bash.log	2025-03-25 12:01:16.106153223 +0100
-@@ -1 +0,0 @@
--Minishell: cd: ./nonexistentfile.txt: No such file in directory
+

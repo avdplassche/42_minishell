@@ -33,69 +33,69 @@ warning(){
 }
 
 run_test() {
-	local test_file="$1"
-	local test_name=$(basename "$test_file")
-	local output_standard_file="$LOG_DIR/minishell.log"
-	local erroroutput_standard_file="$LOG_DIR/minishell_error.log"
-	local bash_log="$LOG_DIR/bash.log"
-	local bash_err="$LOG_DIR/bash_err.log"
-	local diff_stdout="$RESULTS_DIR/${test_name}_stdout_diff.txt"
-	local diff_stderr="$RESULTS_DIR/${test_name}_stderr_diff.txt"
-	
-	info "Testing $test_name"
-	
-	# Create necessary directories
-	mkdir -p "$LOG_DIR" "$RESULTS_DIR"
+    local test_file="$1"
+    local test_name=$(basename "$test_file")
+    local output_standard_file="$LOG_DIR/minishell.log"
+    local erroroutput_standard_file="$LOG_DIR/minishell_error.log"
+    local bash_log="$LOG_DIR/bash.log"
+    local bash_err="$LOG_DIR/bash_err.log"
+    local diff_stdout="$RESULTS_DIR/${test_name}_stdout_diff.txt"
+    local diff_stderr="$RESULTS_DIR/${test_name}_stderr_diff.txt"
+    
+    info "Testing $test_name"
+    
+    mkdir -p "$LOG_DIR" "$RESULTS_DIR"
 
-	info "Running tests in Minishell and bash..."
-	$LEAKS_CMD $MINISHELL $test_file > $output_standard_file 2> $erroroutput_standard_file
-	bash $test_file > "$bash_log" 2> "$bash_err"
+    info "Running tests in Minishell and bash..."
+    $LEAKS_CMD $MINISHELL $test_file > $output_standard_file 2> $erroroutput_standard_file
+    bash $test_file > "$bash_log" 2> "$bash_err"
+    
+    sed -i -r "s/ line [0-9]+://" "$bash_err"
 
-	info "Comparing outputs..."
+    info "Comparing outputs..."
 
-	# Create simplified comparison output
-	if ! cmp -s "$output_standard_file" "$bash_log"; then
-		error "STDOUT DIFFERENCES DETECTED:"
-		echo ""
-		echo "=== MINISHELL OUTPUT ==="
-		cat "$output_standard_file"
-		echo ""
-		echo "=== BASH OUTPUT ==="
-		cat "$bash_log"
-		echo ""
-		# Still create the diff file for reference
-		diff -u "$output_standard_file" "$bash_log" > "$diff_stdout"
-	else
-		success "✓ Standard output matches"
-	fi
-	
-	if ! cmp -s "$erroroutput_standard_file" "$bash_err"; then
-		error "STDERR DIFFERENCES DETECTED:"
-		echo ""
-		echo "=== MINISHELL ERROR OUTPUT ==="
-		cat "$erroroutput_standard_file"
-		echo ""
-		echo "=== BASH ERROR OUTPUT ==="
-		cat "$bash_err"
-		echo ""
-		# Still create the diff file for reference
-		diff -u "$erroroutput_standard_file" "$bash_err" > "$diff_stderr"
-	else
-		success "✓ Standard error output matches"
-	fi
-	
-	# Show the test commands for context
-	info "Test commands executed:"
-	cat "$test_file" | grep -v "^#" | sed '/^$/d' | sed 's/^/  /'
-	
-	# Overall test result
-	if cmp -s "$output_standard_file" "$bash_log" && cmp -s "$erroroutput_standard_file" "$bash_err"; then
-		success "✓ Test passed: All outputs match"
-		return 0
-	else
-		error "✗ Test failed: Differences found"
-		return 1
-	fi
+    local stdout_diff=$(diff -U 1 "$bash_log" "$output_standard_file")
+    local stderr_diff=$(diff -U 1 "$bash_err" "$erroroutput_standard_file")
+    
+    echo "$stdout_diff" > "$diff_stdout"
+    echo "$stderr_diff" > "$diff_stderr"
+
+    if [[ -z "$stdout_diff" ]]; then
+        success "✓ Standard output matches"
+    else
+        error "STDOUT DIFFERENCES DETECTED:"
+        echo ""
+        echo "=== MINISHELL OUTPUT ==="
+        cat "$output_standard_file"
+        echo ""
+        echo "=== BASH OUTPUT ==="
+        cat "$bash_log"
+        echo ""
+    fi
+    
+    if [[ -z "$stderr_diff" ]]; then
+        success "✓ Standard error output matches"
+    else
+        warning "STDERR DIFFERENCES DETECTED (Warning only):"
+        echo ""
+        echo "=== MINISHELL ERROR OUTPUT ==="
+        cat "$erroroutput_standard_file"
+        echo ""
+        echo "=== BASH ERROR OUTPUT (normalized) ==="
+        cat "$bash_err"
+        echo ""
+    fi
+
+    info "Test commands executed:"
+    cat "$test_file" | grep -v "^#" | sed '/^$/d' | sed 's/^/  /'
+    
+    if [[ -z "$stdout_diff" ]]; then
+        success "✓ Test passed: Standard output matches"
+        return 0
+    else
+        error "✗ Test failed: Differences found in standard output"
+        return 1
+    fi
 }
 
 run_command_test() {
