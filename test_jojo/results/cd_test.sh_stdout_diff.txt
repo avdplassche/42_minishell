@@ -1,0 +1,4 @@
+--- ./test_jojo/logs/minishell.log
++++ ./test_jojo/logs/bash.log
+@@ -1 +0,0 @@
+-Minishell: cd: ./nonexistentfile.txt: No such file in directory
