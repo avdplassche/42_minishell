@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/26 14:54:11 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/26 18:31:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_fd_backup
 	int	stderr_backup;
 }	t_fd_backup;
 
-typedef union u_pipe_ends
+typedef union u_pipefds
 {
 	int	fildes[2];
 	struct
@@ -27,7 +27,7 @@ typedef union u_pipe_ends
 		int		read;
 		int		write;
 	};	
-}			t_pipe_ends;
+}			t_pipefds;
 
 
 typedef struct s_redir
@@ -67,7 +67,7 @@ typedef struct s_mini
 	int			fd_in;
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
-	t_pipe_ends *pipes;
+	t_pipefds *pipes;
 }				t_mini;
 
 /** A structure containing command's 'token'
@@ -101,8 +101,8 @@ typedef struct s_cmd
 	int			redir_amount;
 	int			error;
 	pid_t		pid;
-	t_pipe_ends	pipe_in;
-	t_pipe_ends	pipe_out;
+	t_pipefds	pipe_in;
+	t_pipefds	pipe_out;
 }				t_cmd;
 
 /** A pointer to function for the builtin function

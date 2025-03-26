@@ -10,6 +10,7 @@ int	is_builtin_echo(t_cmd *cmd)
 	int	i;
 	int	j;
 
+	cmd->echo_n_index = 0;
 	if (!cmd->arg_amount)
 		return (1);
 	j = 1;
@@ -63,7 +64,6 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 	}
 	return (0);
 }
-
 
 /** Fill cmd type token
  * @param mini t_mini structure, containing current line to work with
