@@ -21,12 +21,12 @@ int	count_valid_files(DIR *folder, t_wildcard w)
 	return (count);
 }
 
-char	*tokenize_wildcard(char *temp, int start)
+void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
 {
 	int		len;
-	char	*token;
+	// char	*token;
 	
-	DEBUG("(f)Tokenize_wildcard\n-> temp = %s, start = %d\n\n", temp, start);
+	// DEBUG("(f)Tokenize_wildcard\n-> temp = %s, start = %d\n\n", temp, start);
 	len = start;
 	while (start >= 0 && temp[start] != '/')
 		start--;
@@ -35,9 +35,8 @@ char	*tokenize_wildcard(char *temp, int start)
 		len++;
 	if (temp[len] == '/')
 		len ++;
-	token = ft_substr(temp, start, len - start);
+	w->token = ft_substr(temp, start, len - start);
 	//malloc protection
-	return (token);
 }
 
 char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
@@ -48,7 +47,7 @@ char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
 
 	if (!file_amount)
 		return (NULL);
-	DEBUG("\nFile Amount : %d\n", file_amount);
+	// DEBUG("\nFile Amount : %d\n", file_amount);
 	file_list = (char **)malloc(sizeof(char *) * (file_amount + 1));
 	if (!file_list)
 		return (NULL);
@@ -192,34 +191,61 @@ void	free_wildcard_struct(t_wildcard *w)
 		free(w->suffix);
 }
 
-// char	*join_n_string(char **table, int len)
-// {
-// 	char	*str;
-// 	int		i;
-// 	int		j;
-// 	char	*temp1;
-// 	char	*temp2;
+char	*join_n_string(char **file_list, int len)
+{
+	char	*str;
+	int		i;
+	int		j;
+	char	*temp;
 
-// 	i = 0;
-// 	j = 1;
-// 	if (len = 1)
-// 		return (table[0]);
-// 	while (j < len)
-// 	{
-// 		temp1 = ft_strjoin(table[i], " ");
-// 		temp2 = ft_strjoin(temp1, table[j]);
-// 		free(temp1);
-// 		i++;
-// 		j++;
-// 	}
+	i = 0;
+	j = 1;
+	if (len == 1)
+		return (file_list[0]);
+	str = ft_strjoin(file_list[i], file_list[j++]);;
+	while (j < len)
+	{
+		temp = ft_strjoin(str, file_list[j]);
+		j++;
+		free(str);
+		str = ft_strdup(temp);
+		free(temp);
+	}
+	return (str);
+}
 
-// }
+void	append_space_to_string(char **str)
+{
+	char	*temp; 
 
-// void	set_final_substitution(t_wildcard *w, char **file_list)
-// {
+	temp = ft_strdup(*str);
+	free(*str);
+	*str = NULL;
+	*str = ft_strjoin(temp, " ");
+	free(temp);
+	temp = NULL;
+}
 
-	
-// }
+char	*set_final_substitution(char **file_list, int file_amount)
+{
+	int		len;
+	char	*str;
+
+	len = file_amount - 2;
+	while (len >= 0)
+	{
+		append_space_to_string(&file_list[len]);
+		len--;
+	}
+	str = join_n_string(file_list, file_amount);
+
+	/*     INSERT CODE HERE      */
+
+	free(file_list);
+	return (str);
+}
+
+
 
 char	*substitute_wildcard(char *temp, int i)
 {
@@ -227,27 +253,22 @@ char	*substitute_wildcard(char *temp, int i)
 	DIR				*folder;
 	char			**file_list;
 	int				file_amount;  //here because of the case where echo * return nothing
+	char			*temp2;
 
 	folder = NULL;
 	init_wildcard_struct(&w);
 	set_wildcard_directory(&w, temp, i);
-	DEBUG("Dirname : %s\n\n", w.dirname);
-	w.token = tokenize_wildcard(temp, i);
-	DEBUG("Token : %s\n", w.token);
-	DEBUG("Index : %d\n", i);
+	tokenize_wildcard(&w, temp, i);
 	file_amount = count_valid_files(folder, w);
 	if (!file_amount)
 		return (free_wildcard_struct(&w), temp);  //Should I also write on stderr
-	DEBUG("Count : %d\n", file_amount);
 	file_list = fill_file_list(folder, w, file_amount);
-	print_char_table(file_list, "file_list");
 	sort_array(file_list, double_array_len(file_list));
-	print_char_table(file_list, "file_list");
 	change_affixes(file_list, temp, &w, i);
 	print_char_table(file_list, "file_list");
-	// set_final_substitution(&w, file_list);
-	// temp = 
+	temp2 = set_final_substitution(file_list, file_amount);
 
+	DEBUG("temp : %s\n", temp2);
 	DEBUG("\n");
 	closedir(folder);
 	free_wildcard_struct(&w);
