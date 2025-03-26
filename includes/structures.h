@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 19:31:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:58:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef union u_pipe_ends
 typedef struct s_redir
 {
 	char	*pathname;
-	char	*eof; //maybe delete
+	char	*eof; //heredoc delimiter 
 	int		type;
 }	t_redir;
 
@@ -52,6 +52,7 @@ typedef struct s_quote
  * @param last_return sig return of the last cmd (needed for $?)
  * @param cursor used to remember where we stopped the parsing
  * @param error to be configured
+ * @param fdin 
  */
 typedef struct s_mini
 {
@@ -63,7 +64,9 @@ typedef struct s_mini
 	int			last_return;
 	int			cursor;
 	bool		error;
-	t_fd_backup	*fd_backup;
+	int			fd_in;
+	int			fd_out;
+	t_fd_backup	*fd_backup; 
 }				t_mini;
 
 /** A structure containing command's 'token'
@@ -78,6 +81,10 @@ typedef struct s_mini
  * @param file struct containning file name + type containing all redirections
  * @param redir type of the redirection and path to the file
  * @param error not set yet
+ * @param pid_t is the pid of the process 
+ * @param pipe_in is the pipe on the left of the command
+ * @param pipe_out is the pipe on the right of the command
+ * 
  */
 typedef struct s_cmd
 {
@@ -92,9 +99,9 @@ typedef struct s_cmd
 	t_redir		*redir;
 	int			redir_amount;
 	int			error;
+	pid_t		pid;
 	t_pipe_ends	pipe_in;
 	t_pipe_ends	pipe_out;
-	pid_t		pid;
 }				t_cmd;
 
 /** A pointer to function for the builtin function
