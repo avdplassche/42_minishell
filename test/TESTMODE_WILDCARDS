@@ -1,5 +1,5 @@
-echo ../*
 echo *
+echo ../*
 echo /*
 echo */..
 echo t*/

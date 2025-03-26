@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /** Check if cmd is echo -n
- * @return -  1 if echo -n (so type is builtin)
+ * @return - 1 if echo -n (so type is builtin)
  * @return - 0 if echo with other args(so type is user command)
  */
 int	is_builtin_echo(t_cmd *cmd)
@@ -24,6 +24,10 @@ int	is_builtin_echo(t_cmd *cmd)
 				return(0);
 		}
 	}
+	else if (cmd->args[1][1] == 'e')
+		return (0);
+	else
+		return (1);
 	while (cmd->args[++j])
 	{
 		i = -1;

@@ -38,8 +38,9 @@ char	*get_cmd_bin(t_mini *mini)
 	mini->cursor = len;
 	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
-	temp = wildcard_handle(temp);
-	DEBUG("temp = %s\n\n", temp);
+	// temp = dollar_handle(temp);
+	// temp = wildcard_handle(temp);
+	// DEBUG("temp = %s\n\n", temp);
 	// (void) debug;
 	// DEBUG("debug : %s\n", debug);
 	i = need_dollar_substitution(temp);

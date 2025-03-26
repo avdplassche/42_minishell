@@ -10,6 +10,8 @@ int	count_valid_files(DIR *folder, t_wildcard w)
 
 	count = 0;
 	folder = opendir(w.dirname);
+	if (!folder)
+		perror("doc");
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
@@ -28,7 +30,7 @@ void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
 	
 	// DEBUG("(f)Tokenize_wildcard\n-> temp = %s, start = %d\n\n", temp, start);
 	len = start;
-	while (start >= 0 && temp[start] != '/')
+	while (start >= 0 && temp[start] != '/' && temp[start] != ' ')
 		start--;
 	start ++;
 	while (temp[len] && temp[len] != '/')
@@ -139,16 +141,28 @@ void	change_affixes(char **file_list, char *temp1, t_wildcard *w, int i)
 	}
 }
 
+int	get_dir_start(char *temp, int i)
+{
+	while (i > 0 && temp[i] != ' ')
+		i--;
+	if (i == 0)
+		return (0);
+	else
+		return (i + 1);
+}
+
 void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
 {
 	char	buffer[PATH_MAX];
 
+	// DEBUG("(f)Set_wildcard_directory\ntemp : %s\n i = %d\n\n", temp, i);
 	while (i > 0)
 	{
 		if (temp[i] == '/')
 			break ;
 		i--;
 	}
+	// start = get_dir_start(temp, i);
 	if (i == 0)
 	{
 		if (temp[i] == '/')
@@ -161,7 +175,7 @@ void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
 		}
 	}
 	else if (i > -1)
-		w->dirname = ft_substr(temp, 0, i );
+		w->dirname = ft_substr(temp, 0, i);
 	else
 		w->dirname = NULL;
 }
@@ -241,6 +255,46 @@ char	*get_sub_token(char **file_list, int file_amount)
 	return (str);
 }
 
+char	*crop_args(char *temp)
+{
+	char	*dest;
+	int		i;
+
+	if (!contain_char(temp, ' '))
+		return (temp);
+	i = 0;
+	while (temp [i] != ' ')
+		i++;
+	i++;
+	dest = ft_substr(temp, i, ft_strlen(temp) - i);
+	return (dest);
+}
+
+char	*crop_command(char *temp)
+{
+	int		i;
+	char	*dest;
+
+	i = 0;
+	if (!contain_char(temp, ' '))
+		return (temp);
+	while (temp[i] && temp[i] != ' ')
+		i++;
+	dest = ft_substr(temp, 0, i + 1);
+	return(free(temp), dest);
+}
+
+int	get_new_index(char *temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp[i] != '*')
+		i++;
+	return (i);
+}
+
+
 char	*substitute_wildcard(char *temp, int i)
 {
 	t_wildcard		w;
@@ -248,18 +302,27 @@ char	*substitute_wildcard(char *temp, int i)
 	char			**file_list;
 	int				file_amount;
 	char			*dest;
+	char			*temp2;
 
+	// DEBUG("(f)Substitute_wildcard\n-> Temp = %s\n\n", temp);
+
+	temp2 = crop_args(temp);
+	i = get_new_index(temp2);
 	folder = NULL;
 	init_wildcard_struct(&w);
-	set_wildcard_directory(&w, temp, i);
-	tokenize_wildcard(&w, temp, i);
+	set_wildcard_directory(&w, temp2, i);
+	// DEBUG("Dir = %s\n", w.dirname);
+	tokenize_wildcard(&w, temp2, i);
+	// DEBUG("Token = %s\n", w.token);
 	file_amount = count_valid_files(folder, w);
+	// DEBUG("File amount : %d\n", file_amount);
 	if (!file_amount)
 		return (free_wildcard_struct(&w), temp);
 	file_list = fill_file_list(folder, w, file_amount);
 	sort_array(file_list, double_array_len(file_list));
-	change_affixes(file_list, temp, &w, i);
-	dest = get_sub_token(file_list, file_amount);
+	change_affixes(file_list, temp2, &w, i);
+	temp = crop_command(temp);
+	dest = ft_strjoin (temp, get_sub_token(file_list, file_amount));
 	closedir(folder);
 	free_wildcard_struct(&w);
 	free(temp);
@@ -291,9 +354,8 @@ char	*wildcard_handle(char *temp)
 	int		i;
 	int		j = 0;
 
-	DEBUG("(f)Wildcard_handle\n-> Temp = %s\n\n", temp);
+	// DEBUG("(f)Wildcard_handle\n-> Temp = %s\n\n", temp);
 	i = need_wildcard_substitution(temp);
-	// DEBUG("i = %d\n", )
 	if (i == -1)
 		return (temp);
 	while (i != -1 && ++j <= 1)
