@@ -81,7 +81,7 @@ int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
-void		exec_mini(t_mini *mini, t_cmd *cmd);
+int			exec_mini(t_mini *mini, t_cmd *cmd);
 char		*ft_get_env(t_mini *mini, char *var_name);
 int			set_env(t_mini *mini, char *env_key, char *env_row);
 int			update_pwd_env(t_mini *mini, char *env_var);
@@ -99,12 +99,6 @@ int			builtin_env(t_cmd *cmd, t_mini *mini);
 int			builtin_pwd(t_cmd *cmd, t_mini *mini);
 // int			builtin_unset(t_cmd *cmd, t_mini *mini);
 
-/* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
-
-void		free_double_pointer(char **str);
-void		free_cmd(t_mini *mini, t_cmd *cmd);
-void		free_mini(t_mini *mini);
-void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * * * * * * ERRORS * * * * * * * * * * * * * * * * */
 
@@ -188,5 +182,12 @@ void		string_build(char **dest_ptr, char *prefix, char *suffix);
 /* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
 
 void	print_error(const char *format, const char *path);
+
+/* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
+
+void		free_string_array(char **str);
+void		free_cmd(t_mini *mini, t_cmd *cmd);
+void		free_mini(t_mini *mini);
+void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 #endif

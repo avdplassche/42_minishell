@@ -46,6 +46,7 @@ SRCS				=	main.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
+						exec_mini.c \
 						execute_command.c \
 						ft_get_env.c \
 						set_env.c \
@@ -53,7 +54,7 @@ SRCS				=	main.c \
 						get_new_env_row.c \
 						update_pwd_env.c \
 						update_old_pwd_env.c \
-						free.c
+						minishell_exit.c
 
 UTILS				=	contain_char.c \
 						contain_quotes.c \

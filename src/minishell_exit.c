@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
@@ -13,19 +12,18 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 		if (cmd[i].path != NULL)
 			free(cmd[i].path);
 		if (cmd[i].args != NULL)
-			free_double_pointer(cmd[i].args);
+			free_string_array(cmd[i].args);
 	}
 	free(cmd);
-	cmd = NULL;
 }
 
 /** Frees char ** variables
  */
-void	free_double_pointer(char **str)
+void	free_string_array(char **str)
 {
 	int	i;
 
-	if (!str)
+	if (!(str))
 		return ;
 	i = 0;
 	while (str[i])
@@ -34,7 +32,6 @@ void	free_double_pointer(char **str)
 		i++;
 	}
 	free(str);
-	str = (NULL);
 }
 
 /** Frees t_mini mini, used when leaving minishell
@@ -43,29 +40,21 @@ void	free_double_pointer(char **str)
 void	free_mini(t_mini *mini)
 {
 	if (mini->envp)
-	{
-		free_double_pointer(mini->envp);
-		mini->envp = NULL;
-	}
+		free_string_array(mini->envp);
 	if (mini->builtins)
-	{
-		free_double_pointer(mini->builtins);
-		mini->builtins = NULL;
-	}
+		free_string_array(mini->builtins);
 	if (mini->paths)
-	{
-		free_double_pointer(mini->paths);
-		mini->paths = NULL;
-	}
+		free_string_array(mini->paths);
 	if (mini->fd_backup)
-	{
-		free(mini->fd_backup);
-		mini->fd_backup = NULL;
-	}
+		free((mini)->fd_backup);
+	if (mini->pipes)
+		free(mini->pipes);
+	
 }
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)
 {
 	free_cmd(mini, cmd);
+	cmd = NULL;
 	free_mini(mini);
 }
