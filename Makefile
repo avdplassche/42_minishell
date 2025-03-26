@@ -54,7 +54,7 @@ SRCS				=	main.c \
 						get_new_env_row.c \
 						update_pwd_env.c \
 						update_old_pwd_env.c \
-						free.c
+						minishell_exit.c
 
 UTILS				=	contain_char.c \
 						contain_quotes.c \

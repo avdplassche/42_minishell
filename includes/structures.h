@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/26 12:58:22 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:54:11 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_mini
 	int			fd_in;
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
+	t_pipe_ends *pipes;
 }				t_mini;
 
 /** A structure containing command's 'token'

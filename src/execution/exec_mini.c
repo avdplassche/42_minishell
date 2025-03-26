@@ -22,7 +22,7 @@ static t_builtin_func	get_builtin_function(char *cmd_name)
 		return (NULL);
 }
 
-void	exec_mini(t_mini *mini, t_cmd *cmd)
+int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 
@@ -31,17 +31,17 @@ void	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		f = get_builtin_function(cmd->command);
 		f(cmd, mini);
-		return ;
+		return (mini->last_return);s
 	}
-	else if (cmd->type == USER)
+	/*else if (cmd->type == USER)
 	{
-		create_pipe_array()
+		create_pipe_array(cmd);
 		execute_command(mini, cmd);
 	}
 	else if (cmd->type == INVALID)
 	{
 		//exit the shell
-	}
+	}*/
 }
 
 /*pid_t	exec_child(t_mini *mini, t_cmd cmd)
