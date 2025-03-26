@@ -52,10 +52,10 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	i = -1;
 	if (!(is_valid_command(mini)))
 		return (set_return_value(mini, 127));
-	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_amount);
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
 	if (!cmd)
 		return (MALLOC_ERROR);
-	while (++i < mini->cmd_amount)
+	while (++i < mini->cmd_count)
 	{
 		init_cmd(&cmd[i], i);
 		fill_cmd_structure(mini, &cmd[i]);

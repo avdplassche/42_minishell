@@ -5,7 +5,7 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	while (++i < mini->cmd_amount)
+	while (++i < mini->cmd_count)
 	{
 		if (cmd[i].command != NULL)
 			free(cmd[i].command);

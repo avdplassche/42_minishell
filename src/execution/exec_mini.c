@@ -33,12 +33,12 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 		f(cmd, mini);
 		return (mini->last_return);
 	}
-	/*else if (cmd->type == USER)
+	else if (cmd->type == USER)
 	{
 		create_pipe_array(cmd);
 		execute_command(mini, cmd);
 	}
-	else if (cmd->type == INVALID)
+	/*else if (cmd->type == INVALID)
 	{
 		//exit the shell
 	}*/

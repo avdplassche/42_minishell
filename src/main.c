@@ -23,7 +23,7 @@ static void	execute_file(t_mini *mini, char *filename)
 		mini->line = ft_strtrim(line, SPACES);
 		free(line);
 		line = NULL;
-		mini->cmd_amount = count_cmd(mini);
+		mini->cmd_count = count_cmd(mini);
 		mini->cursor = 0;
 		if (!(is_only_spaces(mini->line)) || mini->line[0] != '#')
 			parsing(mini, cmd);
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 		mini.cursor = 0;
 		mini.line = ft_strtrim(readline("Prompt minishell "), SPACES);
 		// if (!(ft_strncmp(mini.line, "exit", 4)))
-		mini.cmd_amount = count_cmd(&mini);
+		mini.cmd_count = count_cmd(&mini);
 		// 	return (free (mini.line), free_mini(&mini), EXIT_SUCCESS);
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
@@ -104,7 +104,7 @@ int	main(int argc, char **argv, char **envp)
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
 			mini.line = ft_strtrim(get_next_line(fd), SPACES);
-			mini.cmd_amount = count_cmd(&mini);
+			mini.cmd_count = count_cmd(&mini);
 			mini.cursor = 0;
 			DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')

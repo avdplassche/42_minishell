@@ -23,7 +23,7 @@ typedef struct s_redir
 {
 	char	*pathname;
 	char	*eof; //heredoc delimiter 
-	int		type;
+	t_redirections		type;
 }	t_redir;
 
 typedef struct s_quote
@@ -49,14 +49,15 @@ typedef struct s_mini
 	char		**builtins;
 	char		**paths;
 	char		*line;
-	int			cmd_amount;
+	int			cmd_count;
 	int			last_return;
 	int			cursor;
 	bool		error;
 	int			fd_in;
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
-	t_pipefds *pipes;
+	t_pipefds	*pipes;
+	t_cmd		*cmd;
 }				t_mini;
 
 /** A structure containing command's 'token'
@@ -89,9 +90,10 @@ typedef struct s_cmd
 	t_redir		*redir;
 	int			redir_amount;
 	int			error;
+	t_cmd		*cmd;
 	pid_t		pid;
-	t_pipefds	pipe_in;
-	t_pipefds	pipe_out;
+	t_pipefds	*pipe_in;
+	t_pipefds	*pipe_out;
 }				t_cmd;
 
 /** A pointer to function for the builtin function

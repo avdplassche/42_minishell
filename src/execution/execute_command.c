@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-void	execute_command(t_mini *mini, t_cmd *cmd)
+void	execute_command(t_mini *mini)
 {
 	cmd->pid = fork();
 	if (cmd->pid == -1)
