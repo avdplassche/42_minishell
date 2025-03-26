@@ -185,9 +185,9 @@ void	print_error(const char *format, const char *path);
 
 /* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 
-void		free_string_array(char ***str);
-void		free_cmd(t_mini *mini, t_cmd **cmd);
-void		free_mini(t_mini **mini);
+void		free_string_array(char **str);
+void		free_cmd(t_mini *mini, t_cmd *cmd);
+void		free_mini(t_mini *mini);
 void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 #endif

@@ -31,17 +31,18 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		f = get_builtin_function(cmd->command);
 		f(cmd, mini);
-		return (mini->last_return);s
+		return (mini->last_return);
 	}
-	/*else if (cmd->type == USER)
+	else if (cmd->type == USER)
 	{
 		create_pipe_array(cmd);
 		execute_command(mini, cmd);
-	}
+	}/*
 	else if (cmd->type == INVALID)
 	{
 		//exit the shell
 	}*/
+	return (mini->last_return);
 }
 
 /*pid_t	exec_child(t_mini *mini, t_cmd cmd)

@@ -3,8 +3,6 @@
 
 void	execute_command(t_mini *mini, t_cmd *cmd)
 {
-	char	*execution_path;
-
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 		minishell_exit(mini, cmd);
@@ -18,6 +16,6 @@ void	execute_command(t_mini *mini, t_cmd *cmd)
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
 		perror("execve");
-		minishell_exit(mini, cmd);
+		//need to use the exit function that i need to code
 	}
 }
