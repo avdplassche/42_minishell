@@ -130,7 +130,6 @@ void	change_affixes(char **file_list, char *temp1, t_wildcard *w, int i)
 	len = double_array_len(file_list);
 	get_prefix(w, temp1, i);
 	get_suffix(w, temp1, i);
-	DEBUG("\nPrefix = %s\nSuffix : %s\n\n", w->prefix, w->suffix);
 	while (++j < len)
 	{
 		temp2 = ft_strdup(file_list[j]);
@@ -226,7 +225,7 @@ void	append_space_to_string(char **str)
 	temp = NULL;
 }
 
-char	*set_final_substitution(char **file_list, int file_amount)
+char	*get_sub_token(char **file_list, int file_amount)
 {
 	int		len;
 	char	*str;
@@ -238,22 +237,17 @@ char	*set_final_substitution(char **file_list, int file_amount)
 		len--;
 	}
 	str = join_n_string(file_list, file_amount);
-
-	/*     INSERT CODE HERE      */
-
 	free(file_list);
 	return (str);
 }
-
-
 
 char	*substitute_wildcard(char *temp, int i)
 {
 	t_wildcard		w;
 	DIR				*folder;
 	char			**file_list;
-	int				file_amount;  //here because of the case where echo * return nothing
-	char			*temp2;
+	int				file_amount;
+	char			*dest;
 
 	folder = NULL;
 	init_wildcard_struct(&w);
@@ -261,18 +255,15 @@ char	*substitute_wildcard(char *temp, int i)
 	tokenize_wildcard(&w, temp, i);
 	file_amount = count_valid_files(folder, w);
 	if (!file_amount)
-		return (free_wildcard_struct(&w), temp);  //Should I also write on stderr
+		return (free_wildcard_struct(&w), temp);
 	file_list = fill_file_list(folder, w, file_amount);
 	sort_array(file_list, double_array_len(file_list));
 	change_affixes(file_list, temp, &w, i);
-	print_char_table(file_list, "file_list");
-	temp2 = set_final_substitution(file_list, file_amount);
-
-	DEBUG("temp : %s\n", temp2);
-	DEBUG("\n");
+	dest = get_sub_token(file_list, file_amount);
 	closedir(folder);
 	free_wildcard_struct(&w);
-	return (temp);
+	free(temp);
+	return (dest);
 }
 
 /**Tests if a substitution is needed
@@ -297,12 +288,12 @@ int	need_wildcard_substitution(char *temp)
  */
 char	*wildcard_handle(char *temp)
 {
-	char	*dest = NULL;
 	int		i;
 	int		j = 0;
 
 	DEBUG("(f)Wildcard_handle\n-> Temp = %s\n\n", temp);
 	i = need_wildcard_substitution(temp);
+	// DEBUG("i = %d\n", )
 	if (i == -1)
 		return (temp);
 	while (i != -1 && ++j <= 1)
@@ -312,5 +303,5 @@ char	*wildcard_handle(char *temp)
 		// list all files in the directory
 		// Single ENQUOTE all tokens
 	}
-	return (dest);
+	return (temp);
 }

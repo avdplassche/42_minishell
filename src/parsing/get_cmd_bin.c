@@ -31,15 +31,16 @@ char	*get_cmd_bin(t_mini *mini)
 	int		len;
 	int		i;
 	char	*dest;
-	char	*debug;
+	// char	*debug;
 
 	len = get_last_index(mini);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
 	mini->cursor = len;
 	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
-	debug = wildcard_handle(temp);
-	(void) debug;
+	temp = wildcard_handle(temp);
+	DEBUG("temp = %s\n\n", temp);
+	// (void) debug;
 	// DEBUG("debug : %s\n", debug);
 	i = need_dollar_substitution(temp);
 	while (i > -1)

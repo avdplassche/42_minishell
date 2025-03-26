@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:38:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/25 19:31:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:25:24 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,3 +113,4 @@ typedef struct s_wildcard
 	char			*final_sub;
 	bool			current;
 }					t_wildcard;
+
