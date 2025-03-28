@@ -8,7 +8,7 @@ typedef struct s_fd_backup
 	int	stderr_backup;
 }	t_fd_backup;
 
-typedef union u_pipefds
+typedef union u_pipefd
 {
 	int	fildes[2];
 	struct
@@ -16,7 +16,7 @@ typedef union u_pipefds
 		int		read;
 		int		write;
 	};	
-}			t_pipefds;
+}			t_pipefd;
 
 
 typedef struct s_redir
@@ -31,6 +31,8 @@ typedef struct s_quote
 	int	sgl;
 	int	dbl;
 }	t_quote;
+
+typedef struct s_cmd t_cmd;
 
 /** A structure containing minishell related variables
  * @param envp local environment variables (execve's 3rd parameter for ex)
@@ -56,7 +58,7 @@ typedef struct s_mini
 	int			fd_in;
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
-	t_pipefds	*pipes;
+	t_pipefd	*pipes;
 	t_cmd		*cmd;
 }				t_mini;
 
@@ -90,10 +92,9 @@ typedef struct s_cmd
 	t_redir		*redir;
 	int			redir_amount;
 	int			error;
-	t_cmd		*cmd;
 	pid_t		pid;
-	t_pipefds	*pipe_in;
-	t_pipefds	*pipe_out;
+	t_pipefd	*pipe_in;
+	t_pipefd	*pipe_out;
 }				t_cmd;
 
 /** A pointer to function for the builtin function

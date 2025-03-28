@@ -1,6 +1,6 @@
 
 #include "minishell.h"
-
+/*
 static void	dup_fd(t_command *cmd, int fd, int fd2)
 {
 	if (dup2(fd, fd2) == -1)
@@ -25,7 +25,7 @@ static void connect_pipe(t_mini *mini, t_cmd *cmd)
 
 void	execute_command(t_mini *mini, t_cmd *cmd)
 {
-	cmd->pid = fork();
+	cmd->pid = fork(); // parent process forks a child 
 	if (cmd->pid == -1)
 		minishell_exit(mini, cmd);
 	if (cmd->pid != 0)
@@ -36,18 +36,18 @@ void	execute_command(t_mini *mini, t_cmd *cmd)
 			close_fd(cmd, mini, cmd->pipe_in->write);
 		}
 	}
-	connect_pipe(mini, cmd);
-	if (execve(cmd->path, cmd->args, mini->envp) == -1)
+	connect_pipe(mini, cmd); // the command itself connects and redirects the input and output (itas own fd table)
+	if (execve(cmd->path, cmd->args, mini->envp) == -1) // the final command that takes over the p
 	{
 		perror("execve");
 		minishell_exit(mini, cmd);
 	}
 }
 
-void	execute_pipe(t_mini *mini, t_cmd *cmd)
+void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
-	t_pipefds *p;
+	t_pipefd *p;
 
 	i = 0;
 	p = mini->pipes;
@@ -62,3 +62,4 @@ void	execute_pipe(t_mini *mini, t_cmd *cmd)
 	}
 	execute_command(cmd + i);
 }
+*/

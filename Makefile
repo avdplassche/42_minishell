@@ -47,7 +47,7 @@ SRCS				=	main.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
 						exec_mini.c \
-						execute_command.c \
+						execute_commands.c \
 						ft_get_env.c \
 						set_env.c \
 						get_current_workdir.c \
