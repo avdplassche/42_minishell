@@ -1,0 +1,7 @@
+--- ./test_jojo/logs/bash_err.log	2025-03-28 17:48:38.834038919 +0100
++++ ./test_jojo/logs/minishell_error.log	2025-03-28 17:48:38.337295593 +0100
+@@ -0,0 +1,4 @@
++Invalid file descriptor in close_fd: Bad file descriptor
++Invalid file descriptor in close_fd: Bad file descriptor
++Invalid file descriptor in close_fd: Bad file descriptor
++Invalid file descriptor in close_fd: Bad file descriptor

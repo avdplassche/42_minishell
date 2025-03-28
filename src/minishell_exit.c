@@ -4,17 +4,28 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
-	i = -1;
-	while (++i < mini->cmd_count)
+	i = 0;
+	while (i < mini->cmd_count)
 	{
 		if (cmd[i].command != NULL)
+		{
 			free(cmd[i].command);
+			cmd[i].command = NULL;
+		}
 		if (cmd[i].path != NULL)
+		{
 			free(cmd[i].path);
+			cmd[i].path = NULL;
+		}
 		if (cmd[i].args != NULL)
+		{
 			free_string_array(cmd[i].args);
+			cmd[i].args = NULL;
+		}
+		i++;
 	}
-	free(cmd);
+	if (cmd)
+		free(cmd);
 }
 
 /** Frees char ** variables
@@ -45,11 +56,23 @@ void	free_mini(t_mini *mini)
 		free_string_array(mini->builtins);
 	if (mini->paths)
 		free_string_array(mini->paths);
-	if (mini->fd_backup)
-		free((mini)->fd_backup);
 	if (mini->pipes)
 		free(mini->pipes);
-	
+	if (mini->fd_backup)
+	{
+		if (mini->fd_backup->stdin_backup != -1)
+			close(mini->fd_backup->stdin_backup);
+		if (mini->fd_backup->stdout_backup != -1)
+			close(mini->fd_backup->stdout_backup);
+		if (mini->fd_backup->stderr_backup != -1)
+			close(mini->fd_backup->stderr_backup);
+		if (mini->fd_backup)
+			free(mini->fd_backup);
+	}
+	if (mini->fd_in != -1)
+		close(mini->fd_in);
+	if (mini->fd_out != -1)
+		close(mini->fd_out);
 }
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)

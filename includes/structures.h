@@ -59,7 +59,7 @@ typedef struct s_mini
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
 	t_pipefd	*pipes;
-	t_cmd		*cmd;
+	t_cmd		*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
 }				t_mini;
 
 /** A structure containing command's 'token'
@@ -100,7 +100,7 @@ typedef struct s_cmd
 /** A pointer to function for the builtin function
  * @param t_builtin_func contains the signature of all the builtin functions
  */
-typedef int (*t_builtin_func)(t_cmd *, t_mini *);
+typedef int (*t_builtin_func)(t_mini *, t_cmd *);
 
 
 typedef struct s_wildcard

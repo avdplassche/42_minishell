@@ -5,7 +5,7 @@
 /*
 	uses the getcwd and prints to the standard output, this is a builtin
 */
-int	builtin_pwd(t_cmd *cmd, t_mini *mini)
+int	builtin_pwd(t_mini *mini, t_cmd *cmd)
 {
 	char	cwd[PATH_MAX];
 	

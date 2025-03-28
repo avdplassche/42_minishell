@@ -1,0 +1,5 @@
+--- ./test_jojo/logs/bash.log	2025-03-28 17:48:38.834038919 +0100
++++ ./test_jojo/logs/minishell.log	2025-03-28 17:48:38.798644945 +0100
+@@ -1 +1,2 @@
+ hello
++hello

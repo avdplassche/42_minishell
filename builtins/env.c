@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int	builtin_env(t_cmd *cmd, t_mini *mini)
+int	builtin_env(t_mini *mini, t_cmd *cmd)
 {
 	(void)cmd;
 

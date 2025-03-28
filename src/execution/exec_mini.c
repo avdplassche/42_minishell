@@ -30,16 +30,17 @@ void exec_mini(t_mini *mini, t_cmd *cmd)
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd->command);
-		f(cmd, mini);
+		f(mini, cmd);
 	}
-	/*else if (cmd->type == USER)
+	else if (cmd->type == USER)
 	{
-		//create_pipe_array(cmd);
-		//set_and_execute_pipeline(mini, cmd);
-		//wait_for_chilren(mini, cmd);
-
+		backup_standard_fd(mini, cmd);
+		create_pipe_array(mini, cmd);
+		set_and_execute_pipeline(mini, cmd);
+		wait_for_chilren(mini, cmd);
+		restore_standard_fd(mini, cmd);
 	}
-	else if (cmd->type == INVALID)
+	/*else if (cmd->type == INVALID)
 	{
 		//exit the shell
 	}

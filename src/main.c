@@ -25,7 +25,7 @@ static void	execute_file(t_mini *mini, char *filename)
 		line = NULL;
 		mini->cmd_count = count_cmd(mini);
 		mini->cursor = 0;
-		if (!(is_only_spaces(mini->line)) || mini->line[0] != '#')
+		if (!(is_only_spaces(mini->line)) && mini->line[0] != '#')
 			parsing(mini, cmd);
 		free(cmd);
 		free(mini->line);

@@ -12,7 +12,7 @@ static void	print_echo(t_cmd *cmd, int i)
 	}
 }
 
-int	builtin_echo(t_cmd *cmd, t_mini *mini)
+int	builtin_echo(t_mini *mini, t_cmd *cmd)
 {
 	(void)mini;
 	if (cmd->echo_n_index)

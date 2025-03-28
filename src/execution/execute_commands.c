@@ -1,29 +1,13 @@
 
 #include "minishell.h"
-/*
-static void	dup_fd(t_command *cmd, int fd, int fd2)
+
+static void	redirect_pipes(t_mini *mini, t_cmd *cmd)
 {
-	if (dup2(fd, fd2) == -1)
-		pipex_exit(cmd->pipex, "Dup2 failed\n");
-	close_fd(cmd, fd);
+	redirect_command_input(mini, cmd);
+	redirect_command_output(mini, cmd);
 }
 
-static void connect_pipe(t_mini *mini, t_cmd *cmd)
-{
-	if (!cmd->pipe_in)
-	{
-		dup_fd(mini, cmd, mini->fd_in, STDIN_FILENO);
-	}
-	else
-	{
-		close_fd(mini, cmd, mini->fd_in);
-		close_fd(mini, cmd, cmd->pipe_in->write);
-		dup_fd(mini, cmd, cmd->pipe_in->read, STDIN_FILENO);
-		close(STDIN_FILENO);
-	}
-}
-
-void	execute_command(t_mini *mini, t_cmd *cmd)
+static void	execute_command(t_mini *mini, t_cmd *cmd)
 {
 	cmd->pid = fork(); // parent process forks a child 
 	if (cmd->pid == -1)
@@ -33,10 +17,10 @@ void	execute_command(t_mini *mini, t_cmd *cmd)
 		if (cmd->pipe_in)
 		{
 			close_fd(mini, cmd, cmd->pipe_in->read);
-			close_fd(cmd, mini, cmd->pipe_in->write);
+			close_fd(mini, cmd, cmd->pipe_in->write);
 		}
 	}
-	connect_pipe(mini, cmd); // the command itself connects and redirects the input and output (itas own fd table)
+	redirect_pipes(mini, cmd); // the command itself connects and redirects the input and output (itas own fd table)
 	if (execve(cmd->path, cmd->args, mini->envp) == -1) // the final command that takes over the p
 	{
 		perror("execve");
@@ -44,7 +28,7 @@ void	execute_command(t_mini *mini, t_cmd *cmd)
 	}
 }
 
-void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
+void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd_array)
 {
 	int	i;
 	t_pipefd *p;
@@ -53,13 +37,13 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 	p = mini->pipes;
 	while (i < mini->cmd_count - 1)
 	{
-		pipe(p->fildes);
-		cmd[i].pipe_out = p;
-		cmd[i + 1].pipe_in = p;
-		execute_command(cmd + i);
+		if (pipe(p->fildes) == -1)
+			minishell_exit(mini, cmd_array);
+		cmd_array[i].pipe_out = p;
+		cmd_array[i + 1].pipe_in = p;
+		execute_command(mini, cmd_array + i);
 		p++;
 		i++;
 	}
-	execute_command(cmd + i);
+	execute_command(mini, cmd_array + i);
 }
-*/
