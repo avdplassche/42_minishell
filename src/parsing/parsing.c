@@ -48,6 +48,7 @@ int	set_return_value(t_mini *mini, int value)
 int	parsing(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
+	int		status;
 
 	i = -1;
 	if (!(is_valid_command(mini)))
@@ -69,9 +70,12 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		print_cmd(cmd[i], mini->line);
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	exec_mini(mini, cmd);
-	free_cmd(mini, cmd);
+	status = exec_mini(mini, cmd);
+	if (!mini->should_exit)
+	{
+		free_cmd(mini, cmd);
+	}
 	cmd = NULL;
-	return (0);
+	return (status);
 }
 

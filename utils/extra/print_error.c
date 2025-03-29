@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-void	print_error(const char *format, const char *path)
+void	print_error(const char *format, const char *path, int fd)
 {
 	char	buffer[1024];
 	char	*ptr;
@@ -24,5 +24,5 @@ void	print_error(const char *format, const char *path)
 		*ptr++ = *format++;
 	}
 	*ptr = '\0';
-	write(2, buffer, ft_strlen(buffer));
+	write(fd, buffer, ft_strlen(buffer));
 }

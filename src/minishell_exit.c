@@ -1,5 +1,13 @@
 #include "minishell.h"
 
+void	handle_error(t_mini *mini, t_cmd *cmd, const char *message)
+{
+	perror(message);
+	mini->last_return = 1;
+	if (cmd->pid == 0)
+		exit(1);
+}
+
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
@@ -51,23 +59,36 @@ void	free_string_array(char **str)
 void	free_mini(t_mini *mini)
 {
 	if (mini->envp)
+	{
 		free_string_array(mini->envp);
+		mini->envp = NULL;
+	}
 	if (mini->builtins)
+	{
 		free_string_array(mini->builtins);
+		mini->builtins = NULL;
+	}
 	if (mini->paths)
+	{
 		free_string_array(mini->paths);
+		mini->paths = NULL;
+	}
 	if (mini->pipes)
+	{
 		free(mini->pipes);
+		mini->pipes = NULL;
+	}
 	if (mini->fd_backup)
 	{
 		if (mini->fd_backup->stdin_backup != -1)
 			close(mini->fd_backup->stdin_backup);
 		if (mini->fd_backup->stdout_backup != -1)
 			close(mini->fd_backup->stdout_backup);
-		if (mini->fd_backup->stderr_backup != -1)
-			close(mini->fd_backup->stderr_backup);
 		if (mini->fd_backup)
+		{
 			free(mini->fd_backup);
+			mini->fd_backup = NULL;
+		}
 	}
 	if (mini->fd_in != -1)
 		close(mini->fd_in);
@@ -77,7 +98,7 @@ void	free_mini(t_mini *mini)
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)
 {
-	free_cmd(mini, cmd);
-	cmd = NULL;
+	(void)cmd;
+	mini->should_exit = true;
 	free_mini(mini);
 }

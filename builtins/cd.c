@@ -33,7 +33,7 @@ int	builtin_cd(t_mini *mini, t_cmd *cmd)
 	}
 	else
 	{
-		print_error("Minishell: cd: %s: No such file or directory\n", path);
+		print_error("Minishell: cd: %s: No such file or directory\n", path, 2);
 		mini->last_return = CMD_NOT_FOUND;
 	}
 	return (mini->last_return);

@@ -74,11 +74,13 @@ UTILS				=	contain_char.c \
 						is_quote.c \
 						is_space.c \
 						is_angle_bracket.c \
+						is_valid_arithmetic_exit.c \
 						print_error.c \
 						start_with.c \
 						sort_array.c \
 						ft_atoi.c \
 						ft_bzero.c \
+						ft_isdigit.c \
 						ft_calloc.c \
 						ft_itoa.c \
 						ft_memchr.c \

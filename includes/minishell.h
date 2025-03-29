@@ -81,7 +81,7 @@ int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
-void		exec_mini(t_mini *mini, t_cmd *cmd);
+int		exec_mini(t_mini *mini, t_cmd *cmd);
 //builtin exec 
 char		*ft_get_env(t_mini *mini, char *var_name);
 int			set_env(t_mini *mini, char *env_key, char *env_row);
@@ -106,7 +106,7 @@ void		restore_standard_fd(t_mini *mini);
 int			builtin_cd(t_mini *mini, t_cmd *cmd);
 int			builtin_echo(t_mini *mini, t_cmd *cmd);
 int			builtin_env(t_mini *mini, t_cmd *cmd);
-// int			builtin_exit(t_mini *mini, t_cmd *cmd);
+int			builtin_exit(t_mini *mini, t_cmd *cmd);
 // int			builtin_export(t_mini *mini, t_cmd *cmd);
 int			builtin_pwd(t_mini *mini, t_cmd *cmd);
 // int			builtin_unset(t_mini *mini, t_cmd *cmd);
@@ -135,6 +135,7 @@ void		debug_parsing_print(t_mini *mini, t_cmd cmd);
 int			ft_atoi(char *str);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t count, size_t size);
+int			ft_isdigit(int c);
 char		*ft_itoa(int n);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -155,7 +156,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlen(const char *s);
 int			ft_strncmp(char *s1, char *s2, size_t n);
 char		*ft_strnstr(char *haystack, char *needle, size_t len);
-char		*ft_strtrim(char *s1, char *set);
+char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
@@ -177,6 +178,7 @@ int			is_only_specific_char(char *s, char c);
 char		*epurstring(char *src);
 int			is_quote(char c);
 int			is_angle_bracket(char c);
+int			is_valid_arithmetic_exit(char *str);
 int			start_with(char *string, char *start_string);
 int			double_array_len(char **table);
 int			ft_strcmp_alpha(char *s1, char *s2);
@@ -191,7 +193,7 @@ void		string_build(char **dest_ptr, char *prefix, char *suffix);
 
 /* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
 
-void	print_error(const char *format, const char *path);
+void	print_error(const char *format, const char *path, int fd);
 
 /* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 

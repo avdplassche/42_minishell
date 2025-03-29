@@ -10,8 +10,8 @@ static t_builtin_func	get_builtin_function(char *cmd_name)
 		return (&builtin_echo);
 	else if (ft_strcmp(cmd_name, "env") == 0)
 		return (&builtin_env);
-	// else if (ft_strcmp(cmd_name, "exit") == 0)
-	// 	return (&builtin_exit);
+	else if (ft_strcmp(cmd_name, "exit") == 0)
+		return (&builtin_exit);
 	// else if (ft_strcmp(cmd_name, "export"))
 	// 	return (&builtin_export);
 	else if (ft_strcmp(cmd_name, "pwd") == 0)
@@ -22,7 +22,7 @@ static t_builtin_func	get_builtin_function(char *cmd_name)
 		return (NULL);
 }
 
-void exec_mini(t_mini *mini, t_cmd *cmd)
+int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 
@@ -43,8 +43,8 @@ void exec_mini(t_mini *mini, t_cmd *cmd)
 	/*else if (cmd->type == INVALID)
 	{
 		//exit the shell
-	}
-	//return (mini->last_return);*/
+	}*/
+	return (mini->last_return);
 }
 
 /*pid_t	exec_child(t_mini *mini, t_cmd cmd)

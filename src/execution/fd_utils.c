@@ -3,6 +3,8 @@
 
 void	close_fd(t_mini *mini, t_cmd *cmd, int fd)
 {
+	if (fd < 0)
+		return ;
 	if (close(fd) == -1)
 	{
 		perror("Invalid file descriptor in close_fd");

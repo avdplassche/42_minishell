@@ -5,7 +5,6 @@ typedef struct s_fd_backup
 {
 	int	stdin_backup;
 	int	stdout_backup;
-	int	stderr_backup;
 }	t_fd_backup;
 
 typedef union u_pipefd
@@ -60,6 +59,7 @@ typedef struct s_mini
 	t_fd_backup	*fd_backup; 
 	t_pipefd	*pipes;
 	t_cmd		*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
+	bool		should_exit;
 }				t_mini;
 
 /** A structure containing command's 'token'

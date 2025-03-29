@@ -23,33 +23,40 @@ static void	execute_command(t_mini *mini, t_cmd *cmd)
 			minishell_exit(mini, cmd);
 		}
 	}
-	if (cmd->pid != 0)
+	else
 	{
-		printf("I am inside the parent\n");
 		if (cmd->pipe_in)
 		{
 			close_fd(mini, cmd, cmd->pipe_in->read);
-			close_fd(mini, cmd, cmd->pipe_in->write);
+		}
+		if (cmd->pipe_out)
+		{
+			close_fd(mini, cmd, cmd->pipe_out->write);
 		}
 	}
 }
 
+
 void    set_and_execute_pipeline(t_mini *mini, t_cmd *cmd_array)
 {
-    int    i;
-    t_pipefd *p;
+	int    i;
+	t_pipefd *p;
 
-    i = 0;
-    p = mini->pipes;
-    while (i < mini->cmd_count - 1)
-    {
-        if (pipe(p->fildes) == -1)
-            minishell_exit(mini, cmd_array);
-        cmd_array[i].pipe_out = p;
-        cmd_array[i + 1].pipe_in = p;
-        execute_command(mini, cmd_array + i);
-        p++;
-        i++;
-    }
-    execute_command(mini, cmd_array + i);
+	i = 0;
+	p = mini->pipes;
+	while (i < mini->cmd_count - 1)
+	{
+		if (pipe(p->fildes) == -1)
+			minishell_exit(mini, cmd_array);
+		cmd_array[i].pipe_out = p;
+		cmd_array[i + 1].pipe_in = p;
+		p++;
+		i++;
+	}
+	i = 0;
+	while (i < mini->cmd_count)
+	{
+		execute_command(mini, cmd_array + i);
+		i++;
+	}
 }
