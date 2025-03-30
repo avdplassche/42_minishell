@@ -35,9 +35,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	else if (cmd->type == USER)
 	{
 		backup_standard_fd(mini);
-		create_pipe_array(mini, cmd);
 		set_and_execute_pipeline(mini, cmd);
-		wait_for_chilren(mini, cmd);
 		restore_standard_fd(mini);
 	}
 	/*else if (cmd->type == INVALID)

@@ -46,20 +46,15 @@ SRCS				=	main.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
-						exec_mini.c \
 						ft_get_env.c \
 						get_current_workdir.c \
 						get_new_env_row.c \
 						set_env.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
-						execute_commands.c \
-						create_pipe_array.c \
-						fd_utils.c \
+						exec_mini.c \
 						fd_backup_utils.c \
-						file_redirections.c \
-						pipe_redirections.c \
-						wait_for_children.c \
+						pipeline.c \
 						minishell_exit.c
 
 UTILS				=	contain_char.c \

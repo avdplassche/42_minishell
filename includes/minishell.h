@@ -91,15 +91,8 @@ char		*get_current_workdir(t_mini *mini);
 char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
 void		backup_standard_fd(t_mini *mini);
-void		create_pipe_array(t_mini *mini, t_cmd *cmd_array);
 void		set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
-void		redirect_command_input(t_mini *mini, t_cmd *cmd);
-void		redirect_command_output(t_mini *mini, t_cmd *cmd);
-void		dup_fd(t_mini *mini, t_cmd *cmd, int oldfd, int newfd);
-void		close_fd(t_mini *mini, t_cmd *cmd, int fd);
-void		wait_for_chilren(t_mini *mini, t_cmd *cmd_array);
 void		restore_standard_fd(t_mini *mini);
-
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
