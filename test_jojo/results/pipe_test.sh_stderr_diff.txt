@@ -1,7 +1,10 @@
---- ./test_jojo/logs/bash_err.log	2025-03-28 17:48:38.834038919 +0100
-+++ ./test_jojo/logs/minishell_error.log	2025-03-28 17:48:38.337295593 +0100
-@@ -0,0 +1,4 @@
-+Invalid file descriptor in close_fd: Bad file descriptor
-+Invalid file descriptor in close_fd: Bad file descriptor
-+Invalid file descriptor in close_fd: Bad file descriptor
-+Invalid file descriptor in close_fd: Bad file descriptor
+--- ./test_jojo/logs/bash_err.log	2025-03-30 16:25:20.755290384 +0200
++++ ./test_jojo/logs/minishell_error.log	2025-03-30 16:25:13.664247010 +0200
+@@ -1,5 +1,2 @@
+-./test_jojo/tests/pipe_test.sh: nonexistentcommand: command not found
+-./test_jojo/tests/pipe_test.sh: ./sigsegv: No such file or directory
+-./test_jojo/tests/pipe_test.sh: ./conduit: No such file or directory
+-./test_jojo/tests/pipe_test.sh: ./conduit: No such file or directory
+-./test_jojo/tests/pipe_test.sh: ./conduit: No such file or directory
++execve: Bad address
++execve: Bad address

@@ -2,7 +2,7 @@
 
 #include "minishell.h"
 
-static void	wait_for_children(t_mini *mini)
+static void	wait_for_children(t_mini *mini, t_cmd *cmd)
 {
 	int	status;
 	int	i;
@@ -10,9 +10,7 @@ static void	wait_for_children(t_mini *mini)
 	i = 0;
 	while (i < mini->cmd_count)
 	{
-		waitpid(mini->cmd[i].pid, &status, 0);
-		if (WIFEXITED(status))
-			mini->last_return = WEXITSTATUS(status);
+		waitpid(cmd[i].pid, &status, 0);
 		i++;
 	}
 }
@@ -108,12 +106,11 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 
 	create_pipes(mini, cmd);
 	cmd_index = 0;
-	printf("mini->cmd_count is %d\n", mini->cmd_count);
 	while (cmd_index < mini->cmd_count)
 	{
 		execute_piped_command(mini, &cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
-	wait_for_children(mini);
+	wait_for_children(mini, cmd);
 }

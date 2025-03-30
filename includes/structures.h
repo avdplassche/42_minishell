@@ -20,8 +20,8 @@ typedef union u_pipefd
 
 typedef struct s_redir
 {
-	char	*pathname;
-	char	*eof; //heredoc delimiter 
+	char				*pathname;
+	char				*eof; //heredoc delimiter 
 	t_redirections		type;
 }	t_redir;
 
@@ -54,7 +54,7 @@ typedef struct s_mini
 	int			last_return;
 	int			cursor;
 	bool		error;
-	int			fd_in;
+	int			fd_in; // we'll see 
 	int			fd_out;
 	t_fd_backup	*fd_backup; 
 	t_pipefd	*pipes;
