@@ -1,19 +1,5 @@
 
-
 #include "minishell.h"
-
-static void	wait_for_children(t_mini *mini, t_cmd *cmd)
-{
-	int	status;
-	int	i;
-
-	i = 0;
-	while (i < mini->cmd_count)
-	{
-		waitpid(cmd[i].pid, &status, 0);
-		i++;
-	}
-}
 
 static void	parent_closes_all_pipes(t_mini *mini)
 {
@@ -76,8 +62,8 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 }
 static void	create_pipes(t_mini *mini, t_cmd *cmd)
 {
-	int	i;
-	t_pipefd *p;
+	int			i;
+	t_pipefd	*p;
 
 	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
 	if (!mini->pipes)
