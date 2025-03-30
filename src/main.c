@@ -85,6 +85,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			parsing(&mini, cmd);
 		// signal(g_sig, handle_signal);
+		if (mini.should_exit)
+			break;
 		free(mini.line);
 		mini.line = NULL;
 	}
@@ -136,5 +138,5 @@ int	main(int argc, char **argv, char **envp)
 
 	free_mini(&mini);
 	DEBUG_CLOSE;
-	return (0);
+	return (mini.last_return);
 }
