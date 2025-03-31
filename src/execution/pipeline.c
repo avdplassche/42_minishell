@@ -12,6 +12,8 @@ static void	parent_closes_all_pipes(t_mini *mini)
 		close(mini->pipes[i].write);
 		i++;
 	}
+	free(mini->pipes);
+	mini->pipes = NULL;
 }
 
 static void	setup_child_redirections(t_mini *mini, int cmd_index)
@@ -94,10 +96,18 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
 	int	cmd_index;
 
-	create_pipes(mini, cmd);
 	cmd_index = 0;
+	if (cmd->redir[0].type == HERE_DOC)
+	{
+		mini->cmd_count += 1;
+	}
+	create_pipes(mini, cmd);
 	while (cmd_index < mini->cmd_count)
 	{
+		if (cmd->redir[0].type == HERE_DOC)
+		{
+			handle_heredoc(mini, cmd);
+		}
 		execute_piped_command(mini, &cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}

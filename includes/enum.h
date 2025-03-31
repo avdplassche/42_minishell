@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:37:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/22 15:57:15 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:22:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef enum e_error
 {
 			MALLOC_ERROR = 1,
 			CMD_NOT_FOUND = 2,
+			PIPE_ERROR = 3,
+			FORK_ERROR = 4,
+			DUP_ERROR = 5,
 }			t_error;
 
 typedef enum e_redirections
