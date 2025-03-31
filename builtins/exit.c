@@ -16,7 +16,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	{
 		if (is_valid_arithmetic_exit(cmd->args[1]))
 		{
-			mini->last_return = ft_atoi(cmd->args[1]);
+			mini->last_return = ft_atoi(cmd->args[1]) & 255; //double check this
 		}
 		else
 		{
