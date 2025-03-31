@@ -48,6 +48,10 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 	if (pid == 0) //inside the child process 
 	{
 		setup_child_redirections(mini, cmd_index);
+		if (cmd->redir_amount > 0)
+		{
+			setup_redirections(mini, cmd);
+		}
 		if (execve(cmd->path, cmd->args, mini->envp) == -1)
 		{
 			perror("execve");

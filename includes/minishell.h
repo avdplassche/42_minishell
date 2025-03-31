@@ -92,6 +92,7 @@ char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
 void		backup_standard_fd(t_mini *mini);
 void		set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
+void		setup_redirections(t_mini *mini, t_cmd *cmd);
 void		wait_for_children(t_mini *mini, t_cmd *cmd);
 void		restore_standard_fd(t_mini *mini);
 
