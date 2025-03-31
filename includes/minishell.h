@@ -79,6 +79,17 @@ char		last_quote(char *str, int i);
 
 char		*wildcard_handle(char *temp);
 int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
+char		**fill_file_list(DIR *folder, t_wildcard w, int file_amount);
+int			count_valid_files(DIR *folder, t_wildcard w);
+void		change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
+char		*crop_command(char *temp);
+int			get_new_index(char *temp);
+int			get_dir_start(char *temp, int i);
+void		set_wildcard_directory(t_wildcard *w, char *temp, int i);
+int			is_last_asterisk(char *token, int i);
+void		tokenize_wildcard(t_wildcard *w, char *temp, int start);
+char		*crop_args(char *temp);
+
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
@@ -162,6 +173,9 @@ char		*get_next_line(int fd);
 				/* XTRA */
 
 bool		contain_char(char *s, char c);
+void		append_space_to_string(char **str);
+char		*join_n_strings(char **file_list, int n);
+char		*join_three_strings(char *s1, char *s2, char *s3);
 void		sort_array(char **filename, int len);
 bool		contain_quotes(char *s);
 char		*enquote_str(char *str, int q);
@@ -187,13 +201,15 @@ void		string_build(char **dest_ptr, char *prefix, char *suffix);
 
 /* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
 
-void	print_error(const char *format, const char *path, int fd);
+void		print_error(const char *format, const char *path, int fd);
 
 /* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 
 void		free_string_array(char **str);
+void		free_wildcard_struct(t_wildcard *w);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
+void		free_double_pointer(char **table, int len);
 void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 #endif

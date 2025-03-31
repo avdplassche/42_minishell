@@ -3,6 +3,7 @@
 #include "minishell.h"
 
 
+
 /**Count the amount of redirections in order
  * to malloc t_file structures for each redir
  */

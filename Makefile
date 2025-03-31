@@ -33,6 +33,7 @@ vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 SRCS				=	main.c \
 						print.c \
 						init_mini.c \
+						errors.c \
 						parsing.c \
 						fill_cmd_struct.c \
 						get_cmd_bin.c \
@@ -43,6 +44,8 @@ SRCS				=	main.c \
 						dollar_sign.c \
 						wildcards_sub.c \
 						wildcards_files.c \
+						wildcards_affixes.c \
+						wildcards_utils.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_arithmetic.c \
@@ -59,6 +62,7 @@ SRCS				=	main.c \
 						minishell_exit.c
 
 UTILS				=	contain_char.c \
+						append_space_to_string.c \
 						contain_quotes.c \
 						contain_string_at_specific_index.c \
 						enquote_str.c \
@@ -71,6 +75,8 @@ UTILS				=	contain_char.c \
 						is_space.c \
 						is_angle_bracket.c \
 						is_valid_arithmetic_exit.c \
+						join_n_strings.c\
+						join_three_strings.c \
 						print_error.c \
 						start_with.c \
 						sort_array.c \
