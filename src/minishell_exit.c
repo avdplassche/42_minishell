@@ -1,12 +1,34 @@
 #include "minishell.h"
 
-void	handle_error(t_mini *mini, t_cmd *cmd, const char *message)
+void	free_wildcard_struct(t_wildcard *w)
 {
-	perror(message);
-	mini->last_return = 1;
-	if (cmd->pid == 0)
-		exit(1);
+	if (w->dirname)
+	{
+		free(w->dirname);
+		w->dirname = NULL;
+	}
+	if (w->token)
+	{
+		free(w->token);
+		w->token = NULL;
+	}
+	if (w->s_dir)
+	{
+		free(w->s_dir);
+		w->s_dir = NULL;
+	}
+	if (w->prefix)
+	{
+		free(w->prefix);
+		w->prefix = NULL;
+	}
+	if (w->suffix)
+	{
+		free(w->suffix);
+		w->suffix = NULL;
+	}
 }
+
 
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
@@ -32,6 +54,8 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 		}
 		i++;
 	}
+	if (cmd->redir)
+		free(cmd->redir);
 	if (cmd)
 		free(cmd);
 }

@@ -29,26 +29,13 @@ char	*get_cmd_bin(t_mini *mini)
 {
 	char	*temp;
 	int		len;
-	int		i;
 	char	*dest;
-	// char	*debug;
 
 	len = get_last_index(mini);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
 	mini->cursor = len;
 	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
-	// temp = dollar_handle(temp);
-	// temp = wildcard_handle(temp);
-	// DEBUG("temp = %s\n\n", temp);
-	// (void) debug;
-	// DEBUG("debug : %s\n", debug);
-	i = need_dollar_substitution(temp);
-	while (i > -1)
-	{
-		temp = translate_dollar_sign(mini, temp, i);
-		i = need_dollar_substitution(temp);
-	}
 	if (!contain_quotes(temp))
 		dest = ft_strdup(temp);
 	else

@@ -21,7 +21,6 @@ typedef union u_pipefd
 typedef struct s_redir
 {
 	char				*pathname;
-	char				*eof; //heredoc delimiter 
 	t_redirections		type;
 }	t_redir;
 
@@ -83,7 +82,7 @@ typedef struct s_cmd
 {
 	char		*command;
 	char		*path;
-	bool		export;
+	bool		export; // ????
 	int			type;
 	int			echo_n_index;
 	char		**args;

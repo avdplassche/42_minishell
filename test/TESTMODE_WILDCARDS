@@ -11,8 +11,8 @@ echo te*
 echo t***t
 echo */
 echo */*.c
-echo */*/*
-echo ../*/*
+echo */****/*
+echo ../**/*
 echo .*/
 echo *.c
 

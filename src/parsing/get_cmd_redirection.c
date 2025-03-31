@@ -3,6 +3,7 @@
 #include "minishell.h"
 
 
+
 /**Count the amount of redirections in order
  * to malloc t_file structures for each redir
  */
@@ -73,14 +74,10 @@ int	get_cmd_redirection(t_mini *mini, t_cmd *cmd, int j)
 	int	sign;
 
 	sign = get_cmd_redir_type(mini);
-	if (sign != HERE_DOC)
-		cmd->redir[j].eof = NULL;
 	while (contain_char(SPACES, mini->line[mini->cursor]))
 		mini->cursor++;
 	cmd->redir[j].pathname = get_cmd_bin(mini);
 	cmd->redir[j].type = sign;
-	if (cmd->redir[j].type == HERE_DOC)
-		cmd->redir[j].eof = get_cmd_bin(mini);
 	return (0);
 }
 

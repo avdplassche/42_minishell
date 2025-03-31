@@ -1,0 +1,3 @@
+echo *$LANG
+echo $LANG*
+echo ../*$PAGER

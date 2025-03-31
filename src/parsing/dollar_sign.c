@@ -54,7 +54,8 @@ char	*trim_var_name(t_mini *mini, int index)
 		i++;
 	while (mini->envp[index][++i])
 		j++;
-	trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
+	// trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
+	trimmed_str = ft_substr(mini->envp[index], i - j, j);
 		//malloc protection (malloc in enquote_str)
 	return (trimmed_str);
 }
@@ -209,3 +210,15 @@ int	need_dollar_substitution(char *temp)
 	return (-1);
 }
 
+char	*dollar_handle(t_mini *mini, char *temp)
+{
+	int	i;
+
+	i = need_dollar_substitution(temp);
+	while (i > -1)
+	{
+		temp = translate_dollar_sign(mini, temp, i);
+		i = need_dollar_substitution(temp);
+	}
+	return (temp);
+}

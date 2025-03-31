@@ -1,6 +1,8 @@
 
 #include "minishell.h"
 
+
+
 static int	execute_file(t_mini *mini, char *filename)
 {
 	t_cmd 	*cmd;
@@ -37,11 +39,11 @@ static int	execute_file(t_mini *mini, char *filename)
 	return cmd_status;
 }
 
-void	handle_signal(void)
-{
+// void	handle_signal(void)
+// {
 
 
-}
+// }
 
 // void	loading()
 // {
