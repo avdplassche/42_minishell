@@ -45,18 +45,6 @@ static int	execute_file(t_mini *mini, char *filename)
 
 // }
 
-// void	loading()
-// {
-// 	int i;
-
-// 	i = -1;
-// 	while (++i < 20)
-// 	{
-// 		printf("■");
-// 		usleep(30 * 1000);
-// 	}
-// 	printf("\n");
-// }
 
 int	main(int argc, char **argv, char **envp)
 {

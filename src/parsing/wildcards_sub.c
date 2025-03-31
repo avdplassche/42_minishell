@@ -25,7 +25,7 @@ char	*get_sub_token(char **file_list, int file_amount)
 		len--;
 	}
 	str = join_n_strings(file_list, file_amount);
-	free(file_list);
+	// free_string_array(file_list);
 	return (str);
 }
 
@@ -38,6 +38,7 @@ char	*substitute_wildcard(char *temp, int i)
 	char			*dest;
 	char			*temp2;
 
+	file_list = NULL;
 	temp2 = crop_args(temp);
 	i = get_new_index(temp2);
 	folder = NULL;
@@ -49,13 +50,20 @@ char	*substitute_wildcard(char *temp, int i)
 		return (free_wildcard_struct(&w), temp);
 	file_list = fill_file_list(folder, w, file_amount);
 	sort_array(file_list, double_array_len(file_list));
-	change_affixes(file_list, temp2, &w, i);
+	change_affixes(file_list, temp2, &w, i);  /*PROB*/
+	free(temp2);
 	temp = crop_command(temp);
-	dest = ft_strjoin (temp, get_sub_token(file_list, file_amount));
+	// if (file_amount > 1)
+	// {
+		temp2 = get_sub_token(file_list, file_amount);
+		dest = ft_strjoin (temp, temp2);
+		free(temp2);
+	// }
+	// else
 	closedir(folder);
-	// free_wildcard_struct(&w);  /* CHECK, maybe put it in change affizes*/
 	free(temp);
 	free_string_array(file_list);
+	free_wildcard_struct(&w);
 	return (dest);
 }
 

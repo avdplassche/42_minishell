@@ -66,13 +66,12 @@ void	free_string_array(char **str)
 {
 	int	i;
 
-	if (!(str))
+	if (!str)
 		return ;
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		free(str[i]);
-		i++;
 	}
 	free(str);
 }

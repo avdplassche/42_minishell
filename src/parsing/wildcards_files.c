@@ -64,6 +64,7 @@ char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
 	int				i;
 	struct dirent	*s_dir;
 	char			**file_list;
+	char			*temp;
 
 	if (!file_amount)
 		return (NULL);
@@ -76,7 +77,11 @@ char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
 	while (s_dir)
 	{
 		if (is_valid_filename(w.token, s_dir, 0, 0))
-			file_list[++i] = enquote_str(ft_strdup(s_dir->d_name), '"');
+		{
+			temp = ft_strdup(s_dir->d_name);
+			file_list[++i] = enquote_str(temp, '"');
+			free(temp);
+		}
 		s_dir = readdir(folder);
 	}
 	file_list[++i] = NULL;
