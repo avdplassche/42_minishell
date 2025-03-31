@@ -37,3 +37,4 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 //teminates the current shell session
 // returns an exit status code 
 // 0 is success, non zero indicate errors.
+//make the last return go all the way back up to main and handle in main

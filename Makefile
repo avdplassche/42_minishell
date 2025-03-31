@@ -55,6 +55,7 @@ SRCS				=	main.c \
 						exec_mini.c \
 						fd_backup_utils.c \
 						pipeline.c \
+						wait_for_children.c \
 						minishell_exit.c
 
 UTILS				=	contain_char.c \
