@@ -59,7 +59,7 @@ char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
 	while (s_dir)
 	{
 		if (is_valid_filename(w.token, s_dir, 0, 0))
-			file_list[++i] = ft_strdup(s_dir->d_name);
+			file_list[++i] = enquote_str(ft_strdup(s_dir->d_name), '"');
 		s_dir = readdir(folder);
 	}
 	file_list[++i] = NULL;
@@ -342,23 +342,27 @@ int	need_wildcard_substitution(char *temp)
 	while (temp[++i])
 	{
 		quote_enclosure_handle(temp[i], &q);
-		if (temp[i] == '*' && !q.dbl && !q.sgl)
-			return (i);
+		if (temp[i] && temp[i] == '*' && !q.dbl && !q.sgl)
+		{
+			if (i > 0 && temp[i - 1] != 92)
+				return (i);
+		}
 	}
 	return (-1);
 }
+
 /**Go through the command and do all the substitutions
  */
 char	*wildcard_handle(char *temp)
 {
 	int		i;
-	int		j = 0;
+	// int		j = 0;
 
 	// DEBUG("(f)Wildcard_handle\n-> Temp = %s\n\n", temp);
 	i = need_wildcard_substitution(temp);
 	if (i == -1)
 		return (temp);
-	while (i != -1 && ++j <= 1)
+	if (i != -1)
 	{
 		temp = substitute_wildcard(temp, i);
 		i = need_wildcard_substitution(temp);

@@ -66,6 +66,7 @@ int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);
 
 int			get_envp_index(t_mini *mini, char *variable);
+char		*dollar_handle(t_mini *mini, char *temp);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
 int			need_dollar_substitution(char *str);
 

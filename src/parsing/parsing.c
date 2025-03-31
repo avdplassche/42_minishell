@@ -22,7 +22,7 @@ void	init_cmd(t_cmd *cmd, int i)
 int	is_valid_command(t_mini *mini)
 {
 	if (!(is_valid_quote(mini)))
-		return (printf("minishell: quote error\n---------------------------\n") , 0);
+		return (DEBUG("minishell: quote error\n---------------------------\n") , 0);
 	if (!is_valid_pipes(mini))
 		return (0);
 	if (!is_valid_redirections(mini))
