@@ -39,7 +39,8 @@ static void	setup_child_redirections(t_mini *mini, int cmd_index)
 
 static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
-	pid_t pid;
+	pid_t 			pid;
+	t_builtin_func	f;
 
 	pid = fork();
 	if (pid == -1)
@@ -53,6 +54,11 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 		if (cmd->redir_amount > 0)
 		{
 			setup_redirections(mini, cmd);
+		}
+		if (cmd[cmd_index].redir->type == BUILTIN)
+		{
+			f = get_builtin_function(cmd->command);
+			f(mini, cmd);
 		}
 		if (execve(cmd->path, cmd->args, mini->envp) == -1)
 		{

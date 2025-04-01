@@ -27,7 +27,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	t_builtin_func	f;
 
 	DEBUG("cmd type is %d\n", cmd->type);
-	if (cmd->type == BUILTIN)
+	if (cmd->type == BUILTIN && cmd->redir->type != PIPE)
 	{
 		f = get_builtin_function(cmd->command);
 		f(mini, cmd);
