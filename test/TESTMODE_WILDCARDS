@@ -1,9 +1,9 @@
+echo s*/
 echo *
 echo ../*
 echo /*
 echo */..
 echo t*/
-echo s*/
 echo ../../*
 echo ***
 echo *st

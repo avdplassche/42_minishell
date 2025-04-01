@@ -49,12 +49,23 @@ int	dup_env(t_mini *mini, char **envp)
 	return (0);
 }
 
+void	init_mini_pointers(t_mini *mini)
+{
+	mini->envp = NULL;
+	mini->builtins = NULL;
+	mini->paths = NULL;
+	mini->line = NULL;
+	mini->pipes = NULL;
+	mini->fd_backup = NULL;
+}
+
 /** Fill t_mini mini's variable
  * @param mini an empty t_mini_structure
  * @param envp the terminal env variable
  */
 int	init_mini(t_mini *mini, char **envp)
 {
+	init_mini_pointers(mini);
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
 		return (MALLOC_ERROR);

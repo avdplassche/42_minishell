@@ -212,7 +212,7 @@ void		free_string_array(char **str);
 void		free_wildcard_struct(t_wildcard *w);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
-void		free_double_pointer(char **table, int len);
+// void		free_double_pointer(char **table, int len);
 void		minishell_exit(t_mini *mini, t_cmd *cmd);
 
 #endif
