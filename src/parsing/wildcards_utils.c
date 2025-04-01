@@ -14,6 +14,7 @@ void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
 	if (temp[len] == '/')
 		len ++;
 	w->token = ft_substr(temp, start, len - start);
+	// if (!w->token)
 	//malloc protection
 }
 
@@ -51,7 +52,7 @@ char	*crop_command(char *temp)
 	while (temp[i] && temp[i] != ' ')
 		i++;
 	dest = ft_substr(temp, 0, i + 1);
-	return(free(temp), dest);
+	return(dest);
 }
 
 int	get_new_index(char *temp)

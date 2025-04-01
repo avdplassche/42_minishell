@@ -9,6 +9,8 @@ char	*join_n_strings(char **file_list, int n)
 	char	*temp;
 
 	i = 0;
+	temp= NULL;
+	str = NULL;
 	j = 1;
 	if (n == 1)
 		return (file_list[0]);

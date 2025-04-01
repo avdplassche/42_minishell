@@ -27,7 +27,7 @@ int	is_valid_command(t_mini *mini)
 		return (0);
 	if (!is_valid_redirections(mini))
 		return (0);
-	if	(!is_valid_arithmetic(mini))
+	if	(!is_valid_backslash(mini))
 		return (0);
 
 	// if (err_char == UNEXPECTED_IN_REDIR)
@@ -69,7 +69,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		print_cmd(cmd[i], mini->line);
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	exec_mini(mini, cmd);
+	// exec_mini(mini, cmd);
 	if (!mini->should_exit)
 	{
 		free_cmd(mini, cmd);

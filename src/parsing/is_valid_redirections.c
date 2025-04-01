@@ -1,8 +1,6 @@
 
 #include "minishell.h"
 
-//to move in /errors
-
 int	is_valid_angle_bracket(t_mini *mini, char bracket)
 {
 	int		i;
@@ -28,7 +26,6 @@ int	is_valid_angle_bracket(t_mini *mini, char bracket)
 	return (1);
 }
 
-
 int	is_valid_redirections(t_mini *mini)
 {
 	if (!is_valid_angle_bracket(mini, '<'))
@@ -37,4 +34,3 @@ int	is_valid_redirections(t_mini *mini)
 		return (print_unexpected_token(">>"), 0);
 	return (1);
 }
-

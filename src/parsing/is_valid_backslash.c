@@ -1,12 +1,9 @@
 #include "minishell.h"
 
-//to move in  /errors
-
-
-int	is_valid_arithmetic(t_mini *mini)
+int	is_valid_backslash(t_mini *mini)
 {
 	int		i;
-	char	set[8] = "'\'';'";
+	const char	set[8] = "'\'';'";
 	t_quote	q;
 
 	i = -1;

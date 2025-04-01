@@ -58,17 +58,19 @@ int			init_arguments(t_mini *mini, t_cmd *cmd);
 int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
-int			get_cmd_args(t_mini *mini, t_cmd *cmd, int index);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
 int			count_arguments(t_mini *mini);
 int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);
 
-int			get_envp_index(t_mini *mini, char *variable);
 char		*dollar_handle(t_mini *mini, char *temp);
+char		*sub_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
+char		*empty_expand(char *temp1, t_quote q, int i);
+int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
 int			need_dollar_substitution(char *str);
+int			is_minishell_punct(char c);
 
 int			is_valid_quote(t_mini *mini);
 void		quote_enclosure_handle(char c, t_quote *quote);
@@ -79,7 +81,7 @@ char		last_quote(char *str, int i);
 
 char		*wildcard_handle(char *temp);
 int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
-char		**fill_file_list(DIR *folder, t_wildcard w, int file_amount);
+char		**fill_file_list(DIR *folder, t_wildcard w);
 int			count_valid_files(DIR *folder, t_wildcard w);
 void		change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
 char		*crop_command(char *temp);
@@ -89,6 +91,8 @@ void		set_wildcard_directory(t_wildcard *w, char *temp, int i);
 int			is_last_asterisk(char *token, int i);
 void		tokenize_wildcard(t_wildcard *w, char *temp, int start);
 char		*crop_args(char *temp);
+void		init_wildcard_struct(t_wildcard *w);
+void		free_wildcards(char *temp, char *temp2, char **list, int file_amount);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
@@ -122,7 +126,7 @@ int			builtin_pwd(t_mini *mini, t_cmd *cmd);
 
 int			is_valid_pipes(t_mini *mini);
 int			is_valid_redirections(t_mini *mini);
-int			is_valid_arithmetic(t_mini *mini);
+int			is_valid_backslash(t_mini *mini);
 
 /* * * * * * * * * * * * * * PRINT * * * * * * * * * * * * * * * * * */
 
@@ -173,7 +177,7 @@ char		*get_next_line(int fd);
 
 				/* XTRA */
 
-bool		contain_char(char *s, char c);
+bool		contain_char(const char *s, char c);
 void		append_space_to_string(char **str);
 char		*join_n_strings(char **file_list, int n);
 char		*join_three_strings(char *s1, char *s2, char *s3);

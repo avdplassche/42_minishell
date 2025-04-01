@@ -35,7 +35,6 @@ void	change_affixes(char **file_list, char *temp1, t_wildcard *w, int i)
 	temp2 = NULL;
 	j = -1;
 	len = double_array_len(file_list);
-
 	get_prefix(w, temp1, i);
 	get_suffix(w, temp1, i);
 	while (++j < len)

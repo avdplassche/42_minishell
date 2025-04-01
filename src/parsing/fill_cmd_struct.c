@@ -1,8 +1,4 @@
-
-
 #include "minishell.h"
-
-
 
 /** Fill command structure (for 1 command of the command line)
  * @param mini t_mini structure, containing current line to work with
@@ -30,7 +26,7 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
 			get_cmd_redirection(mini, cmd, j++);
 		else if (cmd->arg_amount)
-			get_cmd_args(mini, cmd, i++);
+			cmd->args[i++] = get_cmd_bin(mini);
 	}
 	if (cmd->arg_amount)
 		cmd->args[i] = NULL;

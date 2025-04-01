@@ -52,7 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*cmd;
 	char	*input;
 
-	// loading();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
 	while (argc == 1)
@@ -94,6 +93,7 @@ int	main(int argc, char **argv, char **envp)
 		int i = -1;
 		int c = 0;
 		int r = read(fd, buffer, 9999);
+		char	*next_line = NULL;
 
 		cmd = NULL;
 		buffer[r] = '\0';
@@ -107,14 +107,16 @@ int	main(int argc, char **argv, char **envp)
 		c = 0;
 		while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
 		{
-			mini.line = ft_strtrim(get_next_line(fd), SPACES);
+			next_line = get_next_line(fd);
+			mini.line = ft_strtrim(next_line, SPACES);
+			free(next_line);
 			mini.cmd_count = count_cmd(&mini);
 			mini.cursor = 0;
 			DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			{
 				parsing(&mini, cmd);
-				//exec_mini(&mini, cmd);
+				// exec_mini(&mini, cmd);
 			}
 			free(cmd);
 			free(mini.line);

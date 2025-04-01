@@ -1,9 +1,8 @@
 #include "minishell.h"
 
-
 int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 {
-	char	charset[5] = " <>|";
+	const char	charset[5] = " <>|";
 
 	while (is_angle_bracket(mini->line[i]))
 		i++;
@@ -63,22 +62,13 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 	return (i);
 }
 
-
-/** Fill cmd arg tokens, a char** that will be used in execve
- * @param cmd_line the command line from the prompt
- * @param cmd_struct the command structure to fill
- * @return error ? not set yet
- */
-int	get_cmd_args(t_mini *mini, t_cmd *cmd, int index)
-{
-	// int		i;
-
-	// i = 0;
-	// cmd->arg_amount = get_arg_amount(mini);
-	// cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
-	// cmd->args[i] = ft_strdup(cmd->command);
-	// while (++i <= cmd->arg_amount)
-	cmd->args[index] = get_cmd_bin(mini);
-	// cmd->args[i] = NULL;
-	return (0);
-}
+// /** Fill cmd arg tokens, a char** that will be used in execve
+//  * @param cmd_line the command line from the prompt
+//  * @param cmd_struct the command structure to fill
+//  * @return error ? not set yet
+//  */
+// void	get_cmd_args(t_mini *mini, t_cmd *cmd, int index)
+// {
+// 	cmd->args[index] = get_cmd_bin(mini);
+// 	return (0);
+// }
