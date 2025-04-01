@@ -60,6 +60,7 @@ SRCS				=	main.c \
 						update_pwd_env.c \
 						exec_mini.c \
 						fd_backup_utils.c \
+						handle_heredoc.c \
 						file_redirections.c \
 						pipeline.c \
 						wait_for_children.c \
@@ -84,6 +85,7 @@ UTILS				=	contain_char.c \
 						print_error.c \
 						start_with.c \
 						sort_array.c \
+						get_line_from_stdin.c \
 						ft_atoi.c \
 						ft_bzero.c \
 						ft_isdigit.c \

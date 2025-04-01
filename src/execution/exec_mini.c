@@ -38,23 +38,6 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 		set_and_execute_pipeline(mini, cmd);
 		restore_standard_fd(mini);
 	}
-	/*else if (cmd->type == INVALID)
-	{
-		//exit the shell
-	}*/
 	return (mini->last_return);
 }
 
-/*pid_t	exec_child(t_mini *mini, t_cmd cmd)
-{
-	(void)mini;
-	
-	int status = 0;
-	pid_t pid = fork();
-	if (pid == 0)
-	{
-		DEBUG("i am HERE IN THE CHILD\n");
-		execve(cmd.path, cmd.args, mini->envp);
-	}
-	waitpid(pid, &status, 0);
-}*/

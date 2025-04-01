@@ -1,6 +1,13 @@
 
 #include "minishell.h"
 
+static void	handle_heredoc_pipe_connection(t_mini *mini, t_cmd *cmd)
+{
+	(void)cmd;
+	dup2(mini->pipes[0].read, STDIN_FILENO);
+	close(mini->pipes[0].read);
+}
+
 static void	handle_out_append(t_cmd *cmd, int *fd, int *i)
 {
 	*fd = open(cmd->redir[*i].pathname, O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -41,7 +48,6 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 {
 	int	fd;
 	int	i;
-	(void)mini;
 
 	i = 0;
 	while (i < cmd->redir_amount)
@@ -57,6 +63,10 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		if(cmd->redir[i].type == OUT_APPEND)
 		{
 			handle_out_append(cmd, &fd, &i);
+		}
+		if(cmd->redir[i].type == HERE_DOC)
+		{
+			handle_heredoc_pipe_connection(mini, cmd);
 		}
 		i++;
 	}

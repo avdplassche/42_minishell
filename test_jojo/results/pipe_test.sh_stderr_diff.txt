@@ -1,5 +1,5 @@
---- ./test_jojo/logs/bash_err.log	2025-03-30 16:25:20.755290384 +0200
-+++ ./test_jojo/logs/minishell_error.log	2025-03-30 16:25:13.664247010 +0200
+--- ./test_jojo/logs/bash_err.log	2025-03-31 16:57:34.617439960 +0200
++++ ./test_jojo/logs/minishell_error.log	2025-03-31 16:57:27.526263689 +0200
 @@ -1,5 +1,2 @@
 -./test_jojo/tests/pipe_test.sh: nonexistentcommand: command not found
 -./test_jojo/tests/pipe_test.sh: ./sigsegv: No such file or directory

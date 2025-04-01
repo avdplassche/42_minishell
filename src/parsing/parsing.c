@@ -70,7 +70,11 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		print_cmd(cmd[i], mini->line);
 	}
 	DEBUG("\n-----------------------------------------------\n");
+<<<<<<< HEAD
 	// exec_mini(mini, cmd);
+=======
+	//exec_mini(mini, cmd);
+>>>>>>> 9f99c37a067be43a567ff8283017e695fab5431f
 	if (!mini->should_exit)
 	{
 		free_cmd(mini, cmd);

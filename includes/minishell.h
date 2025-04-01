@@ -97,7 +97,7 @@ void		free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
-int		exec_mini(t_mini *mini, t_cmd *cmd);
+int			exec_mini(t_mini *mini, t_cmd *cmd);
 //builtin exec 
 char		*ft_get_env(t_mini *mini, char *var_name);
 int			set_env(t_mini *mini, char *env_key, char *env_row);
@@ -107,6 +107,7 @@ char		*get_current_workdir(t_mini *mini);
 char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
 void		backup_standard_fd(t_mini *mini);
+void		handle_heredoc(t_mini *mini, t_cmd *cmd);
 void		set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void		setup_redirections(t_mini *mini, t_cmd *cmd);
 void		wait_for_children(t_mini *mini, t_cmd *cmd);
@@ -195,6 +196,7 @@ int			is_valid_arithmetic_exit(char *str);
 int			start_with(char *string, char *start_string);
 int			double_array_len(char **table);
 int			ft_strcmp_alpha(char *s1, char *s2);
+char		*get_line_from_stdin(void);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
