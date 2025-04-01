@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-static t_builtin_func	get_builtin_function(char *cmd_name)
+t_builtin_func	get_builtin_function(char *cmd_name)
 {
 	DEBUG("entered the get_builtin function\n");
 	if (ft_strcmp(cmd_name, "cd") == 0)
@@ -27,12 +27,12 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	t_builtin_func	f;
 
 	DEBUG("cmd type is %d\n", cmd->type);
-	if (cmd->type == BUILTIN && cmd->redir->type != PIPE)
+	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		f = get_builtin_function(cmd->command);
 		f(mini, cmd);
 	}
-	else if (cmd->type == USER)
+	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1))
 	{
 		backup_standard_fd(mini);
 		set_and_execute_pipeline(mini, cmd);

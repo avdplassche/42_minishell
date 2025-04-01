@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:37:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/03/31 17:22:47 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/01 11:04:54 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ typedef enum e_error
 
 typedef enum e_redirections
 {
-			PIPE = 1,
-			IN_REDIR = 2,
-			OUT_REDIR = 3,
-			HERE_DOC = 4,
-			OUT_APPEND = 5,
+			IN_REDIR,
+			OUT_REDIR,
+			HERE_DOC,
+			OUT_APPEND,
 }			t_redirections;
 
 typedef enum e_command

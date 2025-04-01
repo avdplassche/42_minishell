@@ -21,16 +21,16 @@ static void	setup_child_redirections(t_mini *mini, int cmd_index)
 	int	i;
 	
 	if (cmd_index > 0)
-	{ // stdin is connected to the read end of the previous pipe
-		dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO); //if not the first command, redirects its input to the previous pipe ls |(this pipe) grep | wc 
-	} //if i am the first command, i only look at the line below 
-	if (cmd_index < mini->cmd_count - 1) //in both these cases it is the middle command 
-	{ //stdout is connected to the write end of the next pipe
-		dup2(mini->pipes[cmd_index].write, STDOUT_FILENO); // if not the last command, redirects its output to the next pipe ls | grep |(this pipe) wc
-	} //if i am the last command, i only look at the first if.
+	{
+		dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO);
+	}
+	if (cmd_index < mini->cmd_count - 1)
+	{
+		dup2(mini->pipes[cmd_index].write, STDOUT_FILENO);
+	}
 	i = 0;
 	while (i < mini->cmd_count - 1)
-	{ //all original file descriptors closed as they have either been duplicated or 
+	{ 
 		close(mini->pipes[i].read);
 		close(mini->pipes[i].write);
 		i++;
@@ -48,17 +48,18 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 		mini->last_return = MALLOC_ERROR;
 		exit(EXIT_FAILURE);
 	}
-	if (pid == 0) //inside the child process 
+	if (pid == 0)
 	{
 		setup_child_redirections(mini, cmd_index);
 		if (cmd->redir_amount > 0)
 		{
 			setup_redirections(mini, cmd);
 		}
-		if (cmd[cmd_index].redir->type == BUILTIN)
+		if (cmd->type == BUILTIN)
 		{
 			f = get_builtin_function(cmd->command);
 			f(mini, cmd);
+			exit(EXIT_SUCCESS);
 		}
 		if (execve(cmd->path, cmd->args, mini->envp) == -1)
 		{

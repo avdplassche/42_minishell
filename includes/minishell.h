@@ -93,21 +93,22 @@ char		*crop_args(char *temp);
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
-int			exec_mini(t_mini *mini, t_cmd *cmd);
+int				exec_mini(t_mini *mini, t_cmd *cmd);
+t_builtin_func	get_builtin_function(char *cmd_name);
 //builtin exec 
-char		*ft_get_env(t_mini *mini, char *var_name);
-int			set_env(t_mini *mini, char *env_key, char *env_row);
-int			update_pwd_env(t_mini *mini, char *env_var);
-int			update_old_pwd_env(t_mini *mini);
-char		*get_current_workdir(t_mini *mini);
-char		*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
+char			*ft_get_env(t_mini *mini, char *var_name);
+int				set_env(t_mini *mini, char *env_key, char *env_row);
+int				update_pwd_env(t_mini *mini, char *env_var);
+int				update_old_pwd_env(t_mini *mini);
+char			*get_current_workdir(t_mini *mini);
+char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
-void		backup_standard_fd(t_mini *mini);
-void		handle_heredoc(t_mini *mini, t_cmd *cmd);
-void		set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
-void		setup_redirections(t_mini *mini, t_cmd *cmd);
-void		wait_for_children(t_mini *mini, t_cmd *cmd);
-void		restore_standard_fd(t_mini *mini);
+void			backup_standard_fd(t_mini *mini);
+void			handle_heredoc(t_mini *mini, t_cmd *cmd);
+void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
+void			setup_redirections(t_mini *mini, t_cmd *cmd);
+void			wait_for_children(t_mini *mini, t_cmd *cmd);
+void			restore_standard_fd(t_mini *mini);
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
