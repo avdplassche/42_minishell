@@ -29,6 +29,19 @@ void	free_wildcard_struct(t_wildcard *w)
 	}
 }
 
+void	free_pathnames(t_cmd cmd)
+{
+	int	i;
+
+	i = 0;
+	// DEBUG("Redir Amount : %d\n\n", cmd->redir_amount);
+	while (i < cmd.redir_amount)
+	{
+		free(cmd.redir[i].pathname);
+		i++;
+	}
+	free(cmd.redir);
+}
 
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
@@ -52,10 +65,10 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 			free_string_array(cmd[i].args);
 			cmd[i].args = NULL;
 		}
+		if (cmd[i].redir)
+			free_pathnames(cmd[i]);
 		i++;
 	}
-	if (cmd->redir)
-		free(cmd->redir);
 	if (cmd)
 		free(cmd);
 }

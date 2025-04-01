@@ -22,7 +22,7 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	if (i < 0)
 		return (MALLOC_ERROR);
 	while (mini->line[mini->cursor] && mini->line[mini->cursor] != '|')
-	{
+	{	
 		if (is_angle_bracket(mini->line[mini->cursor]) && cmd->redir_amount)
 			get_cmd_redirection(mini, cmd, j++);
 		else if (cmd->arg_amount)

@@ -33,8 +33,10 @@ char	*trim_var_name(t_mini *mini, int index)
  */
 char	*sub_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i)
 {
+	char	*affix;
 	char	*temp2;
 	char	*dest;
+	char	*var_name;
 	int		i;
 	t_quote	q;
 
@@ -45,14 +47,20 @@ char	*sub_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i)
 		quote_enclosure_handle(temp[i], &q);
 	if (envp_i < 0)
 		return (empty_expand(temp, q, i));
-	temp2 = ft_strjoin(ft_substr(temp, 0, i), trim_var_name(mini, envp_i));
+	var_name = trim_var_name(mini, envp_i);
+	affix = ft_substr(temp, 0, i);
+	temp2 = ft_strjoin(affix, var_name);
+	free(var_name);
+	free(affix);
 	while (temp[++i] && temp[i] != ' ')  //can maybe cause problem because of quotes
 	{
-		if ((q.dbl && temp[i] == 39) || is_minishell_punct(temp[i]))
+		if ((q.dbl && (temp[i] == 39 || temp[i] == 34 || is_minishell_punct(temp[i]))))
 			break ;
 		quote_enclosure_handle(temp[i], &q);
 	}
-	dest = ft_strjoin(temp2, ft_substr(temp, i, ft_strlen(temp)));
+	affix = ft_substr(temp, i, ft_strlen(temp));
+	dest = ft_strjoin(temp2, affix);
+	free(affix);
 	free(temp2);
 	return (dest);
 }
@@ -67,14 +75,17 @@ char	*empty_expand(char *temp1, t_quote q, int i)
 {
 	char	*temp2;
 	char	*dest;
+	char	*suffix;
 
 	temp2 = ft_substr(temp1, 0, i);
 	while (temp1[++i])
 		if (temp1[i] == ' ' || (temp1[i] == 34 && !q.dbl)
 			|| (temp1[i] == 39 && !q.sgl))
 			break ;
-	dest = ft_strjoin(temp2, ft_substr(temp1, i, ft_strlen(temp1)));
+	suffix = ft_substr(temp1, i, ft_strlen(temp1));
+	dest = ft_strjoin(temp2, suffix);
 	free(temp2);
+	free(suffix);
 	return (dest);
 }
 

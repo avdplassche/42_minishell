@@ -92,7 +92,7 @@ int			is_last_asterisk(char *token, int i);
 void		tokenize_wildcard(t_wildcard *w, char *temp, int start);
 char		*crop_args(char *temp);
 void		init_wildcard_struct(t_wildcard *w);
-void		free_wildcards(char *temp, char *temp2, char **list, int file_amount);
+void		free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */

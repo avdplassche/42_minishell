@@ -1,33 +1,38 @@
 
 #include "minishell.h"
 
-
-
 char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 {
 	char	*variable_name;
 	int		envp_index;
 	char	*dest;
+	char	*temp2;
 
 	variable_name = ft_substr(temp, sub_index + 1, j);
-	envp_index = get_envp_index(mini, ft_strjoin(variable_name, "="));
+	temp2 = ft_strjoin(variable_name, "=");
+	envp_index = get_envp_index(mini, temp2);
+	free(temp2);
 	free(variable_name);
 	dest = sub_env_variable(mini, temp, envp_index, sub_index);
 	return (dest);
 }
-
 
 char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
 {
 	char	*dest;
 	char	*temp2;
 	int		len;
+	char	*suffix;
 
 	len = ft_strlen(temp1);
 	dest = ft_substr(temp1, 0, i);
-	temp2 = ft_strjoin(dest, ft_itoa(mini->last_return));
+	suffix = ft_itoa(mini->last_return);
+	temp2 = ft_strjoin(dest, suffix);
+	free(suffix);
 	free(dest);
-	dest = ft_strjoin(temp2, ft_substr(temp1, i + 2, len - i));
+	suffix = ft_substr(temp1, i + 2, len - i);
+	dest = ft_strjoin(temp2, suffix);
+	free(suffix);
 	free(temp1);
 	free(temp2);
 	return (dest);

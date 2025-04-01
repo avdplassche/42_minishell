@@ -1,7 +1,4 @@
-
-
 #include "minishell.h"
-
 
 /** Get the command's last index, use it to substring
  * @param mini t_mini structure, containing current line to work with
@@ -9,9 +6,9 @@
 */
 int	get_last_index(t_mini *mini)
 {
-	int		i;
-	t_quote	q;
-	char	charset[5] = " <>|";
+	const char	charset[5] = " <>|";
+	int			i;
+	t_quote		q;
 
 	i = mini->cursor - 1;
 	q.dbl = 0;
@@ -42,4 +39,3 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = clean_command_quotes(temp);
 	return (free(temp), dest);
 }
-

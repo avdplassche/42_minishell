@@ -62,7 +62,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		if (mini->line[mini->cursor] == '|')
 		{
 			mini->cursor++;
-			while (mini->line[++mini->cursor]
+			while (mini->line[mini->cursor]
 				&& mini->line[mini->cursor] == ' ')
 				mini->cursor++;
 		}
@@ -76,6 +76,5 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	}
 	cmd = NULL;
 	return (mini->last_return);
-	//return (status);
 }
 
