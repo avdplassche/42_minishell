@@ -10,8 +10,6 @@ int	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	int	i;
 	int	j;
 
-	mini->line = dollar_handle(mini, mini->line);
-	mini->line = wildcard_handle(mini->line);
 	i = 0;
 	j = init_redirections(mini, cmd);
 	if (j < 0)

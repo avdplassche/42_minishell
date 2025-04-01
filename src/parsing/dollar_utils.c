@@ -1,71 +1,8 @@
 
 #include "minishell.h"
 
-
-/** Cut the var name out of the envp line and return it into quote
- * @param mini t_mini containing envp to trim
- * @param index index of envp where is stored the variable
- * Example : USER=alvan-de will return "alvan-de"
- */
-char	*trim_var_name(t_mini *mini, int index)
-{
-	int		i;
-	int		j;
-	char	*trimmed_str;
-
-	i = 0;
-	j = 0;
-	while (mini->envp[index][i] && mini->envp[index][i] != '=')
-		i++;
-	while (mini->envp[index][++i])
-		j++;
-	// trimmed_str = enquote_str(ft_substr(mini->envp[index], i - j, j), 34);
-	trimmed_str = ft_substr(mini->envp[index], i - j, j);
-		//malloc protection (malloc in enquote_str)
-	return (trimmed_str);
-}
-
-/** Replace $VAR by it's value and return new cleaned string
- * @param mini t_mini struct containind envp
- * @param temp1 string containing $VAR to substitut
- * @param envp_index index where to find the variable (if -1, no existing variable, replace by blank)
- * @return temp2 : a string with the value instead of the variable name
- */
-char	*sub_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i)
-{
-	char	*affix;
-	char	*temp2;
-	char	*dest;
-	char	*var_name;
-	int		i;
-	t_quote	q;
-
-	q.sgl = 0;
-	q.dbl = 0;
-	i = -1;
-	while (++i < sub_i)
-		quote_enclosure_handle(temp[i], &q);
-	if (envp_i < 0)
-		return (empty_expand(temp, q, i));
-	var_name = trim_var_name(mini, envp_i);
-	affix = ft_substr(temp, 0, i);
-	temp2 = ft_strjoin(affix, var_name);
-	free(var_name);
-	free(affix);
-	while (temp[++i] && temp[i] != ' ')  //can maybe cause problem because of quotes
-	{
-		if ((q.dbl && (temp[i] == 39 || temp[i] == 34 || is_minishell_punct(temp[i]))))
-			break ;
-		quote_enclosure_handle(temp[i], &q);
-	}
-	affix = ft_substr(temp, i, ft_strlen(temp));
-	dest = ft_strjoin(temp2, affix);
-	free(affix);
-	free(temp2);
-	return (dest);
-}
-
-/** If the $ sign is followed by an invalid variable, this function delete the $VARIABLE
+/** If the $ sign is followed by an invalid variable,
+ * this function delete the $VARIABLE
  * @param temp1 the string to elag
  * @param quote the quotes state
  * @param i where the suppression is needed
@@ -99,7 +36,6 @@ int	is_minishell_punct(char c)
 		|| c == '{' || c == '}' || c == '~')
 		return (1);
 	return (0);
-
 }
 
 /** Get the envp index containing the variable

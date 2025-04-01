@@ -43,6 +43,7 @@ SRCS				=	main.c \
 						quotes.c \
 						dollar_handle.c \
 						dollar_utils.c \
+						dollar_variable.c \
 						wildcards_sub.c \
 						wildcards_files.c \
 						wildcards_affixes.c \

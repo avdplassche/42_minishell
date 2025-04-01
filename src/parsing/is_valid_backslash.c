@@ -2,9 +2,9 @@
 
 int	is_valid_backslash(t_mini *mini)
 {
-	int		i;
+	int			i;
 	const char	set[8] = "'\'';'";
-	t_quote	q;
+	t_quote		q;
 
 	i = -1;
 	q.sgl = 0;

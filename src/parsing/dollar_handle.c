@@ -13,7 +13,7 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	envp_index = get_envp_index(mini, temp2);
 	free(temp2);
 	free(variable_name);
-	dest = sub_env_variable(mini, temp, envp_index, sub_index);
+	dest = get_env_variable(mini, temp, envp_index, sub_index);
 	return (dest);
 }
 

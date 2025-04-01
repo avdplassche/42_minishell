@@ -65,7 +65,7 @@ int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);
 
 char		*dollar_handle(t_mini *mini, char *temp);
-char		*sub_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
+char		*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
 char		*empty_expand(char *temp1, t_quote q, int i);
 int			get_envp_index(t_mini *mini, char *variable);
 char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);

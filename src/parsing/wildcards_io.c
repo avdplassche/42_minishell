@@ -21,4 +21,3 @@ void	free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w)
 		free(list);
 	free_wildcard_struct(w);
 }
-
