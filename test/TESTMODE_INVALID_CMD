@@ -1,0 +1,15 @@
+ temp.txt | grep "error" > errors.log >> all_logs.log | sort >> sorted_errors.log
+cat <<eof1 <<eof2
+echo "Hello World" > file1 > f > file3 >> file4 | tr 'a-z' 'A-Z' > uppercase.txt
+cut -d, -f2 < data.csv > column2.txt | sort > sot >> sorted_unique.txt | uniq > final_output.txt
+tac < input.txt > reversed.txt | grep c -l > line_count.txt
+cat << EOF > words1.txt > wor'\n' > split_words.txt | sort > sorted_words.txt >> word_freq.txt
+cat he       < file1.txt
+cat     file1.txtgrep "error"
+cat < file1.txt | grek '{print $2}' < file2.txt | sort > output1.txt | tee result.txt > final_output.txt
+sort < data.txt | grep ie_data.txt | awk '{print $1, $3}' | uniq > processed_output.txt | tee final_data.txt > final_report.txt
+cat file1.txt | grep dataawk '{print $1}' < file3.txt | sort > sorted_data.txt | tee output.txt > final_output.txt
+curl -s http://example.com/g < raw_data.txt | sort | tee result.txt > clean_output.txt > processed_data.txt
+cat < file1.txt | grep "error" | awk '{print $3}' < file2.txt | sort final_output.txt > processed_output.txt
+sort < data.csv | awk -F',' '{print $1, $2}' < more_dnt | uniq > cleaned_data.txt | tee final_clean.txt > result.txt
+cat < log.txt | gre'crit{print $1}' | tee filtered_logs.txt > final_log.txt

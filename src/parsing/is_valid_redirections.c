@@ -15,7 +15,8 @@ int	is_valid_angle_bracket(t_mini *mini, char bracket)
 	{
 		c = 0;
 		quote_enclosure_handle(mini->line[i], &q);
-		while (mini->line[i] && !q.sgl && !q.dbl && mini->line[i] == bracket)
+		while (mini->line[i] && !q.sgl && !q.dbl &&
+			(mini->line[i] == bracket))
 		{
 			i++;
 			if (++c == 3)
