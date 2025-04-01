@@ -73,10 +73,10 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 		cmd->pid = pid;
 	}
 }
+
 static void	create_pipes(t_mini *mini, t_cmd *cmd)
 {
 	int			i;
-	t_pipefd	*p;
 
 	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
 	if (!mini->pipes)
@@ -84,17 +84,16 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 		mini->last_return = MALLOC_ERROR;
 		minishell_exit(mini, cmd);
 	}
-	p = mini->pipes;
 	i = 0;
-	while (i < mini->cmd_count -1)
+	while (i < mini->cmd_count - 1)
 	{
-		if (pipe(p[i].fildes) == -1)
+		if (pipe(mini->pipes[i].fildes) == -1)
 		{
 			mini->last_return = MALLOC_ERROR;
 			minishell_exit(mini, cmd);
 		}
-		cmd[i].pipe_out = &mini->pipes[i]; // ls | this is the first pipe
-		cmd[i + 1].pipe_in = &mini->pipes[i]; // the next commmand's pipe in is the same pipe shared. 
+		cmd[i].pipe_out = &mini->pipes[i];
+		cmd[i + 1].pipe_in = &mini->pipes[i];
 		i++;
 	}
 }
@@ -102,19 +101,26 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
 	int	cmd_index;
+	int	i;
 
 	cmd_index = 0;
-	if (cmd->redir[0].type == HERE_DOC)
+	i = 0;
+	while (cmd_index < mini->cmd_count)
 	{
-		mini->cmd_count += 1;
+		while (i < cmd->redir_amount)
+		{
+			if (cmd[cmd_index].redir[i].type == HERE_DOC)
+			{
+				handle_heredoc(mini, &cmd[cmd_index]);
+			}
+			i++;
+		}
+		cmd_index++;
 	}
+	cmd_index = 0;
 	create_pipes(mini, cmd);
 	while (cmd_index < mini->cmd_count)
 	{
-		if (cmd->redir[0].type == HERE_DOC)
-		{
-			handle_heredoc(mini, cmd);
-		}
 		execute_piped_command(mini, &cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}
