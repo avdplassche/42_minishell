@@ -22,6 +22,7 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 			break ;
 		}
 		write(here_doc_pipe[1], line, ft_strlen(line));
+		write(here_doc_pipe[1], "\n", 1);
 		free(line);
 	}
 }
