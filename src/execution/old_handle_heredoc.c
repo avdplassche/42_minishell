@@ -28,14 +28,14 @@ void	old_handle_heredoc(t_mini *mini, t_cmd *cmd)
 	if (pipe(mini->pipes->fildes) == -1)
 	{
 		mini->last_return = PIPE_ERROR;
-		minishell_exit(mini, cmd);
+		exit_minishell(mini, cmd);
 	}
 	get_line_into_pipe(mini, cmd);
 	close(mini->pipes->write);
 	if (dup2(mini->pipes->read, STDIN_FILENO) == -1)
 	{
 		mini->last_return = DUP_ERROR;
-		minishell_exit(mini, cmd);
+		exit_minishell(mini, cmd);
 	}
 	close(mini->pipes[0].read);
 }

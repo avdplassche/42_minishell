@@ -39,13 +39,13 @@ int	dup_env(t_mini *mini, char **envp)
 		i++;
 	mini->envp = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!mini->envp)
-		minishell_exit(mini, mini->cmd);
+		exit_minishell(mini, mini->cmd);
 	i = -1;
 	while (envp[++i])
 	{
 		mini->envp[i] = ft_strdup(envp[i]);
 		if (!mini->envp)
-			minishell_exit(mini, mini->cmd);
+			exit_minishell(mini, mini->cmd);
 	}
 	mini->envp[i] = NULL;
 	return (0);
@@ -67,6 +67,8 @@ void	init_mini_pointers(t_mini *mini)
  */
 int	init_mini(t_mini *mini, char **envp)
 {
+	char	*env;
+
 	init_mini_pointers(mini);
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
@@ -76,7 +78,9 @@ int	init_mini(t_mini *mini, char **envp)
 		dup_env(mini, envp);
 	else
 		mini->envp = NULL;
-	mini->paths = ft_split(ft_get_env(mini, "PATH"), ':');
+	env = ft_get_env(mini, "PATH");
+	mini->paths = ft_split(env, ':');
+	free(env);
 	if (!mini->paths)
 		return (MALLOC_ERROR);
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));

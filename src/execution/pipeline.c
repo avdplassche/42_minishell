@@ -82,7 +82,7 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 	if (!mini->pipes)
 	{
 		mini->last_return = MALLOC_ERROR;
-		minishell_exit(mini, cmd);
+		exit_minishell(mini, cmd);
 	}
 	i = 0;
 	while (i < mini->cmd_count - 1)
@@ -90,7 +90,7 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 		if (pipe(mini->pipes[i].fildes) == -1)
 		{
 			mini->last_return = MALLOC_ERROR;
-			minishell_exit(mini, cmd);
+			exit_minishell(mini, cmd);
 		}
 		cmd[i].pipe_out = &mini->pipes[i];
 		cmd[i + 1].pipe_in = &mini->pipes[i];

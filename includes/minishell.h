@@ -8,6 +8,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <sys/signal.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>
@@ -22,6 +23,7 @@
 # elif __linux__
 #  include <linux/limits.h>
 # endif
+
 
 # define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
 # define SPACES " \t\n"
@@ -40,61 +42,66 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
-// int g_sig;
+
 
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
 int			init_mini(t_mini *mini, char **envp);
 int			count_cmd(t_mini *mini);
 
+void		signal_list();
+void		handle_signal();
+void		init_signals();
+
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
 int			parsing(t_mini *mini, t_cmd *cmd);
 
-int			count_arguments(t_mini *mini);
-int			init_redirections(t_mini *mini, t_cmd *cmd);
-int			init_arguments(t_mini *mini, t_cmd *cmd);
+int				count_arguments(t_mini *mini);
+int				init_redirections(t_mini *mini, t_cmd *cmd);
+int				init_arguments(t_mini *mini, t_cmd *cmd);
 
-int			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
-char		*get_cmd_bin(t_mini *mini);
-int			get_cmd_type(t_mini *mini, t_cmd *cmd);
-int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
+int				fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+char			*get_cmd_bin(t_mini *mini);
+int				get_cmd_type(t_mini *mini, t_cmd *cmd);
+int				get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
-int			is_builtin_echo(t_cmd *cmd);
+int				is_builtin_echo(t_cmd *cmd);
 
-int			count_arguments(t_mini *mini);
-int			init_redirections(t_mini *mini, t_cmd *cmd);
-int			init_arguments(t_mini *mini, t_cmd *cmd);
+int				count_arguments(t_mini *mini);
+int				init_redirections(t_mini *mini, t_cmd *cmd);
+int				init_arguments(t_mini *mini, t_cmd *cmd);
 
-char		*dollar_handle(t_mini *mini, char *temp);
-char		*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
-char		*empty_expand(char *temp1, t_quote q, int i);
-int			get_envp_index(t_mini *mini, char *variable);
-char		*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
-int			need_dollar_substitution(char *str);
-int			is_minishell_punct(char c);
+char			*dollar_handle(t_mini *mini, char *temp);
+char			*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
+char			*empty_expand(char *temp1, t_quote q, int i);
+int				get_envp_index(t_mini *mini, char *variable);
+char			*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
+int				need_dollar_substitution(char *str);
+int				is_minishell_punct(char c);
 
-int			is_valid_quote(t_mini *mini);
-void		quote_enclosure_handle(char c, t_quote *quote);
-int			strlen_quote_cleaned_command(char *str);
-char		*clean_command_quotes(char *str);
-char		*clean_envp_quotes(char *str);
-char		last_quote(char *str, int i);
+void			expand_tildes(t_mini *mini);
 
-char		*wildcard_handle(char *temp);
-int			is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
-char		**fill_file_list(DIR *folder, t_wildcard w);
-int			count_valid_files(DIR *folder, t_wildcard w);
-void		change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
-char		*crop_command(char *temp);
-int			get_new_index(char *temp);
-int			get_dir_start(char *temp, int i);
-void		set_wildcard_directory(t_wildcard *w, char *temp, int i);
-int			is_last_asterisk(char *token, int i);
-void		tokenize_wildcard(t_wildcard *w, char *temp, int start);
-char		*crop_args(char *temp);
-void		init_wildcard_struct(t_wildcard *w);
-void		free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
+int				is_valid_quote(t_mini *mini);
+void			quote_enclosure_handle(char c, t_quote *quote);
+int				strlen_quote_cleaned_command(char *str);
+char			*clean_command_quotes(char *str);
+char			last_quote(char *str, int i);
+
+char			*wildcard_handle(char *temp);
+int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
+char			**fill_file_list(DIR *folder, t_wildcard w);
+int				count_valid_files(DIR *folder, t_wildcard w);
+void			change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
+char			*crop_command(char *temp);
+int				get_new_index(char *temp);
+int				get_dir_start(char *temp, int i);
+void			set_wildcard_directory(t_wildcard *w, char *temp, int i);
+int				is_last_asterisk(char *token, int i);
+void			tokenize_wildcard(t_wildcard *w, char *temp, int start);
+char			*crop_args(char *temp);
+void			init_wildcard_struct(t_wildcard *w);
+void			free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
@@ -220,6 +227,6 @@ void		free_wildcard_struct(t_wildcard *w);
 void		free_cmd(t_mini *mini, t_cmd *cmd);
 void		free_mini(t_mini *mini);
 // void		free_double_pointer(char **table, int len);
-void		minishell_exit(t_mini *mini, t_cmd *cmd);
+void		exit_minishell(t_mini *mini, t_cmd *cmd);
 
 #endif

@@ -1,8 +1,6 @@
 
 #include "minishell.h"
 
-
-
 int	is_user_command(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
@@ -40,12 +38,14 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 	if (!(ft_strncmp(cmd->command, "echo", len)))
 	{
 		if (is_builtin_echo(cmd))
-			return (BUILTIN);
+			return (DEBUG("echo\n"), BUILTIN);
 		else
 			return (is_user_command(mini, cmd), USER);
 	}
 	while (++i < BUILTIN_AMOUNT)
 	{
+		if (ft_strlen(cmd->command) < ft_strlen(mini->builtins[i]))
+			len = ft_strlen(mini->builtins[i]);
 		if (!(ft_strncmp(mini->builtins[i], cmd->command, len)))
 			return (BUILTIN);
 	}

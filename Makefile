@@ -29,11 +29,13 @@ vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/ft_string_ptr
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 
-#---------------------SOURCE------------------------#s
+#---------------------SOURCE------------------------#
+
 SRCS				=	main.c \
 						print.c \
 						init_mini.c \
 						errors.c \
+						signals.c \
 						parsing.c \
 						fill_cmd_struct.c \
 						get_cmd_bin.c \
@@ -42,6 +44,7 @@ SRCS				=	main.c \
 						echo_type.c \
 						get_cmd_redirection.c \
 						quotes.c \
+						expand_tildes.c \
 						dollar_handle.c \
 						dollar_utils.c \
 						dollar_variable.c \
@@ -65,7 +68,7 @@ SRCS				=	main.c \
 						file_redirections.c \
 						pipeline.c \
 						wait_for_children.c \
-						minishell_exit.c
+						exit_minishell.c
 
 UTILS				=	contain_char.c \
 						append_space_to_string.c \
