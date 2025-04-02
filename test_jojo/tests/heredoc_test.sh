@@ -1,3 +1,3 @@
 #!/bin/bash
 # enter the tests below for the specified command
-cat << EOF
+ls > output | cat output

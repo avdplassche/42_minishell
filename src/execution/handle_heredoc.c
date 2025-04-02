@@ -7,7 +7,6 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 	char	*cursor;
 
 	(void)mini;
-	printf("I an in the get lime into pipe function\n");
 	while(1)
 	{
 		line = get_line_from_stdin();
@@ -15,7 +14,6 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 		while (*cursor && *cursor != '\n')
 			cursor++;
 		*cursor = '\0';
-		DEBUG("LINE: [%s]\n", line);
 		if (line[0] != 0 && ft_strcmp(line, cmd->redir->pathname) == 0)
 		{
 			free(line);
@@ -31,8 +29,6 @@ int	handle_heredoc(t_mini *mini, t_cmd *cmd)
 {
 	pid_t 	pid;
 	int		here_doc_pipe[2];
-
-	printf("pathname is worth %s\n", cmd->redir->pathname);
 
 	if (pipe(here_doc_pipe) == -1)
 	{
@@ -54,7 +50,6 @@ int	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	}
 	if (pid != 0)
 	{
-		printf("I am in the parent\n");
 		close(here_doc_pipe[1]);
 		cmd->pipe_in_heredoc_read_fd = here_doc_pipe[0]; // SEGFAULT HERE
 	}

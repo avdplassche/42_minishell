@@ -22,6 +22,7 @@ static void	handle_out_append(t_cmd *cmd, int *fd, int *i)
 
 static void	handle_out_redir(t_cmd *cmd, int *fd, int *i)
 {
+	DEBUG("the pathis %s for the command\n", cmd->redir[*i].pathname);
 	*fd = open(cmd->redir[*i].pathname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (*fd == -1)
 	{
@@ -59,6 +60,7 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		}
 		if(cmd->redir[i].type == OUT_REDIR)
 		{
+			DEBUG("entered the outredir function \n");
 			handle_out_redir(cmd, &fd, &i);
 		}
 		if(cmd->redir[i].type == OUT_APPEND)
@@ -67,7 +69,6 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		}
 		if(cmd->pipe_in_heredoc_read_fd != -1)
 		{
-			printf("I am in the redirection for heredoc\n");
 			handle_heredoc_pipe_connection(mini, cmd);
 		}
 		i++;

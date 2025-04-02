@@ -26,11 +26,18 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 
-	DEBUG("cmd type is %d\n", cmd->type);
+	DEBUG("command type is %d and cmd count is %d\n", cmd->type, mini->cmd_count);
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
+		DEBUG("entered the case where it is a builtin and alone\n");
+		if (cmd->redir_amount > 0)
+		{
+			backup_standard_fd(mini);
+			setup_redirections(mini, cmd);
+		}
 		f = get_builtin_function(cmd->command);
 		f(mini, cmd);
+		restore_standard_fd(mini);
 	}
 	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1))
 	{
