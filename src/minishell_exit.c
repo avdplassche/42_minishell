@@ -127,18 +127,11 @@ void	free_mini(t_mini *mini)
 			mini->fd_backup = NULL;
 		}
 	}
-<<<<<<< HEAD
-	if (mini->fd_in != -1)
-		close(mini->fd_in);
-	if (mini->fd_out != -1)
-		close(mini->fd_out);
 	if (mini->line)
 	{
 		free(mini->line);
 		mini->line = NULL;
 	}
-=======
->>>>>>> main
 }
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)
