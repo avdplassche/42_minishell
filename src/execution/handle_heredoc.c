@@ -6,7 +6,8 @@ void	get_line_into_pipe(t_mini *mini, t_cmd *cmd)
 	char	*line;
 	int		i;
 
-	while (1)
+	(void)mini;
+	while(1)
 	{
 		line = get_line_from_stdin();
 		i = 0;
@@ -17,25 +18,33 @@ void	get_line_into_pipe(t_mini *mini, t_cmd *cmd)
 			free(line);
 			break ;
 		}
-		write(mini->pipes[0].write, line, ft_strlen(line));
-		write(mini->pipes[0].write, "\n", 1);
+		write(cmd->pipe_in_heredoc->write, line, ft_strlen(line));
+		write(cmd->pipe_in_heredoc->write, "\n", ft_strlen(line));
 		free(line);
 	}
 }
 
 void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 {
-	if (pipe(mini->pipes->fildes) == -1)
+	pid_t pid;
+
+	if (pipe(cmd->pipe_in_heredoc->fildes) == -1)
 	{
 		mini->last_return = PIPE_ERROR;
 		minishell_exit(mini, cmd);
 	}
-	get_line_into_pipe(mini, cmd);
-	close(mini->pipes->write);
-	if (dup2(mini->pipes->read, STDIN_FILENO) == -1)
+	pid = fork();
+	if (pid == -1)
 	{
-		mini->last_return = DUP_ERROR;
+		mini->last_return = FORK_ERROR;
 		minishell_exit(mini, cmd);
 	}
-	close(mini->pipes[0].read);
+	if (pid == 0)
+	{
+		get_line_into_pipe(mini, cmd);
+		close(cmd->pipe_in_heredoc->write);
+
+	}
+
+
 }

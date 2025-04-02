@@ -53,10 +53,8 @@ typedef struct s_mini
 	int			last_return;
 	int			cursor;
 	bool		error;
-	int			fd_in; // we'll see 
-	int			fd_out;
 	t_fd_backup	*fd_backup; 
-	t_pipefd	*pipes;
+	t_pipefd	*pipes; //array of pipes
 	t_cmd		*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
 	bool		should_exit;
 }				t_mini;
@@ -82,7 +80,7 @@ typedef struct s_cmd
 {
 	char		*command;
 	char		*path;
-	bool		export; // ????
+	//bool		export; // ????
 	int			type;
 	int			echo_n_index;
 	char		**args;
@@ -94,6 +92,7 @@ typedef struct s_cmd
 	pid_t		pid;
 	t_pipefd	*pipe_in;
 	t_pipefd	*pipe_out;
+	t_pipefd	*pipe_in_heredoc;
 }				t_cmd;
 
 /** A pointer to function for the builtin function
