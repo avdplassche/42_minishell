@@ -10,7 +10,7 @@
  * @return - 0 if c isn't in s
  * @note can be used to see if a char is in a charset !!!
  */
-bool	contain_char(char *s, char c)
+bool	contain_char(const char *s, char c)
 {
 	int	i;
 

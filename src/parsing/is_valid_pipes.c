@@ -1,8 +1,5 @@
 #include "minishell.h"
 
-//to move in  /errors
-
-
 static int	pipe_start_of_line(t_mini *mini)
 {
 	if (mini->line[0] == '|')
@@ -13,7 +10,7 @@ static int	pipe_start_of_line(t_mini *mini)
 			return (print_unexpected_token("|"), 0);
 	}
 	if (mini->line[ft_strlen(mini->line) - 1] == '|')
-		return (printf("minishell: pipe error\n") , 0);;
+		return (printf("minishell: pipe error\n"), 0);
 	return (1);
 }
 

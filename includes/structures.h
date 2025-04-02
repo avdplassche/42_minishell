@@ -110,5 +110,6 @@ typedef struct s_wildcard
 	char			*suffix;
 	char			*final_sub;
 	bool			current;
+	int				file_amount;
 }					t_wildcard;
 

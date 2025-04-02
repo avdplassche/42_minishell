@@ -1,5 +1,6 @@
-echo s*/
 echo *
+echo *.c
+echo s*/
 echo ../*
 echo /*
 echo */..
@@ -14,7 +15,6 @@ echo */*.c
 echo */****/*
 echo ../**/*
 echo .*/
-echo *.c
 
 1 > *
 2 > *

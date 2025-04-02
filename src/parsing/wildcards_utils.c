@@ -14,7 +14,6 @@ void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
 	if (temp[len] == '/')
 		len ++;
 	w->token = ft_substr(temp, start, len - start);
-	//malloc protection
 }
 
 int	is_last_asterisk(char *token, int i)
@@ -51,7 +50,8 @@ char	*crop_command(char *temp)
 	while (temp[i] && temp[i] != ' ')
 		i++;
 	dest = ft_substr(temp, 0, i + 1);
-	return(free(temp), dest);
+	free(temp);
+	return (dest);
 }
 
 int	get_new_index(char *temp)

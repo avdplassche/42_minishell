@@ -41,14 +41,17 @@ SRCS				=	main.c \
 						get_cmd_type.c \
 						get_cmd_redirection.c \
 						quotes.c \
-						dollar_sign.c \
+						dollar_handle.c \
+						dollar_utils.c \
+						dollar_variable.c \
 						wildcards_sub.c \
 						wildcards_files.c \
 						wildcards_affixes.c \
 						wildcards_utils.c \
+						wildcards_io.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
-						is_valid_arithmetic.c \
+						is_valid_backslash.c \
 						ft_get_env.c \
 						get_current_workdir.c \
 						get_new_env_row.c \

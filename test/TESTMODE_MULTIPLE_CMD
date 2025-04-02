@@ -1,6 +1,7 @@
+cat <<EOF | sed 's/foo/'"bar"'/'
+echo 'txt'"$HOME"   |  grep   txt
 ls
 echo -nnnn 'Hello'" World"
-echo 'txt'"$HOME"   |  grep   txt
      echo "User: "'$USER'
 echo Today is "'$(date)'"
 find . -name '"*.sh"'
@@ -10,7 +11,6 @@ awk '{print "'$1'"}' data.txt
 ls -l | awk "'{print \"$9\"}'"
 echo '"Hello" world' | tr -d '"'
      echo    '"Hello"   world'    |  tr    -d '"'
-cat <<EOF | sed 's/foo/'"bar"'/'
 ls -l | grep '"*.log"' | wc -l
 echo 'Single'" and "'double quotes"
 find / -type f -name 'config'".txt"

@@ -59,16 +59,14 @@ int	count_valid_files(DIR *folder, t_wildcard w)
 	return (count);
 }
 
-char	**fill_file_list(DIR *folder, t_wildcard w, int file_amount)
+char	**fill_file_list(DIR *folder, t_wildcard w)
 {
 	int				i;
 	struct dirent	*s_dir;
 	char			**file_list;
 	char			*temp;
 
-	if (!file_amount)
-		return (NULL);
-	file_list = (char **)malloc(sizeof(char *) * (file_amount + 1));
+	file_list = (char **)malloc(sizeof(char *) * (w.file_amount + 1));
 	if (!file_list)
 		return (NULL);
 	i = -1;
@@ -104,20 +102,15 @@ int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j)
 	while (s_dir->d_name[j] && s_dir->d_name[j] != token[i])
 		j++;
 	if (!is_last_asterisk(token, i))
-	{
 		if (!is_valid_filename(token, s_dir, i, j))
 			return (0);
-	}
-	else
-	{
-		tok_end = ft_strlen(token) - 1;
-		file_end = ft_strlen(s_dir->d_name) - 1;
-		if (token[tok_end] == '/')
-			if (s_dir->d_type == 4)
-				return (1);
-		while (token[tok_end] != '*')
-			if (token[tok_end--] != s_dir->d_name[file_end--])
-				return (0);
-	}
+	tok_end = ft_strlen(token) - 1;
+	file_end = ft_strlen(s_dir->d_name) - 1;
+	if (token[tok_end] == '/')
+		if (s_dir->d_type == 4)
+			return (1);
+	while (token[tok_end] != '*')
+		if (token[tok_end--] != s_dir->d_name[file_end--])
+			return (0);
 	return (1);
 }

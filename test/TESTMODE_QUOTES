@@ -5,18 +5,18 @@
 ech"o Hello World"
 "ech"o Hello World
 e"'ch'o" Hello World
-e'"ch"o' Hello World
-e'c"h'o" Hello World
 "e'c'"h"o" Hello World
 "e'c''h'o" Hello World
 "e'c"h"o'k Hel'l'o" World
 "e'c"h"o'k Hel'l'o World"
 "e"c"ho "Hello World
-e'ch'o" Hello World
 e'ch'o" Hello" World
 e'c'"ho" Hello World
-"e'c"'h"o" hello
 "echo $?"
+e'ch'o" Hello World
+"e'c"'h"o" hello
+e'"ch"o' Hello World
+e'c"h'o" Hello World
 
 
 ls -1 | grep "config" | tee configs.txt | wc -l

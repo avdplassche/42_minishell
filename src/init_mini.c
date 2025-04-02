@@ -70,6 +70,7 @@ int	init_mini(t_mini *mini, char **envp)
 	if (!mini->builtins)
 		return (MALLOC_ERROR);
 	mini->last_return = 0;
+	//protection env -i
 	dup_env(mini, envp);
 	mini->paths = ft_split(ft_get_env(mini, "PATH"), ':');
 	if (!mini->paths)

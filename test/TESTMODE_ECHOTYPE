@@ -1,4 +1,5 @@
+echo -e
+echo hello world
 echo "-n -n hello"
 echo -n -n hello
 echo "-n   " -n hello
-echo -e

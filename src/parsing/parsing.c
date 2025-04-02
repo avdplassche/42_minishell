@@ -22,14 +22,13 @@ void	init_cmd(t_cmd *cmd, int i)
 int	is_valid_command(t_mini *mini)
 {
 	if (!(is_valid_quote(mini)))
-		return (DEBUG("minishell: quote error\n---------------------------\n") , 0);
+		return (DEBUG("minishell: quote error\n"), 0);
 	if (!is_valid_pipes(mini))
 		return (0);
 	if (!is_valid_redirections(mini))
 		return (0);
-	if	(!is_valid_arithmetic(mini))
+	if (!is_valid_backslash(mini))
 		return (0);
-
 	// if (err_char == UNEXPECTED_IN_REDIR)
 	// 	return (printf("error near unexpected token `>>'\n"), 0);
 	// else if (err_char == UNEXPECTED_OUT_REDIR)
@@ -40,7 +39,7 @@ int	is_valid_command(t_mini *mini)
 int	set_return_value(t_mini *mini, int value)
 {
 	mini->last_return = value;
-	if (value == 127)  //when to return (1) ?
+	if (value == 127)
 		return (-1);
 	return (0);
 }
@@ -55,6 +54,8 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
 	if (!cmd)
 		return (MALLOC_ERROR);
+	mini->line = dollar_handle(mini, mini->line);
+	mini->line = wildcard_handle(mini->line);
 	while (++i < mini->cmd_count)
 	{
 		init_cmd(&cmd[i], i);
@@ -62,20 +63,23 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		if (mini->line[mini->cursor] == '|')
 		{
 			mini->cursor++;
-			while (mini->line[++mini->cursor]
+			while (mini->line[mini->cursor]
 				&& mini->line[mini->cursor] == ' ')
 				mini->cursor++;
 		}
 		print_cmd(cmd[i], mini->line);
 	}
 	DEBUG("\n-----------------------------------------------\n");
+<<<<<<< HEAD
 	exec_mini(mini, cmd);
+=======
+	// exec_mini(mini, cmd);
+>>>>>>> main
 	if (!mini->should_exit)
 	{
 		free_cmd(mini, cmd);
 	}
 	cmd = NULL;
 	return (mini->last_return);
-	//return (status);
 }
 

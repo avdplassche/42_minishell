@@ -1,7 +1,8 @@
 
 #include "minishell.h"
 
-/** This function calculate the necessary lenght of the new string after deleting the quotes
+/** This function calculate the necessary lenght of the
+ * new string after deleting the quotes
  * @param str the string to delete the quote from
  * @return a total amount of char, to be used for malloc
 */
@@ -42,7 +43,6 @@ char	last_quote(char *str, int i)
 	return (0);
 }
 
-
 /** Fill command structure (for 1 command of the command line)
  * @param cmd the cmd structure containing cmd->commandto fill
  * @param str the string used to epure from (will be freed after the function)
@@ -57,7 +57,8 @@ char	*clean_command_quotes(char *str)
 
 	j = strlen_quote_cleaned_command(str);
 	dest = malloc(sizeof(char) * (j + 1));
-		//malloc protection
+	if (!dest)
+		return (NULL);
 	i = -1;
 	j = 0;
 	q.dbl = 0;
@@ -72,7 +73,6 @@ char	*clean_command_quotes(char *str)
 	dest[j] = '\0';
 	return (dest);
 }
-
 
 /** Change quote enclosure, taking a char (34 or 39) as argument
  *
@@ -89,14 +89,13 @@ void	quote_enclosure_handle(char c, t_quote *q)
 		q->sgl = 0;
 }
 
-
 /** Tests the validity of quotes with an open/closed boolean system
  * @param mini t_mini containing the command line
  * @return 1 for valid quotes, 0 for non valid
  * @note ascii 34 =  "
  * @note ascii 39 =  '
  */
-int	is_valid_quote(t_mini *mini)  // use last_quote
+int	is_valid_quote(t_mini *mini)
 {
 	int		i;
 	t_quote	q;
@@ -110,4 +109,3 @@ int	is_valid_quote(t_mini *mini)  // use last_quote
 		return (0);
 	return (1);
 }
-
