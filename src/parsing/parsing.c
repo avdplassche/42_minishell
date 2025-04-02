@@ -17,6 +17,7 @@ void	init_cmd(t_cmd *cmd, int i)
 	cmd->id = i + 1;
 	cmd->echo_n_index = 0;
 	cmd->type = -1;
+	cmd->pipe_in_heredoc_read_fd = -1;
 }
 
 int	is_valid_command(t_mini *mini)

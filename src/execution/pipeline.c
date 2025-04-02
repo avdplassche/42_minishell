@@ -53,10 +53,12 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 		setup_child_redirections(mini, cmd_index);
 		if (cmd->redir_amount > 0)
 		{
+			DEBUG("entered loop where redir amount is above 0\n");
 			setup_redirections(mini, cmd);
 		}
 		if (cmd->type == BUILTIN)
 		{
+			DEBUG("in execute piped command entered the BUILTIN\n");
 			f = get_builtin_function(cmd->command);
 			f(mini, cmd);
 			exit(EXIT_SUCCESS);
@@ -100,18 +102,22 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
+	int	pid;
 	int	cmd_index;
 	int	i;
+	int	status;
 
 	cmd_index = 0;
 	i = 0;
-	while (cmd_index < mini->cmd_count)
+	while (cmd_index < mini->cmd_count) // count the number of heredocs in this implementation
 	{
+		i = 0;
 		while (i < cmd->redir_amount)
 		{
-			if (cmd[cmd_index].redir[i].type == HERE_DOC)
+			if (cmd->redir[i].type == HERE_DOC)
 			{
-				handle_heredoc(mini, &cmd[cmd_index]);
+				pid = handle_heredoc(mini, &cmd[cmd_index]);
+				waitpid(pid, &status, 0);
 			}
 			i++;
 		}
@@ -121,6 +127,7 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 	create_pipes(mini, cmd);
 	while (cmd_index < mini->cmd_count)
 	{
+		DEBUG("entered the loop fir execute_piped_command\n");
 		execute_piped_command(mini, &cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}

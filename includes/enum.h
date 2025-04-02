@@ -8,13 +8,6 @@
 	THREE
 }	t_whatever; */
 
-typedef enum e_standard
-{
-			STDIN = 0,
-			STDOUT = 1,
-			STDERR = 2,
-}			t_standard;
-
 typedef enum e_error
 {
 			MALLOC_ERROR = 1,
