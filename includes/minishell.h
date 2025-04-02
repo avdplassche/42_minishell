@@ -60,6 +60,8 @@ char		*get_cmd_bin(t_mini *mini);
 int			get_cmd_type(t_mini *mini, t_cmd *cmd);
 int			get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
 
+int			is_builtin_echo(t_cmd *cmd);
+
 int			count_arguments(t_mini *mini);
 int			init_redirections(t_mini *mini, t_cmd *cmd);
 int			init_arguments(t_mini *mini, t_cmd *cmd);

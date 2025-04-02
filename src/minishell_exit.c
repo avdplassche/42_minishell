@@ -127,6 +127,11 @@ void	free_mini(t_mini *mini)
 			mini->fd_backup = NULL;
 		}
 	}
+	if (mini->line)
+	{
+		free(mini->line);
+		mini->line = NULL;
+	}
 }
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)

@@ -39,6 +39,7 @@ SRCS				=	main.c \
 						get_cmd_bin.c \
 						get_cmd_args.c \
 						get_cmd_type.c \
+						echo_type.c \
 						get_cmd_redirection.c \
 						quotes.c \
 						dollar_handle.c \

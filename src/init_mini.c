@@ -32,18 +32,20 @@ int	count_cmd(t_mini *mini)
  */
 int	dup_env(t_mini *mini, char **envp)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (envp[i])
 		i++;
 	mini->envp = (char **)malloc(sizeof(char *) * (i + 1));
-		//malloc protection
+	if (!mini->envp)
+		minishell_exit(mini, mini->cmd);
 	i = -1;
 	while (envp[++i])
 	{
 		mini->envp[i] = ft_strdup(envp[i]);
-		//double malloc protection
+		if (!mini->envp)
+			minishell_exit(mini, mini->cmd);
 	}
 	mini->envp[i] = NULL;
 	return (0);
@@ -70,8 +72,10 @@ int	init_mini(t_mini *mini, char **envp)
 	if (!mini->builtins)
 		return (MALLOC_ERROR);
 	mini->last_return = 0;
-	//protection env -i
-	dup_env(mini, envp);
+	if (envp)
+		dup_env(mini, envp);
+	else
+		mini->envp = NULL;
 	mini->paths = ft_split(ft_get_env(mini, "PATH"), ':');
 	if (!mini->paths)
 		return (MALLOC_ERROR);
@@ -83,5 +87,3 @@ int	init_mini(t_mini *mini, char **envp)
 	mini->should_exit = 0;
 	return (0);
 }
-
-
