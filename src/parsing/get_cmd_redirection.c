@@ -37,6 +37,7 @@ int	init_redirections(t_mini *mini, t_cmd *cmd)
 	int	j;
 
 	j = 0;
+	cmd->heredoc_amount = 0;
 	cmd->redir_amount = count_redirections(mini, mini->cursor);
 	if (!cmd->redir_amount)
 		return (0);
@@ -76,5 +77,7 @@ int	get_cmd_redirection(t_mini *mini, t_cmd *cmd, int j)
 		mini->cursor++;
 	cmd->redir[j].pathname = get_cmd_bin(mini);
 	cmd->redir[j].type = sign;
+	if (cmd->redir[j].type == HERE_DOC)
+		cmd->heredoc_amount++;
 	return (0);
 }

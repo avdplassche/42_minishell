@@ -134,7 +134,7 @@ void	free_mini(t_mini *mini)
 	}
 }
 
-void	minishell_exit(t_mini *mini, t_cmd *cmd)
+void	exit_minishell(t_mini *mini, t_cmd *cmd)
 {
 	(void)cmd;
 	mini->should_exit = true;

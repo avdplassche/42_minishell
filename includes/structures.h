@@ -80,7 +80,6 @@ typedef struct s_cmd
 {
 	char		*command;
 	char		*path;
-	//bool		export; // ????
 	int			type;
 	int			echo_n_index;
 	char		**args;
@@ -88,6 +87,7 @@ typedef struct s_cmd
 	int			id;
 	t_redir		*redir;
 	int			redir_amount;
+	int			heredoc_amount;
 	int			error;
 	pid_t		pid;
 	t_pipefd	*pipe_in;

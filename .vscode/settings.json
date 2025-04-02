@@ -15,6 +15,9 @@
 		"types.h": "c",
 		"stdbool.h": "c",
 		"debug.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"structures.h": "c",
+		"fcntl.h": "c",
+		"sigaction.h": "c"
 	}
 }

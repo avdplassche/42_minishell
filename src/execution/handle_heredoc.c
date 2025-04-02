@@ -33,13 +33,13 @@ int	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	if (pipe(here_doc_pipe) == -1)
 	{
 		mini->last_return = PIPE_ERROR;
-		minishell_exit(mini, cmd);
+		exit_minishell(mini, cmd);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		mini->last_return = FORK_ERROR;
-		minishell_exit(mini, cmd);
+		exit_minishell(mini, cmd);
 	}
 	if (pid == 0)
 	{

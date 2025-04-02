@@ -1,6 +1,7 @@
 
-#include "minishell.h"
 
+
+#include "minishell.h"
 
 
 static int	execute_file(t_mini *mini, char *filename)
@@ -39,13 +40,6 @@ static int	execute_file(t_mini *mini, char *filename)
 	return cmd_status;
 }
 
-// void	handle_signal(void)
-// {
-
-
-// }
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
@@ -56,9 +50,9 @@ int	main(int argc, char **argv, char **envp)
 		return (EXIT_FAILURE);
 	while (argc == 1)
 	{
-
 		cmd = NULL;
 		mini.cursor = 0;
+		signal_list();
 		input = readline("Prompt minishell ");
 		if (input == NULL)
 		{
@@ -67,13 +61,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		mini.line = ft_strtrim(input, SPACES);
 		free(input);
-		// if (!(ft_strncmp(mini.line, "exit", 4)))
 		mini.cmd_count = count_cmd(&mini);
-		// 	return (free (mini.line), free_mini(&mini), EXIT_SUCCESS);
+		// 	return (free (mini.line), free_mini(&m ini), EXIT_SUCCESS);
 		add_history(mini.line);
 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			parsing(&mini, cmd);
-		// signal(g_sig, handle_signal);
 		if (mini.should_exit)
 			break;
 		free(mini.line);

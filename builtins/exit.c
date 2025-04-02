@@ -29,7 +29,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 		mini->last_return = 0; // in the case whhere its exit 0
 	}
 	mini->should_exit = true;
-	minishell_exit(mini, cmd);
+	exit_minishell(mini, cmd);
 	return mini->last_return;
 }
 
