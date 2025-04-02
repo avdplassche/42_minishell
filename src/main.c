@@ -116,6 +116,7 @@ int	main(int argc, char **argv, char **envp)
 /************************ /TEST MODE ***************************** */
 
 	free_mini(&mini);
+	printf("mini %d\n", mini.last_return);
 	DEBUG_CLOSE;
 	return (mini.last_return);
 }

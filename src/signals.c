@@ -1,35 +1,36 @@
 
 #include "minishell.h"
 
-// void	init_signals()
-// {
-// 	sigemptyset();
-// 	// sigaction(SIGINT, );
+void	init_signals()
+{
+	// sigaction()
+	// sigaction(SIGINT, );
 
+}
 
-// }
+void	handle_signal()
+{
 
-// void	handle_signal()
-// {
+	// siga
+	printf("Signal\n\n");
+	// printf("sig %d\n", )
 
-// 	siga
-// 	printf("Signal\n\n");
-// 	// printf("sig %d\n", )
+}
 
-// }
+void	end_signal()
+{
+	// struct sigaction *sig;
 
-// void	end_signal()
-// {
-// 	// struct sigaction *sig;
+	printf("End Signal\n\n");
 
-// 	printf("End Signal\n\n");
-
-// }
+}
 
 void	signal_list()
 {
-	// signal(SIGINT, handle_signal);
-	// signal(SIGTERM, end_signal);
+	// struct sigaction = NULL;
+
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, end_signal);
 
 }
 

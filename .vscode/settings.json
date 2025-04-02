@@ -18,6 +18,7 @@
 		"typeinfo": "c",
 		"structures.h": "c",
 		"fcntl.h": "c",
-		"sigaction.h": "c"
+		"sigaction.h": "c",
+		"enum.h": "c"
 	}
 }

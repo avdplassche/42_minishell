@@ -8,7 +8,6 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
-# include <sys/signal.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>
@@ -46,16 +45,16 @@
 
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
-int			init_mini(t_mini *mini, char **envp);
-int			count_cmd(t_mini *mini);
+int				init_mini(t_mini *mini, char **envp);
+int				count_cmd(t_mini *mini);
 
-void		signal_list();
-void		handle_signal();
-void		init_signals();
+void			signal_list();
+void			handle_signal();
+void			init_signals();
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
-int			parsing(t_mini *mini, t_cmd *cmd);
+int				parsing(t_mini *mini, t_cmd *cmd);
 
 int				count_arguments(t_mini *mini);
 int				init_redirections(t_mini *mini, t_cmd *cmd);
@@ -125,108 +124,108 @@ void			restore_standard_fd(t_mini *mini);
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
-int			builtin_cd(t_mini *mini, t_cmd *cmd);
-int			builtin_echo(t_mini *mini, t_cmd *cmd);
-int			builtin_env(t_mini *mini, t_cmd *cmd);
-int			builtin_exit(t_mini *mini, t_cmd *cmd);
+int				builtin_cd(t_mini *mini, t_cmd *cmd);
+int				builtin_echo(t_mini *mini, t_cmd *cmd);
+int				builtin_env(t_mini *mini, t_cmd *cmd);
+int				builtin_exit(t_mini *mini, t_cmd *cmd);
 // int			builtin_export(t_mini *mini, t_cmd *cmd);
-int			builtin_pwd(t_mini *mini, t_cmd *cmd);
+int				builtin_pwd(t_mini *mini, t_cmd *cmd);
 // int			builtin_unset(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * * * * * * ERRORS * * * * * * * * * * * * * * * * */
 
-int			is_valid_pipes(t_mini *mini);
-int			is_valid_redirections(t_mini *mini);
-int			is_valid_backslash(t_mini *mini);
+int				is_valid_pipes(t_mini *mini);
+int				is_valid_redirections(t_mini *mini);
+int				is_valid_backslash(t_mini *mini);
 
 /* * * * * * * * * * * * * * PRINT * * * * * * * * * * * * * * * * * */
 
-void		print_unexpected_token(char *token);
-void		print_char_table(char **string, char *name);
-void		print_string(char *string, char *name);
-void		print_cmd(t_cmd cmd, char *cmd_line);
+void			print_unexpected_token(char *token);
+void			print_char_table(char **string, char *name);
+void			print_string(char *string, char *name);
+void			print_cmd(t_cmd cmd, char *cmd_line);
 
-void		print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
-void		debug_parsing_print(t_mini *mini, t_cmd cmd);
+void			print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
+void			debug_parsing_print(t_mini *mini, t_cmd cmd);
 
 /* * * * * * * * * * * * * * UTILS * * * * * * * * * * * * * * * * * */
 
 				/* LIBFT */
 
-int			ft_atoi(char *str);
-void		ft_bzero(void *s, size_t n);
-void		*ft_calloc(size_t count, size_t size);
-int			ft_isdigit(int c);
-char		*ft_itoa(int n);
-void		*ft_memchr(const void *s, int c, size_t n);
-int			ft_memcmp(const void *s1, const void *s2, size_t n);
-void		*ft_memcpy(void *dst, const void *src, size_t n);
-void		*ft_memmove(void *dst, const void *src, size_t n);
-void		*ft_memset(void	*b, int c, size_t len);
-void		ft_putchar_fd(char c, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
-char		*ft_sized_strdup(char *s, int size);
-char		**ft_split(char *s, char c);
-char		*ft_strchr(char *s, int c);
-int			ft_strcmp(char *s1, char *s2);
-char		*ft_strcpy(char *dest, char *src);
-char		*ft_strdup(char *s1);
-char		*ft_strjoin(char *s1, char *s2);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t		ft_strlen(const char *s);
-int			ft_strncmp(char *s1, char *s2, size_t n);
-char		*ft_strnstr(char *haystack, char *needle, size_t len);
-char		*ft_strtrim(char const *s1, char const *set);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_toupper(int c);
-int			ft_tolower(int c);
+int				ft_atoi(char *str);
+void			ft_bzero(void *s, size_t n);
+void			*ft_calloc(size_t count, size_t size);
+int				ft_isdigit(int c);
+char			*ft_itoa(int n);
+void			*ft_memchr(const void *s, int c, size_t n);
+int				ft_memcmp(const void *s1, const void *s2, size_t n);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			*ft_memmove(void *dst, const void *src, size_t n);
+void			*ft_memset(void	*b, int c, size_t len);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putstr_fd(char *s, int fd);
+char			*ft_sized_strdup(char *s, int size);
+char			**ft_split(char *s, char c);
+char			*ft_strchr(char *s, int c);
+int				ft_strcmp(char *s1, char *s2);
+char			*ft_strcpy(char *dest, char *src);
+char			*ft_strdup(char *s1);
+char			*ft_strjoin(char *s1, char *s2);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t			ft_strlen(const char *s);
+int				ft_strncmp(char *s1, char *s2, size_t n);
+char			*ft_strnstr(char *haystack, char *needle, size_t len);
+char			*ft_strtrim(char const *s1, char const *set);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+int				ft_toupper(int c);
+int				ft_tolower(int c);
 
 				/* GNL */
 
-char		*get_next_line(int fd);
+char			*get_next_line(int fd);
 
 				/* XTRA */
 
-bool		contain_char(const char *s, char c);
-void		append_space_to_string(char **str);
-char		*join_n_strings(char **file_list, int n);
-char		*join_three_strings(char *s1, char *s2, char *s3);
-void		sort_array(char **filename, int len);
-bool		contain_quotes(char *s);
-char		*enquote_str(char *str, int q);
-int			contain_string_at_specific_index(char *haystack, char *needle, int i);
-bool		is_space(char c);
-int			is_only_spaces(char *s);
-int			is_only_specific_char(char *s, char c);
-char		*epurstring(char *src);
-int			is_quote(char c);
-int			is_angle_bracket(char c);
-int			is_valid_arithmetic_exit(char *str);
-int			start_with(char *string, char *start_string);
-int			double_array_len(char **table);
-int			ft_strcmp_alpha(char *s1, char *s2);
-char		*get_line_from_stdin(void);
+bool			contain_char(const char *s, char c);
+void			append_space_to_string(char **str);
+char			*join_n_strings(char **file_list, int n);
+char			*join_three_strings(char *s1, char *s2, char *s3);
+void			sort_array(char **filename, int len);
+bool			contain_quotes(char *s);
+char			*enquote_str(char *str, int q);
+int				contain_string_at_specific_index(char *haystack, char *needle, int i);
+bool			is_space(char c);
+int				is_only_spaces(char *s);
+int				is_only_specific_char(char *s, char c);
+char			*epurstring(char *src);
+int				is_quote(char c);
+int				is_angle_bracket(char c);
+int				is_valid_arithmetic_exit(char *str);
+int				start_with(char *string, char *start_string);
+int				double_array_len(char **table);
+int				ft_strcmp_alpha(char *s1, char *s2);
+char			*get_line_from_stdin(void);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
-char		*string_array_find_string(char **string_array, char *string_to_find);
-void		string_array_print(char **string_array);
-size_t		string_array_len(char **str);
-char		*string_array_create_key(char *variable, int variable_len);
-void		string_build(char **dest_ptr, char *prefix, char *suffix);
+char			*string_array_find_string(char **string_array, char *string_to_find);
+void			string_array_print(char **string_array);
+size_t			string_array_len(char **str);
+char			*string_array_create_key(char *variable, int variable_len);
+void			string_build(char **dest_ptr, char *prefix, char *suffix);
 
 /* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
 
-void		print_error(const char *format, const char *path, int fd);
+void			print_error(const char *format, const char *path, int fd);
 
 /* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 
-void		free_string_array(char **str);
-void		free_wildcard_struct(t_wildcard *w);
-void		free_cmd(t_mini *mini, t_cmd *cmd);
-void		free_mini(t_mini *mini);
-// void		free_double_pointer(char **table, int len);
-void		exit_minishell(t_mini *mini, t_cmd *cmd);
+void			free_string_array(char **str);
+void			free_wildcard_struct(t_wildcard *w);
+void			free_cmd(t_mini *mini, t_cmd *cmd);
+void			free_mini(t_mini *mini);
+// void			free_double_pointer(char **table, int len);
+void			exit_minishell(t_mini *mini, t_cmd *cmd);
 
 #endif
