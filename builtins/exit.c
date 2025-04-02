@@ -28,6 +28,8 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	{
 		mini->last_return = 0; // in the case whhere its exit 0
 	}
+	if (mini->fd_backup->stdin_backup != -1 || mini->fd_backup->stdout_backup != -1)
+		restore_standard_fd(mini);
 	mini->should_exit = true;
 	exit_minishell(mini, cmd);
 	return mini->last_return;
