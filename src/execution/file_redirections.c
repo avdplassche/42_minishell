@@ -3,9 +3,9 @@
 
 static void	handle_heredoc_pipe_connection(t_mini *mini, t_cmd *cmd)
 {
-	(void)cmd;
-	dup2(mini->pipes[0].read, STDIN_FILENO);
-	close(mini->pipes[0].read);
+	(void)mini;
+	dup2(cmd->pipe_in_heredoc_read_fd, STDIN_FILENO);
+	close(cmd->pipe_in_heredoc_read_fd);
 }
 
 static void	handle_out_append(t_cmd *cmd, int *fd, int *i)
@@ -50,6 +50,7 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = 0;
+	(void)mini; //need to take this away
 	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == IN_REDIR)
@@ -64,8 +65,9 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		{
 			handle_out_append(cmd, &fd, &i);
 		}
-		if(cmd->redir[i].type == HERE_DOC)
+		if(cmd->pipe_in_heredoc_read_fd != -1)
 		{
+			printf("I am in the redirection for heredoc\n");
 			handle_heredoc_pipe_connection(mini, cmd);
 		}
 		i++;

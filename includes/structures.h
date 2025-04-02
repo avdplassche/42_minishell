@@ -92,7 +92,7 @@ typedef struct s_cmd
 	pid_t		pid;
 	t_pipefd	*pipe_in;
 	t_pipefd	*pipe_out;
-	t_pipefd	*pipe_in_heredoc;
+	int			pipe_in_heredoc_read_fd;
 }				t_cmd;
 
 /** A pointer to function for the builtin function

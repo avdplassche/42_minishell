@@ -100,8 +100,10 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
+	int	pid;
 	int	cmd_index;
 	int	i;
+	int	status;
 
 	cmd_index = 0;
 	i = 0;
@@ -111,7 +113,9 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 		{
 			if (cmd[cmd_index].redir[i].type == HERE_DOC)
 			{
-				handle_heredoc(mini, &cmd[cmd_index]);
+				printf("entered the set and execute pipeline function with heredoc\n");
+				pid = handle_heredoc(mini, &cmd[cmd_index]);
+				waitpid(pid, &status, 0);
 			}
 			i++;
 		}
@@ -121,6 +125,7 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 	create_pipes(mini, cmd);
 	while (cmd_index < mini->cmd_count)
 	{
+		printf("entered the classic exeuciton for the first command\n");
 		execute_piped_command(mini, &cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}

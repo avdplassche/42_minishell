@@ -108,7 +108,7 @@ char			*get_current_workdir(t_mini *mini);
 char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
 void			backup_standard_fd(t_mini *mini);
-void			handle_heredoc(t_mini *mini, t_cmd *cmd);
+int				handle_heredoc(t_mini *mini, t_cmd *cmd);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void			setup_redirections(t_mini *mini, t_cmd *cmd);
 void			wait_for_children(t_mini *mini, t_cmd *cmd);
