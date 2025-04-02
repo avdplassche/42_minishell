@@ -1,3 +1,4 @@
+env
 echo -e
 echo hello world
 echo "-n -n hello"

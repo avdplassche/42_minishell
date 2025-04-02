@@ -44,6 +44,20 @@ int	set_return_value(t_mini *mini, int value)
 	return (0);
 }
 
+void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
+{
+	init_cmd(cmd, i);
+	fill_cmd_structure(mini, cmd);
+	if (mini->line[mini->cursor] == '|')
+	{
+		mini->cursor++;
+		while (mini->line[mini->cursor]
+			&& mini->line[mini->cursor] == ' ')
+			mini->cursor++;
+	}
+	print_cmd(*cmd, mini->line);
+}
+
 int	parsing(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
@@ -53,24 +67,13 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 		return (set_return_value(mini, 127));
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
 	if (!cmd)
-		return (MALLOC_ERROR);
+		minishell_exit(mini, cmd);
 	mini->line = dollar_handle(mini, mini->line);
 	mini->line = wildcard_handle(mini->line);
 	while (++i < mini->cmd_count)
-	{
-		init_cmd(&cmd[i], i);
-		fill_cmd_structure(mini, &cmd[i]);
-		if (mini->line[mini->cursor] == '|')
-		{
-			mini->cursor++;
-			while (mini->line[mini->cursor]
-				&& mini->line[mini->cursor] == ' ')
-				mini->cursor++;
-		}
-		print_cmd(cmd[i], mini->line);
-	}
+		cmd_fill_loop(mini, &cmd[i], i);
 	DEBUG("\n-----------------------------------------------\n");
-	// exec_mini(mini, cmd);
+	exec_mini(mini, cmd);
 	if (!mini->should_exit)
 	{
 		free_cmd(mini, cmd);
@@ -78,4 +81,3 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	cmd = NULL;
 	return (mini->last_return);
 }
-

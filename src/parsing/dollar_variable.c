@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 /** Cut the var name out of the envp line and return it into quote
  * @param mini t_mini containing envp to trim
  * @param index index of envp where is stored the variable

@@ -131,6 +131,11 @@ void	free_mini(t_mini *mini)
 		close(mini->fd_in);
 	if (mini->fd_out != -1)
 		close(mini->fd_out);
+	if (mini->line)
+	{
+		free(mini->line);
+		mini->line = NULL;
+	}
 }
 
 void	minishell_exit(t_mini *mini, t_cmd *cmd)
