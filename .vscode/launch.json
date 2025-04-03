@@ -21,7 +21,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/minishell",
-		"args": ["./test_jojo/tests/heredoc_test.sh"],
+		"args": ["./test_jojo/tests/redir_test.sh"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],
