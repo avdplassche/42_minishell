@@ -26,10 +26,8 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 
-	DEBUG("command type is %d and cmd count is %d\n", cmd->type, mini->cmd_count);
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
-		DEBUG("entered the case where it is a builtin and alone\n");
 		if (cmd->redir_amount > 0)
 		{
 			backup_standard_fd(mini);

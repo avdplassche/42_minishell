@@ -1,21 +1,20 @@
 
 #include "minishell.h"
 
-int	builtin_echo(t_mini *mini, t_cmd *cmd)
+int	new_builtin_echo(t_mini *mini, t_cmd *cmd)
 {
 	int i;
 	int	j;
 	int takeaway_new_line;
 
-	(void)mini;
 	i = 1;
 	takeaway_new_line = 0;
 	while (cmd->args[i] && cmd->args[i][0] == '-')
 	{
 		j = 1;
-		while (cmd->args[i][j] == 'n')
+		while (cmd->args[i] && cmd->args[i][0] == 'n')
 			j++;
-		if (cmd->args[i][j] != '\0')
+		if (cmd->args[i][j] == '\0')
 			break;
 		takeaway_new_line = 1;
 		i++;
@@ -31,4 +30,4 @@ int	builtin_echo(t_mini *mini, t_cmd *cmd)
 		ft_putchar_fd('\n', 1);
 	return (0);
 }
-
+	
