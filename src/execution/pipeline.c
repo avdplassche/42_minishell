@@ -16,10 +16,15 @@ static void	parent_closes_all_pipes(t_mini *mini)
 	mini->pipes = NULL;
 }
 
-static void	setup_child_redirections(t_mini *mini, int cmd_index)
+static void	setup_child_redirections(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	int	i;
 	
+	if (cmd->pipe_in_heredoc_read_fd != -1)
+	{
+		dup2(cmd->pipe_in_heredoc_read_fd, STDIN_FILENO);
+		close(cmd->pipe_in_heredoc_read_fd);
+	}
 	if (cmd_index > 0)
 	{
 		dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO);
@@ -50,7 +55,7 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (pid == 0)
 	{
-		setup_child_redirections(mini, cmd_index);
+		setup_child_redirections(mini, cmd, cmd_index);
 		if (cmd->redir_amount > 0)
 		{
 			DEBUG("entered loop where redir amount is above 0\n");
@@ -111,10 +116,9 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 	i = 0;
 	while (cmd_index < mini->cmd_count) // count the number of heredocs in this implementation
 	{
-		i = 0;
-		while (i < cmd->redir_amount)
+		while (i < cmd[cmd_index].redir_amount)
 		{
-			if (cmd->redir[i].type == HERE_DOC)
+			if (cmd[cmd_index].redir[i].type == HERE_DOC)
 			{
 				pid = handle_heredoc(mini, &cmd[cmd_index]);
 				waitpid(pid, &status, 0);
