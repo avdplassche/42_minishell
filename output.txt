@@ -12,7 +12,6 @@ log
 Makefile
 minishell
 output
-output1
 output.txt
 print_string_indexes
 run.sh
