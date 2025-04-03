@@ -3,34 +3,42 @@
 
 void	init_signals()
 {
-	// sigaction()
+	// sigaction();
 	// sigaction(SIGINT, );
+	
 
 }
 
-void	handle_signal()
+void	handle_signal(int signo)
 {
 
 	// siga
-	printf("Signal\n\n");
+	printf("Signo : %d\n", signo);
+	// if (signo == SIGINT)
+	// 	printf("Signal\n\n");
+	// else if (signo == SIGQUIT)
+	// 	printf("End\n\n");
 	// printf("sig %d\n", )
 
 }
 
-void	end_signal()
+void	end_signal(int signo)
 {
 	// struct sigaction *sig;
+	// printf("Signo : %d\n", signo);
 
-	printf("End Signal\n\n");
+	printf("Signo : %d\n", signo);
 
 }
 
-void	signal_list()
+void	signal_list(void)
 {
-	// struct sigaction = NULL;
+	struct sigaction s;
 
+	(void)s;
 	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, end_signal);
+	// signal(SIGQUIT, handle_signal);
+	// signal(SIGSTOP, end_signal);
 
 }
 

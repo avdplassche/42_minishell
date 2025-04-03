@@ -18,6 +18,14 @@ char	*get_sub_token(char **file_list, int file_amount)
 	return (str);
 }
 
+char	*cat_wildcards(char *temp, char *temp2)
+{
+	if (is_only_specific_char(temp, '*'))
+		return (ft_strdup(temp2));
+	return (ft_strjoin (temp, temp2));
+}
+
+
 char	*substitute_wildcard(char *temp, char *temp2, int i)
 {
 	t_wildcard		w;
@@ -36,12 +44,11 @@ char	*substitute_wildcard(char *temp, char *temp2, int i)
 	if (!w.file_amount)
 		return (free(temp2), free_wildcard_struct(&w), temp);
 	file_list = fill_file_list(folder, w);
-	sort_array(file_list, double_array_len(file_list));
 	change_affixes(file_list, temp2, &w, i);
-	free(temp2);
 	temp = crop_command(temp);
+	free(temp2);
 	temp2 = get_sub_token(file_list, w.file_amount);
-	dest = ft_strjoin (temp, temp2);
+	dest = cat_wildcards(temp, temp2);
 	free_wildcards(temp, temp2, file_list, &w);
 	closedir(folder);
 	return (dest);
@@ -64,6 +71,8 @@ int	need_wildcard_substitution(char *temp)
 		{
 			if (i > 0 && temp[i - 1] != 92)
 				return (i);
+			else if (i == 0)
+				return (0);
 		}
 	}
 	return (-1);

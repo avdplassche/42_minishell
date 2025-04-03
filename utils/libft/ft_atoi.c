@@ -27,10 +27,3 @@ int	ft_atoi(char *str)
 	}
 	return (nb * sign);
 }
-/*
-int main(void)
-{
-	printf("%d", ft_atoi("  -214"));
-	return (0);
-}
-*/

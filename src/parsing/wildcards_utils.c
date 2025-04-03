@@ -30,7 +30,7 @@ char	*crop_args(char *temp)
 	int		i;
 
 	if (!contain_char(temp, ' '))
-		return (temp);
+		return (ft_strdup(temp));
 	i = 0;
 	while (temp [i] != ' ')
 		i++;

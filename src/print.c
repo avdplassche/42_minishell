@@ -77,7 +77,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 			i++;
 		}
 		DEBUG("\n");
-		DEBUG("H	  EREDOC Amount : %d\n\n", cmd.heredoc_amount);
+		DEBUG("	  HEREDOC Amount : %d\n\n", cmd.heredoc_amount);
 	}
 	//DEBUG("	  command amount : %d\n\n", cmd.redir_amount")
 }

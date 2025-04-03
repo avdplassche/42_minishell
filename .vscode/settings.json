@@ -19,6 +19,7 @@
 		"structures.h": "c",
 		"fcntl.h": "c",
 		"sigaction.h": "c",
-		"enum.h": "c"
+		"enum.h": "c",
+		"features.h": "c"
 	}
 }

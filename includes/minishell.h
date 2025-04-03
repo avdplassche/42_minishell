@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define __USE_GNU
+# define __USE_POSIX
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -8,6 +10,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <features.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>

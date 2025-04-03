@@ -84,6 +84,7 @@ char	**fill_file_list(DIR *folder, t_wildcard w)
 	}
 	file_list[++i] = NULL;
 	closedir(folder);
+	sort_array(file_list, double_array_len(file_list));
 	return (file_list);
 }
 
