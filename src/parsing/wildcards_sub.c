@@ -25,32 +25,29 @@ char	*cat_wildcards(char *temp, char *temp2)
 	return (ft_strjoin (temp, temp2));
 }
 
-
 char	*substitute_wildcard(char *temp, char *temp2, int i)
 {
 	t_wildcard		w;
-	DIR				*folder;
 	char			**file_list;
 	char			*dest;
 
 	i = get_new_index(temp2);
-	folder = NULL;
 	init_wildcard_struct(&w);
 	set_wildcard_directory(&w, temp2, i);
 	tokenize_wildcard(&w, temp2, i);
 	if (!w.token)
 		return (NULL);
-	w.file_amount = count_valid_files(folder, w);
+	w.file_amount = count_valid_files( w);
 	if (!w.file_amount)
 		return (free(temp2), free_wildcard_struct(&w), temp);
-	file_list = fill_file_list(folder, w);
+	file_list = fill_file_list( w);
+	sort_array(file_list, double_array_len(file_list));
 	change_affixes(file_list, temp2, &w, i);
 	temp = crop_command(temp);
 	free(temp2);
 	temp2 = get_sub_token(file_list, w.file_amount);
 	dest = cat_wildcards(temp, temp2);
 	free_wildcards(temp, temp2, file_list, &w);
-	closedir(folder);
 	return (dest);
 }
 

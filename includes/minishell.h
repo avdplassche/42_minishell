@@ -1,8 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define _GNU_SOURCE
 
-# define __USE_GNU
-# define __USE_POSIX
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -10,6 +9,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <termios.h>
 # include <features.h>
 # include <dirent.h>
 # include <signal.h>
@@ -92,8 +92,8 @@ char			last_quote(char *str, int i);
 
 char			*wildcard_handle(char *temp);
 int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
-char			**fill_file_list(DIR *folder, t_wildcard w);
-int				count_valid_files(DIR *folder, t_wildcard w);
+char			**fill_file_list( t_wildcard w);
+int				count_valid_files(t_wildcard w);
 void			change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
 char			*crop_command(char *temp);
 int				get_new_index(char *temp);

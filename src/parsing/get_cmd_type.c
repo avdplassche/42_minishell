@@ -38,7 +38,7 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 	if (!(ft_strncmp(cmd->command, "echo", len)))
 	{
 		if (is_builtin_echo(cmd))
-			return (DEBUG("echo\n"), BUILTIN);
+			return (BUILTIN);
 		else
 			return (is_user_command(mini, cmd), USER);
 	}

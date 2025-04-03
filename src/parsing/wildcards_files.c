@@ -39,10 +39,11 @@ void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
 
 /** Count valid files in order to malloc a char table 
  */
-int	count_valid_files(DIR *folder, t_wildcard w)
+int	count_valid_files(t_wildcard w)
 {
 	int				count;
 	struct dirent	*s_dir;
+	DIR				*folder;
 
 	count = 0;
 	folder = opendir(w.dirname);
@@ -59,12 +60,13 @@ int	count_valid_files(DIR *folder, t_wildcard w)
 	return (count);
 }
 
-char	**fill_file_list(DIR *folder, t_wildcard w)
+char	**fill_file_list(t_wildcard w)
 {
 	int				i;
 	struct dirent	*s_dir;
 	char			**file_list;
 	char			*temp;
+	DIR				*folder;
 
 	file_list = (char **)malloc(sizeof(char *) * (w.file_amount + 1));
 	if (!file_list)
@@ -84,7 +86,6 @@ char	**fill_file_list(DIR *folder, t_wildcard w)
 	}
 	file_list[++i] = NULL;
 	closedir(folder);
-	sort_array(file_list, double_array_len(file_list));
 	return (file_list);
 }
 

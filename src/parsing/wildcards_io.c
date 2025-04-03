@@ -1,15 +1,6 @@
 
 #include "minishell.h"
 
-// void	only_asterix_case(char *temp, char **list)
-// {
-// 	if (is_only_specific_char(temp, '*'))
-// 		return ;
-
-// }
-
-
-
 void	init_wildcard_struct(t_wildcard *w)
 {
 	w->dirname = NULL;
