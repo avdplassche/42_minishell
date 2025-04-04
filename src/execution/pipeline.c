@@ -22,16 +22,19 @@ static void	setup_child_redirections(t_mini *mini, t_cmd *cmd, int cmd_index)
 	
 	if (cmd->pipe_in_heredoc_read_fd != -1)
 	{
-		dup2(cmd->pipe_in_heredoc_read_fd, STDIN_FILENO);
+		if(dup2(cmd->pipe_in_heredoc_read_fd, STDIN_FILENO) == -1)  // Fixed semicolon here
+			perror("dup2 heredoc");
 		close(cmd->pipe_in_heredoc_read_fd);
 	}
 	if (cmd_index > 0)
 	{
-		dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO);
+		if(dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO) == -1)  // Added error check
+			perror("dup2 stdin");
 	}
 	if (cmd_index < mini->cmd_count - 1)
 	{
-		dup2(mini->pipes[cmd_index].write, STDOUT_FILENO);
+		if(dup2(mini->pipes[cmd_index].write, STDOUT_FILENO) == -1)  // Added error check
+			perror("dup2 stdout");
 	}
 	i = 0;
 	while (i < mini->cmd_count - 1)
@@ -96,6 +99,7 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 	{
 		if (pipe(mini->pipes[i].fildes) == -1)
 		{
+			perror("pipe creation");
 			mini->last_return = MALLOC_ERROR;
 			exit_minishell(mini, cmd);
 		}
@@ -104,7 +108,9 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 		i++;
 	}
 }
-
+/// @brief 
+/// @param mini 
+/// @param cmd 
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
 	int	pid;

@@ -3,8 +3,8 @@
 
 void	backup_standard_fd(t_mini *mini)
 {
-	// if (mini || !mini->fd_backup)
-	// 	return ;
+	if (mini || !mini->fd_backup)
+		return ;
 	mini->fd_backup->stdin_backup = dup(STDIN_FILENO);
 	mini->fd_backup->stdout_backup = dup(STDOUT_FILENO);
 }

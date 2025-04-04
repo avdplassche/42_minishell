@@ -1,1 +1,22 @@
-hello
+total 264
+-rwxr-xr-x 1 jrandet 2024_lausanne    620 Apr  3 16:48 add_function_to_makefile.sh
+drwxr-xr-x 5 jrandet 2024_lausanne     46 Apr  4 18:19 bin
+drwxr-xr-x 2 jrandet 2024_lausanne    103 Apr  3 16:27 builtins
+-rwxr-xr-x 1 jrandet 2024_lausanne    251 Mar 20 17:03 compare_fdes.sh
+-rwxr-xr-x 1 jrandet 2024_lausanne   3146 Mar 25 17:17 dev.sh
+-rw-r--r-- 1 jrandet 2024_lausanne    430 Mar 25 17:17 Dockerfile
+-rw-r--r-- 1 jrandet 2024_lausanne     52 Apr  1 10:39 EOF
+drwxr-xr-x 2 jrandet 2024_lausanne     74 Apr  3 16:48 includes
+drwxr-xr-x 2 jrandet 2024_lausanne     23 Mar 28 16:57 log
+-rw-r--r-- 1 jrandet 2024_lausanne   5247 Apr  2 17:51 Makefile
+-rwxr-xr-x 1 jrandet 2024_lausanne 197520 Apr  4 18:19 minishell
+-rw-r--r-- 1 jrandet 2024_lausanne      0 Apr  3 16:48 out
+-rw-r--r-- 1 jrandet 2024_lausanne      0 Apr  4 18:19 output.txt
+-rwxr-xr-x 1 jrandet 2024_lausanne  16048 Mar 13 16:40 print_string_indexes
+-rwxr-xr-x 1 jrandet 2024_lausanne    377 Apr  3 16:48 run.sh
+drwxr-xr-x 4 jrandet 2024_lausanne    143 Apr  3 16:48 src
+drwxr-xr-x 4 jrandet 2024_lausanne   4096 Apr  3 16:48 test
+drwxr-xr-x 5 jrandet 2024_lausanne     89 Mar 28 18:20 test_jojo
+-rw-r--r-- 1 jrandet 2024_lausanne   8030 Mar 25 18:15 test_mini.sh
+drwxr-xr-x 5 jrandet 2024_lausanne     98 Mar 25 17:17 utils
+-rwxr-xr-x 1 jrandet 2024_lausanne    156 Apr  2 17:51 valgrind.sh

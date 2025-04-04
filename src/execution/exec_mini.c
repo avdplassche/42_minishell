@@ -28,9 +28,9 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
+		backup_standard_fd(mini);
 		if (cmd->redir_amount > 0)
 		{
-			backup_standard_fd(mini);
 			setup_redirections(mini, cmd);
 		}
 		f = get_builtin_function(cmd->command);
