@@ -48,14 +48,17 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 	{
 		if (cmd->redir[i].type == IN_REDIR)
 		{
+			DEBUG("1\n");
 			handle_in_redir(cmd, &fd, &i);
 		}
 		if(cmd->redir[i].type == OUT_REDIR)
 		{
+			DEBUG("2\n");
 			handle_out_redir(cmd, &fd, &i);
 		}
 		if(cmd->redir[i].type == OUT_APPEND)
 		{
+			DEBUG("3\n");
 			handle_out_append(cmd, &fd, &i);
 		}
 		i++;
