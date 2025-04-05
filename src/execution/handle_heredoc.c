@@ -4,6 +4,7 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 {
 	char	*line;
 	char	*cursor;
+	//char	*expanded_line;
 
 	(void)mini;
 	while(1)
@@ -18,10 +19,23 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 			free(line);
 			break ;
 		}
-		DEBUG("writing into the pipe...\n");
+		/*if (need_dollar_substitution(line) > 1)
+		{
+			expanded_line = dollar_handle(mini, line);
+			DEBUG("in get_line_into_pipe: after expanssion: %s\n", expanded_line);
+			write(here_doc_pipe[1], expanded_line, ft_strlen(expanded_line));
+			free(expanded_line);
+			expanded_line = NULL;
+		}
+		else
+		{
+			write(here_doc_pipe[1], line, ft_strlen(line));
+		}*/
+		DEBUG("writing %s into the pipe...\n", line);
 		write(here_doc_pipe[1], line, ft_strlen(line));
 		write(here_doc_pipe[1], "\n", 1);
 		free(line);
+		line = NULL;
 	}
 }
 

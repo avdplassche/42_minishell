@@ -70,6 +70,17 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 			f(mini, cmd);
 			exit(EXIT_SUCCESS);
 		}
+		if (!cmd->args)
+		{
+			cmd->args = (char **)malloc(sizeof(char *) * 2);
+			if (!cmd->args)
+			{
+				mini->last_return = MALLOC_ERROR;
+				exit(EXIT_FAILURE);
+			}
+			cmd->args[0] = ft_strdup(cmd->command);
+			cmd->args[1] = NULL;
+		}
 		if (execve(cmd->path, cmd->args, mini->envp) == -1)
 		{
 			perror("execve");

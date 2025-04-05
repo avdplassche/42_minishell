@@ -2,6 +2,11 @@
 # define MINISHELL_H
 # define _GNU_SOURCE
 
+# ifdef __linux__
+#  define _GNU_SOURCE
+#  include <features.h>
+# endif
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -10,7 +15,6 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
-//# include <features.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>
@@ -25,7 +29,6 @@
 # elif __linux__
 #  include <linux/limits.h>
 # endif
-
 
 # define BUILTINS_STRING "echo,cd,env,exit,export,pwd,unset"
 # define SPACES " \t\n"
