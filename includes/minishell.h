@@ -10,7 +10,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
-# include <features.h>
+//# include <features.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>
