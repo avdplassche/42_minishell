@@ -65,6 +65,7 @@ SRCS				=	main.c \
 						exec_mini.c \
 						handle_heredoc.c \
 						fd_backup_utils.c \
+						fd_utils.c \
 						file_redirections.c \
 						pipeline.c \
 						wait_for_children.c \

@@ -22,22 +22,27 @@ t_builtin_func	get_builtin_function(char *cmd_name)
 		return (NULL);
 }
 
-int	exec_mini(t_mini *mini, t_cmd *cmd)
+void	handle_builtin(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 
+	backup_standard_fd(mini);
+	if (cmd->redir_amount > 0)
+	{
+		setup_redirections(mini, cmd);
+	}
+	f = get_builtin_function(cmd->command);
+	f(mini, cmd);
+	restore_standard_fd(mini);
+}
+
+int	exec_mini(t_mini *mini, t_cmd *cmd)
+{
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
-		backup_standard_fd(mini);
-		if (cmd->redir_amount > 0)
-		{
-			setup_redirections(mini, cmd);
-		}
-		f = get_builtin_function(cmd->command);
-		f(mini, cmd);
-		restore_standard_fd(mini);
+		handle_builtin(mini, cmd);
 	}
-	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1))
+	if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1))
 	{
 		backup_standard_fd(mini);
 		set_and_execute_pipeline(mini, cmd);

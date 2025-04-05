@@ -65,8 +65,6 @@ int	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	if (pid != 0)
 	{
 		close(here_doc_pipe[1]);
-		if (cmd->pipe_in_heredoc_read_fd != -1)
-			cmd->pipe_in_heredoc_read_fd = -1;
 		cmd->pipe_in_heredoc_read_fd = here_doc_pipe[0];
 	}
 	DEBUG("handle herdoc is returning the pid\n");

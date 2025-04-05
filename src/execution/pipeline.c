@@ -24,16 +24,16 @@ static void	setup_child_redirections(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		DEBUG("entered the setupchild redirection comamnd\n");
 		DEBUG("the fd of pipe_in_heredoc is %d\n", cmd->pipe_in_heredoc_read_fd);
-		dup2(cmd->pipe_in_heredoc_read_fd, STDIN_FILENO);
+		dup2_fd(mini, cmd, cmd->pipe_in_heredoc_read_fd, STDIN_FILENO);
 		close(cmd->pipe_in_heredoc_read_fd);
 	}
 	if (cmd_index > 0)
 	{
-		dup2(mini->pipes[cmd_index - 1].read, STDIN_FILENO);
+		dup2_fd(mini, cmd, mini->pipes[cmd_index - 1].read, STDIN_FILENO);
 	}
 	if (cmd_index < mini->cmd_count - 1)
 	{
-		dup2(mini->pipes[cmd_index].write, STDOUT_FILENO);
+		dup2_fd(mini, cmd, mini->pipes[cmd_index].write, STDOUT_FILENO);
 	}
 	i = 0;
 	while (i < mini->cmd_count - 1)
@@ -42,6 +42,18 @@ static void	setup_child_redirections(t_mini *mini, t_cmd *cmd, int cmd_index)
 		close(mini->pipes[i].write);
 		i++;
 	}
+}
+
+void	create_args_array(t_mini *mini, t_cmd *cmd)
+{
+	cmd->args = (char **)malloc(sizeof(char *) * 2);
+	if (!cmd->args)
+	{
+		mini->last_return = MALLOC_ERROR;
+		exit(EXIT_FAILURE);
+	}
+	cmd->args[0] = ft_strdup(cmd->command);
+	cmd->args[1] = NULL;
 }
 
 static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
@@ -60,26 +72,17 @@ static void	execute_piped_command(t_mini *mini, t_cmd *cmd, int cmd_index)
 		setup_child_redirections(mini, cmd, cmd_index);
 		if (cmd->redir_amount > 0)
 		{
-			DEBUG("entered loop where redir amount is above 0\n");
 			setup_redirections(mini, cmd);
 		}
 		if (cmd->type == BUILTIN)
 		{
-			DEBUG("in execute piped command entered the BUILTIN\n");
 			f = get_builtin_function(cmd->command);
 			f(mini, cmd);
 			exit(EXIT_SUCCESS);
 		}
 		if (!cmd->args)
 		{
-			cmd->args = (char **)malloc(sizeof(char *) * 2);
-			if (!cmd->args)
-			{
-				mini->last_return = MALLOC_ERROR;
-				exit(EXIT_FAILURE);
-			}
-			cmd->args[0] = ft_strdup(cmd->command);
-			cmd->args[1] = NULL;
+			create_args_array(mini, cmd);
 		}
 		if (execve(cmd->path, cmd->args, mini->envp) == -1)
 		{
@@ -120,18 +123,19 @@ static void	create_pipes(t_mini *mini, t_cmd *cmd)
 
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 {
-	int	pid;
+	//int	pid;
 	int	cmd_index;
-	int	i;
-	int	status;
+	//int	i;
+	//int	status;
 
-	cmd_index = 0;
+	/*cmd_index = 0;
 	i = 0;
 	while (cmd_index < mini->cmd_count)
 	{
 		i = 0;
 		while (i < cmd->redir_amount)
 		{
+			//DEBUG("the type is %d in execute pipeline\n", cmd[cmd_index].redir[i].type);
 			if (cmd[cmd_index].redir[i].type == HERE_DOC)
 			{
 				DEBUG("entered the loop  first time (heredoc)\n");
@@ -143,7 +147,8 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 		}
 		cmd_index++;
 	}
-	DEBUG("exited the loop\n");
+	DEBUG("exited the loop\n");*/
+	//check_for_heredoc(mini, cmd);
 	cmd_index = 0;
 	create_pipes(mini, cmd);
 	DEBUG("entered the create pipes\n");

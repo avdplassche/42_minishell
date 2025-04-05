@@ -112,7 +112,15 @@ void			free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
+void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(char *cmd_name);
+void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
+void			backup_standard_fd(t_mini *mini);
+int				handle_heredoc(t_mini *mini, t_cmd *cmd);
+void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
+void			setup_redirections(t_mini *mini, t_cmd *cmd);
+void			wait_for_children(t_mini *mini, t_cmd *cmd);
+void			restore_standard_fd(t_mini *mini);
 //builtin exec 
 char			*ft_get_env(t_mini *mini, char *var_name);
 int				set_env(t_mini *mini, char *env_key, char *env_row);
@@ -121,12 +129,6 @@ int				update_old_pwd_env(t_mini *mini);
 char			*get_current_workdir(t_mini *mini);
 char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 //utils exec (binaries)
-void			backup_standard_fd(t_mini *mini);
-int				handle_heredoc(t_mini *mini, t_cmd *cmd);
-void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
-void			setup_redirections(t_mini *mini, t_cmd *cmd);
-void			wait_for_children(t_mini *mini, t_cmd *cmd);
-void			restore_standard_fd(t_mini *mini);
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
 
