@@ -51,8 +51,8 @@
 int				init_mini(t_mini *mini, char **envp);
 int				count_cmd(t_mini *mini);
 
-void			signal_list();
-void			handle_signal();
+void			signal_list(void);
+void			handle_signal(int signo);
 void			init_signals();
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */

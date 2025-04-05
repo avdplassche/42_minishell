@@ -35,6 +35,7 @@ char	*get_cmd_bin(t_mini *mini)
 		mini->cursor++;
 	if (!contain_quotes(temp))
 		dest = ft_strdup(temp);
+		
 	else
 		dest = clean_command_quotes(temp);
 	return (free(temp), dest);
