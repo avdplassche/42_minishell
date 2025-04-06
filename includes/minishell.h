@@ -114,13 +114,14 @@ void			free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 int				exec_mini(t_mini *mini, t_cmd *cmd);
 void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(char *cmd_name);
-void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			backup_standard_fd(t_mini *mini);
-void			handle_heredoc(t_mini *mini, t_cmd *cmd);
-void			set_heredoc_fd(t_mini *mini, t_cmd *cmd, t_redir *redir);
+void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
+void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
+void			connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index);
 void			setup_redirections(t_mini *mini, t_cmd *cmd);
 void			wait_for_children(t_mini *mini, t_cmd *cmd);
+void			parent_closes_all_pipes(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
 //builtin exec 
 char			*ft_get_env(t_mini *mini, char *var_name);
