@@ -3,7 +3,6 @@
 
 t_builtin_func	get_builtin_function(char *cmd_name)
 {
-	DEBUG("entered the get_builtin function\n");
 	if (ft_strcmp(cmd_name, "cd") == 0)
 		return (&builtin_cd);
 	else if (ft_strcmp(cmd_name, "echo") == 0)
@@ -50,4 +49,3 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	}
 	return (mini->last_return);
 }
-

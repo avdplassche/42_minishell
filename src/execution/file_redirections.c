@@ -3,15 +3,16 @@
 
 static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
-	if(redir->heredoc_fd != -1)
+	if (redir->heredoc_fd != -1)
 	{
 		dup2_fd(mini, cmd, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
 	}
 }
+
 static void	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
-	int fd;
+	int	fd;
 
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
@@ -23,9 +24,9 @@ static void	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	close(fd);
 }
 
-static void	handle_out_redir(t_mini *mini,t_cmd *cmd, t_redir *redir)
+static void	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
-	int fd;
+	int	fd;
 
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
@@ -39,7 +40,7 @@ static void	handle_out_redir(t_mini *mini,t_cmd *cmd, t_redir *redir)
 
 static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
-	int fd;
+	int	fd;
 
 	fd = open(redir->name, O_RDONLY);
 	if (fd == -1)
@@ -56,10 +57,9 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	(void)mini; //need to take this away
 	while (i < cmd->redir_amount)
 	{
-		if(cmd->redir[i].type == HERE_DOC)
+		if (cmd->redir[i].type == HERE_DOC)
 		{
 			handle_heredoc_redir(mini, cmd, &cmd->redir[i]);
 		}
@@ -67,7 +67,7 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		{
 			handle_in_redir(mini, cmd, &cmd->redir[i]);
 		}
-		if(cmd->redir[i].type == OUT_REDIR)
+		if (cmd->redir[i].type == OUT_REDIR)
 		{
 			handle_out_redir(mini, cmd, &cmd->redir[i]);
 		}
@@ -78,3 +78,4 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		i++;
 	}
 }
+

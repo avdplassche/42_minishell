@@ -1,5 +1,6 @@
 
 #include "minishell.h"
+
 static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 {
 	char	*line;
@@ -34,7 +35,7 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
 	}
 }
 
-void	set_heredoc_fd(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int		here_doc_pipe[2];
 
@@ -48,7 +49,7 @@ void	set_heredoc_fd(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	redir->heredoc_fd = here_doc_pipe[0];
 }
 
-void	handle_heredoc(t_mini *mini, t_cmd *cmd)
+void	process_all_heredocs(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
@@ -58,7 +59,7 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
 		{
-			set_heredoc_fd(mini, cmd, &cmd->redir[i]);
+			setup_heredoc_input(mini, cmd, &cmd->redir[i]);
 		}
 		i++;
 	}

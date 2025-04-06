@@ -8,7 +8,7 @@
  * @return - a copy of the path without "PATH=""
  *
  * @return - NULL if malloc error 
- * @note the path reference found with sring_array_find is a reference to env directly do not free
+ * @note the path reference found with s
  */
 char	*ft_get_env(t_mini *mini, char	*var_name)
 {
