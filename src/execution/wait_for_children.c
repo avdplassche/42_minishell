@@ -3,13 +3,15 @@
 
 void	wait_for_children(t_mini *mini, t_cmd *cmd)
 {
-	int	status;
+	int	wait_status;
+	//int status;
 	int	i;
 
 	i = 0;
 	while (i < mini->cmd_count)
 	{
-		waitpid(cmd[i].pid, &status, 0);
+		waitpid(cmd[i].pid, &wait_status, 0);
 		i++;
 	}
+	//status = WEXITSTATUS(wait_status);
 }

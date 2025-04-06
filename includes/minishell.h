@@ -116,7 +116,8 @@ void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(char *cmd_name);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			backup_standard_fd(t_mini *mini);
-int				handle_heredoc(t_mini *mini, t_cmd *cmd);
+void			handle_heredoc(t_mini *mini, t_cmd *cmd);
+void			set_heredoc_fd(t_mini *mini, t_cmd *cmd, t_redir *redir);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void			setup_redirections(t_mini *mini, t_cmd *cmd);
 void			wait_for_children(t_mini *mini, t_cmd *cmd);
@@ -233,7 +234,8 @@ void			free_string_array(char **str);
 void			free_wildcard_struct(t_wildcard *w);
 void			free_cmd(t_mini *mini, t_cmd *cmd);
 void			free_mini(t_mini *mini);
-// void			free_double_pointer(char **table, int len);
+void			free_pathnames(t_cmd cmd);
+void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
 
 #endif

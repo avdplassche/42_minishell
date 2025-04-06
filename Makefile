@@ -69,7 +69,9 @@ SRCS				=	main.c \
 						file_redirections.c \
 						pipeline.c \
 						wait_for_children.c \
-						exit_minishell.c
+						exit_minishell.c \
+						exit_minishell_utils.c
+						
 
 UTILS				=	contain_char.c \
 						append_space_to_string.c \
