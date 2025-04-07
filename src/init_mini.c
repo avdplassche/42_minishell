@@ -59,6 +59,7 @@ void	init_mini_pointers(t_mini *mini)
 	mini->line = NULL;
 	mini->pipes = NULL;
 	mini->fd_backup = NULL;
+	mini->cmd = NULL;
 }
 
 /** Fill t_mini mini's variable

@@ -48,6 +48,7 @@ void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 {
 	init_cmd(cmd, i);
 	fill_cmd_structure(mini, cmd);
+	print_cmd(*cmd, mini->line);
 	if (mini->line[mini->cursor] == '|')
 	{
 		mini->cursor++;
@@ -55,12 +56,11 @@ void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 			&& mini->line[mini->cursor] == ' ')
 			mini->cursor++;
 	}
-	print_cmd(*cmd, mini->line);
 }
 
 int	parsing(t_mini *mini, t_cmd *cmd)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	if (!(is_valid_command(mini)))
@@ -68,8 +68,9 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
 	if (!cmd)
 		exit_minishell(mini, cmd);
+	mini->cmd = cmd;
 	expand_tildes(mini);
-	mini->line = dollar_handle(mini, mini->line);
+	mini->line = dollar_handle(mini);
 	mini->line = wildcard_handle(mini->line);
 	while (++i < mini->cmd_count)
 		cmd_fill_loop(mini, &cmd[i], i);

@@ -100,7 +100,6 @@ typedef struct s_cmd
  */
 typedef int (*t_builtin_func)(t_mini *, t_cmd *);
 
-
 typedef struct s_wildcard
 {
 	char			*dirname;
@@ -112,4 +111,3 @@ typedef struct s_wildcard
 	bool			current;
 	int				file_amount;
 }					t_wildcard;
-

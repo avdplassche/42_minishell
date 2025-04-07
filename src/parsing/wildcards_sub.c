@@ -58,8 +58,7 @@ int	need_wildcard_substitution(char *temp)
 	int		i;
 	t_quote	q;
 
-	q.sgl = 0;
-	q.dbl = 0;
+	init_quotes(&q);
 	i = -1;
 	while (temp[++i])
 	{

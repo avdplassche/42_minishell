@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+void	init_arguments_ptrs(t_cmd *cmd)
+{
+	int	j;
+
+	j = -1;
+	while (++j <= cmd->arg_amount + 1)
+		cmd->args[j] = NULL;
+}
+
+
 int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 {
 	const char	charset[5] = " <>|";
@@ -52,13 +62,11 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 
 	i = 0;
 	cmd->arg_amount = count_arguments(mini);
-	if (cmd->arg_amount)
-	{
-		cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
-		if (!cmd->args)
-			return (-1);
-		cmd->args[i++] = ft_strdup(cmd->command);
-	}
+	cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
+	if (!cmd->args)
+		exit_minishell(mini, cmd);
+	init_arguments_ptrs(cmd);
+	cmd->args[i++] = ft_strdup(cmd->command);
 	return (i);
 }
 

@@ -3,7 +3,7 @@
 
 /** Is c a quote charactere ?
  * @param c a character
- * @return 1 for yes, 2 for no
+ * @return 1 for yes, 0 for no
  * @note 34 =  "
  * @note 39 =  '
  */

@@ -8,6 +8,7 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	char	*dest;
 	char	*temp2;
 
+	// DEBUG("Replace variable\n Temp : %s\n Sub index : %d\n j = %d\n\n", temp, sub_index, j);
 	variable_name = ft_substr(temp, sub_index + 1, j);
 	temp2 = ft_strjoin(variable_name, "=");
 	envp_index = get_envp_index(mini, temp2);
@@ -17,23 +18,25 @@ char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
 	return (dest);
 }
 
-char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
+char	*replace_env_return_value(t_mini *mini, int i)
 {
-	char	*dest;
+char	*dest;
 	char	*temp2;
 	int		len;
 	char	*suffix;
 
-	len = ft_strlen(temp1);
-	dest = ft_substr(temp1, 0, i);
+	DEBUG("Replace env return value\n mini->line : %s\n i = %d\n\n", mini->line, i);
+	// dest = malloc(sizeof(char) * (i + get_int_len(mini->last_return * ft_strlen(suffix)));
+	len = ft_strlen(mini->line);
+	dest = ft_substr(mini->line, 0, i);
 	suffix = ft_itoa(mini->last_return);
 	temp2 = ft_strjoin(dest, suffix);
 	free(suffix);
 	free(dest);
-	suffix = ft_substr(temp1, i + 2, len - i);
+	suffix = ft_substr(mini->line, i + 2, len - i);
 	dest = ft_strjoin(temp2, suffix);
 	free(suffix);
-	free(temp1);
+	free(mini->line);
 	free(temp2);
 	return (dest);
 }
@@ -43,33 +46,33 @@ char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
  * @param temp the string to change dollar sign if needed
  * @return errors
 */
-char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
+static char	*translate_dollar_sign(t_mini *mini, int sub_index)
 {
 	int		i;
 	int		j;
 	t_quote	q;
-	char	*dest;
+	char	*line_out;
 
-	j = 0;
-	q.sgl = 0;
-	q.dbl = 0;
+	// DEBUG("Translate dollar sign\n mini->line : %s\n Sub index : %d\n\n", mini->line, sub_index);
 	i = -1;
+	j = 0;
+	init_quotes(&q);
 	while (++i < sub_index)
-		quote_enclosure_handle(temp[i], &q);
-	if (temp[i + 1] == '?')
-		return (replace_env_return_value(mini, temp, i));
-	while (temp[++i])
+		quote_enclosure_handle(mini->line[i], &q);
+	if (mini->line[i + 1] == '?')
+		return (replace_env_return_value(mini, i));
+	while (mini->line[++i])
 	{
-		if ((!q.sgl && (is_quote(temp[i]) || temp[i] == ' '))
-			|| (q.dbl && (temp[i] == ' ' || temp[i] == 34))
-			|| (!q.sgl && is_minishell_punct(temp[i])))
+		if ((!q.sgl && (is_quote(mini->line[i]) || mini->line[i] == ' '))
+			|| (q.dbl && (mini->line[i] == ' ' || mini->line[i] == 34))
+			|| (!q.sgl && is_minishell_punct(mini->line[i])))
 			break ;
 		j++;
-		quote_enclosure_handle(temp[i], &q);
+		quote_enclosure_handle(mini->line[i], &q);
 	}
-	dest = replace_variable(mini, temp, sub_index, j);
-	free(temp);
-	return (dest);
+	line_out = replace_variable(mini, mini->line, sub_index, j);
+	free(mini->line);
+	return (line_out);
 }
 
 /** Index where a sub is needed
@@ -77,35 +80,35 @@ char	*translate_dollar_sign(t_mini *mini, char *temp, int sub_index)
  * @return index where to sub
  * @return -1 no need
 */
-int	need_dollar_substitution(char *temp)
+static int	need_dollar_substitution(t_mini *mini)
 {
 	int		i;
 	t_quote	q;
 
-	if (!(contain_char(temp, '$')))
+	// DEBUG("Need dollar substitution\n mini->line : %s\n\n", mini->line);
+	if (!(contain_char(mini->line, '$')))
 		return (-1);
-	q.sgl = 0;
-	q.dbl = 0;
+	init_quotes(&q);
 	i = -1;
-	while (temp[++i])
+	while (mini->line[++i])
 	{
-		quote_enclosure_handle(temp[i], &q);
-		if (temp[i] == '$' && (!q.sgl))
-			if (temp[i + 1] && temp[i + 1] != ' ' && !(is_quote(temp[i + 1])))
+		quote_enclosure_handle(mini->line[i], &q);
+		if (mini->line[i] == '$' && (!q.sgl))
+			if (mini->line[i + 1] && mini->line[i + 1] != ' ' && !(is_quote(mini->line[i + 1])))
 				return (i);
 	}
 	return (-1);
 }
 
-char	*dollar_handle(t_mini *mini, char *temp)
+char	*dollar_handle(t_mini *mini)
 {
 	int	i;
 
-	i = need_dollar_substitution(temp);
+	i = need_dollar_substitution(mini);
 	while (i > -1)
 	{
-		temp = translate_dollar_sign(mini, temp, i);
-		i = need_dollar_substitution(temp);
+		mini->line = translate_dollar_sign(mini, i);
+		i = need_dollar_substitution(mini);
 	}
-	return (temp);
+	return (mini->line);
 }

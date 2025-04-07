@@ -11,6 +11,7 @@ char	*trim_var_name(t_mini *mini, int index)
 	int		j;
 	char	*trimmed_str;
 
+	// DEBUG("Trim var name : \nIndex : %d\n\n", index);
 	i = 0;
 	j = 0;
 	while (mini->envp[index][i] && mini->envp[index][i] != '=')
@@ -28,13 +29,14 @@ char	*sub_env_variable(char *temp, char *temp2, int i, t_quote *q)
 	char	*affix;
 	char	*dest;
 
+	// DEBUG("Sub Env Variable\n Temp : %s\nTemp2 : %s\n  i : %d\n\n", temp, temp2, i);
 	while (temp[++i] && temp[i] != ' ')
 	{
-		if ((q->dbl && (temp[i] == 34 || is_minishell_punct(temp[i]))))
+		if ((q->dbl && (temp[i] == 34 || temp[i] == 39 || is_minishell_punct(temp[i]))))
 			break ;
 		quote_enclosure_handle(temp[i], q);
 	}
-	affix = ft_substr(temp, i, ft_strlen(temp));
+	affix = ft_substr(temp, i, ft_strlen(temp) - i);
 	if (!affix)
 		return (NULL);
 	dest = ft_strjoin(temp2, affix);
@@ -60,8 +62,8 @@ char	*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i)
 	int		i;
 	t_quote	q;
 
-	q.sgl = 0;
-	q.dbl = 0;
+	// DEBUG("Get Env Variable\n Temp : %s\nenvp_i : %d\n  sub_i : %d\n", temp, envp_i, sub_i);
+	init_quotes(&q);
 	i = -1;
 	while (++i < sub_i)
 		quote_enclosure_handle(temp[i], &q);

@@ -9,8 +9,7 @@ int	count_redirections(t_mini *mini, int i)
 	int		count;
 	t_quote	q;
 
-	q.sgl = 0;
-	q.dbl = 0;
+	init_quotes(&q);
 	count = 0;
 	while (mini->line[i] && mini->line[i] != '|')
 	{
@@ -43,7 +42,7 @@ int	init_redirections(t_mini *mini, t_cmd *cmd)
 		return (0);
 	cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
 	if (!cmd->redir)
-		return (-1);
+		exit_minishell(mini, cmd);
 	while (is_angle_bracket(mini->line[mini->cursor]))
 		get_cmd_redirection(mini, cmd, j++);
 	return (j);

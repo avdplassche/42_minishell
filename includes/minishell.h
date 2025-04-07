@@ -55,8 +55,6 @@ int				init_mini(t_mini *mini, char **envp);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
-void			handle_signal(int signo);
-void			init_signals();
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
@@ -66,7 +64,7 @@ int				count_arguments(t_mini *mini);
 int				init_redirections(t_mini *mini, t_cmd *cmd);
 int				init_arguments(t_mini *mini, t_cmd *cmd);
 
-int				fill_cmd_structure(t_mini *mini, t_cmd *cmd);
+void			fill_cmd_structure(t_mini *mini, t_cmd *cmd);
 char			*get_cmd_bin(t_mini *mini);
 int				get_cmd_type(t_mini *mini, t_cmd *cmd);
 int				get_cmd_redirection(t_mini *mini, t_cmd *cmd, int index);
@@ -77,16 +75,14 @@ int				count_arguments(t_mini *mini);
 int				init_redirections(t_mini *mini, t_cmd *cmd);
 int				init_arguments(t_mini *mini, t_cmd *cmd);
 
-char			*dollar_handle(t_mini *mini, char *temp);
+char			*dollar_handle(t_mini *mini);
 char			*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
 char			*empty_expand(char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
-char			*translate_dollar_sign(t_mini *mini, char *temp, int sub_index);
-int				need_dollar_substitution(char *str);
 int				is_minishell_punct(char c);
 
 void			expand_tildes(t_mini *mini);
-
+void			init_quotes(t_quote *q);
 int				is_valid_quote(t_mini *mini);
 void			quote_enclosure_handle(char c, t_quote *quote);
 int				strlen_quote_cleaned_command(char *str);
@@ -198,6 +194,7 @@ char			*get_next_line(int fd);
 				/* XTRA */
 
 bool			contain_char(const char *s, char c);
+int				get_int_len(int n);
 void			append_space_to_string(char **str);
 char			*join_n_strings(char **file_list, int n);
 char			*join_three_strings(char *s1, char *s2, char *s3);

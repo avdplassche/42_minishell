@@ -53,6 +53,7 @@ SRCS				=	main.c \
 						wildcards_affixes.c \
 						wildcards_utils.c \
 						wildcards_io.c \
+						is_valid_quotes.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
@@ -75,6 +76,7 @@ SRCS				=	main.c \
 						
 
 UTILS				=	contain_char.c \
+						get_int_len.c \
 						append_space_to_string.c \
 						contain_quotes.c \
 						contain_string_at_specific_index.c \

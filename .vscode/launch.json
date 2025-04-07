@@ -45,7 +45,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/minishell",
-		// "args": ["./test_jojo/tests/tests_test.sh"],
+		// "args": ["./test/TESTMODE_DOLLAR 15"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],

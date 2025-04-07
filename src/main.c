@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 		cmd = NULL;
 		mini.cursor = 0;
 		signal_list();
-		input = readline("Prompt minishell ");
+		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{
 			mini.should_exit = true;
@@ -101,10 +101,7 @@ int	main(int argc, char **argv, char **envp)
 			mini.cursor = 0;
 			DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
-			{
 				parsing(&mini, cmd);
-				// exec_mini(&mini, cmd);
-			}
 			free(cmd);
 			free(mini.line);
 			mini.line = NULL;

@@ -1,3 +1,4 @@
+echo $?
 "echo $LANG $PAGER $PA '$PWD'"
 "echo $PATH"
 'echo $PATH'

@@ -1,35 +1,26 @@
+- Malloc check
 
-Main Task : 
+substr
+strdup
+strjoin
 
-- Handle $ (var name )
+Continue dollar sub (char	*replace_env_return_value)
 
-- check is_valid_arithmetic
-
-
-Now (by order of priority) :
-
-- Error managment (enum errors)
-
-- expand tilde
-- handle env -i
-- Wildcards
-- Signals
-- change prompt to pwd ?
-
-
-Problem to solve :
-
-echo #$LANG
+Try to use strcpy
 
 
 
-Idea for error handling :
-
-1 - make enum amout errors (ex : MALLOC_EROR)
-2 - store them in cmd.error (and return at the same time)
-3 - check error in main, after parsing
-
+struct str
+{
+	line_out;
+	suffix;
 
 
-export EQ"'=U'"AL=equal
-export: not valid in this context: EQ'
+}
+
+
+
+- Invalid Message for Invalid comands
+-> handle error of invalid command, should or shouldnt continue execution ?
+
+- There might be a leak in ft_get_env

@@ -41,7 +41,7 @@ void	signal_list(void)
 	sigquit.sa_flags = 0;
 	sigquit.sa_handler = handle_sigquit;
 	sigemptyset(&sigquit.sa_mask);
-	sigaction(SIGQUIT, &sigquit, NULL); //ctrl - \\
+	sigaction(SIGQUIT, &sigquit, NULL); //ctrl - backslash
 	
 }
 

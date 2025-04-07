@@ -3,4 +3,5 @@
 mkdir log
 make re
 make clean
-valgrind --leak-check=full --show-leak-kinds=all --log-file=log/valgrind.log ./minishell test/TESTMODE_BUILTINS 3
+valgrind --leak-check=full --show-leak-kinds=all --log-file=log/valgrind.log ./minishell test/TESTMODE_DOLLAR 15
+# valgrind --leak-check=full --show-leak-kinds=all --log-file=log/valgrind.log ./minishell test/TESTMODE_WILDCARDS 19
