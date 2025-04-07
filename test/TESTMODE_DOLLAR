@@ -1,4 +1,5 @@
 echo $?
+echo $?ABC$?DEF
 "echo $LANG $PAGER $PA '$PWD'"
 "echo $PATH"
 'echo $PATH'

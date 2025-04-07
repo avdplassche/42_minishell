@@ -12,4 +12,3 @@ int	get_int_len(int n)
 	}
 	return (count);
 }
-

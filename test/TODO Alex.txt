@@ -13,8 +13,12 @@ Try to use strcpy
 struct str
 {
 	line_out;
+	prefix
 	suffix;
-
+	temp
+	var_name;
+	var_env;
+	var_value;
 
 }
 

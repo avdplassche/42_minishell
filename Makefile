@@ -73,7 +73,7 @@ SRCS				=	main.c \
 						wait_for_children.c \
 						exit_minishell.c \
 						exit_minishell_utils.c
-						
+
 
 UTILS				=	contain_char.c \
 						get_int_len.c \
@@ -115,6 +115,7 @@ UTILS				=	contain_char.c \
 						ft_strcmp.c \
 						ft_strdup.c \
 						ft_strjoin.c \
+						ft_strlcat.c \
 						ft_strlcpy.c \
 						ft_strlen.c \
 						ft_strncmp.c \
@@ -130,8 +131,8 @@ UTILS				=	contain_char.c \
 						string_array_len.c \
 						string_array_print.c \
 						string_array_push.c \
-						string_build.c 
-						
+						string_build.c
+
 
 BUILTINS			=	cd.c \
 						echo.c \

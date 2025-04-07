@@ -1,44 +1,64 @@
 
 #include "minishell.h"
 
-char	*replace_variable(t_mini *mini, char *temp, int sub_index, int j)
+char	*replace_variable(t_mini *mini, int sub_index, int j)
 {
-	char	*variable_name;
+	char	*var_name;
+	char	*var_env;
 	int		envp_index;
-	char	*dest;
-	char	*temp2;
+	char	*line_out;
+
 
 	// DEBUG("Replace variable\n Temp : %s\n Sub index : %d\n j = %d\n\n", temp, sub_index, j);
-	variable_name = ft_substr(temp, sub_index + 1, j);
-	temp2 = ft_strjoin(variable_name, "=");
-	envp_index = get_envp_index(mini, temp2);
-	free(temp2);
-	free(variable_name);
-	dest = get_env_variable(mini, temp, envp_index, sub_index);
-	return (dest);
+	var_name = ft_substr(mini->line, sub_index + 1, j);
+	if (!var_name)
+		exit_minishell(mini, mini->cmd);
+	var_env = ft_strjoin(var_name, "=");
+	if (!var_env)
+		exit_minishell(mini, mini->cmd);
+	envp_index = get_envp_index(mini, var_env);
+	free(var_env);
+	free(var_name);
+	line_out = get_env_variable(mini, envp_index, sub_index);
+	return (line_out);
 }
 
 char	*replace_env_return_value(t_mini *mini, int i)
 {
-char	*dest;
-	char	*temp2;
+	char	*line_out;
+	// char	*temp2;
 	int		len;
-	char	*suffix;
+	int		v_len;
+	char	*number;
+	char	*suffix = NULL;
 
-	DEBUG("Replace env return value\n mini->line : %s\n i = %d\n\n", mini->line, i);
-	// dest = malloc(sizeof(char) * (i + get_int_len(mini->last_return * ft_strlen(suffix)));
 	len = ft_strlen(mini->line);
-	dest = ft_substr(mini->line, 0, i);
-	suffix = ft_itoa(mini->last_return);
-	temp2 = ft_strjoin(dest, suffix);
-	free(suffix);
-	free(dest);
-	suffix = ft_substr(mini->line, i + 2, len - i);
-	dest = ft_strjoin(temp2, suffix);
-	free(suffix);
+	v_len = get_int_len(mini->last_return);
+	line_out = malloc(sizeof(char) * (len + v_len - 1));
+	if (!line_out)
+		exit_minishell(mini, mini->cmd);
+	ft_strlcpy(line_out, mini->line, i + 1);
+	number = ft_itoa(mini->last_return);
+	ft_strlcat(line_out, number, i + 1 + v_len);
+	if (len > i + 2)
+	{
+		suffix = ft_substr(mini->line, i + 2, len - v_len - i);
+		if (!suffix)
+			exit_minishell(mini, mini->cmd);
+		ft_strlcat(line_out, suffix, len + v_len - 1);
+	}
+
+	// line_out = ft_substr(mini->line, 0, i);
+	// suffix = ft_itoa(mini->last_return);
+	// temp2 = ft_strjoin(line_out, suffix);
+	// free(suffix);
+	// free(line_out);
+	// suffix = ft_substr(mini->line, i + 2, len - i);
+	// line_out = ft_strjoin(temp2, suffix);
+	// free(suffix);
+	// free(temp2);
 	free(mini->line);
-	free(temp2);
-	return (dest);
+	return (line_out);
 }
 
 /** Used to change every dollar sign to elements of env variable
@@ -70,7 +90,7 @@ static char	*translate_dollar_sign(t_mini *mini, int sub_index)
 		j++;
 		quote_enclosure_handle(mini->line[i], &q);
 	}
-	line_out = replace_variable(mini, mini->line, sub_index, j);
+	line_out = replace_variable(mini, sub_index, j);
 	free(mini->line);
 	return (line_out);
 }

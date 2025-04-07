@@ -76,7 +76,7 @@ int				init_redirections(t_mini *mini, t_cmd *cmd);
 int				init_arguments(t_mini *mini, t_cmd *cmd);
 
 char			*dollar_handle(t_mini *mini);
-char			*get_env_variable(t_mini *mini, char *temp, int envp_i, int sub_i);
+char			*get_env_variable(t_mini *mini, int envp_i, int sub_i);
 char			*empty_expand(char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
@@ -119,7 +119,7 @@ void			setup_redirections(t_mini *mini, t_cmd *cmd);
 void			wait_for_children(t_mini *mini, t_cmd *cmd);
 void			parent_closes_all_pipes(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
-//builtin exec 
+//builtin exec
 char			*ft_get_env(t_mini *mini, char *var_name);
 int				set_env(t_mini *mini, char *env_key, char *env_row);
 int				update_pwd_env(t_mini *mini, char *env_var);
@@ -178,6 +178,7 @@ int				ft_strcmp(char *s1, char *s2);
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *s1);
 char			*ft_strjoin(char *s1, char *s2);
+size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlen(const char *s);
 int				ft_strncmp(char *s1, char *s2, size_t n);
