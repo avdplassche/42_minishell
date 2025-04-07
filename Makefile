@@ -125,6 +125,7 @@ UTILS				=	contain_char.c \
 						get_next_line.c \
 						string_array_create_key.c \
 						string_array_find_string.c \
+						string_array_join.c \
 						string_array_len.c \
 						string_array_print.c \
 						string_array_push.c \

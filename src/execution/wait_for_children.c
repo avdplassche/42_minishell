@@ -1,15 +1,18 @@
 
 #include "minishell.h"
 
-void	wait_for_children(t_mini *mini, t_cmd *cmd)
+int	wait_for_children(t_mini *mini, t_cmd *cmd)
 {
-	int	wait_status;
+	int	wstatus;
 	int	i;
+	int	exit_status;
 
 	i = 0;
 	while (i < mini->cmd_count)
 	{
-		waitpid(cmd[i].pid, &wait_status, 0);
+		waitpid(cmd[i].pid, &wstatus, 0);
+		exit_status = WEXITSTATUS(wstatus);
 		i++;
 	}
+	return (exit_status);
 }

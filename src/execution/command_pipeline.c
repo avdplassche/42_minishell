@@ -33,6 +33,13 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		create_args_array(mini, cmd);
 	}
+	if (cmd->type == INVALID)
+	{
+		printf("entered the invalide function\n");
+		print_error("Minishell: %s: command not found\n", cmd->command, 2);
+		mini->last_return = CMD_NOT_FOUND;
+		exit(EXIT_FAILURE);
+	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
 		perror("execve");
@@ -97,5 +104,5 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
-	wait_for_children(mini, cmd);
+	mini->last_return = wait_for_children(mini, cmd);
 }
