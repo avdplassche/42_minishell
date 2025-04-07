@@ -56,19 +56,23 @@ SRCS				=	main.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
+						command_pipeline.c \
+						exec_mini.c \
+						fd_backup_utils.c \
+						fd_utils.c \
+						file_redirections.c \
 						ft_get_env.c \
 						get_current_workdir.c \
 						get_new_env_row.c \
+						heredoc_handler.c \
+						pipe_redirections.c \
 						set_env.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
-						exec_mini.c \
-						handle_heredoc.c \
-						fd_backup_utils.c \
-						file_redirections.c \
-						pipeline.c \
 						wait_for_children.c \
-						exit_minishell.c
+						exit_minishell.c \
+						exit_minishell_utils.c
+						
 
 UTILS				=	contain_char.c \
 						append_space_to_string.c \

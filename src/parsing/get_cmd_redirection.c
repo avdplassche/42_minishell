@@ -75,7 +75,7 @@ int	get_cmd_redirection(t_mini *mini, t_cmd *cmd, int j)
 	sign = get_cmd_redir_type(mini);
 	while (contain_char(SPACES, mini->line[mini->cursor]))
 		mini->cursor++;
-	cmd->redir[j].pathname = get_cmd_bin(mini);
+	cmd->redir[j].name = get_cmd_bin(mini);
 	cmd->redir[j].type = sign;
 	if (cmd->redir[j].type == HERE_DOC)
 		cmd->heredoc_amount++;

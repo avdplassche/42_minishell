@@ -2,8 +2,6 @@
 
 #include "minishell.h"
 
-
-//exit with no options
 int	builtin_exit(t_mini *mini, t_cmd *cmd)
 {
 	if (cmd->args && cmd->args[2])

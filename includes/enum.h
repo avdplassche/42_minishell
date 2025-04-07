@@ -22,6 +22,7 @@ typedef enum e_redirections
 			IN_REDIR,
 			OUT_REDIR,
 			HERE_DOC,
+			//HERE_DOC_QUOTED
 			OUT_APPEND,
 }			t_redirections;
 

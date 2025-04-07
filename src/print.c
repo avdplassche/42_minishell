@@ -65,7 +65,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	{
 		while (i < cmd.redir_amount)
 		{
-			DEBUG("	  Redir[%d] : %s ", i, cmd.redir[i].pathname);
+			DEBUG("	  Redir[%d] : %s ", i, cmd.redir[i].name);
 			if (cmd.redir[i].type == IN_REDIR)
 				DEBUG("(IN REDIR)¶\n");
 			else if (cmd.redir[i].type == OUT_REDIR)

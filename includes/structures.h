@@ -20,8 +20,9 @@ typedef union u_pipefd
 
 typedef struct s_redir
 {
-	char				*pathname;
+	char				*name;
 	t_redirections		type;
+	int					heredoc_fd;
 }	t_redir;
 
 typedef struct s_quote
@@ -92,7 +93,6 @@ typedef struct s_cmd
 	pid_t		pid;
 	t_pipefd	*pipe_in;
 	t_pipefd	*pipe_out;
-	int			pipe_in_heredoc_read_fd;
 }				t_cmd;
 
 /** A pointer to function for the builtin function
