@@ -1,30 +1,8 @@
 
 #include "minishell.h"
 
-int	builtin_cd(t_mini *mini, t_cmd *cmd)
+static int	change_directory(t_mini *mini, char *path)
 {
-	char	*path;
-
-	if (cmd->arg_amount == 0 || cmd->args[1] == NULL)
-	{
-		path = ft_get_env(mini, "HOME");
-		if (!path)
-		{
-			ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
-			mini->last_return = CMD_NOT_FOUND;
-			return (mini->last_return);
-		}
-	}
-	else if (cmd->arg_amount > 1)
-	{
-		ft_putstr_fd("Minishell: cd: too many arguments\n", 2);
-		mini->last_return = CMD_NOT_FOUND;
-		return (mini->last_return);
-	}
-	else
-	{
-		path = cmd->args[1];
-	}
 	if (chdir(path) == 0)
 	{
 		if (update_old_pwd_env(mini) != 0 || update_pwd_env(mini, "PWD") != 0)
@@ -36,5 +14,43 @@ int	builtin_cd(t_mini *mini, t_cmd *cmd)
 		print_error("Minishell: cd: %s: No such file or directory\n", path, 2);
 		mini->last_return = CMD_NOT_FOUND;
 	}
+	return (0);
+}
+
+static int	get_path(t_mini *mini, char **path, char *env_to_find)
+{
+	*path = ft_get_env(mini, env_to_find);
+	if (!path)
+	{
+		print_error("Minishell: cd %s not set\n", env_to_find, 2);
+		mini->last_return = CMD_NOT_FOUND;
+		return (mini->last_return);
+	}
+	return (0);
+}
+
+int	builtin_cd(t_mini *mini, t_cmd *cmd)
+{
+	char	*path;
+
+	if (cmd->arg_amount == 0 || cmd->args[1] == NULL)
+	{
+		mini->last_return = get_path(mini, &path, "HOME");
+	}
+	else if (cmd->arg_amount == 1 && cmd->args[1][0] == '-')
+	{
+		mini->last_return = get_path(mini, &path, "OLDPWD");
+	}
+	else if (cmd->arg_amount > 1)
+	{
+		ft_putstr_fd("Minishell: cd: too many arguments\n", 2);
+		mini->last_return = CMD_NOT_FOUND;
+		return (mini->last_return);
+	}
+	else
+	{
+		path = cmd->args[1];
+	}
+	mini->last_return = change_directory(mini, path);
 	return (mini->last_return);
 }

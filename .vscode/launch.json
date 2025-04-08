@@ -9,7 +9,18 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/minishell",
-			"args": ["./test_jojo/tests/new_line_test.sh"],
+			"args": ["./test_jojo/tests/heredoc_test.sh"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"MIMode": "lldb"
+		},
+		{
+			"name": "interactive mac",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
@@ -41,11 +52,11 @@
 		]
 	},
 	{
-		"name": "debug alex",
+		"name": "interactive linux",
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/minishell",
-		// "args": ["./test/TESTMODE_DOLLAR 15"],
+		"args": [],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],
@@ -58,8 +69,15 @@
 				"ignoreFailures": true
 			},
 			{
-				"description": "Set Disassembly Flavor to Intel",
-				"text": "-gdb-set disassembly-flavor intel",
+				// https://sourceware.org/gdb/onlinedocs/gdb/Forks.html
+				"description": "Fork follows Child process",
+				"text": "set follow-fork-mode child",
+				"ignoreFailures": true
+			},
+			{
+				// https://sourceware.org/gdb/onlinedocs/gdb/Forks.html
+				"description": "Fork will keep the other process attached to debugger",
+				"text": "set detach-on-fork off",
 				"ignoreFailures": true
 			}
 		]

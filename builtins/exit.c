@@ -14,7 +14,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	{
 		if (is_valid_arithmetic_exit(cmd->args[1]))
 		{
-			mini->last_return = ft_atoi(cmd->args[1]) & 255; //double check this
+			mini->last_return = ft_atoi(cmd->args[1]) & 255;
 		}
 		else
 		{
@@ -24,7 +24,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	}
 	else
 	{
-		mini->last_return = 0; // in the case whhere its exit 0
+		mini->last_return = 0;
 	}
 	if (mini->fd_backup->stdin_backup != -1 || mini->fd_backup->stdout_backup != -1)
 		restore_standard_fd(mini);
@@ -32,9 +32,3 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	exit_minishell(mini, cmd);
 	return mini->last_return;
 }
-
-
-//teminates the current shell session
-// returns an exit status code 
-// 0 is success, non zero indicate errors.
-//make the last return go all the way back up to main and handle in main

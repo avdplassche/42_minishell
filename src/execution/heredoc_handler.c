@@ -1,33 +1,28 @@
 
 #include "minishell.h"
 
-static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe)
+static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
 {
 	char	*line;
-	char	*cursor;
-	//char	*prompt;
-	//char	**array_of_strings;
 	//char	*expanded_line;
+	char	*cursor;
+	char	*prompt;
 
-	(void)mini;
-	//array_of_strings = (char *[3]){"heredoc delimiter: ", cmd->redir->name, "> "};
-	//prompt = string_array_join(array_of_strings);
+	prompt = string_array_join((char *[]){"Heredoc(", cmd->redir->name, ") > ", NULL});
 	while(1)
 	{
-		//line = readline(prompt)
-		line = get_line_from_stdin();
+		line = readline(prompt);
 		cursor = line;
-		DEBUG("pathname is worth: %s\n", cmd->redir->name);
 		while (*cursor && *cursor != '\n')
 			cursor++;
 		*cursor = '\0';
-		if (line[0] != 0 && ft_strcmp(line, cmd->redir->name) == 0)
+		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
 			DEBUG("delimiter matched\n");
 			free(line);
 			break ;
 		}
-		DEBUG("writing %s into the pipe...\n", line);
+		line = dollar_handle(mini, line);
 		write(here_doc_pipe[1], line, ft_strlen(line));
 		write(here_doc_pipe[1], "\n", 1);
 		free(line);
@@ -44,7 +39,7 @@ static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		mini->last_return = PIPE_ERROR;
 		exit_minishell(mini, cmd);
 	}
-	get_line_into_pipe(mini, cmd, here_doc_pipe);
+	get_line_into_pipe(mini, cmd, here_doc_pipe, redir);
 	close(here_doc_pipe[1]);
 	redir->heredoc_fd = here_doc_pipe[0];
 }

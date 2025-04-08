@@ -41,7 +41,8 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		handle_builtin(mini, cmd);
 	}
-	if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1))
+	if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
+		|| cmd->type == INVALID)
 	{
 		backup_standard_fd(mini);
 		set_and_execute_pipeline(mini, cmd);
