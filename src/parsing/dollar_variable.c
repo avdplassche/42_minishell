@@ -19,8 +19,7 @@ char	*trim_var_name(t_mini *mini, int index)
 	while (mini->envp[index][++i])
 		j++;
 	var_value = ft_substr(mini->envp[index], i - j, j);
-	if (!var_value)
-		exit_minishell(mini, mini->cmd);
+	str_malloc_check(mini, var_value);
 	return (var_value);
 }
 
@@ -37,8 +36,7 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 		quote_enclosure_handle(line[i], q);
 	}
 	suffix = ft_substr(line, i, ft_strlen(line) - i);
-	if (!suffix)
-		exit_minishell(mini, mini->cmd);
+	str_malloc_check(mini, suffix);
 	line_out = ft_strjoin(prefix, suffix);
 	if (!line_out)
 	{
@@ -59,10 +57,7 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
  */
 char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 {
-	char	*prefix;
-	char	*line_out;
-	char	*temp;
-	char	*var_name;
+	t_alloc	s;
 	int		i;
 	t_quote	q;
 
@@ -76,17 +71,17 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 		line = empty_expand(line, q, i);
 		return (line);
 	}
-		// return (empty_expand(line, q, i));
-	var_name = trim_var_name(mini, envp_i);
-	temp = ft_substr(line, 0, i);
-	if (!temp)
+	s.var_name = trim_var_name(mini, envp_i);
+	s.temp = ft_substr(line, 0, i);
+	if (!s.temp)
+	{
+		free(s.var_name);
 		exit_minishell(mini, mini->cmd);
-	prefix = ft_strjoin(temp, var_name);
-	if (!prefix)
-		exit_minishell(mini, mini->cmd);
-	free(var_name);
-	free(temp);
-	line_out = sub_env_variable(mini, line, prefix, i, &q);
-	// free(prefix);
-	return (line_out);
+	}
+	s.prefix = ft_strjoin(s.temp, s.var_name);
+	free(s.var_name);
+	free(s.temp);
+	str_malloc_check(mini, s.prefix);
+	s.line_out = sub_env_variable(mini, line, s.prefix, i, &q);
+	return (s.line_out);
 }
