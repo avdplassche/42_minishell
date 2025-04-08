@@ -5,8 +5,7 @@ int	need_tilde_expand(t_mini *mini)
 	int		i;
 	t_quote	q;
 
-	q.sgl = 0;
-	q.dbl = 0;
+	init_quotes(&q);
 	i = -1;
 	while (mini->line[++i])
 	{
@@ -32,15 +31,27 @@ void	sub_tilde(t_mini *mini, int i)
 	if (i == 0)
 	{
 		prefix = ft_get_env(mini, "HOME");
+		if (!prefix)
+			exit_minishell(mini, mini->cmd);
 		suffix = ft_substr(mini->line, 1, ft_strlen(mini->line) - 1);
 		free(mini->line);
+		if (!suffix)
+			return (free(suffix), exit_minishell(mini, mini->cmd));
 		mini->line = ft_strjoin(prefix, suffix);
+		if (!mini->line)
+			return (free(suffix), free(prefix), exit_minishell(mini, mini->cmd));
 	}
 	else
 	{
 		env = ft_get_env(mini, "HOME");
+		if (!env)
+			exit_minishell(mini, mini->cmd);
 		prefix = ft_substr(mini->line, 0, i);
+		if (!prefix)
+			return (free(env), exit_minishell(mini, mini->cmd));
 		suffix = ft_substr(mini->line, i + 1, ft_strlen(mini->line) - 1 - i);
+		if (!suffix)
+			return (free(env), free(prefix), exit_minishell(mini, mini->cmd));
 		mini->line = join_three_strings(prefix, env, suffix);
 		free(env);
 	}

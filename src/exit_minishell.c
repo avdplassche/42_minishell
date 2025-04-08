@@ -79,5 +79,7 @@ void	exit_minishell(t_mini *mini, t_cmd *cmd)
 {
 	(void)cmd;
 	mini->should_exit = true;
+	if (cmd)
+		free_cmd(mini, cmd);
 	free_mini(mini);
 }

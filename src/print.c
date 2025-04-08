@@ -39,7 +39,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	int i;
 	(void)cmd_line;
 
-	i = 0;
+	i = -1;
 	if (TEST_MODE == 0)
 		DEBUG("\n");
 	// DEBUG(CYAN);
@@ -57,6 +57,7 @@ void	print_cmd(t_cmd cmd, char *cmd_line)
 	{
 		while (cmd.args[++i])
 			DEBUG("	  Arg[%d] : %s¶\n", i, cmd.args[i]);
+		DEBUG("	  Arg[%d] : %s¶\n", i, cmd.args[i]);
 		DEBUG("\n");
 	}
 	i = 0;

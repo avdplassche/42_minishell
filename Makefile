@@ -53,6 +53,7 @@ SRCS				=	main.c \
 						wildcards_affixes.c \
 						wildcards_utils.c \
 						wildcards_io.c \
+						is_valid_quotes.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
@@ -72,9 +73,10 @@ SRCS				=	main.c \
 						wait_for_children.c \
 						exit_minishell.c \
 						exit_minishell_utils.c
-						
+
 
 UTILS				=	contain_char.c \
+						get_int_len.c \
 						append_space_to_string.c \
 						contain_quotes.c \
 						contain_string_at_specific_index.c \
@@ -113,6 +115,7 @@ UTILS				=	contain_char.c \
 						ft_strcmp.c \
 						ft_strdup.c \
 						ft_strjoin.c \
+						ft_strlcat.c \
 						ft_strlcpy.c \
 						ft_strlen.c \
 						ft_strncmp.c \
@@ -129,8 +132,8 @@ UTILS				=	contain_char.c \
 						string_array_len.c \
 						string_array_print.c \
 						string_array_push.c \
-						string_build.c 
-						
+						string_build.c
+
 
 BUILTINS			=	cd.c \
 						echo.c \

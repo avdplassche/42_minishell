@@ -1,50 +1,48 @@
 
 #include "minishell.h"
 
-// void	init_signals()
-// {
-	// sigaction();
-	// sigaction(SIGINT, );
-	
 
-// }
-
-// void	handle_signal(int signo)
-// {
-
+void	handle_sigint(int sig)
+{
+	(void)sig;
 	// siga
-	// printf("Signo : %d\n", signo);
+	// printf("Signo : \n");
+	readline("Prompt minishell ");
 	// if (signo == SIGINT)
 	// 	printf("Signal\n\n");
 	// else if (signo == SIGQUIT)
 	// 	printf("End\n\n");
 	// printf("sig %d\n", )
 
-// }
+}
 
-// void	end_signal(int signo)
-// {
-	// struct sigaction *sig;
-	// printf("Signo : %d\n", signo);
+void	handle_sigquit(int sig)
+{
+	(void)sig;
+	// siga
+	printf("Signoquit : \n");
+	// if (signo == SIGINT)
+	// 	printf("Signal\n\n");
+	// else if (signo == SIGQUIT)
+	// 	printf("End\n\n");
+	// printf("sig %d\n", )
 
-	// printf("Signo : %d\n", signo);
+}
 
-// }
+void	signal_list(void)
+{
+	struct sigaction sigint;
+	struct sigaction sigquit;
 
-// void	signal_list(void)
-// {
-// 	struct sigaction s;
-
-	// sigemptyset()
-	// (void)s;
+	sigint.sa_flags = 0;
+	sigint.sa_handler = handle_sigint;
+	sigemptyset(&sigint.sa_mask);
+	sigaction(SIGINT, &sigint, NULL); //ctrl - c
+	sigquit.sa_flags = 0;
+	sigquit.sa_handler = handle_sigquit;
+	sigemptyset(&sigquit.sa_mask);
+	sigaction(SIGQUIT, &sigquit, NULL); //ctrl - backslash
 	
-	// s.sa_flags = 0;
-	// DEBUG("signal :%d\n", s.sa_flags);
-	// sigemptyset(&s.sa_mask);
-	// signal(SIGINT, handle_signal);
-	// signal(SIGQUIT, handle_signal);
-	// signal(SIGSTOP, end_signal);
-
-// }
+}
 
 

@@ -52,8 +52,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = NULL;
 		mini.cursor = 0;
-		// signal_list();
-		input = readline("Prompt minishell ");
+		signal_list();
+		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{
 			mini.should_exit = true;
@@ -62,13 +62,13 @@ int	main(int argc, char **argv, char **envp)
 		mini.line = ft_strtrim(input, SPACES);
 		free(input);
 		mini.cmd_count = count_cmd(&mini);
-		// 	return (free (mini.line), free_mini(&m ini), EXIT_SUCCESS);
 		add_history(mini.line);
-		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
+		if ((!(is_only_spaces(mini.line)) || mini.line[0] != '#') && mini.line[0])
 			parsing(&mini, cmd);
 		if (mini.should_exit)
 			break;
-		free(mini.line);
+		if (mini.line)
+			free(mini.line);
 		mini.line = NULL;
 	}
 
@@ -101,10 +101,7 @@ int	main(int argc, char **argv, char **envp)
 			mini.cursor = 0;
 			DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
 			if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
-			{
 				parsing(&mini, cmd);
-				// exec_mini(&mini, cmd);
-			}
 			free(cmd);
 			free(mini.line);
 			mini.line = NULL;
