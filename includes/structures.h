@@ -31,6 +31,18 @@ typedef struct s_quote
 	int	dbl;
 }	t_quote;
 
+typedef struct s_alloc
+{
+	char			*line_out;
+	char			*prefix;
+	char			*suffix;
+	char			*number;
+	char			*temp;
+	char			*var_name;
+	char			*var_env;
+	char			*var_value;
+}					t_alloc;
+
 typedef struct s_cmd t_cmd;
 
 /** A structure containing minishell related variables
@@ -57,6 +69,7 @@ typedef struct s_mini
 	t_fd_backup	*fd_backup; 
 	t_pipefd	*pipes; //array of pipes
 	t_cmd		*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
+	t_alloc		alloc;
 	bool		should_exit;
 }				t_mini;
 
@@ -111,3 +124,4 @@ typedef struct s_wildcard
 	bool			current;
 	int				file_amount;
 }					t_wildcard;
+

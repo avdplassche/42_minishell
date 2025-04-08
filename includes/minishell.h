@@ -80,6 +80,8 @@ char			*get_env_variable(t_mini *mini, int envp_i, int sub_i);
 char			*empty_expand(char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
+void			init_dollar_alloc(t_mini *mini);
+void			free_dollar_alloc(t_mini *mini);
 
 void			expand_tildes(t_mini *mini);
 void			init_quotes(t_quote *q);
@@ -236,5 +238,6 @@ void			free_mini(t_mini *mini);
 void			free_pathnames(t_cmd cmd);
 void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
+void			free_string_ptr(char *str);
 
 #endif

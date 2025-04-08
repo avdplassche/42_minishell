@@ -39,10 +39,12 @@ char	*sub_env_variable(t_mini *mini, char *prefix, int i, t_quote *q)
 	suffix = ft_substr(mini->line, i, ft_strlen(mini->line) - i);
 	if (!suffix)
 		exit_minishell(mini, mini->cmd);
-	DEBUG("suffix : %s\n", suffix);
 	line_out = ft_strjoin(prefix, suffix);
 	if (!line_out)
-		return (free(suffix), NULL);
+	{
+		free(suffix);
+		exit_minishell(mini, mini->cmd);
+	}
 	free(suffix);
 	return (line_out);
 }

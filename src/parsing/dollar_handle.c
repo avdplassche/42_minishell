@@ -22,43 +22,37 @@ char	*replace_variable(t_mini *mini, int sub_index, int j)
 	line_out = get_env_variable(mini, envp_index, sub_index);
 	return (line_out);
 }
-
+/** Substitute "$?"
+ */
 char	*replace_env_return_value(t_mini *mini, int i)
 {
-	char	*line_out;
-	// char	*temp2;
+	t_alloc	*str;
 	int		len;
 	int		v_len;
-	char	*number;
-	char	*suffix = NULL;
 
+	str = &mini->alloc;
 	len = ft_strlen(mini->line);
 	v_len = get_int_len(mini->last_return);
-	line_out = malloc(sizeof(char) * (len + v_len - 1));
-	if (!line_out)
+	str->line_out = malloc(sizeof(char) * (len + v_len - 1));
+	if (!str->line_out)
 		exit_minishell(mini, mini->cmd);
-	ft_strlcpy(line_out, mini->line, i + 1);
-	number = ft_itoa(mini->last_return);
-	ft_strlcat(line_out, number, i + 1 + v_len);
+	ft_strlcpy(str->line_out, mini->line, i + 1);
+	str->number = ft_itoa(mini->last_return);
+	if (!str->number)
+		exit_minishell(mini, mini->cmd);
+	ft_strlcat(str->line_out, str->number, i + 1 + v_len);
 	if (len > i + 2)
 	{
-		suffix = ft_substr(mini->line, i + 2, len - v_len - i);
-		if (!suffix)
+		str->suffix = ft_substr(mini->line, i + 2, len - v_len - i);
+		if (!str->suffix)
 			exit_minishell(mini, mini->cmd);
-		ft_strlcat(line_out, suffix, len + v_len - 1);
+		ft_strlcat(str->line_out, str->suffix, len + v_len - 1);
 	}
-
-	// line_out = ft_substr(mini->line, 0, i);
-	// suffix = ft_itoa(mini->last_return);
-	// temp2 = ft_strjoin(line_out, suffix);
-	// free(suffix);
-	// free(line_out);
-	// suffix = ft_substr(mini->line, i + 2, len - i);
-	// line_out = ft_strjoin(temp2, suffix);
-	// free(suffix);
-	// free(temp2);
-	free(mini->line);
-	return (line_out);
+	free_string_ptr(mini->line);
+	mini->line = ft_strdup(str->line_out);
+	if (!mini->line)
+		exit_minishell(mini, mini->cmd);
+	return (mini->line);
 }
 
 /** Used to change every dollar sign to elements of env variable
@@ -71,11 +65,12 @@ static char	*translate_dollar_sign(t_mini *mini, int sub_index)
 	int		i;
 	int		j;
 	t_quote	q;
-	char	*line_out;
+	t_alloc	*str;
 
 	// DEBUG("Translate dollar sign\n mini->line : %s\n Sub index : %d\n\n", mini->line, sub_index);
 	i = -1;
 	j = 0;
+	str = &mini->alloc;
 	init_quotes(&q);
 	while (++i < sub_index)
 		quote_enclosure_handle(mini->line[i], &q);
@@ -90,9 +85,10 @@ static char	*translate_dollar_sign(t_mini *mini, int sub_index)
 		j++;
 		quote_enclosure_handle(mini->line[i], &q);
 	}
-	line_out = replace_variable(mini, sub_index, j);
+	str->line_out = replace_variable(mini, sub_index, j);
 	free(mini->line);
-	return (line_out);
+	mini->line = ft_strdup(str->line_out);
+	return (mini->line);
 }
 
 /** Index where a sub is needed
@@ -127,8 +123,10 @@ char	*dollar_handle(t_mini *mini)
 	i = need_dollar_substitution(mini);
 	while (i > -1)
 	{
+		init_dollar_alloc(mini);
 		mini->line = translate_dollar_sign(mini, i);
 		i = need_dollar_substitution(mini);
+		free_dollar_alloc(mini);
 	}
 	return (mini->line);
 }

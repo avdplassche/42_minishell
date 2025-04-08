@@ -17,6 +17,7 @@ void	free_string_array(char **str)
 		i++;
 	}
 	free(str);
+	str = NULL;
 }
 
 void	free_wildcard_struct(t_wildcard *w)
