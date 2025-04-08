@@ -1,9 +1,10 @@
 
 #include "minishell.h"
 
-static void	get_line_into_pipe(t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
+static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
 {
 	char	*line;
+	//char	*expanded_line;
 	char	*cursor;
 	char	*prompt;
 
@@ -12,7 +13,6 @@ static void	get_line_into_pipe(t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
 	{
 		line = readline(prompt);
 		cursor = line;
-		DEBUG("pathname is worth: %s\n", redir->name);
 		while (*cursor && *cursor != '\n')
 			cursor++;
 		*cursor = '\0';
@@ -22,7 +22,7 @@ static void	get_line_into_pipe(t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
 			free(line);
 			break ;
 		}
-		DEBUG("writing %s into the pipe...\n", line);
+		line = dollar_handle(mini, line);
 		write(here_doc_pipe[1], line, ft_strlen(line));
 		write(here_doc_pipe[1], "\n", 1);
 		free(line);
@@ -39,7 +39,7 @@ static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		mini->last_return = PIPE_ERROR;
 		exit_minishell(mini, cmd);
 	}
-	get_line_into_pipe(cmd, here_doc_pipe, redir);
+	get_line_into_pipe(mini, cmd, here_doc_pipe, redir);
 	close(here_doc_pipe[1]);
 	redir->heredoc_fd = here_doc_pipe[0];
 }
