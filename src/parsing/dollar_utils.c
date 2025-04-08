@@ -19,22 +19,22 @@ void	init_dollar_alloc(t_mini *mini)
  * @param i where the suppression is needed
  * @return temp1  without $VARIABLE
  */
-char	*empty_expand(char *temp1, t_quote q, int i)
+char	*empty_expand(char *line, t_quote q, int i)
 {
-	char	*temp2;
-	char	*dest;
+	char	*prefix;
+	char	*line_out;
 	char	*suffix;
 
-	temp2 = ft_substr(temp1, 0, i);
-	while (temp1[++i])
-		if (temp1[i] == ' ' || (temp1[i] == 34 && !q.dbl)
-			|| (temp1[i] == 39 && !q.sgl))
+	prefix = ft_substr(line, 0, i);
+	while (line[++i])
+		if (line[i] == ' ' || (line[i] == 34 && !q.dbl)
+			|| (line[i] == 39 && !q.sgl))
 			break ;
-	suffix = ft_substr(temp1, i, ft_strlen(temp1));
-	dest = ft_strjoin(temp2, suffix);
-	free(temp2);
+	suffix = ft_substr(line, i, ft_strlen(line));
+	line_out = ft_strjoin(prefix, suffix);
+	free(prefix);
 	free(suffix);
-	return (dest);
+	return (line_out);
 }
 
 int	is_minishell_punct(char c)

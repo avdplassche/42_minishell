@@ -41,20 +41,11 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 void	free_mini(t_mini *mini)
 {
 	if (mini->envp)
-	{
 		free_string_array(mini->envp);
-		// mini->envp = NULL;
-	}
 	if (mini->builtins)
-	{
 		free_string_array(mini->builtins);
-		// mini->builtins = NULL;
-	}
 	if (mini->paths)
-	{
 		free_string_array(mini->paths);
-		mini->paths = NULL;
-	}
 	if (mini->pipes)
 	{
 		free(mini->pipes);
@@ -73,10 +64,7 @@ void	free_mini(t_mini *mini)
 		}
 	}
 	if (mini->line)
-	{
-		free(mini->line);
-		mini->line = NULL;
-	}
+		free_string_ptr(mini->line);
 }
 
 void	free_dollar_alloc(t_mini *mini)
@@ -88,7 +76,10 @@ void	free_dollar_alloc(t_mini *mini)
 	if (mini->alloc.suffix)
 		free_string_ptr(mini->alloc.suffix);
 	if (mini->alloc.number)
+	{
+		DEBUG("FREE\n");
 		free_string_ptr(mini->alloc.number);
+	}
 	if (mini->alloc.temp)
 		free_string_ptr(mini->alloc.temp);
 	if (mini->alloc.var_name)

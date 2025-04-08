@@ -24,19 +24,19 @@ char	*trim_var_name(t_mini *mini, int index)
 	return (var_value);
 }
 
-char	*sub_env_variable(t_mini *mini, char *prefix, int i, t_quote *q)
+char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q)
 {
 	char	*suffix;
 	char	*line_out;
 
 	// DEBUG("Sub Env Variable\n Temp : %s\nprefix : %s\n  i : %d\n\n", temp, prefix, i);
-	while (mini->line[++i] && mini->line[i] != ' ')
+	while (line[++i] && line[i] != ' ')
 	{
-		if ((q->dbl && (mini->line[i] == 34 || mini->line[i] == 39 || is_minishell_punct(mini->line[i]))))
+		if ((q->dbl && (line[i] == 34 || line[i] == 39 || is_minishell_punct(line[i]))))
 			break ;
-		quote_enclosure_handle(mini->line[i], q);
+		quote_enclosure_handle(line[i], q);
 	}
-	suffix = ft_substr(mini->line, i, ft_strlen(mini->line) - i);
+	suffix = ft_substr(line, i, ft_strlen(line) - i);
 	if (!suffix)
 		exit_minishell(mini, mini->cmd);
 	line_out = ft_strjoin(prefix, suffix);
@@ -45,6 +45,7 @@ char	*sub_env_variable(t_mini *mini, char *prefix, int i, t_quote *q)
 		free(suffix);
 		exit_minishell(mini, mini->cmd);
 	}
+	free(prefix);
 	free(suffix);
 	return (line_out);
 }
@@ -56,7 +57,7 @@ char	*sub_env_variable(t_mini *mini, char *prefix, int i, t_quote *q)
  * (if -1, no existing variable, replace by blank)
  * @return temp2 : a string with the value instead of the variable name
  */
-char	*get_env_variable(t_mini *mini, int envp_i, int sub_i)
+char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 {
 	char	*prefix;
 	char	*line_out;
@@ -69,11 +70,15 @@ char	*get_env_variable(t_mini *mini, int envp_i, int sub_i)
 	init_quotes(&q);
 	i = -1;
 	while (++i < sub_i)
-		quote_enclosure_handle(mini->line[i], &q);
+		quote_enclosure_handle(line[i], &q);
 	if (envp_i < 0)
-		return (empty_expand(mini->line, q, i));
+	{
+		line = empty_expand(line, q, i);
+		return (line);
+	}
+		// return (empty_expand(line, q, i));
 	var_name = trim_var_name(mini, envp_i);
-	temp = ft_substr(mini->line, 0, i);
+	temp = ft_substr(line, 0, i);
 	if (!temp)
 		exit_minishell(mini, mini->cmd);
 	prefix = ft_strjoin(temp, var_name);
@@ -81,7 +86,7 @@ char	*get_env_variable(t_mini *mini, int envp_i, int sub_i)
 		exit_minishell(mini, mini->cmd);
 	free(var_name);
 	free(temp);
-	line_out = sub_env_variable(mini, prefix, i, &q);
-	free(prefix);
+	line_out = sub_env_variable(mini, line, prefix, i, &q);
+	// free(prefix);
 	return (line_out);
 }
