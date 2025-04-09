@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:44:25 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/03/18 15:48:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:58:39 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	**ft_split(char *s, char c)
 
 	j = 0;
 	i = 0;
+	if (!s)
+		return (NULL);
 	tab = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
 	if (!tab)
 		return (NULL);

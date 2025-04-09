@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{
-			mini.should_exit = true;
+	 		mini.should_exit = true;
 			break;
 		}
 		mini.line = ft_strtrim(input, SPACES);
@@ -112,6 +112,7 @@ int	main(int argc, char **argv, char **envp)
 
 /************************ /TEST MODE ***************************** */
 
+	
 	free_mini(&mini);
 	//printf("mini %d\n", mini.last_return);
 	DEBUG_CLOSE;
