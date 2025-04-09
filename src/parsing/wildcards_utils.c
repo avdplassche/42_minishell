@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
+void	tokenize_wildcard(t_mini *mini, t_wildcard *w, char *temp, int start)
 {
 	int		len;
 
@@ -14,6 +14,7 @@ void	tokenize_wildcard(t_wildcard *w, char *temp, int start)
 	if (temp[len] == '/')
 		len ++;
 	w->token = ft_substr(temp, start, len - start);
+	str_malloc_wildcard_check(mini, w, w->token);
 }
 
 int	is_last_asterisk(char *token, int i)
@@ -24,19 +25,22 @@ int	is_last_asterisk(char *token, int i)
 	return (1);
 }
 
-char	*crop_args(char *temp)
+void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 {
-	char	*dest;
 	int		i;
 
-	if (!contain_char(temp, ' '))
-		return (ft_strdup(temp));
+	if (!contain_char(line, ' '))
+	{
+		w->wildcard = ft_strdup(line);
+		str_malloc_check(mini, w->wildcard);
+		return ;
+	}
 	i = 0;
-	while (temp [i] != ' ')
+	while (line [i] != ' ')
 		i++;
 	i++;
-	dest = ft_substr(temp, i, ft_strlen(temp) - i);
-	return (dest);
+	w->wildcard = ft_substr(line, i, ft_strlen(line) - i);
+	str_malloc_check(mini, w->wildcard);
 }
 
 char	*crop_command(char *temp)

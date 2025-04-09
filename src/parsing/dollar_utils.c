@@ -1,17 +1,6 @@
 
 #include "minishell.h"
 
-void	init_dollar_alloc(t_mini *mini)
-{
-	mini->alloc.line_out = NULL;
-	mini->alloc.prefix = NULL;
-	mini->alloc.suffix = NULL;
-	mini->alloc.temp = NULL;
-	mini->alloc.var_name = NULL;
-	mini->alloc.var_env = NULL;
-	mini->alloc.var_value = NULL;
-}
-
 /** If the $ sign is followed by an invalid variable,
  * this function delete the $VARIABLE
  * @param temp1 the string to elag

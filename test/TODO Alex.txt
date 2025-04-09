@@ -6,9 +6,6 @@ strjoin
 
 Continue dollar sub (char	*replace_env_return_value)
 
-Try to use strcpy
-
-
 
 struct str
 {
@@ -19,12 +16,5 @@ struct str
 	var_name;
 	var_env;
 	var_value;
-
 }
 
-
-
-- Invalid Message for Invalid comands
--> handle error of invalid command, should or shouldnt continue execution ?
-
-- There might be a leak in ft_get_env

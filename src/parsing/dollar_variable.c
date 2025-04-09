@@ -11,7 +11,6 @@ char	*trim_var_name(t_mini *mini, int index)
 	int		j;
 	char	*var_value;
 
-	// DEBUG("Trim var name : \nIndex : %d\n\n", index);
 	i = 0;
 	j = 0;
 	while (mini->envp[index][i] && mini->envp[index][i] != '=')
@@ -28,7 +27,6 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 	char	*suffix;
 	char	*line_out;
 
-	// DEBUG("Sub Env Variable\n Temp : %s\nprefix : %s\n  i : %d\n\n", temp, prefix, i);
 	while (line[++i] && line[i] != ' ')
 	{
 		if ((q->dbl && (line[i] == 34 || line[i] == 39 || is_minishell_punct(line[i]))))
@@ -61,7 +59,6 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 	t_quote	q;
 	int		i;
 
-	// DEBUG("Get Env Variable\n Line: %s\nenvp_i : %d\n  sub_i : %d\n", mini->line, envp_i, sub_i);
 	init_quotes(&q);
 	i = -1;
 	while (++i < sub_i)

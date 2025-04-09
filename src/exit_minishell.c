@@ -12,6 +12,7 @@ void	str_malloc_check(t_mini *mini, char *str)
 		exit_minishell(mini, mini->cmd);
 }
 
+
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
@@ -76,26 +77,25 @@ void	free_mini(t_mini *mini)
 	DEBUG("only gets here once at the end of the free mini function\n");
 }
 
-void	free_dollar_alloc(t_mini *mini)
-{
-	if (mini->alloc.line_out)
-		free_string_ptr(mini->alloc.line_out);
-	if (mini->alloc.prefix)
-		free_string_ptr(mini->alloc.prefix);
-	if (mini->alloc.suffix)
-		free_string_ptr(mini->alloc.suffix);
-	if (mini->alloc.number)
-		free_string_ptr(mini->alloc.number);
-	if (mini->alloc.temp)
-		free_string_ptr(mini->alloc.temp);
-	if (mini->alloc.var_name)
-		free_string_ptr(mini->alloc.var_name);
-	if (mini->alloc.var_env)
-		free_string_ptr(mini->alloc.var_env);
-	if (mini->alloc.var_value)
-		free_string_ptr(mini->alloc.var_value);
-}
-
+// void	free_dollar_alloc(t_mini *mini)
+// {
+// 	if (mini->alloc.line_out)
+// 		free_string_ptr(mini->alloc.line_out);
+// 	if (mini->alloc.prefix)
+// 		free_string_ptr(mini->alloc.prefix);
+// 	if (mini->alloc.suffix)
+// 		free_string_ptr(mini->alloc.suffix);
+// 	if (mini->alloc.number)
+// 		free_string_ptr(mini->alloc.number);
+// 	if (mini->alloc.temp)
+// 		free_string_ptr(mini->alloc.temp);
+// 	if (mini->alloc.var_name)
+// 		free_string_ptr(mini->alloc.var_name);
+// 	if (mini->alloc.var_env)
+// 		free_string_ptr(mini->alloc.var_env);
+// 	if (mini->alloc.var_value)
+// 		free_string_ptr(mini->alloc.var_value);
+// }
 
 void	exit_minishell(t_mini *mini, t_cmd *cmd)
 {

@@ -9,7 +9,6 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 	char	*line_out;
 
 
-	// DEBUG("Replace variable\n Temp : %s\n Sub index : %d\n j = %d\n\n", temp, sub_index, j);
 	var_name = ft_substr(line, sub_index + 1, j);
 	str_malloc_check(mini, var_name);
 	var_env = ft_strjoin(var_name, "=");
@@ -64,7 +63,6 @@ static char	*translate_dollar_sign(t_mini *mini, char *line, int sub_index)
 	t_quote	q;
 	char	*line_out;
 
-	// DEBUG("Translate dollar sign\n line : %s\n Sub index : %d\n\n", line, sub_index);
 	i = -1;
 	j = 0;
 	init_quotes(&q);
@@ -96,7 +94,6 @@ static int	need_dollar_substitution(char *line)
 	int		i;
 	t_quote	q;
 
-	// DEBUG("Need dollar substitution\n line : %s\n\n", line);
 	if (!(contain_char(line, '$')))
 		return (-1);
 	init_quotes(&q);
@@ -115,7 +112,6 @@ char	*dollar_handle(t_mini *mini, char *line)
 {
 	int	i;
 	
-	// DEBUG("Dollar handle\n line = %s\ni = %d\n", line, i);
 	i = need_dollar_substitution(line);
 	while (i > -1)
 	{

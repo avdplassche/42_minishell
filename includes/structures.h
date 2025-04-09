@@ -43,6 +43,20 @@ typedef struct s_alloc
 	char			*var_value;
 }					t_alloc;
 
+
+typedef struct s_wildcard
+{
+	char			*wildcard;
+	char			*dirname;
+	char			*token;
+	struct dirent	*s_dir;
+	char			*prefix;
+	char			*suffix;
+	char			*final_sub;
+	bool			current;
+	int				file_amount;
+}					t_wildcard;
+
 typedef struct s_cmd t_cmd;
 
 /** A structure containing minishell related variables
@@ -69,7 +83,7 @@ typedef struct s_mini
 	t_fd_backup	*fd_backup; 
 	t_pipefd	*pipes; //array of pipes
 	t_cmd		*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
-	t_alloc		alloc;
+	t_wildcard	w;
 	bool		should_exit;
 }				t_mini;
 
@@ -92,36 +106,25 @@ typedef struct s_mini
  */
 typedef struct s_cmd
 {
-	char		*command;
-	char		*path;
-	int			type;
-	int			echo_n_index;
-	char		**args;
-	int			arg_amount;
-	int			id;
-	t_redir		*redir;
-	int			redir_amount;
-	int			heredoc_amount;
-	int			error;
-	pid_t		pid;
-	t_pipefd	*pipe_in;
-	t_pipefd	*pipe_out;
-}				t_cmd;
+	char			*command;
+	char			*path;
+	int				type;
+	int				echo_n_index;
+	char			**args;
+	int				arg_amount;
+	int				id;
+	t_redir			*redir;
+	int				redir_amount;
+	int				heredoc_amount;
+	int				error;
+	pid_t			pid;
+	t_pipefd		*pipe_in;
+	t_pipefd		*pipe_out;
+}					t_cmd;
 
 /** A pointer to function for the builtin function
  * @param t_builtin_func contains the signature of all the builtin functions
  */
 typedef int (*t_builtin_func)(t_mini *, t_cmd *);
 
-typedef struct s_wildcard
-{
-	char			*dirname;
-	char			*token;
-	struct dirent	*s_dir;
-	char			*prefix;
-	char			*suffix;
-	char			*final_sub;
-	bool			current;
-	int				file_amount;
-}					t_wildcard;
 
