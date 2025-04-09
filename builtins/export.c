@@ -3,7 +3,7 @@
 
 //export with no options
 
-int	builtin_exort(t_mini *mini, t_cmd *cmd)
+int	builtin_export(t_mini *mini, t_cmd *cmd)
 {
 	if (cmd->args[1] == NULL)
 	{
