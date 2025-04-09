@@ -38,12 +38,22 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
  */
 void	free_mini(t_mini *mini)
 {
+
 	if (mini->envp)
+	{
 		free_string_array(mini->envp);
+		mini->envp = NULL;
+	}
 	if (mini->builtins)
+	{
 		free_string_array(mini->builtins);
+		mini->builtins = NULL;
+	}
 	if (mini->paths)
+	{
 		free_string_array(mini->paths);
+		mini->paths = NULL;
+	}
 	if (mini->pipes)
 	{
 		free(mini->pipes);
@@ -63,6 +73,7 @@ void	free_mini(t_mini *mini)
 	}
 	if (mini->line)
 		free_string_ptr(mini->line);
+	DEBUG("only gets here once at the end of the free mini function\n");
 }
 
 void	free_dollar_alloc(t_mini *mini)
