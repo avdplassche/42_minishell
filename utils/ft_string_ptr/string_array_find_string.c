@@ -20,7 +20,8 @@ char	*string_array_find_string(char **string_array, char *string_to_find)
 		return (NULL);
 	i = 0;
 	variable_len = ft_strlen(string_to_find);
-	search_key = string_array_create_key(string_to_find, variable_len);
+	if (string_to_find[variable_len - 1] != '=')
+		search_key = string_array_create_key(string_to_find, variable_len);
 	if (!search_key)
 		return (NULL);
 	while (string_array[i])

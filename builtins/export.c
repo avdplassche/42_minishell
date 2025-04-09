@@ -1,16 +1,40 @@
 
 #include "minishell.h"
 
+static int	is_leading_int(t_mini *mini, t_cmd *cmd)
+{
+	int	i;
+	
+	i = 0;
+	while (i < cmd->arg_amount)
+	{
+		if (ft_isdigit(cmd->args[i + 1][0]))
+		{
+			print_error("Minishell: '%s': not a valid identifier\n", cmd->args[i + 1], 2);
+			mini->last_return = CMD_NOT_FOUND;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 //export with no options
-
 int	builtin_export(t_mini *mini, t_cmd *cmd)
 {
-	if (cmd->args[1] == NULL)
+	if (cmd->arg_amount == 0)
 	{
 		sort_array(mini->envp, string_array_len(mini->envp));
 		string_array_print(mini->envp);
 	}
-	return (0);
+	if (cmd->arg_amount > 0)
+	{
+		if (is_leading_int(mini, cmd))
+		{
+			exit_minishell(mini, cmd);
+		}
+
+	}
+	return (mini->last_return);
 }
 //cases to be careful with
 // minishell: export: '123hello' : not a valid identifier

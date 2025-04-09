@@ -136,7 +136,7 @@ int				builtin_cd(t_mini *mini, t_cmd *cmd);
 int				builtin_echo(t_mini *mini, t_cmd *cmd);
 int				builtin_env(t_mini *mini, t_cmd *cmd);
 int				builtin_exit(t_mini *mini, t_cmd *cmd);
-// int			builtin_export(t_mini *mini, t_cmd *cmd);
+int			builtin_export(t_mini *mini, t_cmd *cmd);
 int				builtin_pwd(t_mini *mini, t_cmd *cmd);
 // int			builtin_unset(t_mini *mini, t_cmd *cmd);
 
@@ -219,6 +219,7 @@ char			*get_line_from_stdin(void);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
+char			**string_array_copy(t_mini *mini, t_cmd *cmd, char **src);
 char			*string_array_find_string(char **string_array, char *string_to_find);
 void			string_array_print(char **string_array);
 size_t			string_array_len(char **str);

@@ -11,11 +11,11 @@ t_builtin_func	get_builtin_function(char *cmd_name)
 		return (&builtin_env);
 	else if (ft_strcmp(cmd_name, "exit") == 0)
 		return (&builtin_exit);
-	// else if (ft_strcmp(cmd_name, "export"))
-	// 	return (&builtin_export);
+	else if (ft_strcmp(cmd_name, "export") == 0)
+		return (&builtin_export);
 	else if (ft_strcmp(cmd_name, "pwd") == 0)
 		return (&builtin_pwd);
-	// else if (ft_strcmp(cmd_name, "unset"))
+	// else if (ft_strcmp(cmd_name, "unset") == 0)
 	// 	return (&builtin_unset);
 	else
 		return (NULL);
