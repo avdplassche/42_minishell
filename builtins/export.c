@@ -3,7 +3,15 @@
 
 //export with no options
 
-
+int	builtin_exort(t_mini *mini, t_cmd *cmd)
+{
+	if (cmd->args[1] == NULL)
+	{
+		sort_array(mini->envp, string_array_len(mini->envp));
+		string_array_print(mini->envp);
+	}
+	return (0);
+}
 //cases to be careful with
 // minishell: export: '123hello' : not a valid identifier
 // export _123hello --> works with the underscore at the beginign 
@@ -24,3 +32,6 @@
 //use ft_setenv 
 
 // add the quotes to the path 
+
+
+//export var += VALUE (concatnene values)
