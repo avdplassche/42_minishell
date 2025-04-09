@@ -58,8 +58,8 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 {
 	t_alloc	s;
-	int		i;
 	t_quote	q;
+	int		i;
 
 	// DEBUG("Get Env Variable\n Line: %s\nenvp_i : %d\n  sub_i : %d\n", mini->line, envp_i, sub_i);
 	init_quotes(&q);
@@ -67,10 +67,7 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 	while (++i < sub_i)
 		quote_enclosure_handle(line[i], &q);
 	if (envp_i < 0)
-	{
-		line = empty_expand(line, q, i);
-		return (line);
-	}
+		return (empty_expand(line, q, i));
 	s.var_name = trim_var_name(mini, envp_i);
 	s.temp = ft_substr(line, 0, i);
 	if (!s.temp)
