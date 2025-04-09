@@ -10,7 +10,6 @@ void	init_wildcard_struct(t_wildcard *w)
 	w->prefix = NULL;
 	w->suffix = NULL;
 	w->temp = NULL;
-	w->final_sub = NULL;
 	w->file_list = NULL;
 	w->current = false;
 }
@@ -90,17 +89,16 @@ void	wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w)
 	}
 }
 
-void	free_wildcards(char *line, char **list, t_wildcard *w)
+void	free_wildcards(char *line, t_wildcard *w)
 {
-	// (void)line;
 	free(line);
 	line = NULL;
 	if (w->file_amount > 1)
-		free_string_array(list);
-	else if (list)
+		free_string_array(w->file_list);
+	else if (w->file_list)
 	{
-		free(list);
-		list = NULL;
+		free(w->file_list);
+		w->file_list = NULL;
 	}
 	free_wildcard_struct(w);
 }

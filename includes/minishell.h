@@ -104,7 +104,7 @@ int				is_last_asterisk(char *token, int i);
 void			tokenize_wildcard(t_mini *mini, t_wildcard *w, int start);
 void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
-void			free_wildcards(char *line, char **list, t_wildcard *w);
+void			free_wildcards(char *line, t_wildcard *w);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
@@ -237,7 +237,7 @@ void			free_wildcard_struct(t_wildcard *w);
 void			free_cmd(t_mini *mini, t_cmd *cmd);
 void			free_mini(t_mini *mini);
 void			free_pathnames(t_cmd cmd);
-void			free_wildcard_struct(t_wildcard *w);
+// void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
 void			free_string_ptr(char *str);
 void			str_malloc_check(t_mini *mini, char *str);

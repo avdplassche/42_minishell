@@ -53,7 +53,6 @@ typedef struct s_wildcard
 	char			*prefix;
 	char			*suffix;
 	char			*temp;
-	char			*final_sub;
 	char			**file_list;
 	bool			current;
 	int				file_amount;

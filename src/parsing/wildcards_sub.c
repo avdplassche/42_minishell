@@ -8,6 +8,8 @@ void	set_sub_token(t_mini *mini, t_wildcard *w)
 	len = 0;
 	if (w->file_amount == 1)
 	{
+		free(w->wildcard);
+		w->wildcard = NULL;
 		w->wildcard = w->file_list[0];   //Maybe ft_strdup
 		return ;
 	}
@@ -18,20 +20,35 @@ void	set_sub_token(t_mini *mini, t_wildcard *w)
 			free_wildcard_double_pointer_first_part(mini, w);
 		len++;
 	}
+	free(w->wildcard);
+	w->wildcard = NULL;
 	w->wildcard = join_n_strings_wildcards(mini, w);
 }
 
-char	*cat_wildcards(char *line, char *wildcard)
+char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 {
+	char	*final_sub;
+
 	if (is_only_specific_char(line, '*'))
-		return (ft_strdup(wildcard));
-	return (ft_strjoin (line, wildcard));
+	{
+		final_sub = ft_strdup(w->wildcard);
+		str_malloc_wildcard_check(mini, w, final_sub);
+		free(w->wildcard);
+		w->wildcard = NULL;
+		return (final_sub);
+	}
+	final_sub = ft_strjoin(line, w->wildcard);
+	str_malloc_wildcard_check(mini, w, final_sub);
+	free(w->wildcard);
+	w->wildcard = NULL;
+	return (final_sub);
 }
 
 char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
 	char	*dest;
 
+	set_wildcard(mini, line, w);
 	i = get_new_index(w->wildcard);
 	set_wildcard_directory(mini, w, i);
 	tokenize_wildcard(mini, w, i);
@@ -43,8 +60,9 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 	change_affixes(mini, w, i);
 	line = crop_command(mini, line, w);
 	set_sub_token(mini, w);
-	dest = cat_wildcards(line, w->wildcard);
-	free_wildcards(line, w->file_list, w);
+	dest = cat_wildcards(mini, w, line);
+	// free
+	free_wildcards(line, w);
 	return (dest);
 }
 
@@ -82,7 +100,6 @@ char	*wildcard_handle(t_mini *mini, char *line)
 	if (i == -1)
 		return (line);
 	init_wildcard_struct(&w);
-	set_wildcard(mini, line, &w);
 	line = substitute_wildcard(mini, line, &w, i);
 	return (line);
 }

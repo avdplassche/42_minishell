@@ -55,7 +55,8 @@ char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
 		i++;
 	line_out = ft_substr(line, 0, i + 1);
 	str_malloc_wildcard_check(mini, w, line_out);
-	free_string_ptr(line);
+	free(line);
+	line = NULL;
 	return (line_out);
 }
 
