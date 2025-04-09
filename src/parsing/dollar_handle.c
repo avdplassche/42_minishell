@@ -11,8 +11,7 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 
 	// DEBUG("Replace variable\n Temp : %s\n Sub index : %d\n j = %d\n\n", temp, sub_index, j);
 	var_name = ft_substr(line, sub_index + 1, j);
-	if (!var_name)
-		exit_minishell(mini, mini->cmd);
+	str_malloc_check(mini, var_name);
 	var_env = ft_strjoin(var_name, "=");
 	if (!var_env)
 		exit_minishell(mini, mini->cmd);
@@ -24,41 +23,34 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 }
 /** Substitute "$?"
  */
-char	*replace_env_return_value(t_mini *mini, char *line, int i)
+char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
 {
-	char	*line_out;
-	char	*number;
-	char	*suffix;
+	t_alloc	s;
 	int		len;
-	int		v_len;
 
-	suffix = NULL;
-	len = ft_strlen(line);
-	v_len = get_int_len(mini->last_return);
-	line_out = malloc(sizeof(char) * (len + v_len - 1));
-	if (!line_out)
-		exit_minishell(mini, mini->cmd);
-	ft_strlcpy(line_out, line, i + 1);
-	number = ft_itoa(mini->last_return);
-	if (!number)
-		exit_minishell(mini, mini->cmd);
-	ft_strlcat(line_out, number, i + 1 + v_len);
-	free_string_ptr(number);
-	if (len > i + 2)
+	len = ft_strlen(temp1);
+	s.line_out = ft_substr(temp1, 0, i);
+	str_malloc_check(mini, s.line_out);
+	s.number = ft_itoa(mini->last_return);
+	if (!s.number)
 	{
-		suffix = ft_substr(line, i + 2, len - v_len - i);
-		if (!suffix)
-			exit_minishell(mini, mini->cmd);
-		ft_strlcat(line_out, suffix, len + v_len - 1);
-		free(suffix);
-	}
-	free_string_ptr(line);
-	line = ft_strdup(line_out);
-	if (!line)
+		free(s.line_out);
 		exit_minishell(mini, mini->cmd);
-	free_string_ptr(line_out);
-	return (line);
+	}
+	s.suffix = ft_strjoin(s.line_out, s.number);
+	free(s.number);
+	free(s.line_out);
+	str_malloc_check(mini, s.suffix);
+	s.number = ft_substr(temp1, i + 2, len - i);
+	str_malloc_check(mini, s.number);
+	s.line_out = ft_strjoin(s.suffix, s.number);
+	free(s.number);
+	free(temp1);
+	free(s.suffix);
+	str_malloc_check(mini, s.line_out);
+	return (s.line_out);
 }
+
 
 /** Used to change every dollar sign to elements of env variable
  * @param mini t_mini struct where envp is stored
@@ -104,7 +96,7 @@ static int	need_dollar_substitution(char *line)
 	int		i;
 	t_quote	q;
 
-	DEBUG("Need dollar substitution\n line : %s\n\n", line);
+	// DEBUG("Need dollar substitution\n line : %s\n\n", line);
 	if (!(contain_char(line, '$')))
 		return (-1);
 	init_quotes(&q);
@@ -123,8 +115,8 @@ char	*dollar_handle(t_mini *mini, char *line)
 {
 	int	i;
 	
+	// DEBUG("Dollar handle\n line = %s\ni = %d\n", line, i);
 	i = need_dollar_substitution(line);
-	DEBUG("Dollar handle\n line = %s\ni = %d\n", line, i);
 	while (i > -1)
 	{
 		line = translate_dollar_sign(mini, line, i);

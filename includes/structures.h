@@ -34,7 +34,7 @@ typedef struct s_quote
 typedef struct s_alloc
 {
 	char			*line_out;
-	char			*prefix;
+	char			*prefix;	
 	char			*suffix;
 	char			*number;
 	char			*temp;
