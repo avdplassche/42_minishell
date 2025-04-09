@@ -1,13 +1,5 @@
 #include "minishell.h"
 
-
-static void	print_invalid_command(char *command)
-{
-	printf("%s: command not found\n", command);
-}
-
-
-
 /** Fill command structure (for 1 command of the command line)
  * @param mini t_mini structure, containing current line to work with
  * @param cmd an empty structure that the function will fill

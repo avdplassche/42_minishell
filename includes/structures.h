@@ -52,7 +52,9 @@ typedef struct s_wildcard
 	struct dirent	*s_dir;
 	char			*prefix;
 	char			*suffix;
+	char			*temp;
 	char			*final_sub;
+	char			**file_list;
 	bool			current;
 	int				file_amount;
 }					t_wildcard;

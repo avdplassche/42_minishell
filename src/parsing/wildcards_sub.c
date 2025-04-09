@@ -1,21 +1,24 @@
 
 #include "minishell.h"
 
-char	*get_sub_token(char **file_list, int file_amount)
+void	set_sub_token(t_mini *mini, t_wildcard *w)
 {
 	int		len;
-	char	*str;
 
 	len = 0;
-	if (file_amount == 1)
-		return (file_list[0]);
-	while (len < file_amount - 1)
+	if (w->file_amount == 1)
 	{
-		append_space_to_string(&file_list[len]);
+		w->wildcard = w->file_list[0];   //Maybe ft_strdup
+		return ;
+	}
+	while (len < w->file_amount - 1)
+	{
+		append_space_to_string(mini, w, &w->file_list[len]);
+		if (!w->file_list[len])
+			free_wildcard_double_pointer_first_part(mini, w);
 		len++;
 	}
-	str = join_n_strings(file_list, file_amount);
-	return (str);
+	w->wildcard = join_n_strings_wildcards(mini, w);
 }
 
 char	*cat_wildcards(char *line, char *wildcard)
@@ -27,23 +30,21 @@ char	*cat_wildcards(char *line, char *wildcard)
 
 char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
-	char		**file_list;
-	char		*dest;
+	char	*dest;
 
 	i = get_new_index(w->wildcard);
-	set_wildcard_directory(mini, w, w->wildcard, i);
-	tokenize_wildcard(mini, w, w->wildcard, i);
+	set_wildcard_directory(mini, w, i);
+	tokenize_wildcard(mini, w, i);
 	w->file_amount = count_valid_files(w);
 	if (!w->file_amount)
-		return (free(w->wildcard), free_wildcard_struct(w), line);
-	file_list = fill_file_list(w);
-	sort_array(file_list, double_array_len(file_list));
-	change_affixes(file_list, w->wildcard, w, i);
-	line = crop_command(line);
-	free(w->wildcard);
-	w->wildcard = get_sub_token(file_list, w->file_amount);
+		return (free_wildcard_struct(w), line);
+	fill_file_list(mini, w);
+	sort_array(w->file_list, double_array_len(w->file_list));
+	change_affixes(mini, w, i);
+	line = crop_command(mini, line, w);
+	set_sub_token(mini, w);
 	dest = cat_wildcards(line, w->wildcard);
-	free_wildcards(line, w->wildcard, file_list, w);
+	free_wildcards(line, w->file_list, w);
 	return (dest);
 }
 

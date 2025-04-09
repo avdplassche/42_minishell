@@ -12,6 +12,12 @@ void	str_malloc_check(t_mini *mini, char *str)
 		exit_minishell(mini, mini->cmd);
 }
 
+void	dbl_str_malloc_check(t_mini *mini, char **str)
+{
+	if (!str)
+		exit_minishell(mini, mini->cmd);
+}
+
 
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
@@ -74,7 +80,6 @@ void	free_mini(t_mini *mini)
 	}
 	if (mini->line)
 		free_string_ptr(mini->line);
-	DEBUG("only gets here once at the end of the free mini function\n");
 }
 
 // void	free_dollar_alloc(t_mini *mini)

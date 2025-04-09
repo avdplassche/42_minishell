@@ -93,18 +93,18 @@ char			last_quote(char *str, int i);
 
 char			*wildcard_handle(t_mini *mini, char *temp);
 int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
-char			**fill_file_list( t_wildcard *w);
+void			fill_file_list(t_mini *mini, t_wildcard *w);
 int				count_valid_files(t_wildcard *w);
-void			change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
-char			*crop_command(char *temp);
+void			change_affixes(t_mini *mini, t_wildcard *w, int i);
+char			*crop_command(t_mini *mini, char *line, t_wildcard *w);
 int				get_new_index(char *temp);
 int				get_dir_start(char *temp, int i);
-void			set_wildcard_directory(t_mini *mini, t_wildcard *w, char *temp, int i);
+void			set_wildcard_directory(t_mini *mini, t_wildcard *w, int i);
 int				is_last_asterisk(char *token, int i);
-void			tokenize_wildcard(t_mini *mini, t_wildcard *w, char *temp, int start);
+void			tokenize_wildcard(t_mini *mini, t_wildcard *w, int start);
 void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
-void			free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
+void			free_wildcards(char *line, char **list, t_wildcard *w);
 
 
 /* * * * * * * * * EXECUTION * * * * * * * * */
@@ -198,8 +198,8 @@ char			*get_next_line(int fd);
 
 bool			contain_char(const char *s, char c);
 int				get_int_len(int n);
-void			append_space_to_string(char **str);
-char			*join_n_strings(char **file_list, int n);
+void			append_space_to_string(t_mini *mini, t_wildcard *w, char **str);
+char			*join_n_strings_wildcards(t_mini *mini, t_wildcard *w);
 char			*join_three_strings(char *s1, char *s2, char *s3);
 void			sort_array(char **filename, int len);
 bool			contain_quotes(char *s);
@@ -241,6 +241,9 @@ void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
 void			free_string_ptr(char *str);
 void			str_malloc_check(t_mini *mini, char *str);
+void			dbl_str_malloc_check(t_mini *mini, char **str);
 void			str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str);
+void			wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w);
+void			free_wildcard_double_pointer_first_part(t_mini *mini, t_wildcard*w);
 
 #endif

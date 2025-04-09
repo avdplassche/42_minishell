@@ -10,19 +10,19 @@ int	get_dir_start(char *temp, int i)
 		return (i + 1);
 }
 
-void	set_wildcard_directory(t_mini *mini, t_wildcard *w, char *temp, int i)
+void	set_wildcard_directory(t_mini *mini, t_wildcard *w, int i)
 {
 	char	buffer[PATH_MAX];
 
 	while (i > 0)
 	{
-		if (temp[i] == '/')
+		if (w->wildcard[i] == '/')
 			break ;
 		i--;
 	}
 	if (i == 0)
 	{
-		if (temp[i] == '/')
+		if (w->wildcard[i] == '/')
 			w->dirname = ft_strdup("/");
 		else
 		{
@@ -32,7 +32,7 @@ void	set_wildcard_directory(t_mini *mini, t_wildcard *w, char *temp, int i)
 		}
 	}
 	else if (i > -1)
-		w->dirname = ft_substr(temp, 0, i);
+		w->dirname = ft_substr(w->wildcard, 0, i);
 	else
 		w->dirname = NULL;
 	if (i > -1)
@@ -62,17 +62,14 @@ int	count_valid_files(t_wildcard *w)
 	return (count);
 }
 
-char	**fill_file_list(t_wildcard *w)
+void	fill_file_list(t_mini *mini, t_wildcard *w)
 {
-	int				i;
-	struct dirent	*s_dir;
-	char			**file_list;
-	char			*temp;
 	DIR				*folder;
+	struct dirent	*s_dir;
+	int				i;
 
-	file_list = (char **)malloc(sizeof(char *) * (w->file_amount + 1));
-	if (!file_list)
-		return (NULL);
+	w->file_list = (char **)malloc(sizeof(char *) * (w->file_amount + 1));
+	wildcard_file_list_malloc_check(mini, w);
 	i = -1;
 	folder = opendir(w->dirname);
 	s_dir = readdir(folder);
@@ -80,15 +77,18 @@ char	**fill_file_list(t_wildcard *w)
 	{
 		if (is_valid_filename(w->token, s_dir, 0, 0))
 		{
-			temp = ft_strdup(s_dir->d_name);
-			file_list[++i] = enquote_str(temp, '"');
-			free(temp);
+			w->temp = ft_strdup(s_dir->d_name);
+			str_malloc_wildcard_check(mini, w, w->temp);
+			w->file_list[++i] = enquote_str(w->temp, '"');
+			if (!w->file_list[i])
+				free_wildcard_double_pointer_first_part(mini, w);
+			free(w->temp);
+			w->temp = NULL;
 		}
 		s_dir = readdir(folder);
 	}
-	file_list[++i] = NULL;
+	w->file_list[++i] = NULL;
 	closedir(folder);
-	return (file_list);
 }
 
 int	is_valid_filename(char *token, struct dirent *s_dir, int i, int j)

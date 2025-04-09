@@ -75,7 +75,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	while (++i < mini->cmd_count)
 		cmd_fill_loop(mini, &cmd[i], i);
 	DEBUG("\n-----------------------------------------------\n");
-	exec_mini(mini, cmd);
+	// exec_mini(mini, cmd);
 	if (!mini->should_exit)
 		free_cmd(mini, cmd);
 	cmd = NULL;

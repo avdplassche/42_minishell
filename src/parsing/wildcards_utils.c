@@ -1,19 +1,19 @@
 
 #include "minishell.h"
 
-void	tokenize_wildcard(t_mini *mini, t_wildcard *w, char *temp, int start)
+void	tokenize_wildcard(t_mini *mini, t_wildcard *w, int start)
 {
 	int		len;
 
 	len = start;
-	while (start >= 0 && temp[start] != '/' && temp[start] != ' ')
+	while (start >= 0 && w->wildcard[start] != '/' && w->wildcard[start] != ' ')
 		start--;
 	start ++;
-	while (temp[len] && temp[len] != '/')
+	while (w->wildcard[len] && w->wildcard[len] != '/')
 		len++;
-	if (temp[len] == '/')
+	if (w->wildcard[len] == '/')
 		len ++;
-	w->token = ft_substr(temp, start, len - start);
+	w->token = ft_substr(w->wildcard, start, len - start);
 	str_malloc_wildcard_check(mini, w, w->token);
 }
 
@@ -43,19 +43,20 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 	str_malloc_check(mini, w->wildcard);
 }
 
-char	*crop_command(char *temp)
+char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
 {
 	int		i;
-	char	*dest;
+	char	*line_out;
 
 	i = 0;
-	if (!contain_char(temp, ' '))
-		return (temp);
-	while (temp[i] && temp[i] != ' ')
+	if (!contain_char(line, ' '))
+		return (line);
+	while (line[i] && line[i] != ' ')
 		i++;
-	dest = ft_substr(temp, 0, i + 1);
-	free(temp);
-	return (dest);
+	line_out = ft_substr(line, 0, i + 1);
+	str_malloc_wildcard_check(mini, w, line_out);
+	free_string_ptr(line);
+	return (line_out);
 }
 
 int	get_new_index(char *temp)
