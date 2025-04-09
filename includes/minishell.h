@@ -118,7 +118,7 @@ void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void			connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index);
 void			setup_redirections(t_mini *mini, t_cmd *cmd);
-void			wait_for_children(t_mini *mini, t_cmd *cmd);
+int				wait_for_children(t_mini *mini, t_cmd *cmd);
 void			parent_closes_all_pipes(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
 //builtin exec
@@ -224,6 +224,7 @@ void			string_array_print(char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);
 void			string_build(char **dest_ptr, char *prefix, char *suffix);
+char			*string_array_join(char	**array);
 
 /* * * * * * * * * * PRINT_ERRORS * * * * * * * * * * * * */
 
