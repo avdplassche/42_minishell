@@ -32,6 +32,6 @@ void	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	if (cmd->arg_amount)
 		cmd->args[i] = NULL;
 	cmd->type = get_cmd_type(mini, cmd);
-	if (cmd->type == -1)
-		return (print_invalid_command(cmd->command));
+	// if (cmd->type == -1)
+	// 	return (print_invalid_command(cmd->command));
 }

@@ -10,7 +10,7 @@ int	get_dir_start(char *temp, int i)
 		return (i + 1);
 }
 
-void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
+void	set_wildcard_directory(t_mini *mini, t_wildcard *w, char *temp, int i)
 {
 	char	buffer[PATH_MAX];
 
@@ -35,24 +35,26 @@ void	set_wildcard_directory(t_wildcard *w, char *temp, int i)
 		w->dirname = ft_substr(temp, 0, i);
 	else
 		w->dirname = NULL;
+	if (i > -1)
+		str_malloc_wildcard_check(mini, w, w->dirname);
 }
 
 /** Count valid files in order to malloc a char table 
  */
-int	count_valid_files(t_wildcard w)
+int	count_valid_files(t_wildcard *w)
 {
 	int				count;
 	struct dirent	*s_dir;
 	DIR				*folder;
 
 	count = 0;
-	folder = opendir(w.dirname);
+	folder = opendir(w->dirname);
 	if (!folder)
 		return (0);
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
-		if (is_valid_filename(w.token, s_dir, 0, 0))
+		if (is_valid_filename(w->token, s_dir, 0, 0))
 			count++;
 		s_dir = readdir(folder);
 	}
@@ -60,7 +62,7 @@ int	count_valid_files(t_wildcard w)
 	return (count);
 }
 
-char	**fill_file_list(t_wildcard w)
+char	**fill_file_list(t_wildcard *w)
 {
 	int				i;
 	struct dirent	*s_dir;
@@ -68,15 +70,15 @@ char	**fill_file_list(t_wildcard w)
 	char			*temp;
 	DIR				*folder;
 
-	file_list = (char **)malloc(sizeof(char *) * (w.file_amount + 1));
+	file_list = (char **)malloc(sizeof(char *) * (w->file_amount + 1));
 	if (!file_list)
 		return (NULL);
 	i = -1;
-	folder = opendir(w.dirname);
+	folder = opendir(w->dirname);
 	s_dir = readdir(folder);
 	while (s_dir)
 	{
-		if (is_valid_filename(w.token, s_dir, 0, 0))
+		if (is_valid_filename(w->token, s_dir, 0, 0))
 		{
 			temp = ft_strdup(s_dir->d_name);
 			file_list[++i] = enquote_str(temp, '"');

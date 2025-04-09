@@ -20,35 +20,6 @@ void	free_string_array(char **str)
 	str = NULL;
 }
 
-void	free_wildcard_struct(t_wildcard *w)
-{
-	if (w->dirname)
-	{
-		free(w->dirname);
-		w->dirname = NULL;
-	}
-	if (w->token)
-	{
-		free(w->token);
-		w->token = NULL;
-	}
-	if (w->s_dir)
-	{
-		free(w->s_dir);
-		w->s_dir = NULL;
-	}
-	if (w->prefix)
-	{
-		free(w->prefix);
-		w->prefix = NULL;
-	}
-	if (w->suffix)
-	{
-		free(w->suffix);
-		w->suffix = NULL;
-	}
-}
-
 void	free_pathnames(t_cmd cmd)
 {
 	int	i;

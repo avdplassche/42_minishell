@@ -91,18 +91,18 @@ int				strlen_quote_cleaned_command(char *str);
 char			*clean_command_quotes(char *str);
 char			last_quote(char *str, int i);
 
-char			*wildcard_handle(char *temp);
+char			*wildcard_handle(t_mini *mini, char *temp);
 int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
-char			**fill_file_list( t_wildcard w);
-int				count_valid_files(t_wildcard w);
+char			**fill_file_list( t_wildcard *w);
+int				count_valid_files(t_wildcard *w);
 void			change_affixes(char **file_list, char *temp1, t_wildcard *w, int i);
 char			*crop_command(char *temp);
 int				get_new_index(char *temp);
 int				get_dir_start(char *temp, int i);
-void			set_wildcard_directory(t_wildcard *w, char *temp, int i);
+void			set_wildcard_directory(t_mini *mini, t_wildcard *w, char *temp, int i);
 int				is_last_asterisk(char *token, int i);
-void			tokenize_wildcard(t_wildcard *w, char *temp, int start);
-char			*crop_args(char *temp);
+void			tokenize_wildcard(t_mini *mini, t_wildcard *w, char *temp, int start);
+void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
 void			free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w);
 
@@ -241,5 +241,6 @@ void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
 void			free_string_ptr(char *str);
 void			str_malloc_check(t_mini *mini, char *str);
+void			str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str);
 
 #endif

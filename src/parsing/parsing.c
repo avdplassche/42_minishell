@@ -71,7 +71,7 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	mini->cmd = cmd;
 	expand_tildes(mini);
 	mini->line = dollar_handle(mini, mini->line);
-	mini->line = wildcard_handle(mini->line);
+	mini->line = wildcard_handle(mini, mini->line);
 	while (++i < mini->cmd_count)
 		cmd_fill_loop(mini, &cmd[i], i);
 	DEBUG("\n-----------------------------------------------\n");
