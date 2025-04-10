@@ -4,7 +4,7 @@
 
 #include "minishell.h"
 
-char	**string_array_push(char **original_arr)
+/*char	**string_array_push(char **original_arr)
 {
 	char	**new_big_arr;
 
@@ -14,4 +14,4 @@ char	**string_array_push(char **original_arr)
 		return (NULL);
 	}
 	return (new_big_arr);
-}
+}*/
