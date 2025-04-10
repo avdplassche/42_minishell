@@ -93,4 +93,5 @@ void	exit_minishell(t_mini *mini, t_cmd *cmd)
 	if (cmd)
 		free_cmd(mini, cmd);
 	free_mini(mini);
+	exit(mini->last_return);
 }
