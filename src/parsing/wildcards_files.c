@@ -39,7 +39,7 @@ void	set_wildcard_directory(t_mini *mini, t_wildcard *w, int i)
 		str_malloc_wildcard_check(mini, w, w->dirname);
 }
 
-/** Count valid files in order to malloc a char table 
+/** Count valid files in order to malloc a char table
  */
 int	count_valid_files(t_wildcard *w)
 {
@@ -81,7 +81,7 @@ void	fill_file_list(t_mini *mini, t_wildcard *w)
 			str_malloc_wildcard_check(mini, w, w->temp);
 			w->file_list[++i] = enquote_str(w->temp, '"');
 			if (!w->file_list[i])
-				free_wildcard_double_pointer_first_part(mini, w);
+				return (free_wildcard_double_pointer_first_part(mini, w));
 			free(w->temp);
 			w->temp = NULL;
 		}

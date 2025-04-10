@@ -77,7 +77,7 @@ int				init_arguments(t_mini *mini, t_cmd *cmd);
 
 char			*dollar_handle(t_mini *mini, char *line);
 char			*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i);
-char			*empty_expand(char *temp1, t_quote q, int i);
+char			*empty_expand(t_mini *mini, char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
 void			init_dollar_alloc(t_mini *mini);

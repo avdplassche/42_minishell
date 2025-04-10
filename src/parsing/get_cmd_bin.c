@@ -30,6 +30,7 @@ char	*get_cmd_bin(t_mini *mini)
 
 	len = get_last_index(mini);
 	temp = ft_substr(mini->line, mini->cursor, len - mini->cursor);
+	str_malloc_check(mini, temp);
 	mini->cursor = len;
 	while (contain_char(SPACES, mini->line[len++]))
 		mini->cursor++;
@@ -37,5 +38,7 @@ char	*get_cmd_bin(t_mini *mini)
 		dest = ft_strdup(temp);
 	else
 		dest = clean_command_quotes(temp);
-	return (free(temp), dest);
+	free(temp);
+	str_malloc_check(mini, dest);
+	return (dest);
 }

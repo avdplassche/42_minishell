@@ -61,7 +61,6 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 	line = crop_command(mini, line, w);
 	set_sub_token(mini, w);
 	dest = cat_wildcards(mini, w, line);
-	// free
 	free_wildcards(line, w);
 	return (dest);
 }

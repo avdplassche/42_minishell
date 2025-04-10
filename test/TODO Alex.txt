@@ -1,10 +1,8 @@
 - Malloc check
 
-substr
-strdup
-strjoin
-
-Continue dollar sub (char	*replace_env_return_value)
+School : Finish Wildcards
+- i/o (use str_safe_free)
+- Do all the is_valid
 
 
 struct str
