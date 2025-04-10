@@ -18,8 +18,8 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 		exit_minishell(mini, mini->cmd);
 	}
 	envp_index = get_envp_index(mini, var_env);
-	free_string_ptr(var_env);
-	free_string_ptr(var_name);
+	free(var_env);
+	free(var_name);
 	line_out = get_env_variable(mini, line, envp_index, sub_index);
 	return (line_out);
 }
@@ -114,7 +114,7 @@ static int	need_dollar_substitution(char *line)
 char	*dollar_handle(t_mini *mini, char *line)
 {
 	int	i;
-	
+
 	i = need_dollar_substitution(line);
 	while (i > -1)
 	{

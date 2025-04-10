@@ -69,14 +69,3 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 	cmd->args[i++] = ft_strdup(cmd->command);
 	return (i);
 }
-
-// /** Fill cmd arg tokens, a char** that will be used in execve
-//  * @param cmd_line the command line from the prompt
-//  * @param cmd_struct the command structure to fill
-//  * @return error ? not set yet
-//  */
-// void	get_cmd_args(t_mini *mini, t_cmd *cmd, int index)
-// {
-// 	cmd->args[index] = get_cmd_bin(mini);
-// 	return (0);
-// }

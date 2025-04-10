@@ -31,9 +31,11 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 	{
 		if ((q->dbl && (line[i] == 34 || line[i] == 39 || is_minishell_punct(line[i]))))
 			break ;
+		if (!q->dbl && is_minishell_punct(line[i]))
+			break ;
 		quote_enclosure_handle(line[i], q);
 	}
-	suffix = ft_substr(line, i, ft_strlen(line) - i);
+	suffix = ft_substr(line, i, ft_strlen(line) - i );
 	str_malloc_check(mini, suffix);
 	line_out = ft_strjoin(prefix, suffix);
 	if (!line_out)
@@ -64,7 +66,7 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 	while (++i < sub_i)
 		quote_enclosure_handle(line[i], &q);
 	if (envp_i < 0)
-		return (empty_expand(line, q, i));
+		return (empty_expand(mini, line, q, i));
 	s.var_name = trim_var_name(mini, envp_i);
 	s.temp = ft_substr(line, 0, i);
 	if (!s.temp)

@@ -8,22 +8,27 @@
  * @param i where the suppression is needed
  * @return temp1  without $VARIABLE
  */
-char	*empty_expand(char *line, t_quote q, int i)
+char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 {
-	char	*prefix;
-	char	*line_out;
-	char	*suffix;
+	t_alloc	s;
 
-	prefix = ft_substr(line, 0, i);
+	s.prefix = ft_substr(line, 0, i);
+	str_malloc_check(mini, s.prefix);
 	while (line[++i])
 		if (line[i] == ' ' || (line[i] == 34 && !q.dbl)
 			|| (line[i] == 39 && !q.sgl))
 			break ;
-	suffix = ft_substr(line, i, ft_strlen(line));
-	line_out = ft_strjoin(prefix, suffix);
-	free(prefix);
-	free(suffix);
-	return (line_out);
+	s.suffix = ft_substr(line, i, ft_strlen(line));
+	if (!s.suffix)
+	{
+		free(s.prefix);
+		exit_minishell(mini, mini->cmd);
+	}
+	s.line_out = ft_strjoin(s.prefix, s.suffix);
+	free(s.prefix);
+	free(s.suffix);
+	str_malloc_check(mini, s.line_out);
+	return (s.line_out);
 }
 
 int	is_minishell_punct(char c)
