@@ -30,6 +30,6 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 		restore_standard_fd(mini);
 	mini->should_exit = true;
 	DEBUG("mini->shoudl exit is worth %d\n", mini->should_exit);
-	exit_minishell(mini, cmd);
+	//exit_minishell(mini, cmd);
 	return mini->last_return;
 }

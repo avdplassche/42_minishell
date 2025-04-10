@@ -234,14 +234,14 @@ void			print_error(const char *format, const char *path, int fd);
 
 /* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
 
-void			free_string_array(char **str);
+void			free_string_array(char ***str);
 void			free_wildcard_struct(t_wildcard *w);
 void			free_cmd(t_mini *mini, t_cmd *cmd);
 void			free_mini(t_mini *mini);
-void			free_pathnames(t_cmd cmd);
+void			free_pathnames(t_cmd *cmd);
 // void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
-void			free_string_ptr(char *str);
+void			free_string_ptr(char **str);
 void			str_malloc_check(t_mini *mini, char *str);
 void			dbl_str_malloc_check(t_mini *mini, char **str);
 void			str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str);

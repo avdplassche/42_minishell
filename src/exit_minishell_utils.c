@@ -3,32 +3,35 @@
 
 /** Frees char ** variables
  */
-void	free_string_array(char **str)
+void	free_string_array(char ***str)
 {
 	int	i;
 
-	if (!str)
+	if (!(*str))
 		return ;
 	i = 0;
-	while (str[i])
+	while ((*str)[i])
 	{
-		free(str[i]);
-		str[i] = NULL;
+		free((*str)[i]);
+		(*str)[i] = NULL;
 		i++;
 	}
-	free(str);
-	str = NULL;
+	free(*str);
+	*str = NULL;
 }
 
-void	free_pathnames(t_cmd cmd)
+void	free_pathnames(t_cmd *cmd)
 {
 	int	i;
 
+	if (!(cmd->redir))
+		return ;
 	i = 0;
-	while (i < cmd.redir_amount)
+	while (i < cmd->redir_amount)
 	{
-		free(cmd.redir[i].name);
+		free(cmd->redir[i].name);
 		i++;
 	}
-	free(cmd.redir);
+	free(cmd->redir);
+	cmd->redir = NULL;
 }

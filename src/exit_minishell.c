@@ -1,9 +1,11 @@
 #include "minishell.h"
 
-void	free_string_ptr(char *str)
+void	free_string_ptr(char **str)
 {
-	free(str);
-	str = NULL;
+	if (!(*str))
+		return ;
+	free(*str);
+	*str = NULL;
 }
 
 void	str_malloc_check(t_mini *mini, char *str)
@@ -26,14 +28,10 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	i = 0;
 	while (i < mini->cmd_count)
 	{
-		if (cmd[i].command != NULL)
-			free_string_ptr(cmd[i].command);
-		if (cmd[i].path != NULL)
-			free_string_ptr(cmd[i].path);
-		if (cmd[i].args != NULL)
-			free_string_array(cmd[i].args);
-		if (cmd[i].redir)
-			free_pathnames(cmd[i]);
+		free_string_ptr(&cmd[i].command);
+		free_string_ptr(&cmd[i].path);
+		free_string_array(&cmd[i].args);
+		free_pathnames(&cmd[i]);
 		i++;
 	}
 	if (cmd)
@@ -45,22 +43,9 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
  */
 void	free_mini(t_mini *mini)
 {
-
-	if (mini->envp)
-	{
-		free_string_array(mini->envp);
-		mini->envp = NULL;
-	}
-	if (mini->builtins)
-	{
-		free_string_array(mini->builtins);
-		mini->builtins = NULL;
-	}
-	if (mini->paths)
-	{
-		free_string_array(mini->paths);
-		mini->paths = NULL;
-	}
+	free_string_array(&mini->envp);
+	free_string_array(&mini->builtins);
+	free_string_array(&mini->paths);
 	if (mini->pipes)
 	{
 		free(mini->pipes);
@@ -78,8 +63,7 @@ void	free_mini(t_mini *mini)
 			mini->fd_backup = NULL;
 		}
 	}
-	if (mini->line)
-		free_string_ptr(mini->line);
+	free_string_ptr(&mini->line);
 }
 
 // void	free_dollar_alloc(t_mini *mini)

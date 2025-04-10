@@ -4,24 +4,23 @@
 /*static void	modify_envp_array(t_mini *mini, t_cmd *cmd)
 {
 	
-	int	i;
+	//int	i;
 	int	len;
 
-	i = 0;
-	while (i < cmd->arg_amount)
+	(void)cmd;
+	len = string_array_len(mini->envp);
+	DEBUG("the len of the string %d before the string array push\n", len);
+	mini->envp = string_array_push(mini->envp);
+	if (!mini->envp)
 	{
-		DEBUG("the ekn of the string %d before the string array push\n");
-		mini->envp = string_array_push(mini->envp);
-		if (!mini->envp)
-		{
-			mini->last_return = MALLOC_ERROR;
-			return ;
-		}
-		len = string_array_len(mini->envp);
-		DEBUG("the ekn of the string %d before the string array push\n");
-		i++;
-	}	//when calling the funvtion to make it bigger, you need to null check the result, and free it if necesary
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+	len = string_array_len(mini->envp);
+	DEBUG("the len of the string %d before the string array push\n", len);
+	//i++;	//when calling the funvtion to make it bigger, you need to null check the result, and free it if necesary
 	//set the mini ;ast return to the right value
+	return ;
 }*/
 
 static int	is_already_in_envp(t_mini *mini, t_cmd *cmd)

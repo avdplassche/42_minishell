@@ -101,7 +101,7 @@ void	free_wildcards(char *line, t_wildcard *w)
 	free(line);
 	line = NULL;
 	if (w->file_amount > 1)
-		free_string_array(w->file_list);
+		free_string_array(&w->file_list);
 	else if (w->file_list)
 	{
 		free(w->file_list);

@@ -83,7 +83,7 @@ static char	*translate_dollar_sign(t_mini *mini, char *line, int sub_index)
 		quote_enclosure_handle(line[i], &q);
 	}
 	line_out = replace_variable(mini, line, sub_index, j);
-	free_string_ptr(line);
+	free_string_ptr(&line);
 	return (line_out);
 }
 

@@ -22,6 +22,7 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_r
 			free(line);
 			break ;
 		}
+		line = enquote_str(line, 34);
 		line = dollar_handle(mini, line);
 		write(here_doc_pipe[1], line, ft_strlen(line));
 		write(here_doc_pipe[1], "\n", 1);
