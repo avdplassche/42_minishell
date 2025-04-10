@@ -89,6 +89,5 @@ int	init_mini(t_mini *mini, char **envp)
 		return (MALLOC_ERROR);
 	mini->fd_backup->stdin_backup = -1;
 	mini->fd_backup->stdout_backup = -1;
-	mini->should_exit = 0;
 	return (0);
 }
