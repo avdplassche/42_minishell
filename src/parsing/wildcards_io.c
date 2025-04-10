@@ -9,26 +9,51 @@ void	init_wildcard_struct(t_wildcard *w)
 	w->s_dir = NULL;
 	w->prefix = NULL;
 	w->suffix = NULL;
+	w->temp = NULL;
+	w->file_list = NULL;
 	w->current = false;
 }
 
 void	free_wildcard_struct(t_wildcard *w)
 {
 	if (w->dirname)
-		free_string_ptr(w->dirname);
+	{
+		free(w->dirname);
+		w->dirname = NULL;
+	}
 	if (w->wildcard)
-		free_string_ptr(w->dirname);
+	{
+		free(w->wildcard);
+		w->wildcard = NULL;
+	}
 	if (w->token)
-		free_string_ptr(w->token);
+	{
+		free(w->token);
+		w->token = NULL;
+	}
 	if (w->s_dir)
 	{
 		free(w->s_dir);
 		w->s_dir = NULL;
 	}
 	if (w->prefix)
-		free_string_ptr(w->prefix);
+	{
+		free(w->prefix);
+		w->prefix = NULL;
+	}
 	if (w->suffix)
-		free_string_ptr(w->suffix);
+	{
+		free(w->suffix);
+		w->suffix = NULL;
+	}
+	if (w->temp)
+	{
+		free(w->temp);
+		w->temp = NULL;
+	}
+	// if (w->file_list)
+	// 	free_string_array(w->file_list);
+
 }
 
 void	str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str)
@@ -40,13 +65,40 @@ void	str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str)
 	}
 }
 
-void	free_wildcards(char *temp, char *temp2, char **list, t_wildcard *w)
+void	free_wildcard_double_pointer_first_part(t_mini *mini, t_wildcard*w)
 {
-	free(temp2);
-	free(temp);
+	int	i;
+
+	i = 0;
+	while (w->file_list[i])
+		i++;
+	while (--i <= 0)
+		free_string_ptr(w->file_list[i]);
+	free(w->file_list);
+	w->file_list = NULL;
+	wildcard_file_list_malloc_check(mini, w);
+}
+
+
+void	wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w)
+{
+	if (!w->file_list)
+	{
+		free_wildcard_struct(w);
+		exit_minishell(mini, mini->cmd);
+	}
+}
+
+void	free_wildcards(char *line, t_wildcard *w)
+{
+	free(line);
+	line = NULL;
 	if (w->file_amount > 1)
-		free_string_array(list);
-	else
-		free(list);
+		free_string_array(w->file_list);
+	else if (w->file_list)
+	{
+		free(w->file_list);
+		w->file_list = NULL;
+	}
 	free_wildcard_struct(w);
 }

@@ -13,10 +13,13 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 	str_malloc_check(mini, var_name);
 	var_env = ft_strjoin(var_name, "=");
 	if (!var_env)
+	{
+		free(var_name);
 		exit_minishell(mini, mini->cmd);
+	}
 	envp_index = get_envp_index(mini, var_env);
-	free(var_env);
-	free(var_name);
+	free_string_ptr(var_env);
+	free_string_ptr(var_name);
 	line_out = get_env_variable(mini, line, envp_index, sub_index);
 	return (line_out);
 }
@@ -80,7 +83,7 @@ static char	*translate_dollar_sign(t_mini *mini, char *line, int sub_index)
 		quote_enclosure_handle(line[i], &q);
 	}
 	line_out = replace_variable(mini, line, sub_index, j);
-	free(line);
+	free_string_ptr(line);
 	return (line_out);
 }
 
