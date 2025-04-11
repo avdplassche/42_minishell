@@ -1,42 +1,38 @@
 
 #include "minishell.h"
 
-/*static void	modify_envp_array(t_mini *mini, t_cmd *cmd)
+static void	modify_envp_array(t_mini *mini, t_cmd *cmd)
 {
-	
-	//int	i;
-	int	len;
+	char	**temp_env;
 
-	(void)cmd;
-	len = string_array_len(mini->envp);
-	DEBUG("the len of the string %d before the string array push\n", len);
-	mini->envp = string_array_push(mini->envp);
-	if (!mini->envp)
+	temp_env = string_array_push(mini->envp, ft_strdup(cmd->args[1]));
+	if (!temp_env)
 	{
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
-	len = string_array_len(mini->envp);
-	DEBUG("the len of the string %d before the string array push\n", len);
-	//i++;	//when calling the funvtion to make it bigger, you need to null check the result, and free it if necesary
-	//set the mini ;ast return to the right value
+	free(mini->envp);
+	mini->envp = temp_env;
 	return ;
-}*/
+}
 
 static int	is_already_in_envp(t_mini *mini, t_cmd *cmd)
 {
 	int i;
+	int	j;
 
 	i = 0;
-	while (mini->envp[i])
+	j = 1;
+	while (mini->envp[i] && j <= cmd->arg_amount)
 	{
 		DEBUG("entered the is already in envp function\n");
-		if (string_array_find_string(mini->envp, cmd->args[i]) != NULL)
+		if (string_array_find_string(mini->envp, cmd->args[j]) != NULL)
 		{
 			mini->last_return = CMD_NOT_FOUND;
 			return (1);
 		}
 		i++;
+		j++;
 	}
 	return (0);
 }
@@ -76,10 +72,13 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 		{
 			return (mini->last_return);
 		}
-		/*else
+		else
 		{
 			modify_envp_array(mini, cmd);
-		}*/
+			sort_array(mini->envp, string_array_len(mini->envp));
+			string_array_print(mini->envp);
+		}
 	}
+
 	return (mini->last_return);
 }

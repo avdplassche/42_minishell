@@ -26,6 +26,10 @@ char	*string_array_find_string(char **string_array, char *string_to_find)
 		if (!search_key)
 			return (NULL);
 	}
+	else
+	{
+		search_key = string_to_find;
+	}
 	while (string_array[i])
 	{
 		if (start_with(string_array[i], search_key))
@@ -36,7 +40,5 @@ char	*string_array_find_string(char **string_array, char *string_to_find)
 		}
 		i++;
 	}
-	free(search_key);
-	search_key = NULL;
 	return (NULL);
 }

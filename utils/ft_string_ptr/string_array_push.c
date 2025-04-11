@@ -4,14 +4,25 @@
 
 #include "minishell.h"
 
-/*char	**string_array_push(char **original_arr)
+char	**string_array_push(char **original_arr, char *new_ptr)
 {
-	char	**new_big_arr;
+	char	**big_array;
+	int		original_len;
+	int		i;
 
-	new_big_arr = (char **)malloc(sizeof(char *) * (string_array_len(original_arr + 2)));
-	if (!new_big_arr)
+	original_len = string_array_len(original_arr);
+	big_array = malloc(sizeof(char *) * (original_len + 1 + 1));
+	if (!big_array)
 	{
 		return (NULL);
 	}
-	return (new_big_arr);
-}*/
+	i = 0;
+	while (original_arr[i])
+	{
+		big_array[i] = original_arr[i];
+		i++;
+	}
+	big_array[i] = new_ptr;
+	big_array[i + 1] = NULL;
+	return (big_array);
+}

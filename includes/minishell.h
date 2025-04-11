@@ -224,7 +224,7 @@ char			*string_array_find_string(char **string_array, char *string_to_find);
 void			string_array_print(char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);
-char			**string_array_push(char **original_arr);
+char			**string_array_push(char **original_arr, char *new_ptr);
 void			string_build(char **dest_ptr, char *prefix, char *suffix);
 char			*string_array_join(char	**array);
 
