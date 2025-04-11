@@ -1,5 +1,0 @@
-hello
-[?2004hPrompt minishell ➤ 
-[?2004l[?2004hPrompt minishell ➤ 
-[?2004l[?2004hPrompt minishell ➤ exit
-[?2004l
