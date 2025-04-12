@@ -29,7 +29,7 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 
 	while (line[++i] && line[i] != ' ')
 	{
-		if ((q->dbl && (line[i] == 34 || line[i] == 39 || is_minishell_punct(line[i]))))
+		if ((q->dbl && (is_quote(line[i]) || is_minishell_punct(line[i]))))
 			break ;
 		if (!q->dbl && is_minishell_punct(line[i]))
 			break ;

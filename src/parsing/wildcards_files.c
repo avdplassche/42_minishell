@@ -82,8 +82,7 @@ void	fill_file_list(t_mini *mini, t_wildcard *w)
 			w->file_list[++i] = enquote_str(w->temp, '"');
 			if (!w->file_list[i])
 				return (free_wildcard_double_pointer_first_part(mini, w));
-			free(w->temp);
-			w->temp = NULL;
+			free_string_ptr(&w->temp);
 		}
 		s_dir = readdir(folder);
 	}

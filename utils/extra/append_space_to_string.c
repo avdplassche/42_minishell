@@ -2,7 +2,7 @@
 
 void	append_space_to_string(t_mini *mini, t_wildcard *w, char **str)
 {
-	char	*temp; 
+	char	*temp;
 
 	temp = NULL;
 	temp = ft_strdup(*str);

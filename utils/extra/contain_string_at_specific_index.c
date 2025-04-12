@@ -5,7 +5,8 @@
  * @param needle string to find in haystack
  * @param i index where to look at
  *
- * Ex : i = 5, strlen(needle) = 2, the function will scan haystack[5] and haystack[6]
+ * Ex : i = 5, strlen(needle) = 2, the function will
+ * scan haystack[5] and haystack[6]
  */
 int	contain_string_at_specific_index(char *haystack, char *needle, int i)
 {
@@ -25,4 +26,3 @@ int	contain_string_at_specific_index(char *haystack, char *needle, int i)
 		return (0);
 	return (1);
 }
-

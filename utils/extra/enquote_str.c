@@ -1,7 +1,4 @@
-
-
 #include "minishell.h"
-
 
 /** Single or double enquote a string
  * @param str string to enquote

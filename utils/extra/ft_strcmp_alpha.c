@@ -7,7 +7,6 @@ int	ft_strcmp_alpha(char *s1, char *s2)
 	char	c2;
 
 	i = 0;
-
 	while (s1[i] && s2[i])
 	{
 		c1 = ft_toupper(s1[i]);

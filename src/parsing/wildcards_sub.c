@@ -1,30 +1,6 @@
 
 #include "minishell.h"
 
-void	set_sub_token(t_mini *mini, t_wildcard *w)
-{
-	int		len;
-
-	len = 0;
-	if (w->file_amount == 1)
-	{
-		free(w->wildcard);
-		w->wildcard = NULL;
-		w->wildcard = w->file_list[0];   //Maybe ft_strdup
-		return ;
-	}
-	while (len < w->file_amount - 1)
-	{
-		append_space_to_string(mini, w, &w->file_list[len]);
-		if (!w->file_list[len])
-			free_wildcard_double_pointer_first_part(mini, w);
-		len++;
-	}
-	free(w->wildcard);
-	w->wildcard = NULL;
-	w->wildcard = join_n_strings_wildcards(mini, w);
-}
-
 char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 {
 	char	*final_sub;
@@ -33,14 +9,12 @@ char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 	{
 		final_sub = ft_strdup(w->wildcard);
 		str_malloc_wildcard_check(mini, w, final_sub);
-		free(w->wildcard);
-		w->wildcard = NULL;
+		free_string_ptr(&w->wildcard);
 		return (final_sub);
 	}
 	final_sub = ft_strjoin(line, w->wildcard);
 	str_malloc_wildcard_check(mini, w, final_sub);
-	free(w->wildcard);
-	w->wildcard = NULL;
+	free_string_ptr(&w->wildcard);
 	return (final_sub);
 }
 
@@ -88,11 +62,24 @@ int	need_wildcard_substitution(char *line)
 	return (-1);
 }
 
+void	init_wildcard_struct(t_wildcard *w)
+{
+	w->wildcard = NULL;
+	w->dirname = NULL;
+	w->token = NULL;
+	w->s_dir = NULL;
+	w->prefix = NULL;
+	w->suffix = NULL;
+	w->temp = NULL;
+	w->file_list = NULL;
+	w->current = false;
+}
+
 /**Go through the command and do all the substitutions
  */
 char	*wildcard_handle(t_mini *mini, char *line)
 {
-	int		i;
+	int			i;
 	t_wildcard	w;
 
 	i = need_wildcard_substitution(line);

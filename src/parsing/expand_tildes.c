@@ -15,7 +15,7 @@ int	need_tilde_expand(t_mini *mini)
 			if (i == 0 && (mini->line[1] == ' ' || !mini->line[i + 1]))
 				return (0);
 			if (i > 0 && (mini->line[i - 1] == ' '
-				&& (!mini->line[i + 1] || mini->line[i + 1])))
+					&& (!mini->line[i + 1] || mini->line[i + 1])))
 				return (i);
 		}
 	}
@@ -52,6 +52,7 @@ void	sub_tilde(t_mini *mini, int i)
 		suffix = ft_substr(mini->line, i + 1, ft_strlen(mini->line) - 1 - i);
 		if (!suffix)
 			return (free(env), free(prefix), exit_minishell(mini, mini->cmd));
+		free(mini->line);
 		mini->line = join_three_strings(prefix, env, suffix);
 		free(env);
 	}
