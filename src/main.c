@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = NULL;
 		mini.cursor = 0;
-		signal_list();
+		// signal_list();
 		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{

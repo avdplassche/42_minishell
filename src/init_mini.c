@@ -73,7 +73,7 @@ int	init_mini(t_mini *mini, char **envp)
 	init_mini_pointers(mini);
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
-		return (MALLOC_ERROR);
+		exit_minishell(mini, mini->cmd);
 	mini->last_return = 0;
 	if (envp)
 		dup_env(mini, envp);

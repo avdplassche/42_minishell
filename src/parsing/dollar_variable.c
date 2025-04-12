@@ -22,28 +22,28 @@ char	*trim_var_name(t_mini *mini, int index)
 	return (var_value);
 }
 
-char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q)
+char	*sub_env_variable(t_mini *mini, char *line, t_alloc *s, int i)
 {
 	char	*suffix;
 	char	*line_out;
 
 	while (line[++i] && line[i] != ' ')
 	{
-		if ((q->dbl && (is_quote(line[i]) || is_minishell_punct(line[i]))))
+		if ((s->q.dbl && (is_quote(line[i]) || is_minishell_punct(line[i]))))
 			break ;
-		if (!q->dbl && is_minishell_punct(line[i]))
+		if (!s->q.dbl && is_minishell_punct(line[i]))
 			break ;
-		quote_enclosure_handle(line[i], q);
+		quote_enclosure_handle(line[i], &s->q);
 	}
 	suffix = ft_substr(line, i, ft_strlen(line) - i );
 	str_malloc_check(mini, suffix);
-	line_out = ft_strjoin(prefix, suffix);
+	line_out = ft_strjoin(s->prefix, suffix);
 	if (!line_out)
 	{
 		free(suffix);
 		exit_minishell(mini, mini->cmd);
 	}
-	free(prefix);
+	free(s->prefix);
 	free(suffix);
 	return (line_out);
 }
@@ -58,15 +58,14 @@ char	*sub_env_variable(t_mini *mini, char *line, char *prefix, int i, t_quote *q
 char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 {
 	t_alloc	s;
-	t_quote	q;
 	int		i;
 
-	init_quotes(&q);
+	init_quotes(&s.q);
 	i = -1;
 	while (++i < sub_i)
-		quote_enclosure_handle(line[i], &q);
+		quote_enclosure_handle(line[i], &s.q);
 	if (envp_i < 0)
-		return (empty_expand(mini, line, q, i));
+		return (empty_expand(mini, line, s.q, i));
 	s.var_name = trim_var_name(mini, envp_i);
 	s.temp = ft_substr(line, 0, i);
 	if (!s.temp)
@@ -78,6 +77,6 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 	free(s.var_name);
 	free(s.temp);
 	str_malloc_check(mini, s.prefix);
-	s.line_out = sub_env_variable(mini, line, s.prefix, i, &q);
+	s.line_out = sub_env_variable(mini, line, &s, i);
 	return (s.line_out);
 }

@@ -27,7 +27,8 @@ int	is_last_asterisk(char *token, int i)
 
 void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 {
-	int		i;
+	int	i;
+	int	j;
 
 	if (!contain_char(line, ' '))
 	{
@@ -39,7 +40,10 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 	while (line [i] != ' ')
 		i++;
 	i++;
-	w->wildcard = ft_substr(line, i, ft_strlen(line) - i);
+	j = i;
+	while (line [j] && line [j] != ' ')
+		j++;
+	w->wildcard = ft_substr(line, i, ft_strlen(line) - i - j);
 	str_malloc_check(mini, w->wildcard);
 }
 

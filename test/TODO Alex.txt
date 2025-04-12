@@ -4,8 +4,6 @@ School :
 
 Functions to recode :
 
-- join 3 strings
-- expand_tilde
 - dollar_variable
 
 

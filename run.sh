@@ -5,7 +5,7 @@ make re
 make clean
 
 # ./minishell test/TESTMODE_WILDCARDS 19
-./minishell test/TESTMODE_DOLLAR 16
+./minishell test/TESTMODE_DOLLAR 19
 # ./minishell test/TESTMODE_QUOTES 16
 # ./minishell test/TESTMODE_MULTIPLE_CMD 14
 # ./minishell test/TESTMODE_MULTIPLE_REDIR 16

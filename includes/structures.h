@@ -41,6 +41,7 @@ typedef struct s_alloc
 	char			*var_name;
 	char			*var_env;
 	char			*var_value;
+	t_quote			q;
 }					t_alloc;
 
 
