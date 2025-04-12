@@ -6,7 +6,6 @@ void	sort_array(char **filename, int len)
 	int		j;
 	char	*temp;
 
-	DEBUG("entered the sort array function\n");
 	if (len <= 1)
 		return ;
 	while (len > 0)

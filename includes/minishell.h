@@ -80,8 +80,6 @@ char			*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i);
 char			*empty_expand(t_mini *mini, char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
-void			init_dollar_alloc(t_mini *mini);
-void			free_dollar_alloc(t_mini *mini);
 
 void			expand_tildes(t_mini *mini);
 void			init_quotes(t_quote *q);
@@ -136,7 +134,7 @@ int				builtin_cd(t_mini *mini, t_cmd *cmd);
 int				builtin_echo(t_mini *mini, t_cmd *cmd);
 int				builtin_env(t_mini *mini, t_cmd *cmd);
 int				builtin_exit(t_mini *mini, t_cmd *cmd);
-int			builtin_export(t_mini *mini, t_cmd *cmd);
+int				builtin_export(t_mini *mini, t_cmd *cmd);
 int				builtin_pwd(t_mini *mini, t_cmd *cmd);
 // int			builtin_unset(t_mini *mini, t_cmd *cmd);
 
@@ -154,7 +152,6 @@ void			print_string(char *string, char *name);
 void			print_cmd(t_cmd cmd, char *cmd_line);
 
 void			print_quote_statement_debug(t_mini *mini, int i, t_quote *q);
-void			debug_parsing_print(t_mini *mini, t_cmd cmd);
 
 /* * * * * * * * * * * * * * UTILS * * * * * * * * * * * * * * * * * */
 
@@ -202,6 +199,7 @@ void			append_space_to_string(t_mini *mini, t_wildcard *w, char **str);
 char			*join_n_strings_wildcards(t_mini *mini, t_wildcard *w);
 char			*join_three_strings(char *s1, char *s2, char *s3);
 void			sort_array(char **filename, int len);
+void			sort_ascii_array(char	**string_array, int len);
 bool			contain_quotes(char *s);
 char			*enquote_str(char *str, int q);
 int				contain_string_at_specific_index(char *haystack, char *needle, int i);

@@ -59,7 +59,7 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 {
 	if (cmd->arg_amount == 0)
 	{
-		sort_array(mini->envp, string_array_len(mini->envp));
+		sort_ascii_array(mini->envp, string_array_len(mini->envp));
 		string_array_print(mini->envp);
 	}
 	if (cmd->arg_amount > 0)
@@ -75,7 +75,7 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 		else
 		{
 			modify_envp_array(mini, cmd);
-			sort_array(mini->envp, string_array_len(mini->envp));
+			sort_ascii_array(mini->envp, string_array_len(mini->envp));
 			string_array_print(mini->envp);
 		}
 	}

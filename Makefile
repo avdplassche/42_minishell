@@ -95,6 +95,7 @@ UTILS				=	contain_char.c \
 						print_error.c \
 						start_with.c \
 						sort_array.c \
+						sort_ascii_array.c \
 						get_line_from_stdin.c \
 						ft_atoi.c \
 						ft_bzero.c \
