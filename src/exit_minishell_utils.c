@@ -16,6 +16,7 @@ void	free_string_array(char ***str)
 		(*str)[i] = NULL;
 		i++;
 	}
+	free((*str)[i]);
 	free(*str);
 	*str = NULL;
 }

@@ -74,6 +74,7 @@ typedef struct s_cmd t_cmd;
 typedef struct s_mini
 {
 	char		**envp;
+	char		**export;
 	char		**builtins;
 	char		**paths;
 	char		*line;
@@ -121,6 +122,7 @@ typedef struct s_cmd
 	pid_t			pid;
 	t_pipefd		*pipe_in;
 	t_pipefd		*pipe_out;
+	int				needs_cleanup;
 }					t_cmd;
 
 /** A pointer to function for the builtin function
