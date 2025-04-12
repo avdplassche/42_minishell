@@ -24,6 +24,5 @@ char	*enquote_str(char *str, int q)
 	i++;
 	enquoted_str[i] = q;
 	enquoted_str[++i] = '\0';
-	// free(str) ?
 	return (enquoted_str);
 }

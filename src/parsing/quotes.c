@@ -47,21 +47,19 @@ char	last_quote(char *str, int i)
  * @param str the string used to epure from (will be freed after the function)
  * @return not set yet, errors
 */
-char	*clean_command_quotes(char *str)
+char	*clean_command_quotes(t_mini *mini, char *str)
 {
 	int		i;
 	int		j;
 	t_quote	q;
 	char	*dest;
 
+	init_quotes(&q);
 	j = strlen_quote_cleaned_command(str);
 	dest = malloc(sizeof(char) * (j + 1));
-	if (!dest)
-		return (NULL);
+	str_malloc_check(mini, dest);
 	i = -1;
 	j = 0;
-	q.dbl = 0;
-	q.sgl = 0;
 	while (str[++i])
 	{
 		quote_enclosure_handle(str[i], &q);

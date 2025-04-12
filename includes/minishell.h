@@ -80,15 +80,13 @@ char			*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i);
 char			*empty_expand(t_mini *mini, char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
-void			init_dollar_alloc(t_mini *mini);
-void			free_dollar_alloc(t_mini *mini);
 
 void			expand_tildes(t_mini *mini);
 void			init_quotes(t_quote *q);
 int				is_valid_quote(t_mini *mini);
 void			quote_enclosure_handle(char c, t_quote *quote);
 int				strlen_quote_cleaned_command(char *str);
-char			*clean_command_quotes(char *str);
+char			*clean_command_quotes(t_mini *mini, char *str);
 char			last_quote(char *str, int i);
 
 char			*wildcard_handle(t_mini *mini, char *temp);

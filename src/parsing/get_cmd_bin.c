@@ -37,7 +37,7 @@ char	*get_cmd_bin(t_mini *mini)
 	if (!contain_quotes(temp))
 		dest = ft_strdup(temp);
 	else
-		dest = clean_command_quotes(temp);
+		dest = clean_command_quotes(mini, temp);
 	free(temp);
 	str_malloc_check(mini, dest);
 	return (dest);

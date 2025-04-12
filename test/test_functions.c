@@ -32,52 +32,6 @@ int main (void)
 }
 
 
-
-
-
-
-
-
-
-// size_t	ft_strlen(char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
-
-// char	*enquote_str(char *str, int q)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*enquoted_str;
-
-// 	j = -1;
-// 	enquoted_str = malloc(sizeof(char) * (ft_strlen(str) + 3));
-// 	enquoted_str[++j] = q;
-// 	i = -1;
-// 	while (str[++i])
-// 		enquoted_str[++j] = str[i];
-// 	i++;
-// 	enquoted_str[i] = q;
-// 	enquoted_str[++i] = '\0';
-// 	return (enquoted_str);
-// }
-
-// int	dup_env(char **envp)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (envp[i])
-// 		i++;
-// 	printf("%d\n", i);
-// 	return (i);
-// }
-
 // int main(int argc, char **argv, char **envp)
 // {
 // 	int fd;

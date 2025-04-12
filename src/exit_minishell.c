@@ -29,6 +29,7 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	while (i < mini->cmd_count)
 	{
 		free_string_ptr(&cmd[i].command);
+		cmd[i].command = NULL;
 		free_string_ptr(&cmd[i].path);
 		free_string_array(&cmd[i].args);
 		free_pathnames(&cmd[i]);
@@ -36,6 +37,7 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	}
 	if (cmd)
 		free(cmd);
+	cmd = NULL;
 }
 
 /** Frees t_mini mini, used when leaving minishell
