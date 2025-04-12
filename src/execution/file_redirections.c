@@ -18,6 +18,8 @@ static void	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	if (fd == -1)
 	{
 		perror("open");
+		free_cmd(mini, cmd);
+		free_mini(mini);
 		exit(EXIT_FAILURE);
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
@@ -32,6 +34,8 @@ static void	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	if (fd == -1)
 	{
 		perror("open");
+		free_cmd(mini, cmd);
+		free_mini(mini);
 		exit(EXIT_FAILURE);
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
@@ -46,6 +50,8 @@ static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	if (fd == -1)
 	{
 		perror("open");
+		free_cmd(mini, cmd);
+		free_mini(mini);
 		exit(EXIT_FAILURE);
 	}
 	dup2_fd(mini, cmd, fd, STDIN_FILENO);
