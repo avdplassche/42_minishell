@@ -1,0 +1,4 @@
+hello
+[?2004hPrompt minishell ➤ xit
+[?2004lentered the invalide function
+[?2004hPrompt minishell ➤ [?2004l
