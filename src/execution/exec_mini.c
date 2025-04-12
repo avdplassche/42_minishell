@@ -47,6 +47,10 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 		backup_standard_fd(mini);
 		set_and_execute_pipeline(mini, cmd);
 		restore_standard_fd(mini);
+		if (mini->last_return == CMD_NOT_FOUND)
+		{
+			exit_minishell(mini, cmd);
+		}
 	}
 	return (mini->last_return);
 }

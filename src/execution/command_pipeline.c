@@ -35,9 +35,17 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (cmd->type == INVALID)
 	{
-		printf("entered the invalide function\n");
 		print_error("Minishell: %s: command not found\n", cmd->command, 2);
 		mini->last_return = CMD_NOT_FOUND;
+		if (mini->fd_backup)
+		{
+			if (mini->fd_backup->stdin_backup > 0)
+				close(mini->fd_backup->stdin_backup);
+			if (mini->fd_backup->stdout_backup > 0)
+				close(mini->fd_backup->stdout_backup);
+			free_cmd(mini, cmd);
+			free_mini(mini);
+		}
 		exit(EXIT_FAILURE);
 	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)

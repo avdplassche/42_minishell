@@ -27,7 +27,7 @@ void	sort_ascii_array(char	**string_array, int len)
 	int		i;
 	int		j;
 	char	*temp;
-
+	
 	while (len > 0)
 	{
 		i = 0;
