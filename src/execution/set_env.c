@@ -1,6 +1,25 @@
 
 #include "minishell.h"
 
+static void	modify_env_array(t_mini *mini, char	*env_row)
+{
+	char	**temp_env;
+
+	temp_env = string_array_push(mini->envp, env_row);
+	if (!temp_env)
+	{
+		free(env_row);
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+	if (mini->envp)
+	{
+		free(mini->envp);
+	}
+	mini->envp = temp_env;
+	return ;
+}
+
 /**
  * Replaces the pointer inside the array of pointers if it starts with a given key
  * @param env_key is the key with the equal sign
@@ -13,7 +32,7 @@
  */
 int	set_env(t_mini *mini, char *env_key, char *env_row)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (mini->envp[i])
@@ -24,12 +43,11 @@ int	set_env(t_mini *mini, char *env_key, char *env_row)
 			mini->envp[i] = env_row;
 			DEBUG("mini->envp[i] is worth %s\n", mini->envp[i]);
 			mini->last_return = 0;
-			return (0);
+			return (mini->last_return);
 		}
 		i++;
 	}
-	//string push if it does not work
-	free(env_row); // needs to do the string push
-	mini->last_return = CMD_NOT_FOUND;
+	modify_env_array(mini, env_row);
+	mini->last_return = 0;
 	return (mini->last_return);
 }

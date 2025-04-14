@@ -20,7 +20,7 @@ char	*ft_get_env(t_mini *mini, char	*var_name)
 	path_ref = string_array_find_string(mini->envp, var_name);
 	if (!path_ref)
 		return (NULL);
-	value_copy = ft_strdup(path_ref + var_length + 1);
+	value_copy = ft_strdup(path_ref + var_length + 1); // this is to obtain only the path and not PATH=
 	if (!value_copy)
 	{
 		mini->last_return = MALLOC_ERROR;

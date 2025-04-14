@@ -25,7 +25,7 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (cmd->type == BUILTIN)
 	{
-		f = get_builtin_function(cmd->command);
+		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
 	}

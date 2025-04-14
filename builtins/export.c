@@ -1,12 +1,6 @@
 
 #include "minishell.h"
 
-
-/** Function for env to be used everywhere and to iterate on its values
- * @param mini an empty t_mini_structure
- * @param envp the terminal env variable
- * @note this is for minishell to have it's own env variable
- */
 static void	create_export(t_mini *mini, t_cmd *cmd)
 {
 	int		i;
@@ -53,7 +47,7 @@ static void	sort_and_add_prefix(t_mini *mini, t_cmd *cmd)
 	sort_ascii_array(mini->export, string_array_len(mini->export));
 }
 
-static void	modify_envp_array(t_mini *mini, t_cmd *cmd)
+static void	modify_export_array(t_mini *mini, t_cmd *cmd)
 {
 	char	**temp_env;
 
@@ -117,7 +111,7 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 	if (cmd->arg_amount == 0)
 	{
 		sort_and_add_prefix(mini, cmd);
-		string_array_print(mini->export);
+		string_array_print(cmd, mini->export);
 	}
 	if (cmd->arg_amount > 0)
 	{
@@ -125,15 +119,12 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 		{
 			return (mini->last_return);
 		}
-		if (mini->export && is_already_in_envp(mini, cmd))
+
+		if (!is_already_in_envp(mini, cmd))
 		{
-			return (mini->last_return);
+			modify_export_array(mini, cmd);
 		}
-		else
-		{
-			modify_envp_array(mini, cmd);
-			sort_and_add_prefix(mini, cmd);
-		}
+		sort_and_add_prefix(mini, cmd);
 	}
 	return (mini->last_return);
 }

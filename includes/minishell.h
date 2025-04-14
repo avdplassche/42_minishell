@@ -109,7 +109,7 @@ void			free_wildcards(char *line, t_wildcard *w);
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
 void			handle_builtin(t_mini *mini, t_cmd *cmd);
-t_builtin_func	get_builtin_function(char *cmd_name);
+t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 void			backup_standard_fd(t_mini *mini);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
@@ -220,7 +220,7 @@ char			*get_line_from_stdin(void);
 
 char			**string_array_copy(t_mini *mini, t_cmd *cmd, char **src);
 char			*string_array_find_string(char **string_array, char *string_to_find);
-void			string_array_print(char **string_array);
+void			string_array_print(t_cmd *cmd, char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);
 char			**string_array_push(char **original_arr, char *new_ptr);
