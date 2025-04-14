@@ -2,6 +2,9 @@ What I changed :
 
 set_return_value
 
+Jojo checks in exec
+	if ()
 
-- Do all the is_valid
-
+	if (is_only_specific_char(mini->line, '%'))
+		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
+			, set_return_value(mini, 2));

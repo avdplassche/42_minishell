@@ -6,7 +6,7 @@ echo -nnnn 'Hello'" World"
 echo Today is "'$(date)'"
 find . -name '"*.sh"'
 	echo 'Nested "quotes" are' "tricky!"
-grep 'pattern'" another"' file.txt
+grep 'pattern'" another" file.txt
 awk '{print "'$1'"}' data.txt
 ls -l | awk "'{print \"$9\"}'"
 echo '"Hello" world' | tr -d '"'

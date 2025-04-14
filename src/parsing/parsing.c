@@ -61,9 +61,6 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-	if (is_only_specific_char(mini->line, '%'))
-		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
-			, set_return_value(mini, 2));
 	if (!(is_valid_command(mini)))
 		return (set_return_value(mini, 127));
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
