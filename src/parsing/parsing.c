@@ -77,6 +77,6 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 			return (free_cmd(mini, cmd), set_return_value(mini, 2));
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	// exec_mini(mini, cmd);
+	exec_mini(mini, cmd);
 	free_cmd(mini, cmd);
 }

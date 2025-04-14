@@ -19,23 +19,44 @@ static int	is_valid_argument(char *str)
 	return (1);
 }
 
-static void	treat_export_argument(t_mini *mini, t_cmd *cmd)
+static char	*extract_key(t_mini *mini, char *arg)
 {
-	int	i;
+	char	*env_key;
+	int		len;
 
-	(void)mini;
-	i = 1;
-	while (i <= cmd->arg_amount)
+	len = 0;
+	while (arg[len] && arg[len] != '=')
+		len++;
+	env_key = (char *)malloc(sizeof(char) * (len + 1));
+	if (!env_key)
+		mini->last_return = MALLOC_ERROR;
+	ft_strlcpy(env_key, arg, len + 1);
+	return (env_key);
+}
+
+
+static void	check_if_valid_arg(t_mini *mini, t_cmd *cmd, int is_declaration)
+{
+	int		i;
+	char	*env_key;
+
+	i = 0;
+	while (++i <= cmd->arg_amount)
 	{
-		if (is_valid_argument(cmd->args[i]))
+		if (ft_strchr(cmd->args[i], '='))
 		{
-			mini->last_return = 0;
+			env_key = extract_key(mini, cmd->args[i]);
+			is_declaration = 1;
 		}
 		else
+			env_key = cmd->args[i];
+		if (!(is_valid_argument(env_key)))
 		{
-			print_error("Minishell: export: '%s': not a valid identifier\n", cmd->args[i], 2);
+			if (is_declaration)
+				free(env_key);
+			print_error("Minishell: '%s': not a valid identifier", cmd->args[i], 2);
+			mini->last_return = CMD_NOT_FOUND;
 		}
-		i++;
 	}
 }
 
@@ -80,6 +101,9 @@ static void	create_export(t_mini *mini, t_cmd *cmd)
 
 int	builtin_export(t_mini *mini, t_cmd *cmd)
 {
+	int	is_declaration;
+
+	is_declaration = 0;	
 	if (!mini->export)
 		create_export(mini, cmd);
 	if (cmd->arg_amount == 0)
@@ -89,7 +113,7 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 	}
 	if (cmd->arg_amount > 0)
 	{
-		treat_export_argument(mini, cmd);
+		check_if_valid_arg(mini, cmd, is_declaration);
 	}
 	return (mini->last_return);
 }
