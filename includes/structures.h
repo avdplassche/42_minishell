@@ -113,7 +113,7 @@ typedef struct s_cmd
 	bool			is_directory;
 	char			*path;
 	int				type;
-	int				echo_n_index;
+	// int				echo_n_index;
 	char			**args;
 	int				arg_amount;
 	int				id;

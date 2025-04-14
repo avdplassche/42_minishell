@@ -24,6 +24,7 @@ endif
 #---------------------VPATH------------------------#
 
 vpath %.c $(DIR_SRC):$(DIR_SRC)/parsing
+vpath %.c $(DIR_SRC):$(DIR_SRC)/checks
 vpath %.c $(DIR_SRC):$(DIR_SRC)/execution
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/ft_string_ptr
@@ -53,7 +54,7 @@ SRCS				=	main.c \
 						wildcards_affixes.c \
 						wildcards_utils.c \
 						wildcards_io.c \
-						is_valid_quotes.c \
+						is_valid_quotes_backslash.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
@@ -171,6 +172,9 @@ $(DIR_BIN)/src/%.o: $(DIR_SRC)/parsing/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/execution/%.c | $(DIR_BIN)/src
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/src/%.o: $(DIR_SRC)/checks/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/%.c | $(DIR_BIN)/src

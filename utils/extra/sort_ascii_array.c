@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_ascii_array.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 15:00:06 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/14 15:01:08 by alvan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ft_strcmp_ascii(char *s1, char *s2)
@@ -27,7 +39,7 @@ void	sort_ascii_array(char	**string_array, int len)
 	int		i;
 	int		j;
 	char	*temp;
-	
+
 	while (len > 0)
 	{
 		i = 0;

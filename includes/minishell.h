@@ -83,7 +83,7 @@ int				is_minishell_punct(char c);
 
 void			expand_tildes(t_mini *mini);
 void			init_quotes(t_quote *q);
-int				is_valid_quote(t_mini *mini);
+int				is_valid_quote_basckslash(t_mini *mini);
 void			quote_enclosure_handle(char c, t_quote *quote);
 int				strlen_quote_cleaned_command(char *str);
 char			*clean_command_quotes(t_mini *mini, char *str);

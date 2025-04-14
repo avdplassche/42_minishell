@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollar_variable.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 14:25:56 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/14 14:42:53 by alvan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /** Cut the var name out of the envp line and return it into quote
@@ -35,7 +47,7 @@ char	*sub_env_variable(t_mini *mini, char *line, t_alloc *s, int i)
 			break ;
 		quote_enclosure_handle(line[i], &s->q);
 	}
-	suffix = ft_substr(line, i, ft_strlen(line) - i );
+	suffix = ft_substr(line, i, ft_strlen(line) - i);
 	str_malloc_check(mini, suffix);
 	line_out = ft_strjoin(s->prefix, suffix);
 	if (!line_out)

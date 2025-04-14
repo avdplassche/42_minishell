@@ -1,6 +1,5 @@
-What I changed : 
 
-set_return_value
+- CLEAN enum and structs
 
 Jojo checks in exec
 	if ()

@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/14 14:57:04 by alvan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
 
 /** Initialize command tokens
  * @param cmd command structure
@@ -15,24 +25,19 @@ void	init_cmd(t_cmd *cmd, int i)
 	cmd->arg_amount = 0;
 	cmd->redir_amount = 0;
 	cmd->id = i + 1;
-	cmd->echo_n_index = 0;
 	cmd->type = -1;
 }
 
 int	is_valid_command(t_mini *mini)
 {
-	if (!(is_valid_quote(mini)))
-		return (print_error("minishell: quote error\n", NULL, 2), 0);
+	if (!(is_valid_quote_basckslash(mini)))
+		return (0);
 	if (!is_valid_pipes(mini))
 		return (print_unexpected_token("|"), 0);
 	if (!is_valid_redirections(mini))
 		return (0);
-	// if (!is_valid_backslash(mini))
-	// 	return (0);
-	// if (err_char == UNEXPECTED_IN_REDIR)
-	// 	return (printf("error near unexpected token `>>'\n"), 0);
-	// else if (err_char == UNEXPECTED_OUT_REDIR)
-	// 	return (printf("error near unexpected token `<<'\n"), 0);
+	if (!is_valid_backslash(mini))
+		return (0);
 	return (1);
 }
 

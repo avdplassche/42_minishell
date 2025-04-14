@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo_type.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 14:26:06 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/14 14:31:41 by alvan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	check_arg_one(t_cmd *cmd)
@@ -21,18 +33,10 @@ static int	check_other_args(t_cmd *cmd, int j)
 
 	i = -1;
 	if (cmd->args[j][++i] != '-')
-	{
-		cmd->echo_n_index = j;
 		return (1);
-	}
 	while (cmd->args[j][++i])
-	{
 		if (cmd->args[j][i] != 'n')
-		{
-			cmd->echo_n_index = j;
 			return (1);
-		}
-	}
 	return (1);
 }
 
@@ -45,7 +49,6 @@ int	is_builtin_echo(t_cmd *cmd)
 	int	i;
 	int	j;
 
-	cmd->echo_n_index = 0;
 	if (!cmd->arg_amount)
 		return (1);
 	j = 1;
