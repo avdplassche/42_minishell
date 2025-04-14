@@ -57,6 +57,7 @@ SRCS				=	main.c \
 						is_valid_redirections.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
+						is_directory.c \
 						command_pipeline.c \
 						exec_mini.c \
 						fd_backup_utils.c \

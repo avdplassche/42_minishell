@@ -145,6 +145,7 @@ int				builtin_pwd(t_mini *mini, t_cmd *cmd);
 int				is_valid_pipes(t_mini *mini);
 int				is_valid_redirections(t_mini *mini);
 int				is_valid_backslash(t_mini *mini);
+int				is_directory(char *line);
 
 /* * * * * * * * * * * * * * PRINT * * * * * * * * * * * * * * * * * */
 

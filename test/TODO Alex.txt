@@ -4,8 +4,6 @@ School :
 
 Functions to recode :
 
-- dollar_variable
-
 
 
 

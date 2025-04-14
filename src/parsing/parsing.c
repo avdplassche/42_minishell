@@ -48,6 +48,7 @@ void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 {
 	init_cmd(cmd, i);
 	fill_cmd_structure(mini, cmd);
+	// cmd->is_directory = is_directory(cmd->command); //maybe put it after parsing, also return value = 126
 	print_cmd(*cmd, mini->line);
 	if (mini->line[mini->cursor] == '|')
 	{

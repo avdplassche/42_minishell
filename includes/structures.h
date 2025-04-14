@@ -110,6 +110,7 @@ typedef struct s_mini
 typedef struct s_cmd
 {
 	char			*command;
+	bool			is_directory;
 	char			*path;
 	int				type;
 	int				echo_n_index;
