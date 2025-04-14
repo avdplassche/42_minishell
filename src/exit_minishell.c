@@ -35,9 +35,9 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 		free_pathnames(&cmd[i]);
 		i++;
 	}
-	// if (cmd)
-	// 	free(cmd);
-	// cmd = NULL;
+	if (cmd)
+		free(cmd);
+	cmd = NULL;
 }
 
 /** Frees t_mini mini, used when leaving minishell
