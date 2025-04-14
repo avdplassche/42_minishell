@@ -58,6 +58,8 @@ SRCS				=	main.c \
 						is_valid_pipes.c \
 						is_valid_backslash.c \
 						is_directory.c \
+						is_valid_syntax.c \
+						is_valid_arithmetic_exit.c \
 						command_pipeline.c \
 						exec_mini.c \
 						fd_backup_utils.c \
@@ -91,7 +93,6 @@ UTILS				=	contain_char.c \
 						is_quote.c \
 						is_space.c \
 						is_angle_bracket.c \
-						is_valid_arithmetic_exit.c \
 						join_n_strings.c\
 						join_three_strings.c \
 						print_error.c \

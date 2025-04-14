@@ -65,7 +65,7 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 	if (!cmd->args)
 		exit_minishell(mini, cmd);
 	init_arguments_ptrs(cmd);
-	cmd->args[i++] = ft_strdup(cmd->command);
+	cmd->args[i] = ft_strdup(cmd->command);
 	str_malloc_check(mini, cmd->args[i]);
-	return (i);
+	return (++i);
 }

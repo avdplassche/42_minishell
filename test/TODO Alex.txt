@@ -1,10 +1,6 @@
-- Malloc check
+What I changed : 
 
-School :
-
-Functions to recode :
-
-
+set_return_value
 
 
 - Do all the is_valid

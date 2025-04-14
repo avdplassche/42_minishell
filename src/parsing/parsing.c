@@ -22,13 +22,13 @@ void	init_cmd(t_cmd *cmd, int i)
 int	is_valid_command(t_mini *mini)
 {
 	if (!(is_valid_quote(mini)))
-		return (DEBUG("minishell: quote error\n"), 0);
+		return (print_error("minishell: quote error\n", NULL, 2), 0);
 	if (!is_valid_pipes(mini))
-		return (0);
+		return (print_unexpected_token("|"), 0);
 	if (!is_valid_redirections(mini))
 		return (0);
-	if (!is_valid_backslash(mini))
-		return (0);
+	// if (!is_valid_backslash(mini))
+	// 	return (0);
 	// if (err_char == UNEXPECTED_IN_REDIR)
 	// 	return (printf("error near unexpected token `>>'\n"), 0);
 	// else if (err_char == UNEXPECTED_OUT_REDIR)
@@ -36,19 +36,16 @@ int	is_valid_command(t_mini *mini)
 	return (1);
 }
 
-int	set_return_value(t_mini *mini, int value)
+void	set_return_value(t_mini *mini, int value)
 {
 	mini->last_return = value;
-	if (value == 127)
-		return (-1);
-	return (0);
 }
 
 void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 {
 	init_cmd(cmd, i);
 	fill_cmd_structure(mini, cmd);
-	// cmd->is_directory = is_directory(cmd->command); //maybe put it after parsing, also return value = 126
+	cmd->is_directory = is_directory(cmd->command);
 	print_cmd(*cmd, mini->line);
 	if (mini->line[mini->cursor] == '|')
 	{
@@ -59,11 +56,14 @@ void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 	}
 }
 
-int	parsing(t_mini *mini, t_cmd *cmd)
+void	parsing(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
 	i = -1;
+	if (is_only_specific_char(mini->line, '%'))
+		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
+			, set_return_value(mini, 2));
 	if (!(is_valid_command(mini)))
 		return (set_return_value(mini, 127));
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
@@ -74,9 +74,12 @@ int	parsing(t_mini *mini, t_cmd *cmd)
 	mini->line = dollar_handle(mini, mini->line);
 	mini->line = wildcard_handle(mini, mini->line);
 	while (++i < mini->cmd_count)
+	{
 		cmd_fill_loop(mini, &cmd[i], i);
+		if (!is_valid_syntax(cmd[i].command))
+			return (free_cmd(mini, cmd), set_return_value(mini, 2));
+	}
 	DEBUG("\n-----------------------------------------------\n");
 	// exec_mini(mini, cmd);
 	free_cmd(mini, cmd);
-	return (mini->last_return);
 }

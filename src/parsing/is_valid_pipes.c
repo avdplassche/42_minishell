@@ -10,7 +10,7 @@ static int	pipe_start_of_line(t_mini *mini)
 			return (print_unexpected_token("|"), 0);
 	}
 	if (mini->line[ft_strlen(mini->line) - 1] == '|')
-		return (printf("minishell: pipe error\n"), 0);
+		return (print_error("minishell: pipe error\n", NULL, 2), 0);
 	return (1);
 }
 
@@ -30,7 +30,7 @@ int	is_valid_pipes(t_mini *mini)
 		if (mini->line[i] == '|' && !q.sgl && !q.dbl)
 		{
 			if (mini->line[++i] == '|')
-				return (print_unexpected_token("|"), 0);
+				return (0);
 			i--;
 		}
 	}
