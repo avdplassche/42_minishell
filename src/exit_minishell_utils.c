@@ -3,22 +3,22 @@
 
 /** Frees char ** variables
  */
-void	free_string_array(char ***str)
+void free_string_array(char ***array)
 {
-	int	i;
-
-	if (!(*str))
-		return ;
+    int	i;
+	
 	i = 0;
-	while ((*str)[i])
-	{
-		free((*str)[i]);
-		(*str)[i] = NULL;
-		i++;
-	}
-	free((*str)[i]);
-	free(*str);
-	*str = NULL;
+	if (!array || !(*array))
+        return;   
+    i = 0;
+    while ((*array)[i])
+    {
+        free((*array)[i]);
+        (*array)[i] = NULL;
+        i++;
+    }
+    free(*array);
+    *array = NULL;
 }
 
 void	free_pathnames(t_cmd *cmd)

@@ -128,6 +128,7 @@ int				update_old_pwd_env(t_mini *mini);
 char			*get_current_workdir(t_mini *mini);
 char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 char			**add_export_prefix(char **string_array);
+void			create_export(t_mini *mini, t_cmd *cmd);
 //utils exec (binaries)
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */

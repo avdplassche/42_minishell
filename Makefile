@@ -74,6 +74,7 @@ SRCS				=	main.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
 						add_export_prefix.c \
+						create_export.c \
 						wait_for_children.c \
 						exit_minishell.c \
 						exit_minishell_utils.c

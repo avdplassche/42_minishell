@@ -29,7 +29,7 @@ void	string_array_print(t_cmd *cmd, char **string_array)
 	{
 		if (cmd->is_export)
 		{
-			printf("%s\n", string_array[i]);
+			printf("declare -x %s\n", string_array[i]);
 		}
 		else if (contains_equal(string_array[i]) && !cmd->is_export)
 		{

@@ -60,6 +60,7 @@ void	init_mini_pointers(t_mini *mini)
 	mini->pipes = NULL;
 	mini->fd_backup = NULL;
 	mini->cmd = NULL;
+	mini->export = NULL;
 }
 
 /** Fill t_mini mini's variable

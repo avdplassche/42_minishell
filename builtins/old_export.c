@@ -11,17 +11,17 @@ static void	create_export(t_mini *mini, t_cmd *cmd)
 	int		i;
 	char	*tmp;
 
-	if (mini->export)
-    {
-        i = 0;
-        while (mini->export[i])
-        {
-            free(mini->export[i]);
-            i++;
-        }
-        free(mini->export);
-        mini->export = NULL;
-    }
+	// if (mini->export)
+    // {
+    //     i = 0;
+    //     while (mini->export[i])
+    //     {
+    //         free(mini->export[i]);
+    //         i++;
+    //     }
+    //     free(mini->export);
+    //     mini->export = NULL;
+    // }
 	i = 0;
 	while (mini->envp[i])
 		i++;

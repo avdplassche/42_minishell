@@ -13,8 +13,8 @@ t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name)
 		return (&builtin_exit);
 	else if (ft_strcmp(cmd_name, "export") == 0)
 	{
-		return (&builtin_export);
 		cmd->is_export = 1;
+		return (&builtin_export);
 	}
 	else if (ft_strcmp(cmd_name, "pwd") == 0)
 		return (&builtin_pwd);

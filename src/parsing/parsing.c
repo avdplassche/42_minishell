@@ -17,6 +17,7 @@ void	init_cmd(t_cmd *cmd, int i)
 	cmd->id = i + 1;
 	cmd->echo_n_index = 0;
 	cmd->type = -1;
+	cmd->is_export = 0;
 }
 
 int	is_valid_command(t_mini *mini)
@@ -78,5 +79,6 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 	}
 	DEBUG("\n-----------------------------------------------\n");
 	exec_mini(mini, cmd);
-	free_cmd(mini, cmd);
+	if (cmd)
+		free_cmd(mini, cmd);
 }
