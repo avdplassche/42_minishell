@@ -58,7 +58,7 @@ void			signal_list(void);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
-int				parsing(t_mini *mini, t_cmd *cmd);
+void			parsing(t_mini *mini, t_cmd *cmd);
 
 int				count_arguments(t_mini *mini);
 int				init_redirections(t_mini *mini, t_cmd *cmd);
@@ -101,6 +101,7 @@ void			set_wildcard_directory(t_mini *mini, t_wildcard *w, int i);
 int				is_last_asterisk(char *token, int i);
 void			tokenize_wildcard(t_mini *mini, t_wildcard *w, int start);
 void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w);
+void			set_sub_token(t_mini *mini, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
 void			free_wildcards(char *line, t_wildcard *w);
 
@@ -139,11 +140,14 @@ int				builtin_export(t_mini *mini, t_cmd *cmd);
 int				builtin_pwd(t_mini *mini, t_cmd *cmd);
 // int			builtin_unset(t_mini *mini, t_cmd *cmd);
 
-/* * * * * * * * * * * * * * ERRORS * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * CHECKS * * * * * * * * * * * * * * * * * */
 
 int				is_valid_pipes(t_mini *mini);
 int				is_valid_redirections(t_mini *mini);
 int				is_valid_backslash(t_mini *mini);
+int				is_valid_syntax(char *command);
+int				is_valid_arithmetic_exit(char *str);
+int				is_directory(char *line);
 
 /* * * * * * * * * * * * * * PRINT * * * * * * * * * * * * * * * * * */
 
@@ -212,7 +216,6 @@ int				is_only_specific_char(char *s, char c);
 char			*epurstring(char *src);
 int				is_quote(char c);
 int				is_angle_bracket(char c);
-int				is_valid_arithmetic_exit(char *str);
 int				start_with(char *string, char *start_string);
 int				double_array_len(char **table);
 int				ft_strcmp_alpha(char *s1, char *s2);

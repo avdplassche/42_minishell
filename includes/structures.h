@@ -41,6 +41,7 @@ typedef struct s_alloc
 	char			*var_name;
 	char			*var_env;
 	char			*var_value;
+	t_quote			q;
 }					t_alloc;
 
 
@@ -109,6 +110,7 @@ typedef struct s_mini
 typedef struct s_cmd
 {
 	char			*command;
+	bool			is_directory;
 	char			*path;
 	int				type;
 	int				echo_n_index;

@@ -1,18 +1,10 @@
-- Malloc check
+What I changed : 
 
-School : Finish Wildcards
-- i/o (use str_safe_free)
-- Do all the is_valid
+set_return_value
 
+Jojo checks in exec
+	if ()
 
-struct str
-{
-	line_out;
-	prefix
-	suffix;
-	temp
-	var_name;
-	var_env;
-	var_value;
-}
-
+	if (is_only_specific_char(mini->line, '%'))
+		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
+			, set_return_value(mini, 2));

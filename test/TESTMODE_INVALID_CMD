@@ -1,3 +1,5 @@
+%%%%
+&&&
  temp.txt | grep "error" > errors.log >> all_logs.log | sort >> sorted_errors.log
 cat <<eof1 <<eof2
 echo "Hello World" > file1 > f > file3 >> file4 | tr 'a-z' 'A-Z' > uppercase.txt

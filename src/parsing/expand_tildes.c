@@ -15,48 +15,68 @@ int	need_tilde_expand(t_mini *mini)
 			if (i == 0 && (mini->line[1] == ' ' || !mini->line[i + 1]))
 				return (0);
 			if (i > 0 && (mini->line[i - 1] == ' '
-				&& (!mini->line[i + 1] || mini->line[i + 1])))
+					&& (!mini->line[i + 1] || mini->line[i + 1])))
 				return (i);
 		}
 	}
 	return (-1);
 }
 
-void	sub_tilde(t_mini *mini, int i)
+char	*get_lonely_tilde(t_mini *mini)
 {
-	char	*env;
 	char	*prefix;
 	char	*suffix;
+	char	*temp;
+
+	prefix = ft_get_env(mini, "HOME");
+	str_malloc_check(mini, prefix);
+	suffix = ft_substr(mini->line, 1, ft_strlen(mini->line) - 1);
+	if (!suffix)
+		return (free(prefix), NULL);
+	temp = ft_strjoin(prefix, suffix);
+	free(suffix);
+	free(prefix);
+	if (!temp)
+		return (NULL);
+	return (temp);
+}
+
+char	*get_tilde(t_mini *mini, int i)
+{
+	char	*temp;
+	char	*prefix;
+	char	*suffix;
+	char	*env;
+
+	env = ft_get_env(mini, "HOME");
+	str_malloc_check(mini, env);
+	prefix = ft_substr(mini->line, 0, i);
+	if (!prefix)
+		return (free(env), NULL);
+	suffix = ft_substr(mini->line, i + 1, ft_strlen(mini->line) - 1 - i);
+	if (!suffix)
+		return (free(env), free(prefix), NULL);
+	temp = join_three_strings(prefix, env, suffix);
+	return (free(env), free(prefix), free(suffix), temp);
+}
+
+void	sub_tilde(t_mini *mini, int i)
+{
+	char	*temp;
 
 	if (i == 0)
 	{
-		prefix = ft_get_env(mini, "HOME");
-		if (!prefix)
-			exit_minishell(mini, mini->cmd);
-		suffix = ft_substr(mini->line, 1, ft_strlen(mini->line) - 1);
-		free(mini->line);
-		if (!suffix)
-			return (free(suffix), exit_minishell(mini, mini->cmd));
-		mini->line = ft_strjoin(prefix, suffix);
-		if (!mini->line)
-			return (free(suffix), free(prefix), exit_minishell(mini, mini->cmd));
+		temp = get_lonely_tilde(mini);
+		str_malloc_check(mini, temp);
 	}
 	else
 	{
-		env = ft_get_env(mini, "HOME");
-		if (!env)
-			exit_minishell(mini, mini->cmd);
-		prefix = ft_substr(mini->line, 0, i);
-		if (!prefix)
-			return (free(env), exit_minishell(mini, mini->cmd));
-		suffix = ft_substr(mini->line, i + 1, ft_strlen(mini->line) - 1 - i);
-		if (!suffix)
-			return (free(env), free(prefix), exit_minishell(mini, mini->cmd));
-		mini->line = join_three_strings(prefix, env, suffix);
-		free(env);
+		temp = get_tilde(mini, i);
+		str_malloc_check(mini, temp);
 	}
-	free(prefix);
-	free(suffix);
+	mini->line = ft_strdup(temp);
+	str_malloc_check(mini, mini->line);
+	free(temp);
 }
 
 void	expand_tildes(t_mini *mini)

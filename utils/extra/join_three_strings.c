@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 char	*join_three_strings(char *s1, char *s2, char *s3)
@@ -6,8 +5,6 @@ char	*join_three_strings(char *s1, char *s2, char *s3)
 	char	*temp1;
 	char	*temp2;
 
-	temp1 = NULL;
-	temp2 = NULL;
 	if (!s1 && !s2 && !s3)
 		return (NULL);
 	if (!s1 && !s2)
@@ -26,7 +23,8 @@ char	*join_three_strings(char *s1, char *s2, char *s3)
 	{
 		temp1 = ft_strjoin(s1, s2);
 		temp2 = ft_strjoin(temp1, s3);
-		free(temp1);
+		if (temp1)
+			free(temp1);
 		return (temp2);
 	}
 }

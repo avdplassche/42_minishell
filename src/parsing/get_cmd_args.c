@@ -9,7 +9,6 @@ void	init_arguments_ptrs(t_cmd *cmd)
 		cmd->args[j] = NULL;
 }
 
-
 int	go_to_next_arg(t_mini *mini, t_quote *q, int i)
 {
 	const char	charset[5] = " <>|";
@@ -66,6 +65,7 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 	if (!cmd->args)
 		exit_minishell(mini, cmd);
 	init_arguments_ptrs(cmd);
-	cmd->args[i++] = ft_strdup(cmd->command);
-	return (i);
+	cmd->args[i] = ft_strdup(cmd->command);
+	str_malloc_check(mini, cmd->args[i]);
+	return (++i);
 }

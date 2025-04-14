@@ -1,2 +1,0 @@
-hello
-[?2004hPrompt minishell ➤ ^C[?2004l[?2004hPrompt minishell ^C[?2004l

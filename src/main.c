@@ -4,42 +4,6 @@
 #include "minishell.h"
 
 
-static int	execute_file(t_mini *mini, char *filename)
-{
-	t_cmd 	*cmd;
-	int		fd;
-	char	*line;
-	int		cmd_status = 0;
-
-	cmd = NULL;
-	fd = open(filename, O_RDONLY, 0666);
-	if (fd == -1)
-		return(-1);
-	line= get_next_line(fd);
-	while (line)
-	{
-		if (!*line || *line == '\n')
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue;
-		}
-		mini->line = ft_strtrim(line, SPACES);
-		free(line);
-		line = NULL;
-		mini->cmd_count = count_cmd(mini);
-		mini->cursor = 0;
-		if (!(is_only_spaces(mini->line)) && mini->line[0] != '#')
-			cmd_status = parsing(mini, cmd);
-		free(cmd);
-		free(mini->line);
-		mini->line = NULL;
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return cmd_status;
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
@@ -52,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = NULL;
 		mini.cursor = 0;
-		signal_list();
+		// signal_list();
 		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{
@@ -73,11 +37,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 /************************ TEST MODE/ ****************************** */
-	if (argc == 2)
-	{
-		int script_status = execute_file(&mini, argv[1]);
-		mini.last_return = script_status;
-	}
 	if (argc == 3)
 	{
 		int fd = open(argv[1], O_RDONLY);
@@ -114,7 +73,6 @@ int	main(int argc, char **argv, char **envp)
 
 	
 	free_mini(&mini);
-	//printf("mini %d\n", mini.last_return);
 	DEBUG_CLOSE;
 	return (mini.last_return);
 }

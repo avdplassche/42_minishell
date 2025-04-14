@@ -29,7 +29,7 @@ static int	count_len_dest(char *src)
 /** Epur string by deleting all multiple spaces
  * @return an epured string
 */
-char *epurstring(char *src)
+char	*epurstring(char *src)
 {
 	char	*dest;
 	int		i;
@@ -54,8 +54,5 @@ char *epurstring(char *src)
 	if (is_space(src[i - 1]))
 		j--;
 	dest[j] = '\0';
-	// free(src);
 	return (dest);
 }
-
-

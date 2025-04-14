@@ -8,7 +8,6 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 	int		envp_index;
 	char	*line_out;
 
-
 	var_name = ft_substr(line, sub_index + 1, j);
 	str_malloc_check(mini, var_name);
 	var_env = ft_strjoin(var_name, "=");
@@ -23,6 +22,7 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 	line_out = get_env_variable(mini, line, envp_index, sub_index);
 	return (line_out);
 }
+
 /** Substitute "$?"
  */
 char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
@@ -52,7 +52,6 @@ char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
 	str_malloc_check(mini, s.line_out);
 	return (s.line_out);
 }
-
 
 /** Used to change every dollar sign to elements of env variable
  * @param mini t_mini struct where envp is stored

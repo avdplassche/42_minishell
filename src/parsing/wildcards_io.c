@@ -1,65 +1,25 @@
 
 #include "minishell.h"
 
-void	init_wildcard_struct(t_wildcard *w)
-{
-	w->wildcard = NULL;
-	w->dirname = NULL;
-	w->token = NULL;
-	w->s_dir = NULL;
-	w->prefix = NULL;
-	w->suffix = NULL;
-	w->temp = NULL;
-	w->file_list = NULL;
-	w->current = false;
-}
-
-void	str_safe_free(char **str)
-{
-	free(*str);
-	*str = NULL;
-}
-
 void	free_wildcard_struct(t_wildcard *w)
 {
 	if (w->dirname)
-	{
-		free(w->dirname);
-		w->dirname = NULL;
-	}
+		free_string_ptr(&w->dirname);
 	if (w->wildcard)
-	{
-		free(w->wildcard);
-		w->wildcard = NULL;
-	}
+		free_string_ptr(&w->wildcard);
 	if (w->token)
-	{
-		free(w->token);
-		w->token = NULL;
-	}
+		free_string_ptr(&w->token);
+	if (w->prefix)
+		free_string_ptr(&w->prefix);
+	if (w->suffix)
+		free_string_ptr(&w->suffix);
+	if (w->temp)
+		free_string_ptr(&w->temp);
 	if (w->s_dir)
 	{
 		free(w->s_dir);
 		w->s_dir = NULL;
 	}
-	if (w->prefix)
-	{
-		free(w->prefix);
-		w->prefix = NULL;
-	}
-	if (w->suffix)
-	{
-		free(w->suffix);
-		w->suffix = NULL;
-	}
-	if (w->temp)
-	{
-		free(w->temp);
-		w->temp = NULL;
-	}
-	// if (w->file_list)
-	// 	free_string_array(w->file_list);
-
 }
 
 void	str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str)
@@ -70,6 +30,7 @@ void	str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str)
 		exit_minishell(mini, mini->cmd);
 	}
 }
+
 void	wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w)
 {
 	if (!w->file_list)

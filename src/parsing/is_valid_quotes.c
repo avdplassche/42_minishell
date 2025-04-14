@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-
 /** Tests the validity of quotes with an open/closed boolean system
  * @param mini t_mini containing the command line
  * @return 1 for valid quotes, 0 for non valid

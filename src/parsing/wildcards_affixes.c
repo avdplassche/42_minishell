@@ -1,6 +1,28 @@
 
 #include "minishell.h"
 
+void	set_sub_token(t_mini *mini, t_wildcard *w)
+{
+	int		len;
+
+	len = 0;
+	if (w->file_amount == 1)
+	{
+		free_string_ptr(&w->wildcard);
+		w->wildcard = w->file_list[0];
+		return ;
+	}
+	while (len < w->file_amount - 1)
+	{
+		append_space_to_string(mini, w, &w->file_list[len]);
+		if (!w->file_list[len])
+			free_wildcard_double_pointer_first_part(mini, w);
+		len++;
+	}
+	free_string_ptr(&w->wildcard);
+	w->wildcard = join_n_strings_wildcards(mini, w);
+}
+
 void	get_prefix(t_mini *mini, t_wildcard *w, int i)
 {
 	while (i >= 0 && w->wildcard[i] != '/')

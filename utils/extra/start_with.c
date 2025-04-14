@@ -8,7 +8,7 @@ int	start_with(char *string, char *start_string)
 	i = 0;
 	while (string[i] && start_string[i])
 	{
-		if(!string[i] || string[i] != start_string[i])
+		if (!string[i] || string[i] != start_string[i])
 			return (0);
 		i++;
 	}

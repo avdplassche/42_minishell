@@ -25,7 +25,7 @@ void	print_string(char *string, char *name)
 
 void	print_unexpected_token(char *token)
 {
-	DEBUG("minishell: error near unexpected token '%s'\n", token);
+	print_error("minishell: error near unexpected token '%s'\n", token, 2);
 }
 
 void	print_quote_statement_debug(t_mini *mini, int i, t_quote *q)
