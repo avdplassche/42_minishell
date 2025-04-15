@@ -9,6 +9,7 @@ char	*get_new_env_row(t_mini *mini, char *env_key, char *new_path)
 	if (!env_row)
 	{
 		mini->last_return = MALLOC_ERROR;
+		free(env_key);
 		free(new_path);
 		return (NULL);
 	}

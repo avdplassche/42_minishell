@@ -20,6 +20,7 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 	while (original_arr[i])
 	{
 		big_array[i] = ft_strdup(original_arr[i]);
+		free_string_ptr(&original_arr[i]);
 		if (!big_array[i])
 		{
 			while (--i >= 0)
@@ -37,6 +38,7 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 		free(big_array);
 		return (NULL);
 	}
+	free(new_ptr);
 	big_array[i + 1] = NULL;
 	return (big_array);
 }

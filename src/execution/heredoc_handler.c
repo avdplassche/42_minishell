@@ -4,7 +4,6 @@
 static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
 {
 	char	*line;
-	//char	*expanded_line;
 	char	*cursor;
 	char	*prompt;
 
@@ -18,7 +17,6 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_r
 		*cursor = '\0';
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
-			DEBUG("delimiter matched\n");
 			free(line);
 			break ;
 		}
@@ -50,6 +48,7 @@ void	process_all_heredocs(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
+	
 	i = 0;
 	DEBUG("cmd->heredocamount is worth %d\n",  cmd->heredoc_amount);
 	while (i < cmd->redir_amount)
