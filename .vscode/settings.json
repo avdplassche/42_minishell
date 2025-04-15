@@ -21,6 +21,7 @@
 		"sigaction.h": "c",
 		"enum.h": "c",
 		"features.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"term.h": "c"
 	}
 }

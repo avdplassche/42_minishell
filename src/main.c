@@ -3,6 +3,7 @@
 
 #include "minishell.h"
 
+int	g_sig;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -10,23 +11,25 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*cmd;
 	char	*input;
 
+	g_sig = 0;
+	signal_list();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
 	while (argc == 1)
 	{
 		cmd = NULL;
 		mini.cursor = 0;
-		signal_list();
 		input = readline("Prompt minishell ➤ ");
 		if (input == NULL)
 		{
-	 		mini.should_exit = true;
+			mini.should_exit = true;
 			break;
 		}
+		add_history(input);
 		mini.line = ft_strtrim(input, SPACES);
 		free(input);
+		str_malloc_check(&mini, mini.line);
 		mini.cmd_count = count_cmd(&mini);
-		add_history(mini.line);
 		if ((!(is_only_spaces(mini.line)) || mini.line[0] != '#') && mini.line[0])
 			parsing(&mini, cmd);
 		if (mini.should_exit)

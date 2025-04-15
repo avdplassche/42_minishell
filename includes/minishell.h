@@ -15,6 +15,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <termios.h>
+# include <sys/ioctl.h>
 # include <dirent.h>
 # include <signal.h>
 # include <curses.h>
@@ -47,7 +48,7 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
-
+// int	g_sig;
 
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
