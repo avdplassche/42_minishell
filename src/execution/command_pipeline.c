@@ -25,7 +25,7 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (cmd->type == BUILTIN)
 	{
-		f = get_builtin_function(cmd->command);
+		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
 	}
@@ -33,6 +33,21 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		create_args_array(mini, cmd);
 	}
+	/*if(cmd->is_directory)
+	{
+		print_error("Minishell: %s: Is a direwctory.\n", cmd->command);
+		mini->last_return = 126;
+		if (mini->fd_backup)
+		{
+			if (mini->fd_backup->stdin_backup > 0)
+				close(mini->fd_backup->stdin_backup);
+			if (mini->fd_backup->stdout_backup > 0)
+				close(mini->fd_backup->stdout_backup); // refACTOR VOID FUNVTION AND TREAT THIS CASE 
+			free_cmd(mini, cmd);
+			free_mini(mini);
+		}
+		exit(EXIT_FAILURE);
+	}*/
 	if (cmd->type == INVALID)
 	{
 		print_error("Minishell: %s: command not found\n", cmd->command, 2);

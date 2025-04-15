@@ -46,6 +46,7 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 void	free_mini(t_mini *mini)
 {
 	free_string_array(&mini->envp);
+	free_string_array(&mini->export);
 	free_string_array(&mini->builtins);
 	free_string_array(&mini->paths);
 	if (mini->pipes)
@@ -90,8 +91,6 @@ void	free_mini(t_mini *mini)
 
 void	exit_minishell(t_mini *mini, t_cmd *cmd)
 {
-	(void)cmd;
-	mini->should_exit = true;
 	if (cmd)
 		free_cmd(mini, cmd);
 	free_mini(mini);

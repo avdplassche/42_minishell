@@ -110,7 +110,7 @@ void			free_wildcards(char *line, t_wildcard *w);
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
 void			handle_builtin(t_mini *mini, t_cmd *cmd);
-t_builtin_func	get_builtin_function(char *cmd_name);
+t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 void			backup_standard_fd(t_mini *mini);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
@@ -128,6 +128,7 @@ int				update_old_pwd_env(t_mini *mini);
 char			*get_current_workdir(t_mini *mini);
 char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
 char			**add_export_prefix(char **string_array);
+void			create_export(t_mini *mini, t_cmd *cmd);
 //utils exec (binaries)
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */
@@ -166,6 +167,8 @@ int				ft_atoi(char *str);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_isdigit(int c);
+int				ft_isalpha(int c);
+int				ft_isalnum(int c);
 char			*ft_itoa(int n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -223,7 +226,7 @@ char			*get_line_from_stdin(void);
 
 char			**string_array_copy(t_mini *mini, t_cmd *cmd, char **src);
 char			*string_array_find_string(char **string_array, char *string_to_find);
-void			string_array_print(char **string_array);
+void			string_array_print(t_cmd *cmd, char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);
 char			**string_array_push(char **original_arr, char *new_ptr);

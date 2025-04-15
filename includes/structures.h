@@ -125,6 +125,7 @@ typedef struct s_cmd
 	t_pipefd		*pipe_in;
 	t_pipefd		*pipe_out;
 	int				needs_cleanup;
+	int				is_export;
 }					t_cmd;
 
 /** A pointer to function for the builtin function

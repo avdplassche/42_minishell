@@ -40,5 +40,6 @@ char	*string_array_find_string(char **string_array, char *string_to_find)
 		}
 		i++;
 	}
+	free(search_key);
 	return (NULL);
 }

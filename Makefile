@@ -74,7 +74,8 @@ SRCS				=	main.c \
 						set_env.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
-						add_prefix_export.c \
+						add_export_prefix.c \
+						create_export.c \
 						wait_for_children.c \
 						exit_minishell.c \
 						exit_minishell_utils.c
@@ -104,6 +105,8 @@ UTILS				=	contain_char.c \
 						ft_atoi.c \
 						ft_bzero.c \
 						ft_isdigit.c \
+						ft_isalpha.c \
+						ft_isalnum.c \
 						ft_calloc.c \
 						ft_itoa.c \
 						ft_memchr.c \

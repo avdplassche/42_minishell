@@ -19,10 +19,24 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 	i = 0;
 	while (original_arr[i])
 	{
-		big_array[i] = original_arr[i];
+		big_array[i] = ft_strdup(original_arr[i]);
+		if (!big_array[i])
+		{
+			while (--i >= 0)
+				free(big_array[i]);
+			free(big_array);
+			return (NULL);
+		}
 		i++;
 	}
-	big_array[i] = new_ptr;
+	big_array[i] = ft_strdup(new_ptr);
+	if (!big_array[i])
+	{
+		while (--i >= 0)
+			free(big_array[i]);
+		free(big_array);
+		return (NULL);
+	}
 	big_array[i + 1] = NULL;
 	return (big_array);
 }

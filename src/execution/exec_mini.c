@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-t_builtin_func	get_builtin_function(char *cmd_name)
+t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name)
 {
 	if (ft_strcmp(cmd_name, "cd") == 0)
 		return (&builtin_cd);
@@ -12,7 +12,10 @@ t_builtin_func	get_builtin_function(char *cmd_name)
 	else if (ft_strcmp(cmd_name, "exit") == 0)
 		return (&builtin_exit);
 	else if (ft_strcmp(cmd_name, "export") == 0)
+	{
+		cmd->is_export = 1;
 		return (&builtin_export);
+	}
 	else if (ft_strcmp(cmd_name, "pwd") == 0)
 		return (&builtin_pwd);
 	// else if (ft_strcmp(cmd_name, "unset") == 0)
@@ -30,7 +33,7 @@ void	handle_builtin(t_mini *mini, t_cmd *cmd)
 	{
 		setup_redirections(mini, cmd);
 	}
-	f = get_builtin_function(cmd->command);
+	f = get_builtin_function(cmd, cmd->command);
 	f(mini, cmd);
 	restore_standard_fd(mini);
 }

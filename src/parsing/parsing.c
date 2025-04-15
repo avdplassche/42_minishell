@@ -26,6 +26,7 @@ void	init_cmd(t_cmd *cmd, int i)
 	cmd->redir_amount = 0;
 	cmd->id = i + 1;
 	cmd->type = -1;
+	cmd->is_export = 0;
 }
 
 int	is_valid_command(t_mini *mini)
@@ -82,6 +83,7 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 			return (free_cmd(mini, cmd), set_return_value(mini, 2));
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	// exec_mini(mini, cmd);
-	free_cmd(mini, cmd);
+	exec_mini(mini, cmd);
+	if (cmd)
+		free_cmd(mini, cmd);
 }
