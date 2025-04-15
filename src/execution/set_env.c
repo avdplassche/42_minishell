@@ -15,6 +15,7 @@ static void	modify_env_array(t_mini *mini, char	*env_row)
 	if (mini->envp)
 	{
 		free(mini->envp);
+		mini->envp = NULL;
 	}
 	mini->envp = temp_env;
 	return ;
@@ -22,7 +23,7 @@ static void	modify_env_array(t_mini *mini, char	*env_row)
 
 /**
  * Replaces the pointer inside the array of pointers if it starts with a given key
- * @param env_key is the key with the equal sign
+ * @param formated_env_key is the key with the equal sign
  * @param env_row is the entire env row with variable and path
  * @return - mini->last_return, otherwise nothing, it replaces the env row or adds.
  *
@@ -30,24 +31,23 @@ static void	modify_env_array(t_mini *mini, char	*env_row)
  * @note frees the env_row at the end
  * @note mainly used in execution
  */
-int	set_env(t_mini *mini, char *env_key, char *env_entry)
+int	set_env(t_mini *mini, char *formated_env_key, char *env_entry)
 {
 	int		i;
 
 	i = 0;
 	while (mini->envp[i])
 	{
-		if (start_with(mini->envp[i], env_key))
+		if (start_with(mini->envp[i], formated_env_key))
 		{
 			free(mini->envp[i]);
-			DEBUG("in set_env env_entry is worth %s\n", env_entry);
 			mini->envp[i] = env_entry;
-			DEBUG("mini->envp[i] is worth %s\n", mini->envp[i]);
 			mini->last_return = 0;
 			return (mini->last_return);
 		}
 		i++;
 	}
+	free(formated_env_key);
 	modify_env_array(mini, env_entry);
 	mini->last_return = 0;
 	return (mini->last_return);

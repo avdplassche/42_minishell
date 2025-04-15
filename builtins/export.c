@@ -1,44 +1,42 @@
 
 #include "minishell.h"
 
-static void add_empty_string_assignment(t_mini *mini, t_cmd *cmd, char *env_key, char *env_entry)
+static void add_empty_string_assignment(t_mini *mini, t_cmd *cmd, char *env_key)
 {
 	char	*formated_env_key;
 	char	*empty_string = "\" \"";
+	char	*new_env_entry;
 	
-	DEBUG("entered the empty string building function\n");
 	formated_env_key = ft_strjoin(env_key, "=");
+	free(env_key);
 	if (!formated_env_key)
 	{
-		free(env_key);
-		free(env_entry);
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
-	free(env_key);
 	empty_string = ft_strdup(" \"\" ");
 	if (!empty_string)
 	{
-		free(env_entry);
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
-	env_entry = ft_strjoin(formated_env_key, empty_string);
+	new_env_entry = ft_strjoin(formated_env_key, empty_string);
 	free(empty_string);
-	if (!env_entry)
+	if (!new_env_entry)
 	{
-		free(env_entry);
 		free(formated_env_key);
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
-	DEBUG("env_entry is worth %s\n", env_entry);
-	set_env(mini, formated_env_key, env_entry);
-	if (mini->export)
-	{
-		free_string_array(&mini->export);
-		create_export(mini, cmd);
-	}
+	set_env(mini, formated_env_key, new_env_entry);
+	free(new_env_entry);
+	// if (mini->export)
+	// {
+	// 	free_string_array(&mini->export);
+	// 	create_export(mini, cmd);
+	// }
+	//printf("\n\n\n\nDEBUG EXPORT\n\n\n\n");
+	//string_array_print(cmd, mini->export);
 }
 
 static int	is_valid_env_identifier(char *str)
@@ -50,7 +48,7 @@ static int	is_valid_env_identifier(char *str)
 	return (0);
 	while (str[char_index] && str[char_index] != '=')
 	{
-		if ((!(ft_isalnum(str[char_index])) || str[char_index] == '_'))
+		if (!(ft_isalnum(str[char_index]) || str[char_index] == '_'))
 		{
 			return (0);
 		}
@@ -95,7 +93,6 @@ static void	process_assignment(t_mini *mini, t_cmd *cmd, char *arg, char *env_ke
 {
 	char	*env_entry;
 	char	*formated_env_key;
-	//char	*quoted_empty_string;
 	
 	env_entry = ft_strdup(arg);
 	if (!env_entry)
@@ -103,8 +100,11 @@ static void	process_assignment(t_mini *mini, t_cmd *cmd, char *arg, char *env_ke
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
-	if (ft_strchr(arg, '=') && *(ft_strchr(arg, '=') + 1) == '\0')
-		add_empty_string_assignment(mini, cmd, env_key, env_entry);
+	if (ft_strchr(env_entry, '=') && *(ft_strchr(env_entry, '=') + 1) == '\0')
+	{
+		free(env_entry);
+		add_empty_string_assignment(mini, cmd, env_key);
+	}
 	else
 	{
 		formated_env_key = ft_strjoin(env_key, "=");

@@ -20,6 +20,8 @@ void	create_export(t_mini *mini, t_cmd *cmd)
         mini->export = NULL;
     }
 	i = 0;
+	//DEBUG("BIG BIG BIG ENV print\n");
+	//string_array_print(cmd, mini->envp);
 	while (mini->envp[i])
 		i++;
 	temp = (char **)malloc(sizeof(char *) * (i + 1));
@@ -35,7 +37,8 @@ void	create_export(t_mini *mini, t_cmd *cmd)
 		}
 		i++;
 	}
+	//DEBUG("BIG BIG BIG ENV print\n");
 	temp[i] = NULL;
-	
+	//string_array_print(cmd, temp);
 	mini->export = temp;
 }
