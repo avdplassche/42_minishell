@@ -12,13 +12,13 @@
  */
 char	*string_array_find_string(char **string_array, char *string_to_find)
 {
-	int		i;
+	int		array_index;
 	char	*search_key;
 	size_t	variable_len;
 
 	if (string_array == NULL || string_to_find == NULL)
 		return (NULL);
-	i = 0;
+	array_index = 0;
 	variable_len = ft_strlen(string_to_find);
 	if (string_to_find[variable_len - 1] != '=')
 	{
@@ -30,15 +30,15 @@ char	*string_array_find_string(char **string_array, char *string_to_find)
 	{
 		search_key = string_to_find;
 	}
-	while (string_array[i])
+	while (string_array[array_index])
 	{
-		if (start_with(string_array[i], search_key))
+		if (start_with(string_array[array_index], search_key))
 		{
 			free(search_key);
 			search_key = NULL;
-			return (string_array[i]);
+			return (string_array[array_index]);
 		}
-		i++;
+		array_index++;
 	}
 	free(search_key);
 	return (NULL);

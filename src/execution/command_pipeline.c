@@ -83,6 +83,7 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (pid == 0)
 	{
+		//SIGNALCHILD
 		handle_command_execution(mini, cmd, cmd_index);
 	}
 	else

@@ -34,7 +34,7 @@ static int	ft_strcmp_ascii(char *s1, char *s2)
 	return (0);
 }
 
-void	sort_ascii_array(char	**string_array, int len)
+void	sort_ascii_array(char **string_array, int len)
 {
 	int		i;
 	int		j;

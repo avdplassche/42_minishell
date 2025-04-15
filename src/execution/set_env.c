@@ -1,14 +1,24 @@
 
 #include "minishell.h"
 
-static void	modify_env_array(t_mini *mini, char	*env_row)
+static void	modify_env_array(t_mini *mini, char	*env_entry)
 {
 	char	**temp_env;
+	char	*new_env_entry;
 
-	temp_env = string_array_push(mini->envp, env_row);
+	new_env_entry = ft_strdup(env_entry);
+	{
+		if (!new_env_entry)
+		{
+			mini->last_return = MALLOC_ERROR;
+			return ;
+		}
+	}
+	//free_string_ptr(&env_entry);
+	temp_env = string_array_push(mini->envp, new_env_entry);
 	if (!temp_env)
 	{
-		free(env_row);
+		free(new_env_entry);
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
@@ -30,7 +40,7 @@ static void	modify_env_array(t_mini *mini, char	*env_row)
  * @note frees the env_row at the end
  * @note mainly used in execution
  */
-int	set_env(t_mini *mini, char *env_key, char *env_row)
+int	set_env(t_mini *mini, char *env_key, char *env_entry)
 {
 	int		i;
 
@@ -39,15 +49,19 @@ int	set_env(t_mini *mini, char *env_key, char *env_row)
 	{
 		if (start_with(mini->envp[i], env_key))
 		{
-			free(mini->envp[i]);
-			mini->envp[i] = env_row;
-			DEBUG("mini->envp[i] is worth %s\n", mini->envp[i]);
+			free_string_ptr(&mini->envp[i]);
+			DEBUG("in set_env env_entry is worth %s\n", env_entry);
+			mini->envp[i] = ft_strdup(env_entry);
+			if (!mini->envp[i])
+			{
+				mini->last_return = MALLOC_ERROR;
+			}
 			mini->last_return = 0;
 			return (mini->last_return);
 		}
 		i++;
 	}
-	modify_env_array(mini, env_row);
+	modify_env_array(mini, env_entry);
 	mini->last_return = 0;
 	return (mini->last_return);
 }

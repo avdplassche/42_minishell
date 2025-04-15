@@ -22,14 +22,20 @@ static int	contains_equal(char *str)
  */
 void	string_array_print(t_cmd *cmd, char **string_array)
 {
-	int	i;
+	int		i;
+	char	*equal_pos;
 
 	i = 0;
 	while (string_array[i])
 	{
 		if (cmd->is_export)
 		{
-			printf("declare -x %s\n", string_array[i]);
+			equal_pos = ft_strchr(string_array[i], '=');
+			if (equal_pos)
+				printf("declare -x %.*s=\"%s\"\n", (int)(equal_pos - string_array[i]), string_array[i],
+					(equal_pos + 1));
+			else
+				printf("declare -x %s\n", string_array[i]);
 		}
 		else if (contains_equal(string_array[i]) && !cmd->is_export)
 		{

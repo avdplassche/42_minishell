@@ -29,8 +29,10 @@ int	update_pwd_env(t_mini *mini, char *env_var)
 		return (mini->last_return);
 	}
 	set_env(mini, env_key, env_row);
-	free(env_key);
-	free(new_cwd);
+	free_string_ptr(&env_key);
+	free_string_ptr(&env_row);
+	free_string_ptr(&new_cwd);
 	mini->last_return = 0;
 	return (mini->last_return);
 }
+

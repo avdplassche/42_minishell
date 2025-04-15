@@ -1,151 +1,156 @@
 
 #include "minishell.h"
 
-static void	modify_env_array(t_mini *mini, t_cmd *cmd)
+static void add_empty_string_assignment(t_mini *mini, t_cmd *cmd, char *env_key)
 {
+	char	*formated_env_key;
+	char	*empty_string = "\" \"";
+	char	*new_env_entry;
 
-}
-
-static void	create_export(t_mini *mini, t_cmd *cmd)
-{
-	int		i;
-	char	*tmp;
-
-	// if (mini->export)
-    // {
-    //     i = 0;
-    //     while (mini->export[i])
-    //     {
-    //         free(mini->export[i]);
-    //         i++;
-    //     }
-    //     free(mini->export);
-    //     mini->export = NULL;
-    // }
-	i = 0;
-	while (mini->envp[i])
-		i++;
-	mini->export = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!mini->export)
-		exit_minishell(mini, mini->cmd);
-	i = -1;
-	while (mini->envp[++i])
-	{
-		tmp = mini->envp[i];
-		mini->export[i] = ft_strdup(tmp);
-		if (!mini->export[i])
-		{
-			exit_minishell(mini, cmd);
-		}
-	}
-	mini->export[i] = NULL;
-}
-
-static void	sort_and_add_prefix(t_mini *mini, t_cmd *cmd)
-{
-	mini->export = add_export_prefix(mini->export);
-	if (!mini->export)
+	(void)cmd;
+	
+	formated_env_key = ft_strjoin(env_key, "=");
+	free(env_key);
+	if (!formated_env_key)
 	{
 		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
+		return ;
 	}
-	sort_ascii_array(mini->export, string_array_len(mini->export));
+	empty_string = ft_strdup(" \"\" ");
+	if (!empty_string)
+	{
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+	new_env_entry = ft_strjoin(formated_env_key, empty_string);
+	free(empty_string);
+	if (!new_env_entry)
+	{
+		free(formated_env_key);
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+	set_env(mini, formated_env_key, new_env_entry);
+	free(new_env_entry);
+	// if (mini->export)
+	// {
+	// 	free_string_array(&mini->export);
+	// 	create_export(mini, cmd);
+	// }
+	//printf("\n\n\n\nDEBUG EXPORT\n\n\n\n");
+	//string_array_print(cmd, mini->export);
 }
 
-static void	modify_export_array(t_mini *mini, t_cmd *cmd)
-{
-	char	**temp_env;
 
-	temp_env = string_array_push(mini->export, cmd->args[1]);
-	if (!temp_env)
+
+static char	*extract_key(t_mini *mini, char *arg)
+{
+	char	*env_key;
+	int		key_length;
+	
+	key_length = 0;
+	while (arg[key_length] && arg[key_length] != '=')
+		key_length++;
+	env_key = (char *)malloc(sizeof(char) * (key_length + 1));
+	if (!env_key)
+		mini->last_return = MALLOC_ERROR;
+	ft_strlcpy(env_key, arg, key_length + 1);
+	return (env_key);
+}
+
+static void	add_to_export(t_mini *mini, char *arg)
+{
+	char	**new_export_array;
+	
+	if (string_array_find_string(mini->export, arg) != NULL)
+		return ;
+	new_export_array = string_array_push(mini->export, arg);
+	if (!new_export_array)
 	{
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}
 	if (mini->export)
-	{
-		free(mini->export);
-	}
-	mini->export = temp_env;
-	return ;
+		free_string_array(&mini->export);
+	mini->export = new_export_array;
 }
 
-static int	is_already_in_envp(t_mini *mini, t_cmd *cmd)
+static void	process_assignment(t_mini *mini, t_cmd *cmd, char *arg, char *env_key)
 {
-	int i;
-	int	j;
-
-	i = 0;
-	j = 1;
-	while (mini->envp[i] && j <= cmd->arg_amount)
-	{
-		DEBUG("entered the is already in envp function\n");
-		if (string_array_find_string(mini->export, cmd->args[j]) != NULL)
-		{
-			mini->last_return = CMD_NOT_FOUND;
-			return (1);
-		}
-		i++;
-		j++;
-	}
-	return (0);
-}
-
-static int	is_leading_int(t_mini *mini, t_cmd *cmd)
-{
-	int	i;
+	char	*env_entry;
+	char	*formated_env_key;
 	
-	i = 1;
-	while (i <= cmd->arg_amount)
+	env_entry = ft_strdup(arg);
+	if (!env_entry)
 	{
-		if (ft_isdigit(cmd->args[i][0]))
-		{
-			print_error("Minishell: '%s': not a valid identifier\n", cmd->args[i], 2);
-			mini->last_return = CMD_NOT_FOUND;
-			return (1);
-		}
-		i++;
+		mini->last_return = MALLOC_ERROR;
+		return ;
 	}
-	return (0);
+	if (ft_strchr(env_entry, '=') && *(ft_strchr(env_entry, '=') + 1) == '\0')
+	{
+		free(env_entry);
+		add_empty_string_assignment(mini, cmd, env_key);
+	}
+	else
+	{
+		formated_env_key = ft_strjoin(env_key, "=");
+		if (!formated_env_key)
+		{
+			free(env_key);
+			free(env_entry);
+			mini->last_return = MALLOC_ERROR;
+			return ;
+		}
+		free(env_key);
+		set_env(mini, formated_env_key, env_entry);
+		if (mini->export)
+		{
+			free_string_array(&mini->export);
+			create_export(mini, cmd);
+		}
+	}
+}
+
+static void	process_export_args(t_mini *mini, t_cmd *cmd)
+{
+	int		arg_index;
+	char	*env_key;
+
+	arg_index = 0;
+	while (++arg_index <= cmd->arg_amount)
+	{
+		env_key = extract_key(mini, cmd->args[arg_index]);
+		if (!env_key)
+			mini->last_return = MALLOC_ERROR;
+		if (!is_valid_env_identifier(env_key))
+		{
+			print_error("Minishell: '%s': not a valid identifier\n", cmd->args[arg_index], 2);
+			mini->last_return = CMD_NOT_FOUND;
+			free(env_key);
+			env_key = NULL;
+		}
+		if (ft_strchr(cmd->args[arg_index], '='))
+			process_assignment(mini, cmd, cmd->args[arg_index], env_key);
+		else
+		{
+			add_to_export(mini, cmd->args[arg_index]);
+			free(env_key);
+			env_key = NULL;
+		}
+	}
 }
 
 int	builtin_export(t_mini *mini, t_cmd *cmd)
 {
-	int	i;
-	int	status;
-	
-	if (!mini->export)
-		create_export(mini, cmd);
 	if (cmd->arg_amount == 0)
 	{
-		sort_and_add_prefix(mini, cmd);
+		sort_ascii_array(mini->envp, string_array_len(mini->envp));
 		string_array_print(cmd, mini->export);
 	}
 	if (cmd->arg_amount > 0)
 	{
-		if (is_leading_int(mini, cmd))
-		{
-			return (mini->last_return);
-		}
-		i = 1;
-		while (i < cmd->arg_amount)
-		{
-			if (ft_strchr(cmd->args[i], '='))
-			{
-				status = update_env_from_export(mini, cmd);
-				if (!status)
-				{
-					mini->last_return = status;
-
-				}
-				i++;
-			}
-		}
-		if (!is_already_in_envp(mini, cmd))
-		{
-			modify_export_array(mini, cmd);
-		}
-		sort_and_add_prefix(mini, cmd);
+		process_export_args(mini, cmd);
 	}
+	sort_ascii_array(mini->envp, string_array_len(mini->envp));
 	return (mini->last_return);
 }
