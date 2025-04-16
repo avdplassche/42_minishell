@@ -48,7 +48,7 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
-// int	g_sig;
+// extern int	g_sig;
 
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 

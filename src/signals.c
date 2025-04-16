@@ -23,24 +23,9 @@ void	signal_child(void)
 
 void	signal_list(void)
 {
-	// struct sigaction sigint;
-	// struct sigaction sigquit;
-	// struct termios term;
-
-	// tcsetattr(1,0,  &term);
-	// tcgetattr(ttyslot(), &term);
-	// printf("term |%hhn|\n", term.c_cc);
-	// printf("%s", ioctl(0, ))
-	// ioctl()
-	// printf("term |%d|\n", ttyslot());
-	// sigemptyset(&sigint.sa_mask);
-	// sigint.sa_handler = handle_sigint;
-	// sigaction(SIGINT, &sigint, NULL);
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
 	signal(SIGQUIT, SIG_IGN);
-
-	// signal(SIGQUIT, handle_sigquit);
-	
 }
 
 

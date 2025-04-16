@@ -7,3 +7,8 @@ Jojo checks in exec
 	if (is_only_specific_char(mini->line, '%'))
 		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
 			, set_return_value(mini, 2));
+
+
+	if (!ft_strcmp(cmd->command, "."))
+		return (print_error("minishell .: filename argument required\n", mini->line, 2)
+			, set_return_value(mini, 2));

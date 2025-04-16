@@ -3,7 +3,6 @@
 
 #include "minishell.h"
 
-int	g_sig;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -11,7 +10,6 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*cmd;
 	char	*input;
 
-	g_sig = 0;
 	signal_list();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
@@ -74,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 
 /************************ /TEST MODE ***************************** */
 
-	
+	rl_clear_history();
 	free_mini(&mini);
 	DEBUG_CLOSE;
 	return (mini.last_return);
