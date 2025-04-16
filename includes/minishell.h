@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:27:51 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:50:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int				builtin_env(t_mini *mini, t_cmd *cmd);
 int				builtin_exit(t_mini *mini, t_cmd *cmd);
 int				builtin_export(t_mini *mini, t_cmd *cmd);
 int				builtin_pwd(t_mini *mini, t_cmd *cmd);
-// int			builtin_unset(t_mini *mini, t_cmd *cmd);
+int				builtin_unset(t_mini *mini, t_cmd *cmd);
 
 /* * * * * * * * * * * * * * CHECKS * * * * * * * * * * * * * * * * * */
 
@@ -234,6 +234,7 @@ int				start_with_identifier(char *string, char *identifier);
 int				double_array_len(char **table);
 int				ft_strcmp_alpha(char *s1, char *s2);
 char			*get_line_from_stdin(void);
+char			*extract_identifier(t_mini *mini, char *src);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:07 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:10:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	free_cmd(t_mini *mini, t_cmd *cmd)
 	while (i < mini->cmd_count)
 	{
 		free_string_ptr(&cmd[i].command);
-		cmd[i].command = NULL;
 		free_string_ptr(&cmd[i].path);
 		free_string_array(&cmd[i].args);
 		free_pathnames(&cmd[i]);

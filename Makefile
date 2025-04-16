@@ -101,6 +101,7 @@ UTILS				=	contain_char.c \
 						sort_array.c \
 						sort_ascii_array.c \
 						get_line_from_stdin.c \
+						extract_identifier.c \
 						ft_atoi.c \
 						ft_bzero.c \
 						ft_isdigit.c \

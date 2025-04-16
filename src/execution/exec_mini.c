@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:48:27 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:53:08 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name)
 	}
 	else if (ft_strcmp(cmd_name, "pwd") == 0)
 		return (&builtin_pwd);
-	// else if (ft_strcmp(cmd_name, "unset") == 0)
-	// 	return (&builtin_unset);
+	else if (ft_strcmp(cmd_name, "unset") == 0)
+		return (&builtin_unset);
 	else
 		return (NULL);
 }
@@ -51,7 +51,6 @@ void	handle_builtin(t_mini *mini, t_cmd *cmd)
 
 int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
-	printf("entered exec_mini\n");
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		handle_builtin(mini, cmd);

@@ -6,26 +6,11 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:51 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:49:08 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:08:14 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*extract_identifier(t_mini *mini, char *src)
-{
-	int		char_index;
-	char	*identifier;
-
-	char_index = 0;
-	while (src[char_index] && src[char_index] != '=')
-		char_index++;
-	identifier = (char *)malloc(sizeof(char) * (char_index + 1));
-	if (!identifier)
-		mini->last_return = MALLOC_ERROR;
-	ft_strlcpy(identifier, src, char_index + 1);
-	return (identifier);
-}
 
 static int	is_valid_env_identifier(char *str)
 {

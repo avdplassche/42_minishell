@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_with_identifier.c                            :+:      :+:    :+:   */
+/*   extract_identifier.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 15:00:14 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/16 18:54:36 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/16 18:06:31 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 18:07:10 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	start_with_identifier(char *string, char *identifier)
+char	*extract_identifier(t_mini *mini, char *src)
 {
-	while (*string && *identifier)
-	{
-		if (*identifier != *string)
-			return (0);
-		identifier++;
-		string++;
-	}
-	if (*identifier)
-		return (0);
-	if (*string == '=' || *string == '\0')
-		return (1);
-	return (0);
+	int		char_index;
+	char	*identifier;
+
+	char_index = 0;
+	while (src[char_index] && src[char_index] != '=')
+		char_index++;
+	identifier = (char *)malloc(sizeof(char) * (char_index + 1));
+	if (!identifier)
+		mini->last_return = MALLOC_ERROR;
+	ft_strlcpy(identifier, src, char_index + 1);
+	return (identifier);
 }
