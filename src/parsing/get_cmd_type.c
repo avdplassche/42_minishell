@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:24 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:55:48 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 	char	*temp;
 
 	i = -1;
+	if (!mini->paths)
+		return (0);
 	while (mini->paths[++i])
 	{
 		temp = ft_strjoin(mini->paths[i], "/");

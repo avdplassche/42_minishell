@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:38:57 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:55:45 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	int	j;
 
 	i = 0;
+	
 	j = init_redirections(mini, cmd);
 	cmd->command = get_cmd_bin(mini);
 	i = init_arguments(mini, cmd);
