@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   string_array_find_identifier.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:51:09 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:10:40 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/16 17:24:54 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 17:42:02 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int builtin_unset(t_mini *mini, t_cmd *cmd)
+char	*string_array_find_identifier(char	**string_array, char *identifier)
 {
-	//int	arg_index;
-	
-	if (cmd->args == 0)
+	while (*string_array)
 	{
-		mini->last_return = 0;
+		if (start_with_identifier(*string_array, identifier))
+			return (*string_array);
+		string_array++;
 	}
-
-	return (mini->last_return);
+	return (NULL);
 }

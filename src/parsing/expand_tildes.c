@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tildes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:36 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:38:38 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:33:04 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_lonely_tilde(t_mini *mini)
 	char	*suffix;
 	char	*temp;
 
-	prefix = ft_get_env(mini, "HOME");
+	prefix = ft_get_env(mini, NULL, "HOME");
 	str_malloc_check(mini, prefix);
 	suffix = ft_substr(mini->line, 1, ft_strlen(mini->line) - 1);
 	if (!suffix)
@@ -60,7 +60,7 @@ char	*get_tilde(t_mini *mini, int i)
 	char	*suffix;
 	char	*env;
 
-	env = ft_get_env(mini, "HOME");
+	env = ft_get_env(mini, NULL, "HOME");
 	str_malloc_check(mini, env);
 	prefix = ft_substr(mini->line, 0, i);
 	if (!prefix)

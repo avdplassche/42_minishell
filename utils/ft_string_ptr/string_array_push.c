@@ -11,7 +11,7 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 	int		i;
 
 	original_len = string_array_len(original_arr);
-	big_array = malloc(sizeof(char *) * (original_len + 1 + 1));
+	big_array = ft_calloc(original_len + 2, sizeof(char *));
 	if (!big_array)
 	{
 		return (NULL);
@@ -39,6 +39,5 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 		return (NULL);
 	}
 	free(new_ptr);
-	big_array[i + 1] = NULL;
 	return (big_array);
 }

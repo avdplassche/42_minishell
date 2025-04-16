@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_with.c                                       :+:      :+:    :+:   */
+/*   start_with_identifier.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:00:14 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 15:00:15 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:41:59 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	start_with(char *string, char *start_string)
+int	start_with_identifier(char *string, char *identifier)
 {
-	int	i;
-
-	i = 0;
-	while (string[i] && start_string[i])
+	while (*string && *identifier)
 	{
-		if (!string[i] || string[i] != start_string[i])
+		if (*identifier != *string)
 			return (0);
-		i++;
+		identifier++;
+		string++;
 	}
-	return (1);
+	if (*identifier)
+		return (0);
+	if (*string == '=' || *string == '\0')
+		return (1);
+	return (0);
 }

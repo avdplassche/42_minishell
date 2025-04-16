@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_mini.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 12:01:33 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:17:57 by jrandet          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -62,6 +51,18 @@ int	dup_env(t_mini *mini, char **envp)
 	return (0);
 }
 
+void	init_mini_pointers(t_mini *mini)
+{
+	mini->envp = NULL;
+	mini->builtins = NULL;
+	mini->paths = NULL;
+	mini->line = NULL;
+	mini->pipes = NULL;
+	mini->fd_backup = NULL;
+	mini->cmd = NULL;
+	mini->export = NULL;
+}
+
 /** Fill t_mini mini's variable
  * @param mini an empty t_mini_structure
  * @param envp the terminal env variable
@@ -70,22 +71,16 @@ int	init_mini(t_mini *mini, char **envp)
 {
 	char	*env;
 
-	ft_bzero(mini, sizeof(*mini));
+	init_mini_pointers(mini);
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
 		exit_minishell(mini, mini->cmd);
 	mini->last_return = 0;
-	if (envp[0])
-	{
+	if (envp)
 		dup_env(mini, envp);
-		DEBUG("test\n");
-	}
 	else
-	{
 		mini->envp = NULL;
-		DEBUG("Second test\n");
-	}
-	env = ft_get_env(mini, "PATH");
+	env = ft_get_env(mini, NULL, "PATH");
 	mini->paths = ft_split(env, ':');
 	free(env);
 	if (!mini->paths)

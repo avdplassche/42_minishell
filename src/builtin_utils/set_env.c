@@ -7,14 +7,11 @@ static void	modify_env_array(t_mini *mini, char	*env_entry)
 	char	*new_env_entry;
 
 	new_env_entry = ft_strdup(env_entry);
+	if (!new_env_entry)
 	{
-		if (!new_env_entry)
-		{
-			mini->last_return = MALLOC_ERROR;
-			return ;
-		}
+		mini->last_return = MALLOC_ERROR;
+		return ;
 	}
-	//free_string_ptr(&env_entry);
 	temp_env = string_array_push(mini->envp, new_env_entry);
 	if (!temp_env)
 	{
@@ -45,9 +42,10 @@ int	set_env(t_mini *mini, char *env_key, char *env_entry)
 	int		i;
 
 	i = 0;
+	DEBUG("the env_key is worth %s\n", env_key);
 	while (mini->envp[i])
 	{
-		if (start_with(mini->envp[i], env_key))
+		if (start_with_identifier(mini->envp[i], env_key))
 		{
 			free_string_ptr(&mini->envp[i]);
 			DEBUG("in set_env env_entry is worth %s\n", env_entry);

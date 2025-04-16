@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:41 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 10:26:44 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:34:00 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	change_directory(t_mini *mini, char *path)
 
 static int	get_path(t_mini *mini, char **path, char *env_to_find)
 {
-	*path = ft_get_env(mini, env_to_find);
+	*path = ft_get_env(mini, NULL, env_to_find);
 	if (!path)
 	{
 		print_error("Minishell: cd %s not set\n", env_to_find, 2);

@@ -97,7 +97,7 @@ UTILS				=	contain_char.c \
 						join_n_strings.c\
 						join_three_strings.c \
 						print_error.c \
-						start_with.c \
+						start_with_identifier.c \
 						sort_array.c \
 						sort_ascii_array.c \
 						get_line_from_stdin.c \
@@ -135,7 +135,7 @@ UTILS				=	contain_char.c \
 						get_next_line.c \
 						string_array_copy.c \
 						string_array_create_key.c \
-						string_array_find_string.c \
+						string_array_find_identifier.c \
 						string_array_join.c \
 						string_array_len.c \
 						string_array_print.c \

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:59:42 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:27:51 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int				wait_for_children(t_mini *mini, t_cmd *cmd);
 void			parent_closes_all_pipes(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
 //builtin exec
-char			*ft_get_env(t_mini *mini, char *var_name);
+char			*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name);
 int				set_env(t_mini *mini, char *env_key, char *env_row);
 int				update_pwd_env(t_mini *mini, char *env_var);
 int				update_old_pwd_env(t_mini *mini);
@@ -230,6 +230,7 @@ char			*epurstring(char *src);
 int				is_quote(char c);
 int				is_angle_bracket(char c);
 int				start_with(char *string, char *start_string);
+int				start_with_identifier(char *string, char *identifier);
 int				double_array_len(char **table);
 int				ft_strcmp_alpha(char *s1, char *s2);
 char			*get_line_from_stdin(void);
@@ -237,7 +238,7 @@ char			*get_line_from_stdin(void);
 /* * * * * * * * * * STRING_ARRAY_FUNCTIONS * * * * * * * * * * * * */
 
 char			**string_array_copy(t_mini *mini, t_cmd *cmd, char **src);
-char			*string_array_find_string(char **string_array, char *string_to_find);
+char			*string_array_find_identifier(char	**string_array, char *identifier);
 void			string_array_print(t_cmd *cmd, char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);

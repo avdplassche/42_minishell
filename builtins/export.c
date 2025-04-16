@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:51 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 10:50:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:49:08 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,6 @@ static int	is_valid_env_identifier(char *str)
 	return (1);
 }
 
-static void	process_export_args(t_mini *mini, char *arg, char *identifier)
-{
-	char	*env_key;
-	char	*env_entry;
-
-	env_key = ft_strjoin(identifier, "=");
-	if (ft_strchr(arg, '='))
-		env_entry = ft_strdup(arg);
-	else
-		env_entry = ft_strdup(identifier);
-	free_string_ptr(&identifier);
-	if (env_key && env_entry)
-	{
-		set_env(mini, env_key, env_entry);
-		free_string_ptr(&env_key);
-		free_string_ptr(&env_entry);
-	}
-	else
-	{
-		free_string_ptr(&env_key);
-		free_string_ptr(&env_entry);
-		mini->last_return = MALLOC_ERROR;
-		return ;
-	}
-}
-
 static void	validate_export_args(t_mini *mini, t_cmd *cmd)
 {
 	int		arg_index;
@@ -92,7 +66,7 @@ static void	validate_export_args(t_mini *mini, t_cmd *cmd)
 				cmd->args[arg_index], 2);
 			mini->last_return = CMD_NOT_FOUND;
 		}
-		process_export_args(mini, cmd->args[arg_index], identifier);
+		set_env(mini, identifier, cmd->args[arg_index]);
 	}
 }
 
