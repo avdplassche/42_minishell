@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:26:51 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 10:50:52 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -19,7 +30,7 @@ static char	*extract_identifier(t_mini *mini, char *src)
 static int	is_valid_env_identifier(char *str)
 {
 	int	char_index;
-	
+
 	char_index = 0;
 	if (!str || (!(ft_isalpha(str[0])) && (str[0] != '_')))
 		return (0);
@@ -34,17 +45,40 @@ static int	is_valid_env_identifier(char *str)
 	return (1);
 }
 
-void	process_export_args(t_mini *mini, t_cmd *cmd)
+static void	process_export_args(t_mini *mini, char *arg, char *identifier)
+{
+	char	*env_key;
+	char	*env_entry;
+
+	env_key = ft_strjoin(identifier, "=");
+	if (ft_strchr(arg, '='))
+		env_entry = ft_strdup(arg);
+	else
+		env_entry = ft_strdup(identifier);
+	free_string_ptr(&identifier);
+	if (env_key && env_entry)
+	{
+		set_env(mini, env_key, env_entry);
+		free_string_ptr(&env_key);
+		free_string_ptr(&env_entry);
+	}
+	else
+	{
+		free_string_ptr(&env_key);
+		free_string_ptr(&env_entry);
+		mini->last_return = MALLOC_ERROR;
+		return ;
+	}
+}
+
+static void	validate_export_args(t_mini *mini, t_cmd *cmd)
 {
 	int		arg_index;
 	char	*identifier;
-	char	*env_key;
-	char	*env_entry;
 
 	arg_index = 0;
 	while (++arg_index <= cmd->arg_amount)
 	{
-		
 		identifier = extract_identifier(mini, cmd->args[arg_index]);
 		if (!identifier)
 		{
@@ -54,36 +88,12 @@ void	process_export_args(t_mini *mini, t_cmd *cmd)
 		if (!is_valid_env_identifier(cmd->args[arg_index]))
 		{
 			free_string_ptr(&identifier);
-			print_error("Minishell: '%s': not a valid identifier\n", cmd->args[arg_index], 2);
+			print_error("Minishell: '%s': not a valid identifier\n",
+				cmd->args[arg_index], 2);
 			mini->last_return = CMD_NOT_FOUND;
 		}
-		if (ft_strchr(cmd->args[arg_index], '='))
-		{
-			env_key = ft_strjoin(identifier, "=");
-			env_entry = ft_strdup(cmd->args[arg_index]);
-			free_string_ptr(&identifier);
-		}
-		else
-		{
-			env_key = ft_strjoin(identifier, "=");
-			env_entry = ft_strdup(identifier);
-			free_string_ptr(&identifier);
-		}
-		if (env_key && env_entry)
-		{
-			set_env(mini, env_key, env_entry);
-			free_string_ptr(&env_key);
-			free_string_ptr(&env_entry);
-		}
-		else
-		{
-			free_string_ptr(&env_key);
-			free_string_ptr(&env_entry);
-			mini->last_return = MALLOC_ERROR;
-			return ;
-		}
+		process_export_args(mini, cmd->args[arg_index], identifier);
 	}
-
 }
 
 int	builtin_export(t_mini *mini, t_cmd *cmd)
@@ -95,7 +105,7 @@ int	builtin_export(t_mini *mini, t_cmd *cmd)
 	}
 	else if (cmd->arg_amount > 0)
 	{
-		process_export_args(mini, cmd);
+		validate_export_args(mini, cmd);
 	}
 	return (mini->last_return);
 }

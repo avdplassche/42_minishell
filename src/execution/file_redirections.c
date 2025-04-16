@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_redirections.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 11:06:45 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 11:56:05 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -77,11 +88,10 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		{
 			handle_out_redir(mini, cmd, &cmd->redir[i]);
 		}
-		if(cmd->redir[i].type == OUT_APPEND)
+		if (cmd->redir[i].type == OUT_APPEND)
 		{
 			handle_out_append(mini, cmd, &cmd->redir[i]);
 		}
 		i++;
 	}
 }
-

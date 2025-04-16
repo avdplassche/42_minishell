@@ -62,21 +62,20 @@ SRCS				=	main.c \
 						is_valid_syntax.c \
 						is_valid_arithmetic_exit.c \
 						command_pipeline.c \
+						create_args_array.c \
 						exec_mini.c \
 						fd_backup_utils.c \
 						fd_utils.c \
 						file_redirections.c \
-						ft_get_env.c \
-						get_current_workdir.c \
-						get_new_env_row.c \
 						heredoc_handler.c \
 						pipe_redirections.c \
+						wait_for_children.c \
+						get_current_workdir.c \
+						get_new_env_row.c \
+						ft_get_env.c \
 						set_env.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
-						add_export_prefix.c \
-						create_export.c \
-						wait_for_children.c \
 						exit_minishell.c \
 						exit_minishell_utils.c
 
@@ -178,6 +177,9 @@ $(DIR_BIN)/src/%.o: $(DIR_SRC)/execution/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/checks/%.c | $(DIR_BIN)/src
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
+$(DIR_BIN)/src/%.o: $(DIR_SRC)/builtin_utils/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/%.c | $(DIR_BIN)/src
