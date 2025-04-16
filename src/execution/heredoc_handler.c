@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_handler.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 11:14:08 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_redir *redir)
+static void	get_in_pipe(t_mini *mini, t_cmd *cmd, int *hd_pipe, t_redir *redir)
 {
 	char	*line;
 	char	*cursor;
 	char	*prompt;
 
 	prompt = string_array_join((char *[]){"Heredoc(", cmd->redir->name, ") > ", NULL});
-	while(1)
+	while (1)
 	{
 		line = readline(prompt);
 		cursor = line;
@@ -23,8 +34,8 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_r
 		line = enquote_str(line, 34);
 		line = dollar_handle(mini, line);
 		line = clean_command_quotes(mini, line);
-		write(here_doc_pipe[1], line, ft_strlen(line));
-		write(here_doc_pipe[1], "\n", 1);
+		write(hd_pipe[1], line, ft_strlen(line));
+		write(hd_pipe[1], "\n", 1);
 		free(line);
 		line = NULL;
 	}
@@ -32,25 +43,23 @@ static void	get_line_into_pipe(t_mini *mini, t_cmd *cmd, int *here_doc_pipe, t_r
 
 static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
-	int		here_doc_pipe[2];
+	int		hd_pipe[2];
 
-	if (pipe(here_doc_pipe) == -1)
+	if (pipe(hd_pipe) == -1)
 	{
 		mini->last_return = PIPE_ERROR;
 		exit_minishell(mini, cmd);
 	}
-	get_line_into_pipe(mini, cmd, here_doc_pipe, redir);
-	close(here_doc_pipe[1]);
-	redir->heredoc_fd = here_doc_pipe[0];
+	get_in_pipe(mini, cmd, hd_pipe, redir);
+	close(hd_pipe[1]);
+	redir->heredoc_fd = hd_pipe[0];
 }
 
 void	process_all_heredocs(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 
-	
 	i = 0;
-	DEBUG("cmd->heredocamount is worth %d\n",  cmd->heredoc_amount);
 	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == HERE_DOC)

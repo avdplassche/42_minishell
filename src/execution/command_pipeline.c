@@ -1,17 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_pipeline.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 12:04:21 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	create_args_array(t_mini *mini, t_cmd *cmd)
-{
-	cmd->args = (char **)malloc(sizeof(char *) * 2);
-	if (!cmd->args)
-	{
-		mini->last_return = MALLOC_ERROR;
-		exit(EXIT_FAILURE);
-	}
-	cmd->args[0] = ft_strdup(cmd->command);
-	cmd->args[1] = NULL;
-}
 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
@@ -20,9 +19,7 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	process_all_heredocs(mini, cmd);
 	connect_command_pipeline(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
-	{
 		setup_redirections(mini, cmd);
-	}
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd, cmd->command);
@@ -30,24 +27,22 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 		exit(EXIT_SUCCESS);
 	}
 	if (!cmd->args)
-	{
 		create_args_array(mini, cmd);
-	}
-	/*if(cmd->is_directory)
+	if(cmd->is_directory)
 	{
-		print_error("Minishell: %s: Is a direwctory.\n", cmd->command);
+		print_error("Minishell: %s: Is a direwctory.\n", cmd->command, 2);
 		mini->last_return = 126;
 		if (mini->fd_backup)
 		{
 			if (mini->fd_backup->stdin_backup > 0)
 				close(mini->fd_backup->stdin_backup);
 			if (mini->fd_backup->stdout_backup > 0)
-				close(mini->fd_backup->stdout_backup); // refACTOR VOID FUNVTION AND TREAT THIS CASE 
+				close(mini->fd_backup->stdout_backup);
 			free_cmd(mini, cmd);
 			free_mini(mini);
 		}
 		exit(EXIT_FAILURE);
-	}*/
+	}
 	if (cmd->type == INVALID)
 	{
 		print_error("Minishell: %s: command not found\n", cmd->command, 2);

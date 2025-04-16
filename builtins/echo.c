@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:26:32 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 10:33:04 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -16,9 +27,9 @@ static void	print_echo(t_cmd *cmd, int no_print_new_line, int i)
 
 int	builtin_echo(t_mini *mini, t_cmd *cmd)
 {
-	int i;
+	int	i;
 	int	j;
-	int no_print_new_line;
+	int	no_print_new_line;
 
 	(void)mini;
 	i = 1;
@@ -29,11 +40,10 @@ int	builtin_echo(t_mini *mini, t_cmd *cmd)
 		while (cmd->args[i][j] == 'n')
 			j++;
 		if (cmd->args[i][j] != '\0')
-			break;
+			break ;
 		no_print_new_line = 1;
 		i++;
 	}
 	print_echo(cmd, no_print_new_line, i);
 	return (0);
 }
-

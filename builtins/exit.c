@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:25:59 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 10:29:58 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -13,21 +23,19 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	if (cmd->args && cmd->arg_amount == 1)
 	{
 		if (is_valid_arithmetic_exit(cmd->args[1]))
-		{
 			mini->last_return = ft_atoi(cmd->args[1]) & 255;
-		}
 		else
 		{
-			print_error("minishell: exit: %s : numeric argument required\n", cmd->args[1], 1);
+			print_error("minishell: exit: %s : numeric argument required\n",
+				cmd->args[1], 1);
 			mini->last_return = 255;
 		}
 	}
 	else
-	{
 		mini->last_return = 0;
-	}
-	if (mini->fd_backup->stdin_backup != -1 || mini->fd_backup->stdout_backup != -1)
+	if (mini->fd_backup->stdin_backup != -1
+		|| mini->fd_backup->stdout_backup != -1)
 		restore_standard_fd(mini);
 	exit_minishell(mini, cmd);
-	return mini->last_return;
+	return (mini->last_return);
 }

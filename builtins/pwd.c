@@ -1,14 +1,21 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:27:10 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 10:32:23 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-	uses the getcwd and prints to the standard output, this is a builtin
-*/
 int	builtin_pwd(t_mini *mini, t_cmd *cmd)
 {
 	char	cwd[PATH_MAX];
-	
+
 	(void)cmd;
 	DEBUG("entered the pwd function\n");
 	if (getcwd(cwd, sizeof(cwd)) != NULL)

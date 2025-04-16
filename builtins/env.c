@@ -1,10 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:26:20 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 12:20:49 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
 int	builtin_env(t_mini *mini, t_cmd *cmd)
 {
 	(void)cmd;
-
+	if (!mini->envp)
+	{
+		DEBUG("env is not there\n");
+		return (-1);
+	}
 	if (cmd->arg_amount >= 1)
 	{
 		perror("Minishell: env: too many arguments\n");

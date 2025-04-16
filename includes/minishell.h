@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 11:59:42 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define _GNU_SOURCE
@@ -114,6 +126,7 @@ void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 void			backup_standard_fd(t_mini *mini);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
+void			create_args_array(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void			connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index);
@@ -128,8 +141,6 @@ int				update_pwd_env(t_mini *mini, char *env_var);
 int				update_old_pwd_env(t_mini *mini);
 char			*get_current_workdir(t_mini *mini);
 char			*get_new_env_row(t_mini *mini, char *env_key, char *new_path);
-char			**add_export_prefix(char **string_array);
-void			create_export(t_mini *mini, t_cmd *cmd);
 //utils exec (binaries)
 
 /* * * * * * * * * * * * * * BUILTINS * * * * * * * * * * * * * * * */

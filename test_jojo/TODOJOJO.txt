@@ -1,2 +1,0 @@
-use ft_getenv more efficiently than what i did 
-finish the binaries 
