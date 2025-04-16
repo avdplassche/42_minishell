@@ -12,3 +12,7 @@ Jojo checks in exec
 	if (!ft_strcmp(cmd->command, "."))
 		return (print_error("minishell .: filename argument required\n", mini->line, 2)
 			, set_return_value(mini, 2));
+
+
+
+./minishell 

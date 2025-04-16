@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/16 12:55:48 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:27:39 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 	i = -1;
 	if (!mini->paths)
 		return (0);
+	if (!access(cmd->command, X_OK))
+		return (1);
 	while (mini->paths[++i])
 	{
 		temp = ft_strjoin(mini->paths[i], "/");
 		cmd->path = ft_strjoin(temp, cmd->command);
-		if (access(cmd->path, F_OK) == 0 && access(cmd->path, X_OK) == 0)
+		if (!access(cmd->path, F_OK) && !access(cmd->path, X_OK))
 			return (free(temp), 1);
 		free(temp);
 		temp = NULL;
