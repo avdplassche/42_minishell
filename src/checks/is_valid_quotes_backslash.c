@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_quotes.c                                  :+:      :+:    :+:   */
+/*   is_valid_quotes_backslash.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:41:02 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:54:51 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:36:19 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_valid_quote_basckslash(t_mini *mini)
 	while (mini->line[++i])
 	{
 		quote_enclosure_handle(mini->line[i], &q);
-		if (!q.sgl && !q.dbl && mini->line[i] == '\'')
+		if (!q.sgl && !q.dbl && mini->line[i] == 92)
 			return (print_error("minishell: backslash found\n", NULL, 2), 0);
 	}
 	if (q.sgl || q.dbl)

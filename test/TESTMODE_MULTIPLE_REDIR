@@ -1,4 +1,4 @@
-cat <<eof1 <<eof2
+.cat <<eof1 <<eof2
 echo hello   <file1.txt | grep "error"cat < input.txt > temp.txt | grep "error" > errors.log >> all_logs.log | sort >> sorted_errors.log
 echo "Hello World" > file1 > file2 | grep "Hello" > file3 >> file4 | tr 'a-z' 'A-Z' > uppercase.txt
 cut -d, -f2 < data.csv > column2.txt | sort > sorted_column2.txt >> sorted_unique.txt | uniq > final_output.txt
