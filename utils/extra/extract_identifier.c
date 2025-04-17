@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:06:31 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 18:07:10 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/17 12:53:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*extract_identifier(t_mini *mini, char *src)
 	char_index = 0;
 	while (src[char_index] && src[char_index] != '=')
 		char_index++;
-	identifier = (char *)malloc(sizeof(char) * (char_index + 1));
+	identifier = ft_calloc((char_index + 1), sizeof(char));
 	if (!identifier)
 		mini->last_return = MALLOC_ERROR;
 	ft_strlcpy(identifier, src, char_index + 1);

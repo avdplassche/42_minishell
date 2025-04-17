@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exec_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/16 18:53:08 by jrandet          ###   ########.fr       */
-=======
-/*   Updated: 2025/04/16 18:31:08 by alvan-de         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2025/04/17 12:15:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
