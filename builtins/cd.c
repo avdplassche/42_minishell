@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:41 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:34:00 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/17 16:17:07 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static int	change_directory(t_mini *mini, char *path)
 static int	get_path(t_mini *mini, char **path, char *env_to_find)
 {
 	*path = ft_get_env(mini, NULL, env_to_find);
-	if (!path)
+	if (!*path)
 	{
-		print_error("Minishell: cd %s not set\n", env_to_find, 2);
-		mini->last_return = CMD_NOT_FOUND;
+		print_error("Minishell: cd: %s not set\n", env_to_find, 2);
+		mini->last_return = 1;
 		return (mini->last_return);
 	}
 	return (0);
@@ -46,7 +46,8 @@ int	builtin_cd(t_mini *mini, t_cmd *cmd)
 
 	if (cmd->arg_amount == 0 || cmd->args[1] == NULL)
 	{
-		mini->last_return = get_path(mini, &path, "HOME");
+		if (get_path(mini, &path, "HOME") != 0)
+			return (mini->last_return);
 	}
 	else if (cmd->arg_amount == 1 && cmd->args[1][0] == '-')
 	{
@@ -62,6 +63,7 @@ int	builtin_cd(t_mini *mini, t_cmd *cmd)
 	{
 		path = cmd->args[1];
 	}
+	printf("got here\n");
 	mini->last_return = change_directory(mini, path);
 	return (mini->last_return);
 }

@@ -42,13 +42,11 @@ int	set_env(t_mini *mini, char *env_key, char *env_entry)
 	int		i;
 
 	i = 0;
-	DEBUG("the env_key is worth %s\n", env_key);
 	while (mini->envp[i])
 	{
 		if (start_with_identifier(mini->envp[i], env_key))
 		{
 			free_string_ptr(&mini->envp[i]);
-			DEBUG("in set_env env_entry is worth %s\n", env_entry);
 			mini->envp[i] = ft_strdup(env_entry);
 			if (!mini->envp[i])
 			{

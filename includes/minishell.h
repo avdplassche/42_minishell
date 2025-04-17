@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 18:50:47 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/17 16:41:29 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void			free_wildcards(char *line, t_wildcard *w);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
+int 			handle_no_env(t_mini *mini, t_cmd *cmd);
 void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 void			backup_standard_fd(t_mini *mini);

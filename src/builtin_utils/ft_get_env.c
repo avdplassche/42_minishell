@@ -16,7 +16,7 @@ char	*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name)
 	char	*path_ref;
 	char	*value_copy;
 
-	if (!mini->envp)
+	if (!mini->envp || !*mini->envp || !var_name)
 		return (NULL);
 	var_length = ft_strlen(var_name);
 	path_ref = string_array_find_identifier(mini->envp, var_name);

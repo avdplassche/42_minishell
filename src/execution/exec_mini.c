@@ -6,10 +6,9 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/17 12:15:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/17 17:25:14 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -50,8 +49,35 @@ void	handle_builtin(t_mini *mini, t_cmd *cmd)
 	restore_standard_fd(mini);
 }
 
+int handle_no_env(t_mini *mini, t_cmd *cmd)
+{
+	char	cwd[PATH_MAX];
+	char	*env_entry;
+	
+	if (!ft_get_env(mini, cmd, "PWD"))
+	{
+		if (getcwd(cwd, sizeof(cwd)) != NULL)
+		{
+			env_entry = ft_strjoin("PWD=", cwd);
+			if (set_env(mini, "PWD", env_entry) != 0)
+			{
+				free(env_entry);
+				return (1);
+			}
+		}
+		else
+			return (1);
+	}
+	free(env_entry);
+	return (0);
+}
+
 int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
+	if (*mini->envp == NULL)
+	{
+		handle_no_env(mini, cmd);
+	}
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		handle_builtin(mini, cmd);

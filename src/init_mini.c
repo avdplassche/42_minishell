@@ -81,15 +81,15 @@ int	init_mini(t_mini *mini, char **envp)
 	else
 		mini->envp = NULL;
 	env = ft_get_env(mini, NULL, "PATH");
-	mini->paths = ft_split(env, ':');
-	free(env);
-	if (!mini->paths)
-		return (MALLOC_ERROR);
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));
 	if (!mini->fd_backup)
 		return (MALLOC_ERROR);
 	mini->fd_backup->stdin_backup = -1;
 	mini->fd_backup->stdout_backup = -1;
 	mini->should_exit = false;
+	mini->paths = ft_split(env, ':');
+	free(env);
+	if (!mini->paths)
+		return (MALLOC_ERROR);
 	return (0);
 }
