@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:45 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:56:05 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/18 13:32:12 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		perror(redir->name);
 		free_cmd(mini, cmd);
 		free_mini(mini);
 		exit(EXIT_FAILURE);
@@ -44,7 +44,7 @@ static void	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		perror(redir->name);
 		free_cmd(mini, cmd);
 		free_mini(mini);
 		exit(EXIT_FAILURE);
@@ -60,7 +60,7 @@ static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	fd = open(redir->name, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("open");
+		perror(redir->name);
 		free_cmd(mini, cmd);
 		free_mini(mini);
 		exit(EXIT_FAILURE);

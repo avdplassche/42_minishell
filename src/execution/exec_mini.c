@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/17 17:25:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:23:57 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,29 @@ void	handle_builtin(t_mini *mini, t_cmd *cmd)
 	restore_standard_fd(mini);
 }
 
-int handle_no_env(t_mini *mini, t_cmd *cmd)
+int set_minimal_env(t_mini *mini, t_cmd *cmd)
 {
 	char	cwd[PATH_MAX];
-	char	*env_entry;
+	char	*pwd_entry;
 	
-	if (!ft_get_env(mini, cmd, "PWD"))
+	if (!ft_get_env(mini, cmd, "PATH"))
 	{
-		if (getcwd(cwd, sizeof(cwd)) != NULL)
-		{
-			env_entry = ft_strjoin("PWD=", cwd);
-			if (set_env(mini, "PWD", env_entry) != 0)
-			{
-				free(env_entry);
-				return (1);
-			}
-		}
-		else
-			return (1);
+		set_env(mini, "PATH",
+	"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
 	}
-	free(env_entry);
+	if (!ft_get_env(mini, cmd, "PWD") && getcwd(cwd, sizeof(cwd)))
+	{
+		pwd_entry = ft_strjoin("PWD=", cwd);
+		if (!pwd_entry)
+		{
+			mini->last_return = 1;
+			exit_minishell(mini, cmd);
+		}
+		set_env(mini, "PWD", pwd_entry);
+		free(pwd_entry);
+	}
+	if (!ft_get_env(mini, cmd, "SHLVL"))
+		set_env(mini, "SHVL", "SHVL=1");
 	return (0);
 }
 
@@ -76,7 +79,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	if (*mini->envp == NULL)
 	{
-		handle_no_env(mini, cmd);
+		set_minimal_env(mini, cmd);
 	}
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{

@@ -22,7 +22,7 @@ static int	build_old_pwd_path(t_mini *mini, char *original_pwd_path)
 		mini->last_return = MALLOC_ERROR;
 		return (1);
 	}
-	status = set_env(mini, env_key, env_row);
+	status = set_env(mini, "OLDPWD", env_row);
 	free(env_key);
 	free(env_row);
 	free(original_pwd_path);

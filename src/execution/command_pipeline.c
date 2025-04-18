@@ -6,11 +6,63 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:04:21 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/18 17:52:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void check_access(t_cmd *cmd)
+{
+	errno = 0;
+
+	access(cmd->command, X_OK);
+	cmd->error_access = errno;
+	errno  = 0;
+}
+
+static void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
+{
+	if (mini->fd_backup)
+	{
+		if (mini->fd_backup->stdin_backup > 0)
+			close(mini->fd_backup->stdin_backup);
+		if (mini->fd_backup->stdout_backup > 0)
+			close(mini->fd_backup->stdout_backup);
+		free_cmd(mini, cmd);
+		free_mini(mini);
+	}
+	exit(EXIT_FAILURE);
+}
+
+static void	handle_errno_message(t_mini *mini, t_cmd *cmd)
+{
+	if(cmd->error_access == EISDIR)
+	{
+		print_error("Minishell: %s: Is a directory.\n", cmd->command, 2);
+		mini->last_return = 126;
+		clean_fd_backup(mini, cmd);
+	}
+	if(cmd->error_access == EISDIR)
+	{
+		print_error("Minishell: %s: Is a directory.\n", cmd->command, 2);
+		mini->last_return = 126;
+		clean_fd_backup(mini, cmd);
+	}
+	if (cmd->error_access == ENOENT)
+	{
+		print_error("Minishell: %s: No such file or directory.\n", cmd->command, 2);
+		mini->last_return = 127;
+		clean_fd_backup(mini, cmd);
+	}
+	if (cmd->type == INVALID)
+	{
+		print_error("Minishell: %s: command not found\n", cmd->command, 2);
+		mini->last_return = 127;
+		clean_fd_backup(mini, cmd);
+	}
+}
+
 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
@@ -20,42 +72,16 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	connect_command_pipeline(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
 		setup_redirections(mini, cmd);
+	check_access(cmd);
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
 	}
-	if (!cmd->args)
-		create_args_array(mini, cmd);
-	if(cmd->is_directory)
+	if (cmd->error_access)
 	{
-		print_error("Minishell: %s: Is a direwctory.\n", cmd->command, 2);
-		mini->last_return = 126;
-		if (mini->fd_backup)
-		{
-			if (mini->fd_backup->stdin_backup > 0)
-				close(mini->fd_backup->stdin_backup);
-			if (mini->fd_backup->stdout_backup > 0)
-				close(mini->fd_backup->stdout_backup);
-			free_cmd(mini, cmd);
-			free_mini(mini);
-		}
-		exit(EXIT_FAILURE);
-	}
-	if (cmd->type == INVALID)
-	{
-		print_error("Minishell: %s: command not found\n", cmd->command, 2);
-		mini->last_return = CMD_NOT_FOUND;
-		if (mini->fd_backup)
-		{
-			if (mini->fd_backup->stdin_backup > 0)
-				close(mini->fd_backup->stdin_backup);
-			if (mini->fd_backup->stdout_backup > 0)
-				close(mini->fd_backup->stdout_backup);
-			free_cmd(mini, cmd);
-			free_mini(mini);
-		}
+		handle_errno_message(mini, cmd);
 		exit(EXIT_FAILURE);
 	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
@@ -77,14 +103,9 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-	{
-		//SIGNALCHILD
 		handle_command_execution(mini, cmd, cmd_index);
-	}
 	else
-	{
 		cmd->pid = pid;
-	}
 }
 
 static void	create_pipes(t_mini *mini, t_cmd *cmd)

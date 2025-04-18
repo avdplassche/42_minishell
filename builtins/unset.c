@@ -6,11 +6,23 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:51:09 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/17 13:36:53 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/18 17:05:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	shift_elements_up(char ***cursor)
+{
+	char	**shift;
+
+	shift = *cursor;
+	while (*shift)
+	{
+		*shift = *(shift + 1);
+		shift++;
+	}
+}
 
 static void	search_and_shrink(t_mini *mini, char **args_cursor)
 {
@@ -19,24 +31,23 @@ static void	search_and_shrink(t_mini *mini, char **args_cursor)
 
 	while (*args_cursor)
 	{
-		cursor = mini->envp;
 		identifier = extract_identifier(mini, *args_cursor);
+		if (ft_strcmp(identifier, "PATH") == 0)
+			free_string_array(&mini->paths);
+		if (!identifier)
+			continue ;
+		cursor = mini->envp;
 		while(*cursor)
 		{
 			if (start_with_identifier(*cursor, identifier))
 			{
-				free(identifier);
 				free(*cursor);
-				*cursor = *(cursor + 1);
+				shift_elements_up(&cursor);
 				break;
 			}
 			cursor++;
 		}
-		while (*cursor)
-		{
-			*cursor = *(cursor + 1);
-			cursor++;
-		}
+		free(identifier);
 		args_cursor++;
 	}
 }
