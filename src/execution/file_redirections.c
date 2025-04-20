@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 20:25:11 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 20:54:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int	setup_redirections(t_mini *mini, t_cmd *cmd)
 		if (cmd->redir[i].type == HERE_DOC)
 			handle_heredoc_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == IN_REDIR)
-			handle_in_redir(mini, cmd, &cmd->redir[i]);
+			result = handle_in_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_REDIR)
 			result = handle_out_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_APPEND)
-			handle_out_append(mini, cmd, &cmd->redir[i]);
+			result = handle_out_append(mini, cmd, &cmd->redir[i]);
 		if (result != 0)
 			break;
 		i++;

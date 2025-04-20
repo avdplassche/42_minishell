@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:51 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:42:54 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 22:27:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ static void	validate_export_args(t_mini *mini, t_cmd *cmd)
 		identifier = extract_identifier(mini, cmd->args[arg_index]);
 		if (!identifier)
 		{
-			mini->last_return = MALLOC_ERROR;
+			mini->last_return = 1;
+			ft_putstr_fd("Minishell: Memory allocation error\n", 2);
 			return ;
 		}
 		if (!is_valid_env_identifier(cmd->args[arg_index]))
 		{
-			//free_string_ptr(&identifier);
 			print_error("Minishell: '%s': not a valid identifier\n",
 				cmd->args[arg_index], 2);
-			mini->last_return = CMD_NOT_FOUND;
+			mini->last_return = 1;
 		}
 		set_env(mini, identifier, cmd->args[arg_index]);
 		free_string_ptr(&identifier);

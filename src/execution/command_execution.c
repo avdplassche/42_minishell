@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:33:14 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 21:59:11 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 		redir_status = setup_redirections(mini, cmd);
 		if (redir_status != 0)
 		{
-			
+			clean_fd_backup(mini, cmd);
+			free_cmd(mini, cmd);
+			free_mini(mini);
 			exit(mini->last_return);
 		}
 	}
@@ -55,6 +57,7 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
+		printf("execve failed with errno: %d\n", errno);
 		perror("execve");
 		mini->last_return = MALLOC_ERROR;
 		exit(EXIT_FAILURE);
