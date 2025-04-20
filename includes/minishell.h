@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/18 16:00:54 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 12:06:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,8 @@ void			free_wildcards(char *line, t_wildcard *w);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
-int 			set_minimal_env(t_mini *mini, t_cmd *cmd);
 void			handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
-void			backup_standard_fd(t_mini *mini);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
 void			create_args_array(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
@@ -135,7 +133,15 @@ void			connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index);
 void			setup_redirections(t_mini *mini, t_cmd *cmd);
 int				wait_for_children(t_mini *mini, t_cmd *cmd);
 void			parent_closes_all_pipes(t_mini *mini);
+//env-i scenario
+int 			set_minimal_env(t_mini *mini, t_cmd *cmd);
+//standard fd backup and restore functions
+void			backup_standard_fd(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
+//error handling
+void			check_access(t_cmd *cmd);
+void			handle_errno_message(t_mini *mini, t_cmd *cmd);
+void			clean_fd_backup(t_mini *mini, t_cmd *cmd);
 //builtin exec
 char			*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name);
 int				set_env(t_mini *mini, char *env_key, char *env_row);
@@ -231,7 +237,6 @@ int				is_only_specific_char(char *s, char c);
 char			*epurstring(char *src);
 int				is_quote(char c);
 int				is_angle_bracket(char c);
-int				start_with(char *string, char *start_string);
 int				start_with_identifier(char *string, char *identifier);
 int				double_array_len(char **table);
 int				ft_strcmp_alpha(char *s1, char *s2);

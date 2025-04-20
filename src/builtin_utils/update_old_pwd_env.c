@@ -43,7 +43,6 @@ static char	*get_original_pwd_path(t_mini *mini)
 			return (0);
 		}
 	}
-	DEBUG("original_pwd_path is worth %s", original_pwd_path);
 	return (original_pwd_path);
 }
 

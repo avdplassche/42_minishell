@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_pipeline.c                                 :+:      :+:    :+:   */
+/*   command_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/18 17:52:22 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 12:48:09 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void check_access(t_cmd *cmd)
-{
-	errno = 0;
-
-	access(cmd->command, X_OK);
-	cmd->error_access = errno;
-	errno  = 0;
-}
-
-static void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
+void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
 {
 	if (mini->fd_backup)
 	{
@@ -34,35 +25,6 @@ static void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
 	}
 	exit(EXIT_FAILURE);
 }
-
-static void	handle_errno_message(t_mini *mini, t_cmd *cmd)
-{
-	if(cmd->error_access == EISDIR)
-	{
-		print_error("Minishell: %s: Is a directory.\n", cmd->command, 2);
-		mini->last_return = 126;
-		clean_fd_backup(mini, cmd);
-	}
-	if(cmd->error_access == EISDIR)
-	{
-		print_error("Minishell: %s: Is a directory.\n", cmd->command, 2);
-		mini->last_return = 126;
-		clean_fd_backup(mini, cmd);
-	}
-	if (cmd->error_access == ENOENT)
-	{
-		print_error("Minishell: %s: No such file or directory.\n", cmd->command, 2);
-		mini->last_return = 127;
-		clean_fd_backup(mini, cmd);
-	}
-	if (cmd->type == INVALID)
-	{
-		print_error("Minishell: %s: command not found\n", cmd->command, 2);
-		mini->last_return = 127;
-		clean_fd_backup(mini, cmd);
-	}
-}
-
 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
@@ -79,7 +41,7 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
 	}
-	if (cmd->error_access)
+	if (cmd->is_directory || cmd->error_access)
 	{
 		handle_errno_message(mini, cmd);
 		exit(EXIT_FAILURE);

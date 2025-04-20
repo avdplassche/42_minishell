@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:51:09 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/18 17:05:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 11:44:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	search_and_shrink(t_mini *mini, char **args_cursor)
 int builtin_unset(t_mini *mini, t_cmd *cmd)
 {
 	char	**args_cursor;
-	
+
 	if (cmd->args == 0)
 		mini->last_return = 0;
 	args_cursor = (cmd->args + 1);
