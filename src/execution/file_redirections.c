@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:20:50 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 20:25:11 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,31 @@ static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 }
 
-static void	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		perror(redir->name);
-		free_cmd(mini, cmd);
-		free_mini(mini);
-		exit(EXIT_FAILURE);
+		printf("entered the handle_out_redir function\n");
+		if (errno == EACCES)
+			print_error("Minishell: %s: Permission denied\n", redir->name, 2);
+		else if (errno == EISDIR)
+			print_error("Minishell: %s: Is a directory\n", redir->name, 2);
+		else if (errno == ENOENT)
+			print_error("Minishell: %s: No such file or directory\n", \
+				redir->name, 2);
+		else
+			print_error("Minishell: %s: Error opening file\n", redir->name, 2);
+		mini->last_return = 1;
+		return (1);
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
 	close(fd);
+	return (0);
 }
 
-static void	print_and_set_error(t_mini *mini, t_redir *redir, char *s,  int error_number)
-{
-	print_error(s, redir->name, 2);
-	mini->last_return = error_number;
-}
 
 static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
@@ -52,17 +56,15 @@ static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	{
 		printf("entered the handle_out_redir function\n");
 		if (errno == EACCES)
-			print_and_set_error(mini, redir, \
-				"Minishell: %s: Permission denied.\n", 126);
+			print_error("Minishell: %s: Permission denied\n", redir->name, 2);
 		else if (errno == EISDIR)
-			print_and_set_error(mini, redir, \
-				"Minishell: %s: Is a directory.\n", 126);
+			print_error("Minishell: %s: Is a directory\n", redir->name, 2);
 		else if (errno == ENOENT)
-			print_and_set_error(mini, redir, \
-				"Minishell: %s: No such file or directory.\n", 127);
+			print_error("Minishell: %s: No such file or directory\n", \
+				redir->name, 2);
 		else
-			print_and_set_error(mini, redir, \
-				"Minishell: %s: Error opening file.\n", 1);
+			print_error("Minishell: %s: Error opening file\n", redir->name, 2);
+		mini->last_return = 1;
 		return (1);
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
@@ -70,20 +72,28 @@ static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	return (0);
 }
 
-static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
 	fd = open(redir->name, O_RDONLY);
 	if (fd == -1)
 	{
-		perror(redir->name);
-		free_cmd(mini, cmd);
-		free_mini(mini);
-		exit(EXIT_FAILURE);
+		if (errno == EACCES)
+			print_error("Minishell: %s: Permission denied\n", redir->name, 2);
+		else if (errno == EISDIR)
+			print_error("%s: read failed: -: Is a directory\n", redir->name, 2);
+		else if (errno == ENOENT)
+			print_error("Minishell: %s: No such file or directory\n", \
+				redir->name, 2);
+		else
+			print_error("Minishell: %s: Error opening file\n", redir->name, 2);
+		mini->last_return = 1;
+		return (1);
 	}
 	dup2_fd(mini, cmd, fd, STDIN_FILENO);
 	close(fd);
+	return (0);
 }
 
 int	setup_redirections(t_mini *mini, t_cmd *cmd)
