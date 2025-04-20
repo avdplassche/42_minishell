@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 12:48:09 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:33:14 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,44 @@
 
 void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
 {
+	(void)cmd;
 	if (mini->fd_backup)
 	{
 		if (mini->fd_backup->stdin_backup > 0)
 			close(mini->fd_backup->stdin_backup);
 		if (mini->fd_backup->stdout_backup > 0)
 			close(mini->fd_backup->stdout_backup);
-		free_cmd(mini, cmd);
-		free_mini(mini);
 	}
-	exit(EXIT_FAILURE);
 }
 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
+	int				redir_status;
 	
+	redir_status = 0;
 	process_all_heredocs(mini, cmd);
 	connect_command_pipeline(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
-		setup_redirections(mini, cmd);
+	{
+		redir_status = setup_redirections(mini, cmd);
+		if (redir_status != 0)
+		{
+			
+			exit(mini->last_return);
+		}
+	}
 	check_access(cmd);
+	if (cmd->is_directory || cmd->error_access)
+	{
+		handle_errno_message(mini, cmd);
+		exit(mini->last_return);
+	}
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
-	}
-	if (cmd->is_directory || cmd->error_access)
-	{
-		handle_errno_message(mini, cmd);
-		exit(EXIT_FAILURE);
 	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{

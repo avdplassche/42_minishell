@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:14:08 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:44:57 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	get_in_pipe(t_mini *mini, t_cmd *cmd, int *hd_pipe, t_redir *redir)
 		*cursor = '\0';
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
-			free(line);
+			free_string_ptr(&line);
 			break ;
 		}
 		line = enquote_str(line, 34);

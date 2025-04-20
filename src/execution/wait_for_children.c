@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:07:13 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 16:45:17 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,34 @@
 
 int	wait_for_children(t_mini *mini, t_cmd *cmd)
 {
-	int	wstatus;
-	int	i;
-	int	exit_status;
+	int		wstatus;
+	int		exit_status;
+	pid_t	w;
+	int		signal_number;
 
-	i = 0;
-	while (i < mini->cmd_count)
+	exit_status = 0;
+	signal_number = 0;
+	while (1)
 	{
-		waitpid(cmd[i].pid, &wstatus, 0);
-		exit_status = WEXITSTATUS(wstatus);
-		if (exit_status == CMD_NOT_FOUND)
+		w = waitpid (-1, &wstatus, 0);
+		if (w == -1)
 		{
-			free_cmd(mini, cmd);
-			free_mini(mini);
+			if (errno == ECHILD)
+				break;
+			if (errno == EINTR)
+				continue;
+			perror("waitpid");
+			exit_minishell(mini, cmd);
 		}
-		i++;
+		if (WIFEXITED(wstatus) && !signal_number)
+		{
+			exit_status = WEXITSTATUS(wstatus);
+		}
+		else if (WIFSIGNALED(wstatus))
+		{
+			signal_number = 1;
+			exit_status  = 128 + WTERMSIG(wstatus);
+		}
 	}
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:51:09 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 11:44:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:43:01 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	search_and_shrink(t_mini *mini, char **args_cursor)
 			}
 			cursor++;
 		}
-		free(identifier);
+		free_string_ptr(&identifier);
 		args_cursor++;
 	}
 }

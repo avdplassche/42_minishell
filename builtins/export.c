@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:51 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/17 13:29:59 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:42:54 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	validate_export_args(t_mini *mini, t_cmd *cmd)
 			mini->last_return = CMD_NOT_FOUND;
 		}
 		set_env(mini, identifier, cmd->args[arg_index]);
-		free(identifier);
+		free_string_ptr(&identifier);
 	}
 }
 

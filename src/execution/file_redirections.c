@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 15:16:08 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:20:50 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ static void	print_and_set_error(t_mini *mini, t_redir *redir, char *s,  int erro
 	mini->last_return = error_number;
 }
 
-static void	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
+		printf("entered the handle_out_redir function\n");
 		if (errno == EACCES)
 			print_and_set_error(mini, redir, \
 				"Minishell: %s: Permission denied.\n", 126);
@@ -62,10 +63,11 @@ static void	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		else
 			print_and_set_error(mini, redir, \
 				"Minishell: %s: Error opening file.\n", 1);
-		clean_fd_backup(mini, cmd);
+		return (1);
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
 	close(fd);
+	return (0);
 }
 
 static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
@@ -84,11 +86,13 @@ static void	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	close(fd);
 }
 
-void	setup_redirections(t_mini *mini, t_cmd *cmd)
+int	setup_redirections(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
+	int	result;
 
 	i = 0;
+	result = 0;
 	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
@@ -96,9 +100,12 @@ void	setup_redirections(t_mini *mini, t_cmd *cmd)
 		else if (cmd->redir[i].type == IN_REDIR)
 			handle_in_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_REDIR)
-			handle_out_redir(mini, cmd, &cmd->redir[i]);
+			result = handle_out_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_APPEND)
 			handle_out_append(mini, cmd, &cmd->redir[i]);
+		if (result != 0)
+			break;
 		i++;
 	}
+	return (result);
 }

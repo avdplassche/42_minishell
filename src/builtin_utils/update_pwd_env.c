@@ -3,7 +3,7 @@
 
 static void	handle_error(t_mini *mini, char *ptr)
 {
-	free(ptr);
+	free_string_ptr(&ptr);
 	mini->last_return = MALLOC_ERROR;
 }
 

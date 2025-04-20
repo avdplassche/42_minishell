@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:17 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:23 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:39:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
  */
 void free_string_array(char ***array)
 {
-    int	i;
+	int	i;
 	
 	i = 0;
 	if (!array || !(*array))
-        return;   
-    i = 0;
-    while ((*array)[i])
-    {
-        free((*array)[i]);
-        (*array)[i] = NULL;
-        i++;
-    }
-    free(*array);
-    *array = NULL;
+		return;
+	i = 0;
+	while ((*array)[i])
+	{
+		free((*array)[i]);
+		(*array)[i] = NULL;
+		i++;
+	}
+	free(*array);
+	*array = NULL;
 }
 
 void	free_pathnames(t_cmd *cmd)

@@ -15,7 +15,7 @@ static void	modify_env_array(t_mini *mini, char	*env_entry)
 	temp_env = string_array_push(mini->envp, new_env_entry);
 	if (!temp_env)
 	{
-		free(new_env_entry);
+		free_string_ptr(&new_env_entry);
 		mini->last_return = MALLOC_ERROR;
 		return ;
 	}

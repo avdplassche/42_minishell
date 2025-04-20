@@ -52,6 +52,6 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 		free(big_array);
 		return (NULL);
 	}
-	free(new_ptr);
+	free_string_ptr(&new_ptr);
 	return (big_array);
 }

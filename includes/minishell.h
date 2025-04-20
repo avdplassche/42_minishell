@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 12:06:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:09:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,14 @@ void			free_wildcards(char *line, t_wildcard *w);
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
-void			handle_builtin(t_mini *mini, t_cmd *cmd);
+int				handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
 void			create_args_array(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
 void			set_and_execute_pipeline(t_mini *mini, t_cmd *cmd);
 void			connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index);
-void			setup_redirections(t_mini *mini, t_cmd *cmd);
+int				setup_redirections(t_mini *mini, t_cmd *cmd);
 int				wait_for_children(t_mini *mini, t_cmd *cmd);
 void			parent_closes_all_pipes(t_mini *mini);
 //env-i scenario

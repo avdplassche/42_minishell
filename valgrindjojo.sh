@@ -3,7 +3,6 @@
 make re
 make clean
 
-env -i \                # Start with empty environment
 valgrind --tool=memcheck \
   --track-origins=yes \
   --leak-check=full \
