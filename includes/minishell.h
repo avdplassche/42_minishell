@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:09:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:33:34 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int				init_mini(t_mini *mini, char **envp);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
+void			handler(int sig);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
