@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:41:11 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:41:39 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:04:58 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_valid_syntax(char *command)
 {
-	const char	set[7] = "&|><;()";
+	const char	set[8] = "&|><;()";
 	int			i;
 
 	i = -1;

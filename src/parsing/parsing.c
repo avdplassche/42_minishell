@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/16 18:36:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:07:38 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 			return (free_cmd(mini, cmd), set_return_value(mini, 2));
 	}
 	DEBUG("\n-----------------------------------------------\n");
-	exec_mini(mini, cmd);
+	// exec_mini(mini, cmd);
 	if (cmd)
 		free_cmd(mini, cmd);
 }
