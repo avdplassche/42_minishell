@@ -78,7 +78,8 @@ SRCS				=	main.c \
 						update_old_pwd_env.c \
 						update_pwd_env.c \
 						exit_minishell.c \
-						exit_minishell_utils.c
+						exit_minishell_utils.c \
+						malloc_checks.c 
 
 
 UTILS				=	contain_char.c \

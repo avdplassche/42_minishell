@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 17:58:27 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 19:23:40 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_access(t_cmd *cmd)
 {
 	errno = 0;
 
-	printf("path is worth %s\n", cmd->path);
+	DEBUG("path is worth %s\n", cmd->path);
 	if (cmd->type == BUILTIN)
 		return ;
 	if (cmd->is_directory)

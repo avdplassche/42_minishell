@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:17 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:39:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:02:08 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /** Frees char ** variables
- */
-void free_string_array(char ***array)
+*/
+void	free_string_array(char ***array)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!array || !(*array))
-		return;
+		return ;
 	i = 0;
 	while ((*array)[i])
 	{

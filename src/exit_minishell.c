@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 19:10:06 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:58:21 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@ void	free_string_ptr(char **str)
 	free(*str);
 	*str = NULL;
 }
-
-void	str_malloc_check(t_mini *mini, char *str)
-{
-	if (!str)
-		exit_minishell(mini, mini->cmd);
-}
-
-void	dbl_str_malloc_check(t_mini *mini, char **str)
-{
-	if (!str)
-		exit_minishell(mini, mini->cmd);
-}
-
 
 void	free_cmd(t_mini *mini, t_cmd *cmd)
 {
@@ -79,26 +66,6 @@ void	free_mini(t_mini *mini)
 	}
 	free_string_ptr(&mini->line);
 }
-
-// void	free_dollar_alloc(t_mini *mini)
-// {
-// 	if (mini->alloc.line_out)
-// 		free_string_ptr(mini->alloc.line_out);
-// 	if (mini->alloc.prefix)
-// 		free_string_ptr(mini->alloc.prefix);
-// 	if (mini->alloc.suffix)
-// 		free_string_ptr(mini->alloc.suffix);
-// 	if (mini->alloc.number)
-// 		free_string_ptr(mini->alloc.number);
-// 	if (mini->alloc.temp)
-// 		free_string_ptr(mini->alloc.temp);
-// 	if (mini->alloc.var_name)
-// 		free_string_ptr(mini->alloc.var_name);
-// 	if (mini->alloc.var_env)
-// 		free_string_ptr(mini->alloc.var_env);
-// 	if (mini->alloc.var_value)
-// 		free_string_ptr(mini->alloc.var_value);
-// }
 
 void	exit_minishell(t_mini *mini, t_cmd *cmd)
 {
