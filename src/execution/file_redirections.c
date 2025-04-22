@@ -6,19 +6,20 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 20:54:19 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:32:50 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	if (redir->heredoc_fd != -1)
 	{
 		dup2_fd(mini, cmd, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
 	}
+	return (0);
 }
 
 static int handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
@@ -106,7 +107,7 @@ int	setup_redirections(t_mini *mini, t_cmd *cmd)
 	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
-			handle_heredoc_redir(mini, cmd, &cmd->redir[i]);
+			result = handle_heredoc_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == IN_REDIR)
 			result = handle_in_redir(mini, cmd, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_REDIR)
