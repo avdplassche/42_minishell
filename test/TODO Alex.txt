@@ -20,3 +20,8 @@ problem is in is_user_command
 
 unset PATH
 ls
+
+
+	if (is_only_specific_char(mini->line, 34) || is_only_specific_char(mini->line, 39))
+		return (print_error("minishell: command '' not found\n", mini->line, 2)
+			, set_return_value(mini, 127));

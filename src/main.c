@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 11:54:17 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:16:23 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int	main(int argc, char **argv, char **envp)
 		if (input == NULL)
 		{
 			mini.should_exit = true;
-			break;
+			break ;
 		}
 		add_history(input);
 		mini.line = ft_strtrim(input, SPACES);
 		free(input);
 		str_malloc_check(&mini, mini.line);
 		mini.cmd_count = count_cmd(&mini);
-		if ((!(is_only_spaces(mini.line)) || mini.line[0] != '#') && mini.line[0])
+		if ((!(is_only_spaces(mini.line)) || mini.line[0] != '#')
+			&& mini.line[0])
 			parsing(&mini, cmd);
 		if (mini.should_exit)
 			break;

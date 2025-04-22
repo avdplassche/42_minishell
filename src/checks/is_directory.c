@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_directory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:46 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/18 16:05:27 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:36:36 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ int	is_directory(char *line)
 		if (!folder)
 			return (0);
 		s_dir = readdir(folder);
-		closedir(folder);
 		if (s_dir->d_type == 4)
+		{
+			closedir(folder);
 			return (1);
+		}
+		closedir(folder);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 10:44:23 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:01:17 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,14 +261,13 @@ char			*string_array_join(char	**array);
 
 void			print_error(const char *format, const char *path, int fd);
 
-/* * * * * * * * * * * FREEING FUNCTIONS * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * FREE FUNCTIONS * * * * * * * * * * * * * * */
 
 void			free_string_array(char ***str);
 void			free_wildcard_struct(t_wildcard *w);
 void			free_cmd(t_mini *mini, t_cmd *cmd);
 void			free_mini(t_mini *mini);
 void			free_pathnames(t_cmd *cmd);
-// void			free_wildcard_struct(t_wildcard *w);
 void			exit_minishell(t_mini *mini, t_cmd *cmd);
 void			free_string_ptr(char **str);
 void			str_malloc_check(t_mini *mini, char *str);

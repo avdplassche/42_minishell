@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/22 12:03:44 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:58:16 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 	while (++i < mini->cmd_count)
 		cmd_fill_loop(mini, &cmd[i], i);
 	DEBUG("\n-----------------------------------------------\n");
-	exec_mini(mini, cmd);
+	// exec_mini(mini, cmd);
 	if (cmd)
 		free_cmd(mini, cmd);
 }

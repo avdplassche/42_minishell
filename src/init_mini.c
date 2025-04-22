@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 /** Count command amount in command line, that will be used for pipes.
@@ -68,7 +67,6 @@ void	set_path(t_mini *mini)
 		free(env);
 }
 
-
 void	init_mini_pointers(t_mini *mini)
 {
 	mini->envp = NULL;
@@ -88,7 +86,8 @@ void	init_mini_pointers(t_mini *mini)
 int	init_mini(t_mini *mini, char **envp)
 {
 	init_mini_pointers(mini);
-	mini->builtins = ft_split(BUILTINS_STRING, ',');
+	if (BUILTINS_STRING)
+		mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
 		exit_minishell(mini, mini->cmd);
 	mini->last_return = 0;

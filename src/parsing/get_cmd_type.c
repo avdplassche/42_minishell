@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/22 12:11:45 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:13:55 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 	return (0);
 }
 
-
 /** Fill cmd type token
  * @param mini t_mini structure, containing current line to work with
  * @param cmd cmd struct
@@ -54,7 +53,7 @@ int	get_cmd_type(t_mini *mini, t_cmd *cmd)
 	int	len;
 
 	i = -1;
-	if (cmd->redir_amount && !cmd->args[1])
+	if (cmd->redir_amount && !cmd->args[0][0])
 		return (INVALID);
 	len = ft_strlen(cmd->command);
 	if (!(ft_strncmp(cmd->command, "echo", len)))

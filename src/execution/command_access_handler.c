@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_access_handler.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 21:56:15 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:02:01 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_access(t_cmd *cmd)
 {
 	errno = 0;
 
-	printf("path is worth %s\n", cmd->path);
+	DEBUG("path is worth %s\n", cmd->path);
 	if (cmd->type == BUILTIN)
 		return ;
 	if (cmd->is_directory)

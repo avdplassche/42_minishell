@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:44:25 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/08 16:58:39 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:10:00 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*ft_fill(char *s, char c)
 	}
 	str[j] = '\0';
 	while (s[i] != c && s[i])
-			i++;
+		i++;
 	return (str);
 }
 
@@ -78,8 +78,6 @@ char	**ft_split(char *s, char c)
 
 	j = 0;
 	i = 0;
-	if (!s)
-		return (NULL);
 	tab = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
 	if (!tab)
 		return (NULL);
