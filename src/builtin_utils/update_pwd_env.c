@@ -3,7 +3,7 @@
 
 static void	handle_error(t_mini *mini, char *ptr)
 {
-	free(ptr);
+	free_string_ptr(&ptr);
 	mini->last_return = MALLOC_ERROR;
 }
 
@@ -28,7 +28,7 @@ int	update_pwd_env(t_mini *mini, char *env_var)
 		handle_error(mini, env_key);
 		return (mini->last_return);
 	}
-	set_env(mini, env_key, env_row);
+	set_env(mini, env_var, env_row);
 	free_string_ptr(&env_key);
 	free_string_ptr(&env_row);
 	free_string_ptr(&new_cwd);

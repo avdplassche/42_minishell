@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:57:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 21:35:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_mini
 	char			**envp;
 	char			**export;
 	char			**builtins;
-	char			**paths;
+	char			**paths; //we need to take away path 
 	char			*line;
 	int				cmd_count;
 	int				last_return;
@@ -119,6 +119,7 @@ typedef struct s_cmd
 {
 	char			*command;
 	bool			is_directory;
+	int				error_access;
 	char			*path;
 	int				type;
 	char			**args;

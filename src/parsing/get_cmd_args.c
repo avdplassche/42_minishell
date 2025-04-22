@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:07 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:08 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:51:23 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	init_arguments(t_mini *mini, t_cmd *cmd)
 
 	i = 0;
 	cmd->arg_amount = count_arguments(mini);
-	cmd->args = (char **)malloc(sizeof(char *) * (cmd->arg_amount + 2));
+	cmd->args = ft_calloc((cmd->arg_amount + 2), sizeof(char *));
 	if (!cmd->args)
 		exit_minishell(mini, cmd);
 	init_arguments_ptrs(cmd);

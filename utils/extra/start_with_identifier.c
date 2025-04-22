@@ -1,49 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_minishell_utils.c                             :+:      :+:    :+:   */
+/*   start_with_identifier.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 12:01:17 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:39:26 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/14 15:00:14 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/16 18:54:36 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/** Frees char ** variables
- */
-void free_string_array(char ***array)
+int	start_with_identifier(char *string, char *identifier)
 {
-	int	i;
-	
-	i = 0;
-	if (!array || !(*array))
-		return;
-	i = 0;
-	while ((*array)[i])
+	while (*string && *identifier)
 	{
-		free((*array)[i]);
-		(*array)[i] = NULL;
-		i++;
+		if (*identifier != *string)
+			return (0);
+		identifier++;
+		string++;
 	}
-	free(*array);
-	*array = NULL;
-}
-
-void	free_pathnames(t_cmd *cmd)
-{
-	int	i;
-
-	if (!(cmd->redir))
-		return ;
-	i = 0;
-	while (i < cmd->redir_amount)
-	{
-		free(cmd->redir[i].name);
-		i++;
-	}
-	free(cmd->redir);
-	cmd->redir = NULL;
+	if (*identifier)
+		return (0);
+	if (*string == '=' || *string == '\0')
+		return (1);
+	return (0);
 }

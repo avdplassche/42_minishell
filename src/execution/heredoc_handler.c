@@ -6,19 +6,19 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:14:08 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 22:37:07 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_in_pipe(t_mini *mini, t_cmd *cmd, int *hd_pipe, t_redir *redir)
+static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
 {
 	char	*line;
 	char	*cursor;
 	char	*prompt;
 
-	prompt = string_array_join((char *[]){"Heredoc(", cmd->redir->name, ") > ", NULL});
+	prompt = "> ";
 	while (1)
 	{
 		line = readline(prompt);
@@ -28,7 +28,7 @@ static void	get_in_pipe(t_mini *mini, t_cmd *cmd, int *hd_pipe, t_redir *redir)
 		*cursor = '\0';
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
-			free(line);
+			free_string_ptr(&line);
 			break ;
 		}
 		line = enquote_str(line, 34);
@@ -50,7 +50,7 @@ static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		mini->last_return = PIPE_ERROR;
 		exit_minishell(mini, cmd);
 	}
-	get_in_pipe(mini, cmd, hd_pipe, redir);
+	get_in_pipe(mini, hd_pipe, redir);
 	close(hd_pipe[1]);
 	redir->heredoc_fd = hd_pipe[0];
 }

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_with.c                                       :+:      :+:    :+:   */
+/*   string_array_find_identifier.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 15:00:14 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 15:00:15 by alvan-de         ###   ########.fr       */
+/*   Created: 2025/04/16 17:24:54 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/16 17:42:02 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	start_with(char *string, char *start_string)
+char	*string_array_find_identifier(char	**string_array, char *identifier)
 {
-	int	i;
-
-	i = 0;
-	while (string[i] && start_string[i])
+	while (*string_array)
 	{
-		if (!string[i] || string[i] != start_string[i])
-			return (0);
-		i++;
+		if (start_with_identifier(*string_array, identifier))
+			return (*string_array);
+		string_array++;
 	}
-	return (1);
+	return (NULL);
 }

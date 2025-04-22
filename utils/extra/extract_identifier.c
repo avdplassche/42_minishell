@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_directory.c                                     :+:      :+:    :+:   */
+/*   extract_identifier.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 14:40:46 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/18 16:05:27 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/16 18:06:31 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/17 12:53:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_directory(char *line)
+char	*extract_identifier(t_mini *mini, char *src)
 {
-	DIR				*folder;
-	struct dirent	*s_dir;
+	int		char_index;
+	char	*identifier;
 
-	if (access(line, F_OK) == 0)
-	{
-		folder = opendir(line);
-		if (!folder)
-			return (0);
-		s_dir = readdir(folder);
-		closedir(folder);
-		if (s_dir->d_type == 4)
-			return (1);
-	}
-	return (0);
+	char_index = 0;
+	while (src[char_index] && src[char_index] != '=')
+		char_index++;
+	identifier = ft_calloc((char_index + 1), sizeof(char));
+	if (!identifier)
+		mini->last_return = MALLOC_ERROR;
+	ft_strlcpy(identifier, src, char_index + 1);
+	return (identifier);
 }

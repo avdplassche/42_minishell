@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:20:49 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/17 17:24:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	builtin_env(t_mini *mini, t_cmd *cmd)
 {
 	(void)cmd;
-	if (!mini->envp)
+	if (!mini->envp || !*mini->envp)
 	{
-		DEBUG("env is not there\n");
-		return (-1);
+		return (1);
 	}
 	if (cmd->arg_amount >= 1)
 	{

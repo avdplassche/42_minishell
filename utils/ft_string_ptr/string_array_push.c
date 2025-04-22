@@ -7,14 +7,28 @@
 char	**string_array_push(char **original_arr, char *new_ptr)
 {
 	char	**big_array;
+	char	**current;
 	int		original_len;
 	int		i;
 
-	original_len = string_array_len(original_arr);
-	big_array = malloc(sizeof(char *) * (original_len + 1 + 1));
-	if (!big_array)
+	if (!*original_arr)
 	{
-		return (NULL);
+		big_array = ft_calloc(2, sizeof(char *));
+		if (!big_array)
+			return (NULL);
+		current = big_array;
+		*current = ft_strdup(new_ptr);
+		*(current + 1) = NULL;
+		return (big_array);
+	}
+	else
+	{
+		original_len = string_array_len(original_arr);
+		big_array = ft_calloc(original_len + 2, sizeof(char *));
+		if (!big_array)
+		{
+			return (NULL);
+		}
 	}
 	i = 0;
 	while (original_arr[i])
@@ -38,7 +52,6 @@ char	**string_array_push(char **original_arr, char *new_ptr)
 		free(big_array);
 		return (NULL);
 	}
-	free(new_ptr);
-	big_array[i + 1] = NULL;
+	free_string_ptr(&new_ptr);
 	return (big_array);
 }

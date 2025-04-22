@@ -1,65 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_pipeline.c                                 :+:      :+:    :+:   */
+/*   command_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:04:21 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/20 21:59:11 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
+{
+	(void)cmd;
+	if (mini->fd_backup)
+	{
+		if (mini->fd_backup->stdin_backup > 0)
+			close(mini->fd_backup->stdin_backup);
+		if (mini->fd_backup->stdout_backup > 0)
+			close(mini->fd_backup->stdout_backup);
+	}
+}
+
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
+	int				redir_status;
 	
+	redir_status = 0;
 	process_all_heredocs(mini, cmd);
 	connect_command_pipeline(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
-		setup_redirections(mini, cmd);
+	{
+		redir_status = setup_redirections(mini, cmd);
+		if (redir_status != 0)
+		{
+			clean_fd_backup(mini, cmd);
+			free_cmd(mini, cmd);
+			free_mini(mini);
+			exit(mini->last_return);
+		}
+	}
+	check_access(cmd);
+	if (cmd->is_directory || cmd->error_access)
+	{
+		handle_errno_message(mini, cmd);
+		exit(mini->last_return);
+	}
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		exit(EXIT_SUCCESS);
 	}
-	if (!cmd->args)
-		create_args_array(mini, cmd);
-	if(cmd->is_directory)
-	{
-		print_error("Minishell: %s: Is a direwctory.\n", cmd->command, 2);
-		mini->last_return = 126;
-		if (mini->fd_backup)
-		{
-			if (mini->fd_backup->stdin_backup > 0)
-				close(mini->fd_backup->stdin_backup);
-			if (mini->fd_backup->stdout_backup > 0)
-				close(mini->fd_backup->stdout_backup);
-			free_cmd(mini, cmd);
-			free_mini(mini);
-		}
-		exit(EXIT_FAILURE);
-	}
-	if (cmd->type == INVALID)
-	{
-		print_error("Minishell: %s: command not found\n", cmd->command, 2);
-		mini->last_return = CMD_NOT_FOUND;
-		if (mini->fd_backup)
-		{
-			if (mini->fd_backup->stdin_backup > 0)
-				close(mini->fd_backup->stdin_backup);
-			if (mini->fd_backup->stdout_backup > 0)
-				close(mini->fd_backup->stdout_backup);
-			free_cmd(mini, cmd);
-			free_mini(mini);
-		}
-		exit(EXIT_FAILURE);
-	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
+		printf("execve failed with errno: %d\n", errno);
 		perror("execve");
 		mini->last_return = MALLOC_ERROR;
 		exit(EXIT_FAILURE);
@@ -77,14 +75,9 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-	{
-		//SIGNALCHILD
 		handle_command_execution(mini, cmd, cmd_index);
-	}
 	else
-	{
 		cmd->pid = pid;
-	}
 }
 
 static void	create_pipes(t_mini *mini, t_cmd *cmd)
