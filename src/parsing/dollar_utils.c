@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:43 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:25:45 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:38:15 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 
 int	is_minishell_punct(char c)
 {
-	if (c == '!' || ('#' <= c && c <= '&')
+	if (c == '!' || ('#' <= c && c <= '&')   /* CHECK  */
 		|| ('(' <= c && c <= '/')
 		|| c == ':' || c == ';' || c == '='
 		|| c == '?' || c == '@' || c == '['
-		|| c == ']' || c == '^' || c == '_'
+		|| c == ']' || c == '^'
 		|| c == '{' || c == '}' || c == '~')
 		return (1);
 	return (0);

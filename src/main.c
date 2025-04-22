@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 10:39:12 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:44:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 
 /************************ /TEST MODE ***************************** */
 
-	rl_clear_history();
+	// rl_clear_history();
 	free_mini(&mini);
 	DEBUG_CLOSE;
 	return (mini.last_return);

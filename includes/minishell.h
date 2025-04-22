@@ -6,9 +6,10 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/21 18:33:34 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:44:23 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -66,6 +67,7 @@
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
 int				init_mini(t_mini *mini, char **envp);
+void			set_path(t_mini *mini);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
