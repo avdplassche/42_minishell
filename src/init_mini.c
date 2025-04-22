@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:33 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:17:57 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:33:46 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,27 @@ int	dup_env(t_mini *mini, char **envp)
 	return (0);
 }
 
+void	set_path(t_mini *mini)
+{
+	char	*env;
+
+	env = NULL;
+	if (mini->paths)
+		free_string_array(&mini->paths);
+	env = ft_get_env(mini, "PATH");
+	mini->paths = ft_split(env, ':');
+	dbl_str_malloc_check(mini, mini->paths);
+	free(env);
+}
+
+
 /** Fill t_mini mini's variable
  * @param mini an empty t_mini_structure
  * @param envp the terminal env variable
  */
 int	init_mini(t_mini *mini, char **envp)
 {
-	char	*env;
+	// char	*env;
 
 	ft_bzero(mini, sizeof(*mini));
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
@@ -76,18 +90,14 @@ int	init_mini(t_mini *mini, char **envp)
 		exit_minishell(mini, mini->cmd);
 	mini->last_return = 0;
 	if (envp[0])
-	{
 		dup_env(mini, envp);
-		DEBUG("test\n");
-	}
 	else
-	{
 		mini->envp = NULL;
-		DEBUG("Second test\n");
-	}
-	env = ft_get_env(mini, "PATH");
-	mini->paths = ft_split(env, ':');
-	free(env);
+	mini->paths = NULL;
+	set_path(mini);
+	// env = ft_get_env(mini, "PATH");
+	// mini->paths = ft_split(env, ':');
+	// free(env);
 	if (!mini->paths)
 		return (MALLOC_ERROR);
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));

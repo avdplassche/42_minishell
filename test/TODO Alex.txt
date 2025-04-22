@@ -15,4 +15,8 @@ Jojo checks in exec
 
 
 
+<<eof1 <eof2
+
+Why does it exi
+
 

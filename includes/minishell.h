@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/21 19:41:17 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:31:28 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
 int				init_mini(t_mini *mini, char **envp);
+void			set_path(t_mini *mini);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
