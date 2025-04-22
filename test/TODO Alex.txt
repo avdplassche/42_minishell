@@ -14,9 +14,9 @@ Jojo checks in exec
 			, set_return_value(mini, 2));
 
 
+cursor not moving problem
 
-<<eof1 <eof2
+problem is in is_user_command
 
-Why does it exi
-
-
+unset PATH
+ls
