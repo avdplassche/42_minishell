@@ -6,7 +6,11 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/22 18:01:17 by alvan-de         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/22 12:03:23 by jrandet          ###   ########.fr       */
+>>>>>>> fcf59c341d4c971d48ee7ab8c15770c1e791d599
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +75,7 @@ void			set_path(t_mini *mini);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
+void			signal_child(void);
 void			handler(int sig);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
