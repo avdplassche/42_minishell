@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 11:54:17 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:59:27 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*cmd;
 	char	*input;
 
-	signal_list();
 	if (init_mini(&mini, envp) == -1)
 		return (EXIT_FAILURE);
 	while (argc == 1)
 	{
+		setup_signal_handlers(&mini);
 		cmd = NULL;
 		mini.cursor = 0;
 		input = readline("Prompt minishell ➤ ");

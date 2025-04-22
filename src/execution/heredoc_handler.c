@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 22:37:07 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:56:48 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
 	char	*line;
 	char	*cursor;
 	char	*prompt;
+	char	*tmp;
 
 	prompt = "> ";
 	while (1)
@@ -31,13 +32,15 @@ static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
 			free_string_ptr(&line);
 			break ;
 		}
-		line = enquote_str(line, 34);
+		tmp = enquote_str(line, 34);
+		free(line);
+		line = tmp;
+		tmp = NULL;
 		line = dollar_handle(mini, line);
 		line = clean_command_quotes(mini, line);
 		write(hd_pipe[1], line, ft_strlen(line));
 		write(hd_pipe[1], "\n", 1);
-		free(line);
-		line = NULL;
+		free_string_ptr(&line);
 	}
 }
 

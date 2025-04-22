@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:39:50 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:57:40 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	handle_builtin(t_mini *mini, t_cmd *cmd)
 	int				redirection_status;
 
 	redirection_status = 0;
+	if (check_command_synthax(mini, cmd))
+			return (mini->last_return);
 	backup_standard_fd(mini);
 	if (cmd->redir_amount > 0)
 	{
@@ -98,6 +100,8 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 		|| cmd->type == INVALID)
 	{
 		backup_standard_fd(mini);
+		if (check_command_synthax(mini, cmd))
+			return (mini->last_return);
 		set_and_execute_pipeline(mini, cmd);
 		restore_standard_fd(mini);
 		if (mini->last_return == CMD_NOT_FOUND)

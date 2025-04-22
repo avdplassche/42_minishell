@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 21:56:15 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:58:27 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,34 @@ void	check_access(t_cmd *cmd)
 	access(cmd->path, F_OK | X_OK);
 	cmd->error_access = errno;
 	errno = 0;
+}
+
+void	print_and_set_error(t_mini *mini, t_cmd *cmd, char *error, int erno)
+{
+	print_error(error, cmd->command, 2);
+	mini->last_return = erno;
+	clean_fd_backup(mini, cmd);
+}
+
+int	check_command_synthax(t_mini *mini, t_cmd *cmd)
+{
+	if (is_only_specific_char(mini->line, '%'))
+	{
+		print_and_set_error(mini, cmd, "minishell: fg: %s: no such job\n", 2);
+		return (1);
+	}
+	else if (!ft_strcmp(cmd->command, "."))
+	{
+		print_and_set_error(mini, cmd, "minishell .: filename argument required\n", 2);
+		return (1);
+	}
+	else if (is_only_specific_char(mini->line, 34)
+		|| is_only_specific_char(mini->line, 39))
+	{
+		ft_putstr_fd("minishell: command not found\n", 2);
+		return (1);
+	}
+	return (0);
 }
 
 void	handle_errno_message(t_mini *mini, t_cmd *cmd)
