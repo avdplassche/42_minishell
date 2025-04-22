@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_mini.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 12:01:33 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 10:33:46 by alvan-de         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-=======
->>>>>>> main
 
 #include "minishell.h"
 
@@ -65,7 +51,6 @@ int	dup_env(t_mini *mini, char **envp)
 	return (0);
 }
 
-<<<<<<< HEAD
 void	set_path(t_mini *mini)
 {
 	char	*env;
@@ -73,14 +58,13 @@ void	set_path(t_mini *mini)
 	env = NULL;
 	if (mini->paths)
 		free_string_array(&mini->paths);
-	env = ft_get_env(mini, "PATH");
+	env = ft_get_env(mini, NULL, "PATH");
 	mini->paths = ft_split(env, ':');
 	dbl_str_malloc_check(mini, mini->paths);
 	free(env);
 }
 
 
-=======
 void	init_mini_pointers(t_mini *mini)
 {
 	mini->envp = NULL;
@@ -93,48 +77,27 @@ void	init_mini_pointers(t_mini *mini)
 	mini->export = NULL;
 }
 
->>>>>>> main
 /** Fill t_mini mini's variable
  * @param mini an empty t_mini_structure
  * @param envp the terminal env variable
  */
 int	init_mini(t_mini *mini, char **envp)
 {
-	// char	*env;
-
 	init_mini_pointers(mini);
 	mini->builtins = ft_split(BUILTINS_STRING, ',');
 	if (!mini->builtins)
 		exit_minishell(mini, mini->cmd);
 	mini->last_return = 0;
-<<<<<<< HEAD
 	if (envp[0])
 		dup_env(mini, envp);
 	else
 		mini->envp = NULL;
-	mini->paths = NULL;
 	set_path(mini);
-	// env = ft_get_env(mini, "PATH");
-	// mini->paths = ft_split(env, ':');
-	// free(env);
-	if (!mini->paths)
-		return (MALLOC_ERROR);
-=======
-	if (envp)
-		dup_env(mini, envp);
-	else
-		mini->envp = NULL;
-	env = ft_get_env(mini, NULL, "PATH");
->>>>>>> main
 	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));
 	if (!mini->fd_backup)
 		return (MALLOC_ERROR);
 	mini->fd_backup->stdin_backup = -1;
 	mini->fd_backup->stdout_backup = -1;
 	mini->should_exit = false;
-	mini->paths = ft_split(env, ':');
-	free(env);
-	if (!mini->paths)
-		return (MALLOC_ERROR);
 	return (0);
 }

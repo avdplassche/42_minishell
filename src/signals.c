@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:58 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 10:43:59 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:13:31 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	handle_sigquit(int sig)
 
 void	signal_child(void)
 {
-
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	signal_list(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	//signal(SIGQUIT, handle_sigquit);
 	signal(SIGQUIT, SIG_IGN);
 }
 

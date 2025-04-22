@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/21 18:15:40 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:00:18 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-
+	{
+		signal_child();
 		handle_command_execution(mini, cmd, cmd_index);
+	}
 	else
 		cmd->pid = pid;
 }

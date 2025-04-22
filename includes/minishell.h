@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:04 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 10:44:23 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:03:23 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			set_path(t_mini *mini);
 int				count_cmd(t_mini *mini);
 
 void			signal_list(void);
+void			signal_child(void);
 void			handler(int sig);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
