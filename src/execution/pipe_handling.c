@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_redirections.c                                :+:      :+:    :+:   */
+/*   pipe_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:07:05 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:13:13 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ void	connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		close(mini->pipes[i].read);
 		close(mini->pipes[i].write);
+		i++;
+	}
+}
+
+void	create_pipes(t_mini *mini, t_cmd *cmd)
+{
+	int			i;
+
+	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
+	if (!mini->pipes)
+	{
+		mini->last_return = MALLOC_ERROR;
+		exit_minishell(mini, cmd);
+	}
+	i = 0;
+	while (i < mini->cmd_count - 1)
+	{
+		if (pipe(mini->pipes[i].fildes) == -1)
+		{
+			mini->last_return = MALLOC_ERROR;
+			exit_minishell(mini, cmd);
+		}
+		cmd[i].pipe_out = &mini->pipes[i];
+		cmd[i + 1].pipe_in = &mini->pipes[i];
 		i++;
 	}
 }

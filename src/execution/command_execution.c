@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 19:21:39 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:10:55 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,6 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 	else
 		cmd->pid = pid;
-}
-
-static void	create_pipes(t_mini *mini, t_cmd *cmd)
-{
-	int			i;
-
-	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
-	if (!mini->pipes)
-	{
-		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
-	}
-	i = 0;
-	while (i < mini->cmd_count - 1)
-	{
-		if (pipe(mini->pipes[i].fildes) == -1)
-		{
-			mini->last_return = MALLOC_ERROR;
-			exit_minishell(mini, cmd);
-		}
-		cmd[i].pipe_out = &mini->pipes[i];
-		cmd[i + 1].pipe_in = &mini->pipes[i];
-		i++;
-	}
 }
 
 void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)

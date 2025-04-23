@@ -62,14 +62,14 @@ SRCS				=	main.c \
 						is_valid_syntax.c \
 						is_valid_arithmetic_exit.c \
 						command_execution.c \
-						command_access_handler.c \
 						create_args_array.c \
 						exec_mini.c \
 						fd_backup_utils.c \
 						fd_utils.c \
 						file_redirections.c \
 						heredoc_handler.c \
-						pipe_redirections.c \
+						pipe_handling.c \
+						validate_command_access.c \
 						wait_for_children.c \
 						get_current_workdir.c \
 						get_new_env_row.c \

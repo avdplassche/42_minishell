@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 17:29:59 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:15:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	handle_builtin(t_mini *mini, t_cmd *cmd)
 		redirection_status = setup_redirections(mini, cmd);
 		if (redirection_status != 0)
 		{
-			printf("redirection has failed\n");
 			clean_fd_backup(mini, cmd);
 			return (mini->last_return);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 18:19:36 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:15:58 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		printf("entered the handle_out_redir function\n");
 		if (errno == EACCES)
 			print_error("Minishell: %s: Permission denied\n", redir->name, 2);
 		else if (errno == EISDIR)
@@ -56,7 +55,6 @@ static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	fd = open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		printf("entered the handle_out_redir function\n");
 		if (errno == EACCES)
 			print_error("Minishell: %s: Permission denied\n", redir->name, 2);
 		else if (errno == EISDIR)
