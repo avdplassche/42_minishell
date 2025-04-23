@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 10:33:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:06:00 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		setup_signal_handlers(&mini);
 		cmd = NULL;
-		mini.cursor = 0;
 		input = readline("Prompt minishell ➤ ");
-		if (input == NULL)
-		{
-			mini.should_exit = true;
+		if (!input)
 			break ;
-		}
 		add_history(input);
 		mini.line = ft_strtrim(input, SPACES);
 		free(input);
@@ -73,20 +69,12 @@ int	main(int argc, char **argv, char **envp)
 		if ((!(is_only_spaces(mini.line)) || mini.line[0] != '#')
 			&& mini.line[0])
 			parsing(&mini, cmd);
-		if (mini.should_exit)
-			break;
-		if (mini.line)
-			free(mini.line);
-		mini.line = NULL;
+		free_string_ptr(&mini.line);
 	}
-
-/************************ TEST MODE/ ****************************** */
+/*********************** TEST MODE/ ****************************** */
 	if (argc == 3)
-	{
 		loop_3args(argv, mini, cmd);
-	}
 /************************ /TEST MODE ***************************** */
-
 	rl_clear_history();
 	free_mini(&mini);
 	DEBUG_CLOSE;
