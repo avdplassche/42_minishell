@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 17:57:40 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:02:27 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,6 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 			return (mini->last_return);
 		set_and_execute_pipeline(mini, cmd);
 		restore_standard_fd(mini);
-		if (mini->last_return == CMD_NOT_FOUND)
-		{
-			exit_minishell(mini, cmd);
-		}
 	}
 	return (mini->last_return);
 }
