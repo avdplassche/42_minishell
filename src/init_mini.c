@@ -59,8 +59,8 @@ void	set_path(t_mini *mini)
 		free_string_array(&mini->paths);
 	env = ft_get_env(mini, NULL, "PATH");
 	if (env)
+	mini->paths = ft_split(env, ':');
 	{
-		mini->paths = ft_split(env, ':');
 		dbl_str_malloc_check(mini, mini->paths);
 	}
 	if (env)
