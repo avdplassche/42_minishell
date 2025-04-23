@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 12:00:18 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 19:21:39 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ void	clean_fd_backup(t_mini *mini, t_cmd *cmd)
 	}
 }
 
+static void	free_and_exit(t_mini *mini, t_cmd *cmd)
+{
+	clean_fd_backup(mini, cmd);
+	free_cmd(mini, cmd);
+	free_mini(mini);
+	exit(mini->last_return);
+}
+
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
@@ -31,22 +39,21 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	
 	redir_status = 0;
 	process_all_heredocs(mini, cmd);
+	if (cmd->command[0] == '\0')
+		free_and_exit(mini, cmd);
 	connect_command_pipeline(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
 	{
 		redir_status = setup_redirections(mini, cmd);
 		if (redir_status != 0)
-		{
-			clean_fd_backup(mini, cmd);
-			free_cmd(mini, cmd);
-			free_mini(mini);
-			exit(mini->last_return);
-		}
+			free_and_exit(mini, cmd);
 	}
 	check_access(cmd);
 	if (cmd->is_directory || cmd->error_access)
 	{
 		handle_errno_message(mini, cmd);
+		free_cmd(mini, cmd);
+		free_mini(mini);
 		exit(mini->last_return);
 	}
 	if (cmd->type == BUILTIN)
@@ -113,6 +120,7 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 
 	cmd_index = 0;
 	create_pipes(mini, cmd);
+	setup_command_signal(mini);
 	while (cmd_index < mini->cmd_count)
 	{
 		fork_command_executor(mini, &cmd[cmd_index], cmd_index);
@@ -120,4 +128,5 @@ void	set_and_execute_pipeline(t_mini *mini, t_cmd *cmd)
 	}
 	parent_closes_all_pipes(mini);
 	mini->last_return = wait_for_children(mini, cmd);
+	setup_command_signal(mini);
 }

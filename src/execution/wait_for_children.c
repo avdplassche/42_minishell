@@ -6,11 +6,21 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 16:45:17 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:24:12 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	handle_fork_signal(int *signal_number, int *exit_status, int wstatus)
+{
+	*signal_number = 1;
+	*exit_status  = 128 + WTERMSIG(wstatus);
+	if (WTERMSIG(wstatus) == SIGINT)
+		write(STDERR_FILENO, "\n", 1);
+	else if (WTERMSIG(wstatus) == SIGQUIT)
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+}
 
 int	wait_for_children(t_mini *mini, t_cmd *cmd)
 {
@@ -34,14 +44,9 @@ int	wait_for_children(t_mini *mini, t_cmd *cmd)
 			exit_minishell(mini, cmd);
 		}
 		if (WIFEXITED(wstatus) && !signal_number)
-		{
 			exit_status = WEXITSTATUS(wstatus);
-		}
 		else if (WIFSIGNALED(wstatus))
-		{
-			signal_number = 1;
-			exit_status  = 128 + WTERMSIG(wstatus);
-		}
+			handle_fork_signal(&signal_number, &exit_status, wstatus);
 	}
 	return (exit_status);
 }

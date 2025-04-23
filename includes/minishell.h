@@ -50,7 +50,7 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
-// extern int	g_sig;
+extern int	g_sig;
 
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
@@ -61,6 +61,11 @@ int				count_cmd(t_mini *mini);
 void			signal_list(void);
 void			signal_child(void);
 void			handler(int sig);
+
+void			setup_signal_handlers(t_mini *mini);
+void			handler(int sig);
+void			setup_command_signal(t_mini *mini);
+void			set_return_and_global_signal(t_mini *mini);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
@@ -117,6 +122,7 @@ void			free_wildcards(char *line, t_wildcard *w);
 int				exec_mini(t_mini *mini, t_cmd *cmd);
 int				handle_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
+int				check_command_synthax(t_mini *mini, t_cmd *cmd);
 void			process_all_heredocs(t_mini *mini, t_cmd *cmd);
 void			create_args_array(t_mini *mini, t_cmd *cmd);
 void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
