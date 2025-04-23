@@ -102,5 +102,6 @@ int	init_mini(t_mini *mini, char **envp)
 	mini->fd_backup->stdin_backup = -1;
 	mini->fd_backup->stdout_backup = -1;
 	mini->should_exit = false;
+	mini->cursor = 0;
 	return (0);
 }
