@@ -35,7 +35,6 @@ vpath %.c $(DIR_UTILS):$(DIR_UTILS)/libft
 SRCS				=	main.c \
 						print.c \
 						init_mini.c \
-						errors.c \
 						signals.c \
 						parsing.c \
 						fill_cmd_struct.c \
