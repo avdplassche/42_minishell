@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:15:58 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:27:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	return (0);
 }
 
-int	setup_redirections(t_mini *mini, t_cmd *cmd)
+int	setup_command_redirections(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 	int	result;

@@ -6,13 +6,13 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:16:02 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:40:05 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_access(t_cmd *cmd)
+void	check_command_access(t_cmd *cmd)
 {
 	errno = 0;
 
@@ -57,7 +57,7 @@ int	check_command_synthax(t_mini *mini, t_cmd *cmd)
 	return (0);
 }
 
-void	handle_errno_message(t_mini *mini, t_cmd *cmd)
+void	handle_error(t_mini *mini, t_cmd *cmd)
 {
 	if (cmd->error_access == EISDIR)
 	{

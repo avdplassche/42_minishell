@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 18:56:48 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:28:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	redir->heredoc_fd = hd_pipe[0];
 }
 
-void	process_all_heredocs(t_mini *mini, t_cmd *cmd)
+void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:15:06 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:29:16 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name)
 		return (NULL);
 }
 
-int	handle_builtin(t_mini *mini, t_cmd *cmd)
+int	execute_builtin(t_mini *mini, t_cmd *cmd)
 {
 	t_builtin_func	f;
 	int				redirection_status;
@@ -46,7 +46,7 @@ int	handle_builtin(t_mini *mini, t_cmd *cmd)
 	backup_standard_fd(mini);
 	if (cmd->redir_amount > 0)
 	{
-		redirection_status = setup_redirections(mini, cmd);
+		redirection_status = setup_command_redirections(mini, cmd);
 		if (redirection_status != 0)
 		{
 			clean_fd_backup(mini, cmd);
@@ -93,7 +93,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	}
 	else if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
-		return (handle_builtin(mini, cmd));
+		return (execute_builtin(mini, cmd));
 	}
 	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
 		|| cmd->type == INVALID)
@@ -101,7 +101,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 		backup_standard_fd(mini);
 		if (check_command_synthax(mini, cmd))
 			return (mini->last_return);
-		set_and_execute_pipeline(mini, cmd);
+		execute_command(mini, cmd);
 		restore_standard_fd(mini);
 	}
 	return (mini->last_return);

@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-static void	handle_error(t_mini *mini, char *ptr)
+static void	free_and_exit(t_mini *mini, char *ptr)
 {
 	free_string_ptr(&ptr);
 	mini->last_return = MALLOC_ERROR;
@@ -19,13 +19,13 @@ int	update_pwd_env(t_mini *mini, char *env_var)
 	new_cwd = get_current_workdir(mini);
 	if (!new_cwd)
 	{
-		handle_error(mini, env_key);
+		free_and_exit(mini, env_key);
 		return (mini->last_return);
 	}
 	env_row = get_new_env_row(mini, env_key, new_cwd);
 	if (!env_row)
 	{
-		handle_error(mini, env_key);
+		free_and_exit(mini, env_key);
 		return (mini->last_return);
 	}
 	set_env(mini, env_var, env_row);

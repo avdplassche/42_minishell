@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:13:13 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 19:30:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parent_closes_all_pipes(t_mini *mini)
 	mini->pipes = NULL;
 }
 
-void	connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index)
+void	setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ void	connect_command_pipeline(t_mini *mini, t_cmd *cmd, int cmd_index)
 	}
 }
 
-void	create_pipes(t_mini *mini, t_cmd *cmd)
+void	create_pipe_array(t_mini *mini, t_cmd *cmd)
 {
 	int			i;
 

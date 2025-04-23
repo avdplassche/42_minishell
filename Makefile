@@ -62,8 +62,8 @@ SRCS				=	main.c \
 						is_valid_syntax.c \
 						is_valid_arithmetic_exit.c \
 						command_execution.c \
-						create_args_array.c \
 						exec_mini.c \
+						exec_cleanup.c \
 						fd_backup_utils.c \
 						fd_utils.c \
 						file_redirections.c \
