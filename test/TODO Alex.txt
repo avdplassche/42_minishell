@@ -1,27 +1,11 @@
+Tests : 
+
+
+
+- cas ls avec un argument invalide qui exit minishell
+- echo ne set pas la return value
+- env : classement des variables ? 
+
 
 - CLEAN enum and structs
-
-Jojo checks in exec
-	if ()
-
-	if (is_only_specific_char(mini->line, '%'))
-		return (print_error("minishell: fg: %s: no such job\n", mini->line, 2)
-			, set_return_value(mini, 2));
-
-
-	if (!ft_strcmp(cmd->command, "."))
-		return (print_error("minishell .: filename argument required\n", mini->line, 2)
-			, set_return_value(mini, 2));
-
-
-cursor not moving problem
-
-problem is in is_user_command
-
-unset PATH
-ls
-
-
-	if (is_only_specific_char(mini->line, 34) || is_only_specific_char(mini->line, 39))
-		return (print_error("minishell: command '' not found\n", mini->line, 2)
-			, set_return_value(mini, 127));
+- cleanup DEBUG

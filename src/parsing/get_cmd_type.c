@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:23 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/22 19:13:55 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:39:49 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 		return (0);
 	if (!access(cmd->command, X_OK))
 	{
+		if (!contain_char(cmd->command, '/'))
+			return (0);
 		cmd->path = ft_strdup(cmd->command);
 		return (1);
 	}
@@ -32,10 +34,8 @@ int	is_user_command(t_mini *mini, t_cmd *cmd)
 		cmd->path = ft_strjoin(temp, cmd->command);
 		if (!access(cmd->path, F_OK) && !access(cmd->path, X_OK))
 			return (free(temp), 1);
-		free(temp);
-		temp = NULL;
-		free(cmd->path);
-		cmd->path = NULL;
+		free_string_ptr(&temp);
+		free_string_ptr(&cmd->path);
 	}
 	return (0);
 }
