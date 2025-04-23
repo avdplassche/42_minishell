@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 16:30:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 01:15:01 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 			parsing(&mini, cmd);
 		free_string_ptr(&mini.line);
 	}
-	
+
 /*********************** TEST MODE/ ****************************** */
 	if (argc == 3)
 		loop_3args(argv, mini, cmd);

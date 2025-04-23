@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:40:38 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:39:10 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	tokenize_wildcard(t_mini *mini, t_wildcard *w, int start)
 	int		len;
 
 	len = start;
-	while (start >= 0 && w->wildcard[start] != '/' && w->wildcard[start] != ' ')
+	while (start >= 0 && w->wildcard[start] != '/'
+			&& w->wildcard[start] != ' ')
 		start--;
-	start ++;
-	while (w->wildcard[len] && w->wildcard[len] != '/')
+	start++;
+	while (w->wildcard[len] && w->wildcard[len] != '/'
+			&& w->wildcard[len] != ' ')
 		len++;
 	if (w->wildcard[len] == '/')
 		len ++;
