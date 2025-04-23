@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:40:44 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:55:22 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	validate_command(t_mini *mini, t_cmd *cmd)
 static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	int	redir_status;
-	
+
 	redir_status = 0;
 	handle_heredoc(mini, cmd);
 	if (cmd->command[0] == '\0')
@@ -44,7 +44,7 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
-	
+
 	setup_execution_environment(mini, cmd, cmd_index);
 	validate_command(mini, cmd);
 	if (cmd->type == BUILTIN)

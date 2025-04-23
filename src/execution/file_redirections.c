@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:27:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:00:50 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 }
 
-static int handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
@@ -47,8 +47,7 @@ static int handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	return (0);
 }
 
-
-static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
@@ -72,7 +71,7 @@ static int handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	return (0);
 }
 
-static int handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	int	fd;
 
@@ -114,7 +113,7 @@ int	setup_command_redirections(t_mini *mini, t_cmd *cmd)
 		else if (cmd->redir[i].type == OUT_APPEND)
 			result = handle_out_append(mini, cmd, &cmd->redir[i]);
 		if (result != 0)
-			break;
+			break ;
 		i++;
 	}
 	return (result);

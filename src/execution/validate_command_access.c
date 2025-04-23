@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:40:05 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:57:10 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	check_command_access(t_cmd *cmd)
 {
 	errno = 0;
-
-	DEBUG("path is worth %s\n", cmd->path);
 	if (cmd->type == BUILTIN)
 		return ;
 	if (cmd->is_directory)
@@ -45,7 +43,8 @@ int	check_command_synthax(t_mini *mini, t_cmd *cmd)
 	}
 	else if (!ft_strcmp(cmd->command, "."))
 	{
-		print_and_set_error(mini, cmd, "minishell .: filename argument required\n", 2);
+		print_and_set_error(mini, cmd,
+			"minishell .: filename argument required\n", 2);
 		return (1);
 	}
 	else if (is_only_specific_char(mini->line, 34)
@@ -66,7 +65,8 @@ void	handle_error(t_mini *mini, t_cmd *cmd)
 	}
 	else if (cmd->error_access == ENOENT)
 	{
-		print_error("Minishell: %s: No such file or directory.\n", cmd->command, 2);
+		print_error("Minishell: %s: No such file or directory.\n",
+			cmd->command, 2);
 		mini->last_return = 127;
 	}
 	else if (cmd->error_access == EACCES)

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:29:16 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:57:38 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 
 	redirection_status = 0;
 	if (check_command_synthax(mini, cmd))
-			return (mini->last_return);
+		return (mini->last_return);
 	backup_standard_fd(mini);
 	if (cmd->redir_amount > 0)
 	{
@@ -59,15 +59,15 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	return (mini->last_return);
 }
 
-int set_minimal_env(t_mini *mini, t_cmd *cmd)
+int	set_minimal_env(t_mini *mini, t_cmd *cmd)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd_entry;
-	
+
 	if (!ft_get_env(mini, cmd, "PATH"))
 	{
 		set_env(mini, "PATH",
-	"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
+			"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
 	}
 	if (!ft_get_env(mini, cmd, "PWD") && getcwd(cwd, sizeof(cwd)))
 	{

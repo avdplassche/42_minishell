@@ -6,16 +6,25 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:28:47 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:07:03 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static	void	null_terminate_line(char **line)
+{
+	char	*cursor;
+
+	cursor = *line;
+	while (*cursor && *cursor != '\n')
+		cursor++;
+	*cursor = '\0';
+}
+
 static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
 {
 	char	*line;
-	char	*cursor;
 	char	*prompt;
 	char	*tmp;
 
@@ -23,10 +32,7 @@ static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
 	while (1)
 	{
 		line = readline(prompt);
-		cursor = line;
-		while (*cursor && *cursor != '\n')
-			cursor++;
-		*cursor = '\0';
+		null_terminate_line(&line);
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
 			free_string_ptr(&line);
