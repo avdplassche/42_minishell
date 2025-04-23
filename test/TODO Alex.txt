@@ -1,11 +1,7 @@
-Tests : 
+Tests :
 
 
-
-- cas ls avec un argument invalide qui exit minishell
-- echo ne set pas la return value
-- env : classement des variables ? 
-
+- exit print exit
 
 - CLEAN enum and structs
 - cleanup DEBUG
