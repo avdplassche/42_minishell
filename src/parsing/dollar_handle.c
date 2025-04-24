@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:22 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 01:14:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:00:48 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static char	*translate_dollar_sign(t_mini *mini, char *line, int sub_index)
 	{
 		if ((!q.sgl && (is_quote(line[i]) || line[i] == ' '))
 			|| (q.dbl && (line[i] == ' ' || line[i] == 34))
-			|| (!q.sgl && is_minishell_punct(line[i])))
+			|| (!q.sgl && (is_minishell_punct(line[i]) || line[i] == '*')))
 			break ;
 		j++;
 		quote_enclosure_handle(line[i], &q);
@@ -115,9 +115,16 @@ static int	need_dollar_substitution(char *line)
 	{
 		quote_enclosure_handle(line[i], &q);
 		if (line[i] == '$' && (!q.sgl))
-			if (line[i + 1] && line[i + 1] != ' ' && !(is_quote(line[i + 1]))
-				&& !ft_isdigit(line[i + 1]))
+		{
+			if (line[i + 1] && (line[i + 1] == '?' || (!q.dbl && line[i + 1] == 39)))
 				return (i);
+			if (line[i + 1]
+				&& line[i + 1] != ' '
+				&& !(is_quote(line[i + 1]))
+				&& !ft_isdigit(line[i + 1])
+				&& !is_minishell_punct(line[i + 1]))
+				return (i);
+		}
 	}
 	return (-1);
 }

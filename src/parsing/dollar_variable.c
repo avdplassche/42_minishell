@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:56 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 00:52:38 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:00:33 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ char	*sub_env_variable(t_mini *mini, char *line, t_alloc *s, int i)
 
 	while (line[++i] && line[i] != ' ')
 	{
-		if ((s->q.dbl && (is_quote(line[i]) || is_minishell_punct(line[i]))))
+		if ((s->q.dbl && (is_quote(line[i]) || is_minishell_punct(line[i])|| line[i] == '*')))
 			break ;
-		if (!s->q.dbl && is_minishell_punct(line[i]))
+		if (!s->q.dbl && (is_minishell_punct(line[i]) || line[i] == '*'))
 			break ;
 		quote_enclosure_handle(line[i], &s->q);
 	}
