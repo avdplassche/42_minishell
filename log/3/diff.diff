@@ -1,0 +1,181 @@
+--- log/3/bash.log
++++ log/3/mini.log
+@@ -1,2 +1,2 @@
+-cd ~
++cd /root
+ 0
+@@ -10,8 +10,8 @@
+ '$USER'
+-""
+-HOME
+-HOME
++"'
++$HOME
++$HOME
+ exit_code ->0 user -> home -> /root
+-HOME
+-42$
++$HOME
++$42$
+ 
+@@ -22,8 +22,8 @@
+ $ 
+-0
++139
+ $?
+-'0'
++'139'
+ cat lol.c | cat > lol.c
+ cat lol.c '|' cat > lol.c
+-$USER  text  ' text
++$USER  text  text"
+ =intergalaktikus miaf*szomez
+@@ -34,3 +34,3 @@
+ text''  $USER 
+-text  
++text     
+               $USER          
+@@ -52,9 +52,8 @@
+  test1 test2  test3 
+-test1 test2
+-/root$
+-/root/app/log
+-test1test1 test2test1 test2 test3 test1 test2  test3 test1 test2test1 -n
++test1		test2
++
++
++test1test1 test2test1 test2 test3 test1 test2  test3 test1		test2test1 -n
+ test1 -n
+-test1test1-
+---
++test1test1--
+   -nn 
+@@ -62,3 +61,3 @@
+ test1 -n test2
+-~42
++/root42
+ -nasd-n-nnnnn-n-nfeel my pain-n-n'totally logical'
+@@ -68,4 +67,21 @@
+ /app/log
++HOME=/root
++
++42
++HALLO42=42
+ /root
++HOME=/root
++42
++HOME=42
++123
++TES_T=123
++T=
++HELLO42=T=
++HELLO42=T=
++0
++0
++
++99
+ /root
++/root
+ /
+@@ -131,3 +147,2 @@
+ /root
+-HOME=/root
+ /root
+@@ -139,28 +154,73 @@
+ 
+-42
+-HALLO42=42
+-/root
+-HOME=/root
+-42
+-HOME=42
+-123
+-TES_T=123
+-T=
+-HELLO42=T=
+-HELLO42=T=
+-0
+-1
+ 
+-99
+ 
+-
+-
+ mini_test=
+-42
+-42
+-42
+-
+-
+-
+-
+-
++/root
++/root
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root
++/root

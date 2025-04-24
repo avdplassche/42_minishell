@@ -1,0 +1,114 @@
+--- log/2/bash_error.log
++++ log/2/mini_error.log
+@@ -1,54 +1,57 @@
+-final_test/2.sh: >>: command not found
+-final_test/2.sh: asd: command not found
+-final_test/2.sh: echo : command not found
+-final_test/2.sh: echo -nnnnn: command not found
+-final_test/2.sh: ECho: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: /root: Is a directory
+-final_test/2.sh: cd: /root/Desktop/: No such file or directory
+-final_test/2.sh: cd: /root/Desktop/: No such file or directory
+-final_test/2.sh: cd: OME/Desktop/: No such file or directory
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: PWD: command not found
+-final_test/2.sh: PWD: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: ECHO: command not found
+-final_test/2.sh: echok: command not found
+-final_test/2.sh: Echo: command not found
+-final_test/2.sh: Echo: command not found
+-final_test/2.sh: ecco: command not found
+-final_test/2.sh: ecCo: command not found
+-final_test/2.sh: ecCo: command not found
+-final_test/2.sh: -a: command not found
+-final_test/2.sh: LS: command not found
+-final_test/2.sh: Ls: command not found
+-final_test/2.sh: lS: command not found
+-final_test/2.sh: PWD: command not found
+-final_test/2.sh: pWD: command not found
+-final_test/2.sh: pwD: command not found
+-final_test/2.sh: ENV: command not found
+-final_test/2.sh: CAT: command not found
+-final_test/2.sh: EXPORT: command not found
+-final_test/2.sh: |||||||: command not found
+-final_test/2.sh: Echo: command not found
+-final_test/2.sh: EXIT: command not found
+-final_test/2.sh: Exit: command not found
+-final_test/2.sh: UNSET: command not found
+-final_test/2.sh: Unset: command not found
+-final_test/2.sh: EXPORT: command not found
+-final_test/2.sh: Export: command not found
+-final_test/2.sh: <<.: command not found
+-final_test/2.sh: OLDPWD: command not found
+-final_test/2.sh: VAR: command not found
+-final_test/2.sh:  ls: command not found
+-final_test/2.sh:  cat: command not found
+-final_test/2.sh:  echo: command not found
+-final_test/2.sh:  PWD: command not found
+-final_test/2.sh:  pwd: command not found
+-final_test/2.sh: PWD : command not found
+-final_test/2.sh: pwd : command not found
+-final_test/2.sh: pwd : command not found
+-final_test/2.sh: : command not found
++Minishell: >>: command not found.
++Minishell: asd: command not found.
++cat: can't open '$VAR': No such file or directory
++Minishell: echo : command not found.
++Minishell: echo -nnnnn: command not found.
++Minishell: ECho: command not found.
++Minishell: ECHO: command not found.
++Minishell: ECHO: command not found.
++cat: can't open 'OME': No such file or directory
++cat: can't open 'YOLO'YOLO'': No such file or directory
++cat: can't open 'YOLO': No such file or directory
++Minishell: cd: /root/Desktop/: No such file or directory
++Minishell: cd: /root/Desktop/: No such file or directory
++Minishell: cd: : No such file or directory
++Minishell: ECHO: command not found.
++Minishell: PWD: command not found.
++Minishell: PWD: command not found.
++Minishell: ECHO: command not found.
++Minishell: ECHO: command not found.
++Minishell: ECHO: command not found.
++Minishell: ECHO: command not found.
++Minishell: echok: command not found.
++Minishell: Echo: command not found.
++Minishell: Echo: command not found.
++Minishell: eco -nn: command not found.
++Minishell: eco -nn: command not found.
++Minishell: eco  -n: command not found.
++minishell: syntax error near unexpected token ''
++minishell: syntax error near unexpected token ''
++Minishell: LS: command not found.
++Minishell: Ls: command not found.
++Minishell: lS: command not found.
++Minishell: PWD: command not found.
++Minishell: pWD: command not found.
++Minishell: pwD: command not found.
++Minishell: ENV: command not found.
++Minishell: CAT: command not found.
++Minishell: EXPORT: command not found.
++minishell: syntax error near unexpected token '|||||||'
++Minishell: Echo: command not found.
++Minishell: EXIT: command not found.
++Minishell: Exit: command not found.
++Minishell: UNSET: command not found.
++Minishell: Unset: command not found.
++Minishell: EXPORT: command not found.
++Minishell: Export: command not found.
++
++Minishell: OLDPWD: command not found.
++Minishell: VAR: command not found.
++Minishell:  ls: command not found.
++Minishell:  cat: command not found.
++Minishell:  echo: command not found.
++Minishell:  PWD: command not found.
++Minishell:  pwd: command not found.
++Minishell: PWD : command not found.
++Minishell: pwd : command not found.
++Minishell: pwd : command not found.

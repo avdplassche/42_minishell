@@ -1,0 +1,5 @@
+--- log/builtin/bash.log
++++ log/builtin/mini.log
+@@ -1 +1 @@
+-16 I LOVE JUST "$HOME"
++16 I LOVE JUST /root

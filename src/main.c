@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 16:30:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:48:23 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	loop_3args(char **argv, t_mini mini, t_cmd *cmd)
 	close(fd);
 }
 
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
@@ -73,6 +71,11 @@ int	main(int argc, char **argv, char **envp)
 	}
 	
 /*********************** TEST MODE/ ****************************** */
+	if (argc == 2)
+	{
+		int script_status = execute_file(&mini, argv[1]);
+		mini.last_return = script_status;
+	}
 	if (argc == 3)
 		loop_3args(argv, mini, cmd);
 /************************ /TEST MODE ***************************** */

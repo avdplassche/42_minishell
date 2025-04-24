@@ -1,0 +1,147 @@
+--- log/2/bash.log
++++ log/2/mini.log
+@@ -2,7 +2,6 @@
+    -n -n -n -n
++127
+ 1
+-1
+ 2
+ debug.log
+-grep
+ leaks.log
+@@ -11,13 +10,19 @@
+ /app/log
++0
++
++ech
++ech 
++ech -n
++ech -n
++ech
++test1 -n test 2ech 
+ /app/log
+-1
+ 
+-echo
+-echo 
+-echo -n
+-echo -n
+-echo
+-test1 -n test 2echo 
+-
++/app/log
++/app/log
+ -nnnnn 
++/app/log
++/app/log
++/app/log
++/app/log
+ -$T-$Tnnnnnnnnnnnnn -nnnnnnnn$T -nnnnnnnn 
+@@ -25,2 +30,8 @@
+ 
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
+ 1
+@@ -28,3 +39,2 @@
+ debug.log
+-grep
+ leaks.log
+@@ -37,3 +47,2 @@
+ debug.log
+-grep
+ leaks.log
+@@ -41,2 +50,6 @@
+ valgrind.log
++/app/log
++/app/log
++/app/log
++/app/log
+ 1
+@@ -44,3 +57,2 @@
+ debug.log
+-grep
+ leaks.log
+@@ -49,28 +61,54 @@
+ /app/log
+-segfault | grep segfault
+-segfault | grep segfault
+-segfault > grep segfault
+-segfault < grep segfault
+-segfault << grep segfault
+-segfault << grep segfault
+-segfault | grep segfault
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++segfault
++segfault
++segfault segfault
++segfault segfault
++segfault segfault
++segfault
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
+ 
+-| echo lala | echo | echo
++
+ /app/log
+-ok
+-ok
+-ok
+-ok
+-maybe
+-maybe
+-maybe
+-cool
+-ok
+-$$$
+-$$$$
+-$$$$$
+-$/ $/
+-/SER
+-$/ $/
+-$/$/
+-$/
++/app/log
++[?2004h> ^C[?2004l/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log
++/app/log

@@ -1,0 +1,13 @@
+--- log/7/bash_error.log
++++ log/7/mini_error.log
+@@ -1,10 +0,0 @@
+-final_test/7.sh: cd: /root/Desktop/: No such file or directory
+-final_test/7.sh: touch: command not found
+-final_test/7.sh: tmp_x_file1: command not found
+-final_test/7.sh: ./tmp_x_file1: No such file or directory
+-final_test/7.sh: tmp_x_file1: command not found
+-final_test/7.sh: ./tmp_x_file1: No such file or directory
+-final_test/7.sh: tmp_x_file1: No such file or directory
+-final_test/7.sh: ./tmp_x_file1: No such file or directory
+-final_test/7.sh: cd: doesntexist: No such file or directory
+-final_test/7.sh: ls: No such file or directory

@@ -1,0 +1,126 @@
+--- log/3/bash_error.log
++++ log/3/mini_error.log
+@@ -1,61 +1,62 @@
+-final_test/3.sh: ./outfiles/outfile01: No such file or directory
+-final_test/3.sh: ./outfiles/outfile01: No such file or directory
+-final_test/3.sh: 123: No such file or directory
+-final_test/3.sh: 123: No such file or directory
+-final_test/3.sh: eCho: command not found
+-final_test/3.sh: eChO: command not found
+-final_test/3.sh: eCHO: command not found
+-final_test/3.sh: ECHO: command not found
+-final_test/3.sh: cd: /Users: No such file or directory
+-final_test/3.sh: cd: //file_tests: No such file or directory
+-final_test/3.sh: cd: doesntexist: No such file or directory
+-final_test/3.sh: cd: wtf: No such file or directory
+-final_test/3.sh: cd: ?: No such file or directory
+-final_test/3.sh: cd: +: No such file or directory
+-final_test/3.sh: cd: _: No such file or directory
+-final_test/3.sh: cd: woof: No such file or directory
+-final_test/3.sh: cd: too many arguments
+-final_test/3.sh: cd: doesntexist: No such file or directory
+-final_test/3.sh: cd: doesntexist: No such file or directory
+-final_test/3.sh: cd: wtf: No such file or directory
+-final_test/3.sh: cd: ?: No such file or directory
+-final_test/3.sh: cd: +: No such file or directory
+-final_test/3.sh: cd: _: No such file or directory
+-final_test/3.sh: cd: echo: No such file or directory
+-final_test/3.sh: cd: too many arguments
+-final_test/3.sh: cd: //file_tests: No such file or directory
+-final_test/3.sh: cd: //something: No such file or directory
+-final_test/3.sh: cd: too many arguments
+-final_test/3.sh: cd: too many arguments
+-final_test/3.sh: cd: too many arguments
+-final_test/3.sh: cd: ../test: No such file or directory
+-final_test/3.sh: export: `=============123': not a valid identifier
+-final_test/3.sh: export: `=': not a valid identifier
+-final_test/3.sh: export: `=42': not a valid identifier
+-final_test/3.sh: export: `=': not a valid identifier
+-final_test/3.sh: export: `=': not a valid identifier
+-final_test/3.sh: export: `0': not a valid identifier
+-final_test/3.sh: export: `=': not a valid identifier
+-final_test/3.sh: export: `===': not a valid identifier
+-final_test/3.sh: export: `===': not a valid identifier
+-final_test/3.sh: export: `TE-ST=100': not a valid identifier
+-final_test/3.sh: export: `TEST-=100': not a valid identifier
+-final_test/3.sh: export: `==========': not a valid identifier
+-final_test/3.sh: export: `1TEST=': not a valid identifier
+-final_test/3.sh: export: `=': not a valid identifier
+-final_test/3.sh: export: `TE+S=T=': not a valid identifier
+-final_test/3.sh: export: `TES.T=123': not a valid identifier
+-final_test/3.sh: export: `TES.T=123': not a valid identifier
+-final_test/3.sh: export: `TES+T=123': not a valid identifier
+-final_test/3.sh: export: `TES}T=123': not a valid identifier
+-final_test/3.sh: export: `TES{T=123': not a valid identifier
+-final_test/3.sh: export: `TES-T=123': not a valid identifier
+-final_test/3.sh: export: `TE*ST=123': not a valid identifier
+-final_test/3.sh: export: `TES#T=123': not a valid identifier
+-final_test/3.sh: export: `TES@T=123': not a valid identifier
+-final_test/3.sh: export: `TES!T=123': not a valid identifier
+-final_test/3.sh: export: `=============123': not a valid identifier
+-final_test/3.sh: export: `+++++++=123': not a valid identifier
+-final_test/3.sh: export: `TES^T=123': not a valid identifier
+-final_test/3.sh: export: `TES!T=123': not a valid identifier
+-final_test/3.sh: export: `?=hallo': not a valid identifier
++Minishell: ./outfiles/outfile01: No such file or directory
++Minishell: ./outfiles/outfile01: No such file or directory
++Minishell: 123: No such file or directory
++Minishell: 123: No such file or directory
++Minishell: eCho: command not found.
++Minishell: eChO: command not found.
++Minishell: eCHO: command not found.
++Minishell: ECHO: command not found.
++Minishell: cd: /Users: No such file or directory
++Minishell: cd: //file_tests: No such file or directory
++Minishell: cd: doesntexist: No such file or directory
++Minishell: cd: wtf: No such file or directory
++Minishell: cd: ?: No such file or directory
++Minishell: cd: +: No such file or directory
++Minishell: cd: _: No such file or directory
++Minishell: cd: woof: No such file or directory
++Minishell: cd: too many arguments
++Minishell: cd: doesntexist: No such file or directory
++Minishell: cd: doesntexist: No such file or directory
++Minishell: cd: wtf: No such file or directory
++Minishell: cd: ?: No such file or directory
++Minishell: cd: +: No such file or directory
++Minishell: cd: _: No such file or directory
++Minishell: cd: echo: No such file or directory
++Minishell: cd: too many arguments
++Minishell: cd: //file_tests: No such file or directory
++Minishell: cd: //something: No such file or directory
++Minishell: cd: too many arguments
++Minishell: cd: too many arguments
++Minishell: cd: too many arguments
++Minishell: cd: ../test: No such file or directory
++Minishell: '=============123': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '=42': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '0': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '===': not a valid identifier
++Minishell: '===': not a valid identifier
++Minishell: 'TE-ST=100': not a valid identifier
++Minishell: 'TEST-=100': not a valid identifier
++Minishell: '==========': not a valid identifier
++Minishell: '1TEST=': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: 'TE+S=T=': not a valid identifier
++Minishell: 'TES.T=123': not a valid identifier
++Minishell: 'TES.T=123': not a valid identifier
++Minishell: 'TES+T=123': not a valid identifier
++Minishell: 'TES}T=123': not a valid identifier
++Minishell: 'TES{T=123': not a valid identifier
++Minishell: 'TES-T=123': not a valid identifier
++Minishell: 'TE*ST=123': not a valid identifier
++Minishell: 'TES#T=123': not a valid identifier
++Minishell: 'TES@T=123': not a valid identifier
++Minishell: 'TES!T=123': not a valid identifier
++Minishell: '=============123': not a valid identifier
++Minishell: '+++++++=123': not a valid identifier
++Minishell: 'TES^T=123': not a valid identifier
++Minishell: 'TES!T=123': not a valid identifier
++Minishell: '?=hallo': not a valid identifier
++minishell: backslash found

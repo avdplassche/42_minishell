@@ -1,0 +1,5 @@
+--- log/bin/bash.log
++++ log/bin/mini.log
+@@ -45 +45,2 @@
+ 127
++/

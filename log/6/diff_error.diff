@@ -1,0 +1,39 @@
+--- log/6/bash_error.log
++++ log/6/mini_error.log
+@@ -1,22 +1,17 @@
+-final_test/6.sh: ./tmp_path_test2/a.out: Permission denied
++execve: Permission denied
+ cat: can't open '42': No such file or directory
+-final_test/6.sh: : command not found
+-final_test/6.sh:    : command not found
+-final_test/6.sh:     : command not found
++minishell: command not found
++Minishell:    : command not found.
++Minishell:     : command not found.
+ cat: can't open '42': No such file or directory
+-final_test/6.sh: /bin/exe42: No such file or directory
+-final_test/6.sh: 42: command not found
+-final_test/6.sh: expr: command not found
++Minishell: /bin/exe42: command not found.
++Minishell: 42: command not found.
++Minishell: expr: command not found.
+ cat: can't open '42': No such file or directory
+-final_test/6.sh: expr: command not found
+-final_test/6.sh: echo 42: command not found
+-final_test/6.sh: <<: command not found
+-final_test/6.sh: export: `=': not a valid identifier
+-final_test/6.sh: export: `=': not a valid identifier
+-final_test/6.sh: export: `=': not a valid identifier
+-final_test/6.sh: export: `=============123': not a valid identifier
+-final_test/6.sh: cd: /notsuchdir: No such file or directory
+-final_test/6.sh: cd: cmds/: No such file or directory
+-final_test/6.sh: cd: cmds/: No such file or directory
+-final_test/6.sh: cd: ./cmds/: No such file or directory
+-final_test/6.sh: cd: HOME not set
++Minishell: expr: command not found.
++Minishell: echo 42: command not found.
++Minishell: <<: command not found.
++Minishell: '=': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '=': not a valid identifier
++Minishell: '=============123': not a valid identifier

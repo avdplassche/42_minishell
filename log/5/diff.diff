@@ -1,0 +1,73 @@
+--- log/5/bash.log
++++ log/5/mini.log
+@@ -3,4 +3,4 @@
+ /root
+-/root$
+-de
++/root
++
+ asdde
+@@ -11,8 +11,8 @@
+ asdde
+-HOME
+-HOME
+-'HOM'E
+-HOME
+-HOME
+-HOME
++$HOME
++$HOME
++$'HOM'E
++$HOME
++$HOME
++$HOME
+ $
+@@ -21,7 +21,7 @@
+ $$
+-$
+-42$
+ $$
+-$
++$42$
+ $$
++$$
++$$
+ $ 
+@@ -30,4 +30,4 @@
+ /root
+-/root
+-/root$
++
++
+ /app/test/random_folder
+@@ -51,16 +51,16 @@
+ 42 42
+-1 A B 2
+-1 A B 2
+-1A B 2
+-1 A B 2
+-1 A B2
+-1 A B 2
+-1 AB 2
+-A B 2
+-A B 1
+-12
+-1 2
+-1 2
+-? A B 2
++1 A B
++1 A B
++1A B
++1 A B
++1 A B
++1 A B
++1 AB
++A B
++A B 
++1
++1
++1
++? A B
+ 1 A B ?
+-1?
++1

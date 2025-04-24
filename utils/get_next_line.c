@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:54:31 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/03/24 20:22:57 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 23:06:56 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (free_and_return_null(&stash));
-	if (!stash || !*stash)
+	if (!stash)
 	{
 		stash = ft_strdup("");
 		if (!stash)

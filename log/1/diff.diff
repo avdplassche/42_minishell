@@ -1,0 +1,66 @@
+--- log/1/bash.log
++++ log/1/mini.log
+@@ -9,8 +9,8 @@
+ '$USER'
+-""
+-HOME
+-HOME
++"'
++$HOME
++$HOME
+ exit_code ->0 user -> home -> /root
+-HOME
+-42$
++$HOME
++$42$
+ $ 
+@@ -23,48 +23,2 @@
+ cat lol.c '|' cat > lol.c
+-$USER  text  ' text
+-=intergalaktikus miaf*szomez
+--n-n bonjour
+-''
+- '' 
+-text
+-text''  $USER 
+-text  
+-              $USER          
+-
+-
+-""""""""$USER""""""""
+-""""""$USER""""""
+-$USER
+-''
+-""$USER""
+-""""
+-""""""$USER""""""
+-$USERtext oui oui oui oui oui 
+-text text ... 
+-
+-
+-
+- 
+-/bin/echo
+-test1
+-test1
+-/bin/echo hallo
+-/bin/echo1
+-test1 test2
+-test1  test2 test3
+- test1 test2  test3 
+-test1 test2
+-/root$
+-/root/app
+-/root$
+-/root/app
+-test1test1 test2test1 test2 test3 test1 test2  test3 test1 test2test1 -n
+-test1 -n
+-test1test1  -nn 
+--n test1 -n test2
+-test1 -n test2
+-~42
+--nasd-n-nnnnn-n-nfeel my pain-n-n'totally logical'
+-totally logical
+-totally logical
+-totally logical
++$USER  text  text"

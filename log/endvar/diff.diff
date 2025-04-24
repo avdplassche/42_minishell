@@ -1,0 +1,255 @@
+--- log/endvar/bash.log
++++ log/endvar/mini.log
+@@ -5,32 +5,32 @@
+  haha
+-!haha
+-#haha
+ 
+-%haha
+-&haha
++
++
++
++
+ 'haha
+-(haha
+-)haha
+-*haha
+-+haha
+-,haha
+--haha
+-.haha
+-/haha
+-:haha
+-;haha
+-<haha
+-=haha
+->haha
+-?haha
+-@haha
+-[haha
+-\haha
+-]haha
+-^haha
+-{haha
+-|haha
+-}haha
+-~haha
+ 
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ ===================
+@@ -39,24 +39,24 @@
+ haha
+-!haha
+-#haha
+ 
+-%haha
++
++
++
+ haha
+-*haha
+-+haha
+-,haha
+--haha
+-.haha
+-/haha
+-:haha
+-=haha
+-?haha
+-@haha
+-[haha
+-]haha
+-^haha
+-{haha
+-}haha
+-~haha
+ 
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ ===================
+@@ -65,24 +65,24 @@
+ $ haha
+-$%haha
+-$&haha
++
++
+ $'haha
+-$)haha
+-haha
+-$+haha
+-$,haha
+-$.haha
+-$/haha
+-$:haha
+-$;haha
+-$<haha
+-$=haha
+-$>haha
++
++
++
++
++
++
++
++
++
++
++
+ 0haha
+-$\haha
+-$]haha
+-$^haha
+-$|haha
+-$}haha
+-$~haha
+ 
++
++
++
++
++
++
+ ===================
+@@ -91,17 +91,17 @@
+ $ haha
+-$%haha
+-haha
+-haha
+-$+haha
+-$,haha
+-$.haha
+-$/haha
+-$:haha
+-$=haha
++
++$haha
++
++
++
++
++
++
++
+ 0haha
+-$]haha
+-$^haha
+-$}haha
+-$~haha
+ 
++
++
++
++
+ ===================
+@@ -110,24 +110,24 @@
+  haha
+-%haha
+-&haha
++
++
+ 'haha
+-)haha
+-*haha
+-+haha
+-,haha
+-.haha
+-/haha
+-:haha
+-;haha
+-<haha
+-=haha
+->haha
+-?haha
+-\haha
+-]haha
+-^haha
+-|haha
+-}haha
+-~haha
+ 
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ ===================
+@@ -136,15 +136,15 @@
+ haha
+-%haha
++
+ haha
+-*haha
+-+haha
+-,haha
+-.haha
+-/haha
+-:haha
+-=haha
+-?haha
+-]haha
+-^haha
+-}haha
+-~haha
++
++
++
++
++
++
++
++
++
++
++
++

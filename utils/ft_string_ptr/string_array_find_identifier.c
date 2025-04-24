@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_array_find_identifier.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:24:54 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:42:02 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/23 23:21:35 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

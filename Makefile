@@ -7,7 +7,6 @@ NAME = minishell
 DIR_BIN			=	./bin
 DIR_INCLUDE		=	./includes
 DIR_SRC			=	./src
-DIR_BUILTINS	=	./builtins
 DIR_UTILS		=	./utils
 
 #-----------------COMP FLAGS------------------------#
@@ -24,6 +23,8 @@ endif
 #---------------------VPATH------------------------#
 
 vpath %.c $(DIR_SRC):$(DIR_SRC)/parsing
+vpath %.c $(DIR_SRC):$(DIR_SRC)/builtins
+vpath %.c $(DIR_SRC):$(DIR_SRC)/builtin_utils
 vpath %.c $(DIR_SRC):$(DIR_SRC)/checks
 vpath %.c $(DIR_SRC):$(DIR_SRC)/execution
 vpath %.c $(DIR_UTILS):$(DIR_UTILS)/extra
@@ -60,6 +61,13 @@ SRCS				=	main.c \
 						is_directory.c \
 						is_valid_syntax.c \
 						is_valid_arithmetic_exit.c \
+						cd.c \
+						echo.c \
+						env.c \
+						exit.c \
+						export.c \
+						pwd.c \
+						unset.c \
 						command_execution.c \
 						exec_mini.c \
 						exec_cleanup.c \
@@ -78,7 +86,8 @@ SRCS				=	main.c \
 						update_pwd_env.c \
 						exit_minishell.c \
 						exit_minishell_utils.c \
-						malloc_checks.c 
+						malloc_checks.c \
+						test_with_file.c
 
 
 UTILS				=	contain_char.c \
@@ -145,20 +154,11 @@ UTILS				=	contain_char.c \
 						string_build.c
 
 
-BUILTINS			=	cd.c \
-						echo.c \
-						env.c \
-						exit.c \
-						export.c \
-						pwd.c \
-						unset.c
-
 #---------------------OBJECTS------------------------#
 
 SRC_OBJ				=	$(addprefix $(DIR_BIN)/src/, $(SRCS:.c=.o))
 UTILS_OBJ			=	$(addprefix $(DIR_BIN)/utils/, $(UTILS:.c=.o))
-BUILTINS_OBJ		=	$(addprefix $(DIR_BIN)/builtins/, $(BUILTINS:.c=.o))
-ALL_OBJ				=	$(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ)
+ALL_OBJ				=	$(SRC_OBJ) $(UTILS_OBJ)
 
 #------------------INCLUDE FLAGS---------------------#
 
@@ -181,6 +181,9 @@ $(DIR_BIN)/src/%.o: $(DIR_SRC)/execution/%.c | $(DIR_BIN)/src
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/checks/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
+$(DIR_BIN)/src/%.o: $(DIR_SRC)/builtins/%.c | $(DIR_BIN)/src
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
+
 $(DIR_BIN)/src/%.o: $(DIR_SRC)/builtin_utils/%.c | $(DIR_BIN)/src
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
@@ -197,9 +200,6 @@ $(DIR_BIN)/utils/%.o: $(DIR_UTILS)/libft/%.c | $(DIR_BIN)/utils
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN)/utils/%.o: $(DIR_UTILS)/%.c | $(DIR_BIN)/utils
-	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
-
-$(DIR_BIN)/builtins/%.o: $(DIR_BUILTINS)/%.c | $(DIR_BIN)/builtins
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(DIR_BIN):
@@ -231,5 +231,5 @@ re: fclean all
 
 SRC_WITHOUT_MAIN = $(filter-out $(DIR_BIN)/src/main.o, $(SRC_OBJ))
 
-test: $(SRC_OBJ) $(UTILS_OBJ) $(BUILTINS_OBJ) | $(DIR_BIN)
-	@$(CC) $(SRC_WITHOUT_MAIN) $(UTILS_OBJ) $(BUILTINS_OBJ) ./test_jojo/test.c $(CFLAGS) $(LIBRARIES) -o test.out
+test: $(SRC_OBJ) $(UTILS_OBJ) | $(DIR_BIN)
+	@$(CC) $(SRC_WITHOUT_MAIN) $(UTILS_OBJ) ./test_jojo/test.c $(CFLAGS) $(LIBRARIES) -o test.out

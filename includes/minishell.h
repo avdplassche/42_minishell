@@ -274,4 +274,7 @@ void			str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str);
 void			wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w);
 void			free_wildcard_double_pointer_first_part(t_mini *mini, t_wildcard*w);
 
+
+int				execute_file(t_mini *mini, char *filename);
+
 #endif

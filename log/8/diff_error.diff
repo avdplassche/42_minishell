@@ -1,0 +1,52 @@
+--- log/8/bash_error.log
++++ log/8/mini_error.log
+@@ -1,37 +1,14 @@
+ cat: can't open 'cmds.sh': No such file or directory
+-final_test/8.sh: : command not found
++minishell: command not found
+ touch: : No such file or directory
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: cat cmds.sh: command not found
+-final_test/8.sh: /bin/echo test1: No such file or directory
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: asd: command not found
+-final_test/8.sh: mkdir: No such file or directory
+-final_test/8.sh: cd: /root/tmp: No such file or directory
+-final_test/8.sh: touch: No such file or directory
+-final_test/8.sh: ./whatever: No such file or directory
+-final_test/8.sh: rm: No such file or directory
+-final_test/8.sh: ls: No such file or directory
+-final_test/8.sh: rm: No such file or directory
+-final_test/8.sh: .: filename argument required
+-.: usage: . filename [arguments]
+-final_test/8.sh: .ls: No such file or directory
+-final_test/8.sh: ./ls: No such file or directory
+-final_test/8.sh: ./ls: No such file or directory
+-final_test/8.sh: ./ls: No such file or directory
+-final_test/8.sh: ./ls: No such file or directory
+-final_test/8.sh: 3123: No such file or directory
+-final_test/8.sh: lsa: No such file or directory
+-final_test/8.sh: /ls: No such file or directory
+-final_test/8.sh: EechoE: No such file or directory
+-final_test/8.sh: /ls/: No such file or directory
+-final_test/8.sh: /bin/: Is a directory
+-final_test/8.sh: /bin/cats: No such file or directory
+-final_test/8.sh: ./4242424242.sh: No such file or directory
+-final_test/8.sh: rm: No such file or directory
++Minishell: asd: command not found.
++Minishell: cat cmds.sh: command not found.
++Minishell: /bin/echo test1: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
++Minishell: asd: command not found.
