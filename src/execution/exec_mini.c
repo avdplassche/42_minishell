@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 21:57:38 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:24:56 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	t_builtin_func	f;
 	int				redirection_status;
 
+	backup_standard_fd(mini);
 	redirection_status = 0;
 	if (check_command_synthax(mini, cmd))
 		return (mini->last_return);
-	backup_standard_fd(mini);
 	if (cmd->redir_amount > 0)
 	{
 		redirection_status = setup_command_redirections(mini, cmd);

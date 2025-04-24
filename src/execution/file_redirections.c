@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 22:00:50 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:51:40 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 			return ;
 		dup2_fd(mini, cmd, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
+		redir->heredoc_fd = -1;
 	}
 }
 
@@ -44,6 +45,7 @@ static int	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 
@@ -68,6 +70,7 @@ static int	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 
@@ -92,6 +95,7 @@ static int	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 	dup2_fd(mini, cmd, fd, STDIN_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 

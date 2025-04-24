@@ -1,4 +1,6 @@
 
+
+export USER="toto"
 # ls /not_dir
 # echo "EXIT WITH $? STATUS"
 # echo "EXIT WITH $? STATUS"
@@ -11,12 +13,12 @@
 # /bin/echo '$USER' "$USER" "text  ' text"
 
 # #wildcards
-# /bin/echo $USER =intergalaktikus miaf*szomez 
+/bin/echo $USER =intergalaktikus miaf*szomez 
 # #celui du dessus a des leaks reliés aux wildcards
 
 # /bin/echo "text"   "$USER"    "$USER"
 
-/bin/echo
+# /bin/echo
 
 # cat /prout/prout | echo Yo
 # echo $?
