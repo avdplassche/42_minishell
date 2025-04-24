@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 22:02:17 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 12:36:49 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	wait_for_children(t_mini *mini, t_cmd *cmd)
 
 	exit_status = 0;
 	sig_number = 0;
-	while (1)
+	int i = 0;
+	while (i < mini->cmd_count)
 	{
-		w = waitpid (-1, &wstatus, 0);
+		w = waitpid (cmd[i].pid, &wstatus, 0);
 		if (w == -1)
 		{
 			if (errno == ECHILD)
@@ -47,6 +48,7 @@ int	wait_for_children(t_mini *mini, t_cmd *cmd)
 			exit_status = WEXITSTATUS(wstatus);
 		else if (WIFSIGNALED(wstatus))
 			handle_fork_signal(&sig_number, &exit_status, wstatus);
+		i++;
 	}
 	return (exit_status);
 }

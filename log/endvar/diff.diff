@@ -1,109 +1,28 @@
 --- log/endvar/bash.log
 +++ log/endvar/mini.log
-@@ -5,32 +5,32 @@
-  haha
--!haha
--#haha
- 
--%haha
--&haha
+@@ -21,5 +21,5 @@
+ toto;haha
+-toto<haha
 +
+ toto=haha
+-toto>haha
 +
+ toto?haha
+@@ -27,3 +27,3 @@
+ toto[haha
+-toto\haha
 +
+ toto]haha
+@@ -31,3 +31,3 @@
+ toto{haha
+-toto|haha
 +
- 'haha
--(haha
--)haha
--*haha
--+haha
--,haha
---haha
--.haha
--/haha
--:haha
--;haha
--<haha
--=haha
-->haha
--?haha
--@haha
--[haha
--\haha
--]haha
--^haha
--{haha
--|haha
--}haha
--~haha
- 
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
- ===================
-@@ -39,24 +39,24 @@
- haha
--!haha
--#haha
- 
--%haha
-+
-+
-+
- haha
--*haha
--+haha
--,haha
---haha
--.haha
--/haha
--:haha
--=haha
--?haha
--@haha
--[haha
--]haha
--^haha
--{haha
--}haha
--~haha
- 
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
- ===================
+ toto}haha
+@@ -43,3 +43,3 @@
+ toto%haha
+-totohaha
++toto
+ toto*haha
 @@ -65,24 +65,24 @@
  $ haha
 -$%haha

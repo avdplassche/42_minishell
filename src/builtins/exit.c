@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:25:59 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 10:29:58 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 11:57:49 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 	if (mini->fd_backup->stdin_backup != -1
 		|| mini->fd_backup->stdout_backup != -1)
 		restore_standard_fd(mini);
+	printf("exit\n");
 	exit_minishell(mini, cmd);
 	return (mini->last_return);
 }

@@ -1,3 +1,5 @@
+export USER="toto"
+
 echo
 echo "==================="
 echo "VAR DQUOTE"
