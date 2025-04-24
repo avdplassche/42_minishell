@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 12:50:25 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:11:49 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	validate_command(t_mini *mini, t_cmd *cmd)
 		free_mini(mini);
 		exit(mini->last_return);
 	}
+	DEBUG("cmd error access is worth %d\n", cmd->error_access);
 }
 
 static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
@@ -51,14 +52,20 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
-		exit_minishell(mini, cmd);
+		DEBUG("entered the builtin section\n");
+		exit(EXIT_SUCCESS);
 	}
+	DEBUG("mini->last return is worth %d\n", mini->last_return);
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
-		printf("execve failed with errno: %d\n", errno);
-		perror("execve");
-		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
+		if (errno == ENOENT)
+			mini->last_return = 127;
+		else if (errno == EACCES)
+			mini->last_return = 126;
+		else 
+			mini->last_return = 1;
+		perror(cmd->command);
+		exit(mini->last_return);
 	}
 }
 

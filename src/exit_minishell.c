@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/22 17:58:21 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:25:43 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	exit_minishell(t_mini *mini, t_cmd *cmd)
 	if (cmd)
 		free_cmd(mini, cmd);
 	free_mini(mini);
+	DEBUG("mini last return before exit is worth %d\n", mini->last_return);
 	exit(mini->last_return);
 }
