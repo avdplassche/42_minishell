@@ -111,7 +111,7 @@ int				get_dir_start(char *temp, int i);
 void			set_wildcard_directory(t_mini *mini, t_wildcard *w, int i);
 int				is_last_asterisk(char *token, int i);
 void			tokenize_wildcard(t_mini *mini, t_wildcard *w, int start);
-void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w);
+void			set_wildcard(t_mini *mini, char *temp, t_wildcard *w, int i);
 void			set_sub_token(t_mini *mini, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
 void			free_wildcards(char *line, t_wildcard *w);

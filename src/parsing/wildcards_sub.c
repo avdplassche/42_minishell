@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:11 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 00:35:55 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:23:13 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
 	char	*dest;
 
-	set_wildcard(mini, line, w);
+	set_wildcard(mini, line, w, i);
 	i = get_new_index(w->wildcard);
 	set_wildcard_directory(mini, w, i);
 	tokenize_wildcard(mini, w, i);

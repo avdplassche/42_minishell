@@ -1,0 +1,18 @@
+add_function_to_makefile.sh dev.sh Dockerfile endvar final_test includes log Makefile minishell print_string_indexes run.sh src test test_bash.txt test_minishell.txt test_wildcards.txt utils valgrind.sh valgrind.supp valgrindjojo.sh
+./add_function_to_makefile.sh ./dev.sh ./Dockerfile ./endvar ./final_test ./includes ./log ./Makefile ./minishell ./print_string_indexes ./run.sh ./src ./test ./test_bash.txt ./test_minishell.txt ./test_wildcards.txt ./utils ./valgrind.sh ./valgrind.supp ./valgrindjojo.sh
+*.c
+src/
+dhsd8*hjsahda
+../42 ../alex.vdplassche@hotmail.fr - Google Drive ../alexandre.vanderp@gmail.com - Google Drive ../Applications ../CPP_Modules ../Cpp_Projects ../C_Projects ../Desktop ../Documents ../Downloads ../Dropbox ../Junk ../Library ../miniRT ../minishell ../minishell_back ../minishell_playground ../Movies ../Music ../Pictures ../Programs ../Public ../Python Projects ../root_me ../Spitfire ../Splice ../vanderplassche.alexandre@gmail.com - Google Drive ../vedou-website
+/Applications /bin /cores /dev /etc /home /Library /opt /private /sbin /System /tmp /Users /usr /var /Volumes
+final_test/.. includes/.. log/.. src/.. test/.. utils/..
+test/
+../../alexandrevanderplassche ../../Guest ../../reparation ../../root ../../Shared
+add_function_to_makefile.sh dev.sh Dockerfile endvar final_test includes log Makefile minishell print_string_indexes run.sh src test test_bash.txt test_minishell.txt test_wildcards.txt utils valgrind.sh valgrind.supp valgrindjojo.sh
+final_test test
+test test_bash.txt test_minishell.txt test_wildcards.txt
+test test_bash.txt test_minishell.txt test_wildcards.txt
+final_test/ includes/ log/ src/ test/ utils/
+final_test/*.c includes/*.c log/*.c src/*.c test/*.c utils/*.c
+final_test/****/* includes/****/* log/****/* src/****/* test/****/* utils/****/*
+../42/* ../Applications/* ../CPP_Modules/* ../Cpp_Projects/* ../C_Projects/* ../Desktop/* ../Documents/* ../Downloads/* ../Dropbox/* ../Junk/* ../Library/* ../miniRT/* ../minishell/* ../minishell_back/* ../minishell_playground/* ../Movies/* ../Music/* ../Pictures/* ../Programs/* ../Public/* ../Python Projects/* ../root_me/* ../Spitfire/* ../Splice/* ../vedou-website/*

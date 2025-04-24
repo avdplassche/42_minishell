@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 00:39:10 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:14:10 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	is_last_asterisk(char *token, int i)
 	return (1);
 }
 
-void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
+void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
-	int	i;
+	// int	i;
 	int	j;
 
 	if (!contain_char(line, ' '))
@@ -49,14 +49,16 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 		str_malloc_check(mini, w->wildcard);
 		return ;
 	}
-	i = 0;
-	while (line [i] != ' ')
-		i++;
-	i++;
+	if (i > 0)
+		while (line[i - 1] != ' ')
+			i--;
+	else
+		while (line [i] != ' ')
+			i++;
 	j = i;
 	while (line [j] && line [j] != ' ')
 		j++;
-	w->wildcard = ft_substr(line, i, ft_strlen(line) - i - j);
+	w->wildcard = ft_substr(line, i, j - i);
 	str_malloc_check(mini, w->wildcard);
 }
 
