@@ -1,8 +1,0 @@
---- log/5/bash_error.log
-+++ log/5/mini_error.log
-@@ -1,3 +1,3 @@
- mkdir: can't create directory 'test': File exists
--final_test/5.sh: cd..: command not found
--final_test/5.sh: tmp_test: command not found
-+Minishell: cd..: command not found.
-+Minishell: tmp_test: command not found.

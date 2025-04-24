@@ -1,6 +1,0 @@
---- log/bin/bash_error.log
-+++ log/bin/mini_error.log
-@@ -1,2 +1,2 @@
- cat: can't open 'Dockerfile': No such file or directory
--final_test/bin.sh: prout: command not found
-+Minishell: prout: command not found.

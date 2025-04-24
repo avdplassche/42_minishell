@@ -1,9 +1,0 @@
---- log/cd/bash.log
-+++ log/cd/mini.log
-@@ -37,3 +37,2 @@
- valgrindjojo.sh
--/
- app
-@@ -56 +55,2 @@
- var
-+/
