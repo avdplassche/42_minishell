@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 21:57:10 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 09:52:41 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	check_command_access(t_cmd *cmd)
 {
 	errno = 0;
 	if (cmd->type == BUILTIN)
+	{
+		cmd->error_access = 0;
 		return ;
+	}
 	if (cmd->is_directory)
 	{
 		cmd->error_access = EISDIR;

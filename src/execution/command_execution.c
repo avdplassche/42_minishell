@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 21:55:22 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 09:46:13 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
-		exit(EXIT_SUCCESS);
+		exit_minishell(mini, cmd);
 	}
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
 		printf("execve failed with errno: %d\n", errno);
 		perror("execve");
 		mini->last_return = MALLOC_ERROR;
-		exit(EXIT_FAILURE);
+		exit_minishell(mini, cmd);
 	}
 }
 
@@ -70,7 +70,7 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	if (pid == -1)
 	{
 		mini->last_return = MALLOC_ERROR;
-		exit(EXIT_FAILURE);
+		exit_minishell(mini, cmd);
 	}
 	if (pid == 0)
 	{

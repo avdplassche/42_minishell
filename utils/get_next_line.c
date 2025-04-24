@@ -5,103 +5,103 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:54:31 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/23 23:06:56 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/24 09:52:25 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/24 09:52:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*free_and_return_null(char **stash)
+static ssize_t	use_str_left(char *buffer, char *str_left)
 {
-	if (*stash)
+	ssize_t	buffer_len;
+
+	if (!*str_left)
+		return (0);
+	buffer_len = 0;
+	while (*str_left && *str_left != '\n')
+		buffer[buffer_len++] = (*str_left++);
+	if (*str_left == '\n')
+		buffer[buffer_len++] = (*str_left++);
+	buffer[buffer_len] = '\0';
+	while (*str_left)
 	{
-		free(*stash);
-		*stash = NULL;
+		*(str_left - buffer_len) = *str_left;
+		str_left++;
 	}
-	return (NULL);
+	*(str_left - buffer_len) = '\0';
+	return (buffer_len);
 }
 
-char	*updated_stash(char **old_stash)
+static void	save_str_left(char *str_left, char *cursor, ssize_t len)
 {
-	char	*new_stash;
-	int		len;
-
-	len = 0;
-	if (!*old_stash)
-		return (NULL);
-	while ((*old_stash)[len] && (*old_stash)[len] != '\n')
-		len++;
-	if ((*old_stash)[len] == '\0')
-		return (free_and_return_null(old_stash));
-	len++;
-	new_stash = ft_substr(*old_stash, len, ft_strlen(*old_stash) - len);
-	if (!new_stash)
-		return (free_and_return_null(old_stash));
-	free(*old_stash);
-	*old_stash = new_stash;
-	return (new_stash);
+	while (len--)
+		*(str_left++) = *(cursor++);
+	*str_left = '\0';
 }
 
-char	*extract_line(char *stash)
+static char	*str_cut(char *buffer, char *cursor, ssize_t line_len)
 {
-	int		len;
-	char	*line;
+	char	*cut;
+	ssize_t	cut_len;
 
-	len = 0;
-	if (!stash)
-		return (NULL);
-	while (stash[len] && stash[len] != '\n')
-		len++;
-	if (stash[len] == '\n')
-		len++;
-	line = ft_substr(stash, 0, len);
-	return (line);
+	if (!line_len && cursor == buffer)
+		return (0);
+	cut_len = cursor - buffer;
+	cut = malloc(cut_len + line_len + 1);
+	if (!cut)
+		return (0);
+	cut += cut_len + line_len;
+	*cut = '\0';
+	while (cut_len--)
+		*(--cut) = *(--cursor);
+	return (cut);
 }
 
-char	*read_and_append(char *stash, int fd)
+static char	*read_next(int fd, char *str_left, ssize_t line_len)
 {
-	int		bytes_read;
-	char	buff[BUFFER_SIZE + 1];
-	char	*temp;
+	char	buffer[BUFFER_SIZE];
+	char	*cursor;
+	ssize_t	bytes_read;
 
-	bytes_read = read(fd, buff, BUFFER_SIZE);
-	while (bytes_read > 0)
-	{
-		buff[bytes_read] = '\0';
-		temp = ft_strjoin(stash, buff);
-		if (!temp)
-			return (free_and_return_null(&stash));
-		free(stash);
-		stash = temp;
-		if (ft_strchr(stash, '\n'))
-			break ;
-		bytes_read = read(fd, buff, BUFFER_SIZE);
-	}
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1)
-		return (free_and_return_null(&stash));
-	return (stash);
+		return (0);
+	if (!bytes_read)
+		return (str_cut(buffer, buffer, line_len));
+	cursor = buffer;
+	while (--bytes_read && *cursor != '\n')
+		cursor++;
+	if (*cursor == '\n')
+	{
+		save_str_left(str_left, cursor + 1, bytes_read);
+		return (str_cut(buffer, cursor + 1, line_len));
+	}
+	bytes_read = cursor - buffer + 1;
+	cursor = read_next(fd, str_left, bytes_read + line_len);
+	if (!cursor)
+		return (0);
+	while (bytes_read--)
+		*(--cursor) = buffer[bytes_read];
+	return (cursor);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	str_left[BUFFER_SIZE];
+	char		buffer[BUFFER_SIZE];
+	ssize_t		buffer_len;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free_and_return_null(&stash));
-	if (!stash)
-	{
-		stash = ft_strdup("");
-		if (!stash)
-			return (NULL);
-	}
-	stash = read_and_append(stash, fd);
-	if (!stash || !*stash)
-		return (free_and_return_null(&stash));
-	line = extract_line(stash);
-	if (!line || line[0] == '\0')
-		return (free_and_return_null(&stash));
-	stash = updated_stash(&stash);
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (0);
+	buffer_len = use_str_left(buffer, str_left);
+	if (buffer_len && buffer[buffer_len - 1] == '\n')
+		return (str_cut(buffer, buffer + buffer_len, 0));
+	line = read_next(fd, str_left, buffer_len);
+	if (!line)
+		return (0);
+	while (buffer_len--)
+		*(--line) = buffer[buffer_len];
 	return (line);
 }
