@@ -1,4 +1,5 @@
-env | grep PATH
+echo "$USER#haha"
+
 
 
 
