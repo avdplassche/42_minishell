@@ -73,7 +73,7 @@ run_test() {
 	local LOG_FILE_ERR="$LOG_DIR/$TEST_NAME/mini_error.log"
 	$COMMAND > "$LOG_FILE" 2> "$LOG_FILE_ERR"
 	info "$TEST_NAME \t$TEST_FILE"
-	echo -e "mini\t\t$LOG_FILE\t$LOG_FILE_ERR"
+	echo -e "mini\t\t$LOG_FILE\t\t$LOG_FILE_ERR"
 	get_diff $TEST_FILE $LOG_FILE $LOG_FILE_ERR
 	check_leaks
 	echo

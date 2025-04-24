@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:27:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 10:32:23 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 09:23:31 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	builtin_pwd(t_mini *mini, t_cmd *cmd)
 	DEBUG("entered the pwd function\n");
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		printf("%s\n", cwd);
+		ft_putstr_fd(cwd, STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
 	else
 	{

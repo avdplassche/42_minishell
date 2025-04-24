@@ -32,7 +32,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/minishell",
-		"args": ["./test_jojo/tests/tests_test.sh"],
+		"args": ["./final_test/todo.sh"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],
