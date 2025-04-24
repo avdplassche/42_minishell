@@ -1,6 +1,6 @@
+echo ../*$PAGER~ ~
 ~
 echo ~
-echo ../*$PAGER~ ~
 echo $?
 echo $?ABC$?DEF
 "echo $LANG $PAGER $PA '$PWD'"

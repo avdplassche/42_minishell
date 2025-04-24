@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:22 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/16 18:44:25 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 01:14:33 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ char	*dollar_handle(t_mini *mini, char *line)
 	int	i;
 
 	i = need_dollar_substitution(line);
+	if (i == -1)
+		return (line);
 	while (i > -1)
 	{
 		line = translate_dollar_sign(mini, line, i);

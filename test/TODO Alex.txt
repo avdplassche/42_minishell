@@ -1,7 +1,8 @@
 Tests :
 
-
+-test valgrind echo $LOVED
 - exit print exit
+
 
 - CLEAN enum and structs
 - cleanup DEBUG

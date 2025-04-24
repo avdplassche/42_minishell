@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 22:48:23 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 12:15:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 			parsing(&mini, cmd);
 		free_string_ptr(&mini.line);
 	}
-	
+
 /*********************** TEST MODE/ ****************************** */
 	if (argc == 2)
 	{

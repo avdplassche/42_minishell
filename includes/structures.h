@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 21:35:19 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 00:45:53 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef union u_pipefd
 	{
 		int			read;
 		int			write;
-	};	
+	};
 }			t_pipefd;
 
 
@@ -45,13 +45,14 @@ typedef struct s_quote
 typedef struct s_alloc
 {
 	char			*line_out;
-	char			*prefix;	
+	char			*prefix;
 	char			*suffix;
 	char			*number;
 	char			*temp;
 	char			*var_name;
 	char			*var_env;
 	char			*var_value;
+	char			*enquoted;
 	t_quote			q;
 }					t_alloc;
 
@@ -81,22 +82,22 @@ typedef struct s_cmd t_cmd;
  * @param last_return sig return of the last cmd (needed for $?)
  * @param cursor used to remember where we stopped the parsing
  * @param error to be configured
- * @param fdin 
+ * @param fdin
  */
 typedef struct s_mini
 {
 	char			**envp;
 	char			**export;
 	char			**builtins;
-	char			**paths; //we need to take away path 
+	char			**paths; //we need to take away path
 	char			*line;
 	int				cmd_count;
 	int				last_return;
 	int				cursor;
 	bool			error;
-	t_fd_backup		*fd_backup; 
+	t_fd_backup		*fd_backup;
 	t_pipefd		*pipes; //array of pipes
-	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations 
+	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations
 	t_wildcard		w;
 	bool			should_exit;
 }					t_mini;
@@ -110,10 +111,10 @@ typedef struct s_mini
  * @param id id of the command (1 == first exec) // Is it needed ?
  * @param file struct containning file name + type containing all redirections
  * @param redir type of the redirection and path to the file
- * @param pid_t is the pid of the process 
+ * @param pid_t is the pid of the process
  * @param pipe_in is the pipe on the left of the command
  * @param pipe_out is the pipe on the right of the command
- * 
+ *
  */
 typedef struct s_cmd
 {
