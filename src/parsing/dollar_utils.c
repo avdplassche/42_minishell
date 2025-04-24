@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:43 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/22 16:45:50 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:00:50 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 	str_malloc_check(mini, s.prefix);
 	while (line[++i])
 		if (line[i] == ' ' || (line[i] == 34 && !q.dbl)
-			|| (line[i] == 39 && !q.sgl))
+			|| (line[i] == 39 && !q.sgl) || is_minishell_punct(line[i]) || line[i] == '*')
 			break ;
+	if (line[i] == '*' && line[i - 1] == '$')
+		i++;
 	s.suffix = ft_substr(line, i, ft_strlen(line));
 	if (!s.suffix)
 	{
@@ -44,12 +46,11 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 
 int	is_minishell_punct(char c)
 {
-	if (c == '!' || ('#' <= c && c <= '&')
-		|| ('(' <= c && c <= '/')
-		|| c == ':' || c == ';' || c == '='
-		|| c == '?' || c == '@' || c == '['
-		|| c == ']' || c == '^' || c == '{'
-		|| c == '}' || c == '~')
+	if (('!' <= c && c <= ')')
+		|| ('+' <= c && c <= '/')
+		|| (':' <= c && c <= '@')
+		|| ('[' <= c && c <= '^')
+		|| ('{' <= c && c <= '~'))
 		return (1);
 	return (0);
 }
