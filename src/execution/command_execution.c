@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:49:33 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:57:56 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	execute_command(t_mini *mini)
 		fork_command_executor(mini, &mini->cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}
-	mini->last_return = wait_for_children(mini);
 	parent_closes_all_pipes(mini);
+	mini->last_return = wait_for_children(mini);
 	setup_command_signal(mini);
 }

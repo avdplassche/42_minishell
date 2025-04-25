@@ -1,4 +1,5 @@
-echo | echo
+export REDIR=">"
+echo YO $REDIR log/hard/a_out.txt
 
 # export USER="toto"
 # ls /not_dir
