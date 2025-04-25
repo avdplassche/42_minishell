@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:01:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:26:46 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:50:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	handle_error(t_mini *mini, t_cmd *cmd)
 		print_error("Minishell: %s: Permission denied.\n", cmd->command, 2);
 		mini->last_return = 127;
 	}
-	else if (cmd->type == INVALID)
+	else if (cmd->type == INVALID || )
 	{
 		print_error("Minishell: %s: command not found.\n", cmd->command, 2);
 		mini->last_return = 127;
