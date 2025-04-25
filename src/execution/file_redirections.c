@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:24:09 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:50:45 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ static void	handle_heredoc_redir(t_mini *mini, t_redir *redir)
 	if (redir->heredoc_fd != -1)
 	{
 		if (redir->heredoc_fd == STDIN_FILENO)
-		{
-			// close(redir->heredoc_fd);
-			// redir->heredoc_fd = -1;
 			return ;
-		}
 		dup2_fd(mini, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
 		redir->heredoc_fd = -1;
@@ -40,7 +36,7 @@ static int	handle_out_append(t_mini *mini, t_redir *redir)
 		else if (errno == EISDIR)
 			print_error("Minishell: %s: Is a directory\n", redir->name, 2);
 		else if (errno == ENOENT)
-			print_error("Minishell: %s: No such file or directory\n", \
+			print_error("Minishell: %s: No such file or directory\n",\
 				redir->name, 2);
 		else
 			print_error("Minishell: %s: Error opening file\n", redir->name, 2);

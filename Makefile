@@ -75,6 +75,7 @@ SRCS				=	main.c \
 						fd_utils.c \
 						file_redirections.c \
 						heredoc_handler.c \
+						heredoc_input.c \
 						pipe_handling.c \
 						validate_command_access.c \
 						wait_for_children.c \

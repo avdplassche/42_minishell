@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_pwd_env.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 00:42:51 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 00:44:46 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -35,4 +46,3 @@ int	update_pwd_env(t_mini *mini, char *env_var)
 	mini->last_return = 0;
 	return (mini->last_return);
 }
-

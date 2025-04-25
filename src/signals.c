@@ -6,13 +6,11 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:19:01 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:14:56 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:35:46 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//int g_sig = 0;
 
 void	handler(int sig)
 {
@@ -20,15 +18,13 @@ void	handler(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
-		//g_sig = 1;
+		rl_replace_line("", 0);
 	}
 }
 
 void	setup_command_signal(t_mini *mini)
 {
-	struct	sigaction sig_ignore;
+	struct sigaction	sig_ignore;
 
 	sig_ignore.sa_handler = SIG_IGN;
 	sigemptyset(&sig_ignore.sa_mask);
@@ -48,8 +44,8 @@ void	signal_child(void)
 
 void	setup_signal_handlers(t_mini *mini)
 {
-	struct sigaction sig_int;
-	struct sigaction sig_quit;
+	struct sigaction	sig_int;
+	struct sigaction	sig_quit;
 
 	(void)mini;
 	sig_int.sa_handler = handler;

@@ -122,9 +122,13 @@ int				exec_mini(t_mini *mini, t_cmd *cmd);
 int				execute_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 int				check_command_synthax(t_mini *mini, t_cmd *cmd);
-void			handle_heredoc(t_mini *mini, t_cmd *cmd);
 void			execute_command(t_mini *mini);
 //pipe functions
+void			handle_heredoc(t_mini *mini, t_cmd *cmd);
+void			get_heredoc_imput_in_pipe(t_mini *mini, int heredoc_fd, t_redir *redir);
+void			null_terminate_heredoc_line(char **line);
+void			treat_heredoc_line_expanssion(t_mini *mini, char **line);
+
 void			create_pipe_array(t_mini *mini);
 void			dup2_fd(t_mini *mini, int fd_to_clone, int fd_new_clone);
 void			setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index);

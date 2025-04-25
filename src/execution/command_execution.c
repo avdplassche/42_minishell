@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:57:56 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:51:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 	int	redir_status;
 
 	redir_status = 0;
-
 	setup_command_pipes(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
 	{

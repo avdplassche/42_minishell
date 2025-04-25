@@ -6,11 +6,23 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:25:59 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:19:18 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:49:34 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	treat_exit_with_one_arg(t_mini *mini, t_cmd *cmd)
+{
+	if (is_valid_arithmetic_exit(cmd->args[1]))
+		mini->last_return = ft_atoi(cmd->args[1]) & 255;
+	else
+	{
+		print_error("minishell: exit: %s : numeric argument required\n",
+			cmd->args[1], 1);
+		mini->last_return = 255;
+	}
+}
 
 int	builtin_exit(t_mini *mini, t_cmd *cmd)
 {
@@ -21,16 +33,7 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 		return (1);
 	}
 	if (cmd->args && cmd->arg_amount == 1)
-	{
-		if (is_valid_arithmetic_exit(cmd->args[1]))
-			mini->last_return = ft_atoi(cmd->args[1]) & 255;
-		else
-		{
-			print_error("minishell: exit: %s : numeric argument required\n",
-				cmd->args[1], 1);
-			mini->last_return = 255;
-		}
-	}
+		treat_exit_with_one_arg(mini, cmd);
 	else
 		mini->last_return = 0;
 	if (mini->fd_backup->stdin_backup != -1

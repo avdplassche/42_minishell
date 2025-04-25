@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 00:43:31 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 00:43:50 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -28,10 +39,10 @@ static void	modify_env_array(t_mini *mini, char	*env_entry)
 }
 
 /**
- * Replaces the pointer inside the array of pointers if it starts with a given key
+ * 
  * @param env_key is the key with the equal sign
  * @param env_row is the entire env row with variable and path
- * @return - mini->last_return, otherwise nothing, it replaces the env row or adds.
+ * @return - mini->last_return
  *
  * @return - NULL if malloc error
  * @note frees the env_row at the end

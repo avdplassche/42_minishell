@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:51:09 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/20 18:43:01 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:36:35 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	search_and_shrink(t_mini *mini, char **args_cursor)
 		if (!identifier)
 			continue ;
 		cursor = mini->envp;
-		while(*cursor)
+		while (*cursor)
 		{
 			if (start_with_identifier(*cursor, identifier))
 			{
 				free(*cursor);
 				shift_elements_up(&cursor);
-				break;
+				break ;
 			}
 			cursor++;
 		}
@@ -52,7 +52,7 @@ static void	search_and_shrink(t_mini *mini, char **args_cursor)
 	}
 }
 
-int builtin_unset(t_mini *mini, t_cmd *cmd)
+int	builtin_unset(t_mini *mini, t_cmd *cmd)
 {
 	char	**args_cursor;
 
