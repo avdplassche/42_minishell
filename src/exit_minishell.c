@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 12:25:43 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:10:32 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ void	free_string_ptr(char **str)
 	*str = NULL;
 }
 
-void	free_cmd(t_mini *mini, t_cmd *cmd)
+void	free_cmd(t_mini *mini)
 {
 	int	i;
 
 	i = 0;
 	while (i < mini->cmd_count)
 	{
-		free_string_ptr(&cmd[i].command);
-		free_string_ptr(&cmd[i].path);
-		free_string_array(&cmd[i].args);
-		free_pathnames(&cmd[i]);
+		free_string_ptr(&mini->cmd[i].command);
+		free_string_ptr(&mini->cmd[i].path);
+		free_string_array(&mini->cmd[i].args);
+		free_pathnames(&mini->cmd[i]);
 		i++;
 	}
-	if (cmd)
-		free(cmd);
-	cmd = NULL;
+	if (mini->cmd)
+		free(mini->cmd);
+	mini->cmd = NULL;
 }
 
 /** Frees t_mini mini, used when leaving minishell
@@ -67,10 +67,9 @@ void	free_mini(t_mini *mini)
 	free_string_ptr(&mini->line);
 }
 
-void	exit_minishell(t_mini *mini, t_cmd *cmd)
+void	exit_minishell(t_mini *mini)
 {
-	if (cmd)
-		free_cmd(mini, cmd);
+	free_cmd(mini);
 	free_mini(mini);
 	DEBUG("mini last return before exit is worth %d\n", mini->last_return);
 	exit(mini->last_return);

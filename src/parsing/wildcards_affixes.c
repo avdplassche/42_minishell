@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_affixes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:56 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:33:28 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

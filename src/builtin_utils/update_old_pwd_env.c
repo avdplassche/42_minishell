@@ -33,7 +33,7 @@ static char	*get_original_pwd_path(t_mini *mini)
 {
 	char	*original_pwd_path;
 
-	original_pwd_path = ft_get_env(mini, NULL, "PWD");
+	original_pwd_path = ft_get_env(mini, "PWD");
 	if (!original_pwd_path)
 	{
 		original_pwd_path = get_current_workdir(mini);

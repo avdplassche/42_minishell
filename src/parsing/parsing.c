@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/25 10:10:06 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:16:10 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,9 @@
  */
 void	init_cmd(t_cmd *cmd, int i)
 {
-	cmd->command = NULL;
-	cmd->args = NULL;
-	cmd->path = NULL;
-	cmd->redir = NULL;
-	cmd->arg_amount = 0;
-	cmd->redir_amount = 0;
+	ft_bzero(cmd, sizeof(t_cmd));
 	cmd->id = i + 1;
 	cmd->type = -1;
-	cmd->is_export = 0;
-	cmd->heredoc_amount = 0;
-	cmd->heredoc_pipe.read = -1;
-	cmd->heredoc_pipe.write = -1;
 }
 
 int	is_valid_command(t_mini *mini)
@@ -74,20 +65,20 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 		return (set_return_value(mini, 127));
 	cmd = (t_cmd *)malloc(sizeof(t_cmd) * mini->cmd_count);
 	if (!cmd)
-		exit_minishell(mini, cmd);
+		exit_minishell(mini);
 	mini->cmd = cmd;
 	expand_tildes(mini);
 	mini->line = dollar_handle(mini, mini->line);
 	mini->line = wildcard_handle(mini, mini->line);
 	if (!is_valid_syntax(mini->line))
-		return (free_cmd(mini, cmd), set_return_value(mini, 2));
+		return (free_cmd(mini), set_return_value(mini, 2));
 	while (++i < mini->cmd_count)
 		cmd_fill_loop(mini, &cmd[i], i);
 	DEBUG("\n-----------------------------------------------\n");
 	exec_mini(mini, cmd);
 	if (cmd)
 	{
-		free_cmd(mini, cmd);
+		free_cmd(mini);
 		cmd = NULL;
 	}
 	mini->cursor = 0;

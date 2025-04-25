@@ -144,7 +144,6 @@ UTILS				=	contain_char.c \
 						ft_tolower.c \
 						get_debug_fd.c \
 						get_next_line.c \
-						string_array_copy.c \
 						string_array_create_key.c \
 						string_array_find_identifier.c \
 						string_array_join.c \

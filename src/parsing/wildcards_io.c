@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_io.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:05 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:40:06 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:19:07 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str)
 	if (!str)
 	{
 		free_wildcard_struct(w);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 }
 
@@ -47,7 +47,7 @@ void	wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w)
 	if (!w->file_list)
 	{
 		free_wildcard_struct(w);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 }
 

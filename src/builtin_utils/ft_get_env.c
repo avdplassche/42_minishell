@@ -10,7 +10,7 @@
  * @return - NULL if malloc error 
  * @note the path reference found with s
  */
-char	*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name)
+char	*ft_get_env(t_mini *mini, char	*var_name)
 {
 	size_t	var_length;
 	char	*path_ref;
@@ -26,7 +26,7 @@ char	*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name)
 	if (!value_copy)
 	{
 		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
+		exit_minishell(mini);
 	}
 	return (value_copy);
 }

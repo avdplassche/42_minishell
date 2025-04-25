@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:22 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 16:00:48 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:18:32 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*replace_variable(t_mini *mini, char *line, int sub_index, int j)
 	if (!var_env)
 	{
 		free(var_name);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	envp_index = get_envp_index(mini, var_env);
 	free(var_env);
@@ -48,7 +48,7 @@ char	*replace_env_return_value(t_mini *mini, char *temp1, int i)
 	if (!s.number)
 	{
 		free(s.line_out);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	s.suffix = ft_strjoin(s.line_out, s.number);
 	free(s.number);

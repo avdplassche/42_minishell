@@ -45,6 +45,12 @@
 				"ignoreFailures": true
 			},
 			{
+				// https://sourceware.org/gdb/onlinedocs/gdb/Forks.html
+				"description": "Fork follows Child process",
+				"text": "set follow-fork-mode child",
+				"ignoreFailures": true
+			},
+			{
 				"description": "Set Disassembly Flavor to Intel",
 				"text": "-gdb-set disassembly-flavor intel",
 				"ignoreFailures": true
@@ -67,7 +73,7 @@
 				"description": "Enable pretty-printing for gdb",
 				"text": "-enable-pretty-printing",
 				"ignoreFailures": true
-			}
+			},
 			{
 				// https://sourceware.org/gdb/onlinedocs/gdb/Forks.html
 				"description": "Fork follows Child process",
@@ -80,7 +86,6 @@
 				"text": "set detach-on-fork off",
 				"ignoreFailures": true
 			}
-			
 		]
 	}
 	]

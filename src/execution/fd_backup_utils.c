@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:28 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 16:51:41 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 18:23:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	backup_standard_fd(t_mini *mini)
 {
-	mini->fd_backup->stdin_backup = dup(STDIN_FILENO);
-	mini->fd_backup->stdout_backup = dup(STDOUT_FILENO);
+	if (mini->fd_backup->stdin_backup == -1)
+		mini->fd_backup->stdin_backup = dup(STDIN_FILENO);
+	if (mini->fd_backup->stdout_backup == -1)
+		mini->fd_backup->stdout_backup = dup(STDOUT_FILENO);
 }
 
 void	restore_standard_fd(t_mini *mini)

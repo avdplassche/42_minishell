@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:43 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 16:00:50 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:18:38 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 	if (!s.suffix)
 	{
 		free(s.prefix);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	s.line_out = ft_strjoin(s.prefix, s.suffix);
 	free(s.prefix);

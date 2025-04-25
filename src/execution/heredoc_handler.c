@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 16:01:29 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:24:44 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,15 @@ static void	get_in_pipe(t_mini *mini, int heredoc_fd, t_redir *redir)
 	char	*prompt;
 	char	*tmp;
 
-	prompt = "> ";
+	prompt = string_array_join((char *[]){"Heredoc(", redir->name, ") > ", \
+		NULL});
 	while (1)
 	{
 		line = readline(prompt);
+		if (line == NULL)
+		{
+			print_error("minishell: warning: here-document delimited by end-of-file (wanted %s)\n", redir->name, 2);
+		}
 		null_terminate_line(&line);
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
 		{
@@ -59,10 +64,10 @@ static void	heredoc_child(t_mini *mini, t_pipefd hd_pipe, t_redir *redir)
 	hd_pipe.read = -1;
 	get_in_pipe(mini, hd_pipe.write, redir);
 	close(hd_pipe.write);
-	exit(0);
+	exit_minishell(mini);
 }
 
-static void	create_heredoc_process(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static void	create_heredoc_process(t_mini *mini, t_redir *redir)
 {
 	pid_t		pid;
 	t_pipefd	hd_pipe;
@@ -73,7 +78,7 @@ static void	create_heredoc_process(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	{
 		perror("ERROR: pipe creation failed:\n");
 		mini->last_return = errno;
-		exit_minishell(mini, cmd);
+		exit_minishell(mini);
 	}
 	pid = fork();
 	if (pid == 0)
@@ -83,7 +88,6 @@ static void	create_heredoc_process(t_mini *mini, t_cmd *cmd, t_redir *redir)
 	}
 	close(hd_pipe.write);
 	redir->heredoc_fd = hd_pipe.read;
-	printf("the redir->heredoc is worth %d\n", redir->heredoc_fd);
 	waitpid(pid, &wstatus, 0);
 	if (WIFSIGNALED(wstatus))
 	{
@@ -105,8 +109,7 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
 		{
-			printf("Processing heredoc %d with delimiter: %s\n", i, cmd->redir[i].name);
-			create_heredoc_process(mini, cmd, &cmd->redir[i]);
+			create_heredoc_process(mini, &cmd->redir[i]);
 			if (mini->last_return == 130)
 				break ;
 		}

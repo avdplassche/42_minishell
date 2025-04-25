@@ -123,27 +123,27 @@ int				execute_builtin(t_mini *mini, t_cmd *cmd);
 t_builtin_func	get_builtin_function(t_cmd *cmd, char *cmd_name);
 int				check_command_synthax(t_mini *mini, t_cmd *cmd);
 void			handle_heredoc(t_mini *mini, t_cmd *cmd);
-void			execute_command(t_mini *mini, t_cmd *cmd);
+void			execute_command(t_mini *mini);
 //pipe functions
-void			create_pipe_array(t_mini *mini, t_cmd *cmd);
-void			dup2_fd(t_mini *mini, t_cmd *cmd, int fd_to_clone, int fd_new_clone);
+void			create_pipe_array(t_mini *mini);
+void			dup2_fd(t_mini *mini, int fd_to_clone, int fd_new_clone);
 void			setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index);
 int				setup_command_redirections(t_mini *mini, t_cmd *cmd);
 //parent functions
-int				wait_for_children(t_mini *mini, t_cmd *cmd);
+int				wait_for_children(t_mini *mini);
 void			parent_closes_all_pipes(t_mini *mini);
 //env-i scenario
-int 			set_minimal_env(t_mini *mini, t_cmd *cmd);
+int 			set_minimal_env(t_mini *mini);
 //standard fd backup and restore functions
 void			backup_standard_fd(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
 //error handling
 void			check_command_access(t_cmd *cmd);
 void			handle_error(t_mini *mini, t_cmd *cmd);
-void			clean_fd_backup(t_mini *mini, t_cmd *cmd);
-void			close_fd_backup_and_exit(t_mini *mini, t_cmd *cmd);
+void			clean_fd_backup(t_mini *mini);
+void			close_fd_backup_and_exit(t_mini *mini);
 //builtin exec
-char			*ft_get_env(t_mini *mini, t_cmd *cmd, char	*var_name);
+char			*ft_get_env(t_mini *mini, char	*var_name);
 int				set_env(t_mini *mini, char *env_key, char *env_row);
 int				update_pwd_env(t_mini *mini, char *env_var);
 int				update_old_pwd_env(t_mini *mini);
@@ -245,7 +245,6 @@ char			*extract_identifier(t_mini *mini, char *src);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTONS * * * * * * * * * * * * */
 
-char			**string_array_copy(t_mini *mini, t_cmd *cmd, char **src);
 char			*string_array_find_identifier(char	**string_array, char *identifier);
 void			string_array_print(t_cmd *cmd, char **string_array);
 size_t			string_array_len(char **str);
@@ -262,10 +261,10 @@ void			print_error(const char *format, const char *path, int fd);
 
 void			free_string_array(char ***str);
 void			free_wildcard_struct(t_wildcard *w);
-void			free_cmd(t_mini *mini, t_cmd *cmd);
+void			free_cmd(t_mini *mini);
 void			free_mini(t_mini *mini);
 void			free_pathnames(t_cmd *cmd);
-void			exit_minishell(t_mini *mini, t_cmd *cmd);
+void			exit_minishell(t_mini *mini);
 void			free_string_ptr(char **str);
 void			str_malloc_check(t_mini *mini, char *str);
 void			dbl_str_malloc_check(t_mini *mini, char **str);

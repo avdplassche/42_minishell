@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 10:50:04 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:13:00 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ typedef struct s_cmd
 	t_pipefd		*pipe_out;
 	int				needs_cleanup;
 	int				is_export;
-	t_pipefd		heredoc_pipe;
 }					t_cmd;
 
 /** A pointer to function for the builtin function
