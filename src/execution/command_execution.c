@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 20:59:59 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:10:49 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 	int	redir_status;
 
 	redir_status = 0;
-	handle_heredoc(mini, cmd);
+	//handle_heredoc(mini, cmd);
 	if (cmd->command[0] == '\0')
 		close_fd_backup_and_exit(mini, cmd);
 	setup_command_pipes(mini, cmd, cmd_index);
@@ -76,6 +76,7 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	pid = fork();
 	if (pid == -1)
 	{
+		perror("ERROR: forking child process failed:\n");
 		mini->last_return = FORK_ERROR;
 		exit_minishell(mini, cmd);
 	}

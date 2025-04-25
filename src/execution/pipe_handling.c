@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:30:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 09:42:54 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	create_pipe_array(t_mini *mini, t_cmd *cmd)
 	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
 	if (!mini->pipes)
 	{
-		mini->last_return = MALLOC_ERROR;
+		perror("Error in pipe creation:");
+		mini->last_return = PIPE_ERROR;
 		exit_minishell(mini, cmd);
 	}
 	i = 0;

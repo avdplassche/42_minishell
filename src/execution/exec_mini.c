@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 19:21:37 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:11:08 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	t_builtin_func	f;
 	int				redirection_status;
 
-	backup_standard_fd(mini);
 	redirection_status = 0;
 	if (check_command_synthax(mini, cmd))
 		return (mini->last_return);
-	handle_heredoc(mini, cmd);
+	//handle_heredoc(mini, cmd);
 	if (cmd->redir_amount > 0)
 	{
 		redirection_status = setup_command_redirections(mini, cmd);
@@ -92,6 +91,8 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		set_minimal_env(mini, cmd);
 	}
+	backup_standard_fd(mini);
+	handle_heredoc(mini, cmd);
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		return (execute_builtin(mini, cmd));
@@ -99,7 +100,6 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
 		|| cmd->type == INVALID)
 	{
-		backup_standard_fd(mini);
 		if (check_command_synthax(mini, cmd))
 			return (mini->last_return);
 		execute_command(mini, cmd);

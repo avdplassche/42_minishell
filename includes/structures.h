@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 20:38:06 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:50:04 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ typedef struct s_mini
 	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations
 	t_wildcard		w;
 	bool			should_exit;
-	t_pipefd		hd_pipein;
-	t_pipefd		hd_pipeout;
 }					t_mini;
 
 /** A structure containing command's 'token'
@@ -136,6 +134,7 @@ typedef struct s_cmd
 	t_pipefd		*pipe_out;
 	int				needs_cleanup;
 	int				is_export;
+	t_pipefd		heredoc_pipe;
 }					t_cmd;
 
 /** A pointer to function for the builtin function

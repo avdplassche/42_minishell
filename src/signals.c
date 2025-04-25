@@ -16,6 +16,30 @@ void	handler(int sig)
 	}
 }
 
+// void	heredoc_handler(int sig)
+// {
+// 	if (sig == SIGINT)
+// 	{
+// 		write(1, "\n", 1);
+// 		exit(130);
+// 	}
+// }
+
+// void	setup_heredoc_signal(t_mini *mini)
+// {
+// 	struct	sigaction sig_int;
+
+// 	sig_int.sa_handler = heredoc_handler;
+// 	sigempty(&sig_int.sa_mask);
+// 	sig_int.sa_flags = 0;
+// 	if (sigaction(SIGINT, &sig_int, NULL) == -1)
+// 	{
+// 		perror("sigaction: heredoc SIGQUIT:");
+// 		exit_minishell(mini, NULL);
+// 	}
+
+// }
+
 void	setup_command_signal(t_mini *mini)
 {
 	struct	sigaction sig_ignore;

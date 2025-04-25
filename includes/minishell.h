@@ -58,14 +58,13 @@ int				init_mini(t_mini *mini, char **envp);
 void			set_path(t_mini *mini);
 int				count_cmd(t_mini *mini);
 
-void			signal_list(void);
 void			signal_child(void);
 void			handler(int sig);
 
 void			setup_signal_handlers(t_mini *mini);
 void			handler(int sig);
 void			setup_command_signal(t_mini *mini);
-void			set_return_and_global_signal(t_mini *mini);
+void			setup_heredoc_signal(t_mini *mini);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 

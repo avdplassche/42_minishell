@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 17:58:40 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:10:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	init_cmd(t_cmd *cmd, int i)
 	cmd->id = i + 1;
 	cmd->type = -1;
 	cmd->is_export = 0;
+	cmd->heredoc_amount = 0;
+	cmd->heredoc_pipe.read = -1;
+	cmd->heredoc_pipe.write = -1;
 }
 
 int	is_valid_command(t_mini *mini)
