@@ -1,10 +1,10 @@
 #!/bin/bash
 
-mkdir log
-make re
-make clean
+# mkdir log
+# make re
+# make clean
 
-./minishell test/TESTMODE_WILDCARDS 24
+# ./minishell test/TESTMODE_WILDCARDS 24
 # ./minishell test/TESTMODE_DOLLAR 18
 # ./minishell test/TESTMODE_QUOTES 16
 # ./minishell test/TESTMODE_MULTIPLE_CMD 14

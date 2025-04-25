@@ -1,3 +1,4 @@
+echo ./* | echo *r
 echo */****/*
 *c
 *.c

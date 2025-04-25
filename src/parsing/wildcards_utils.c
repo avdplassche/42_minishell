@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/25 17:16:37 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 01:46:36 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,13 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 	str_malloc_check(mini, w->wildcard);
 }
 
-char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
+int	get_crop_index(char *line)
 {
-	int		i;
-	char	*line_out;
+	int 	i;
 	t_quote	q;
 
-	init_quotes(&q);
 	i = -1;
-	if (!contain_char(line, ' '))
-		return (line);
+	init_quotes(&q);
 	while (line[++i])
 	{
 		quote_enclosure_handle(line[i], &q);
@@ -84,10 +81,19 @@ char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
 			i++;
 	}
 	else
-	{
 		while (i > 0 && line[i] != ' ')
 			i--;
-	}
+	return (i);
+}
+
+char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
+{
+	int		i;
+	char	*line_out;
+
+	if (!contain_char(line, ' '))
+		return (line);
+	i = get_crop_index(line);
 	line_out = ft_substr(line, 0, i + 1);
 	str_malloc_wildcard_check(mini, w, line_out);
 	free(line);

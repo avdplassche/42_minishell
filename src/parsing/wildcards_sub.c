@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:11 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/25 17:41:16 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 01:42:07 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,11 @@ char	*add_line_suffix(t_mini *mini, char *dest, t_wildcard *w)
 	return (dest);
 }
 
-char	*empty_enquote(t_mini *mini, t_wildcard *w, char *line)
+char	*empty_enquote(t_mini *mini, t_wildcard *w, char *line, int i)
 {
-	int		i;
 	int		j;
 	char	*line_out;
 
-	i = need_wildcard_substitution(line);
 	while (i > 0 && line[i] != ' ')
 		i--;
 	if (i > 0)
@@ -115,7 +113,10 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 	tokenize_wildcard(mini, w, i);
 	w->file_amount = count_valid_files(w);
 	if (!w->file_amount)
-		return (free_wildcard_struct(w), empty_enquote(mini, w, line));
+	{
+		i = need_wildcard_substitution(line);
+		return (free_wildcard_struct(w), empty_enquote(mini, w, line, i));
+	}
 	fill_file_list(mini, w);
 	sort_array(w->file_list, double_array_len(w->file_list));
 	change_affixes(mini, w, i);
@@ -123,9 +124,7 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 	set_sub_token(mini, w);
 	dest = cat_wildcards(mini, w, line);
 	if (w->line_suffix)
-	{
 		dest = add_line_suffix(mini, dest, w);
-	}
 	free_wildcards(line, w);
 	return (dest);
 }
@@ -174,7 +173,6 @@ char	*wildcard_handle(t_mini *mini, char *line)
 	int			i;
 	t_wildcard	w;
 
-	// DEBUG("line in [%s]\n\n\n", line);
 	i = need_wildcard_substitution(line);
 	while (i != -1)
 	{
