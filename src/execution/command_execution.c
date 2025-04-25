@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:29:08 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:41:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	validate_command(t_mini *mini, t_cmd *cmd)
 	if (cmd->is_directory || cmd->error_access || cmd->type == INVALID)
 	{
 		handle_error(mini, cmd);
+		parent_closes_all_pipes(mini);
 		close_fd_backup_and_exit(mini);
 	}
 }

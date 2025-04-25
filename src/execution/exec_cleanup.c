@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:20:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:20:32 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:42:12 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,5 @@ void	clean_fd_backup(t_mini *mini)
 void	close_fd_backup_and_exit(t_mini *mini)
 {
 	clean_fd_backup(mini);
-	free_cmd(mini);
-	free_mini(mini);
-	exit(mini->last_return);
+	exit_minishell(mini);
 }
