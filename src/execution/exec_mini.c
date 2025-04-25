@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 17:24:56 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 19:21:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	redirection_status = 0;
 	if (check_command_synthax(mini, cmd))
 		return (mini->last_return);
+	handle_heredoc(mini, cmd);
 	if (cmd->redir_amount > 0)
 	{
 		redirection_status = setup_command_redirections(mini, cmd);
@@ -91,7 +92,7 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		set_minimal_env(mini, cmd);
 	}
-	else if (cmd->type == BUILTIN && mini->cmd_count == 1)
+	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		return (execute_builtin(mini, cmd));
 	}

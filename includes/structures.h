@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 00:45:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:38:06 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,15 @@ typedef struct s_mini
 	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations
 	t_wildcard		w;
 	bool			should_exit;
+	t_pipefd		hd_pipein;
+	t_pipefd		hd_pipeout;
 }					t_mini;
 
 /** A structure containing command's 'token'
  * @param command the name of the binary to execute
  * @param path path of the command (needed for execve)
  * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
- * @param args arguments given to the binary (needed for execve)
+ * @param args arguments given to  the binary (needed for execve)
  * @param arg_amount amount of arguments in the command
  * @param id id of the command (1 == first exec) // Is it needed ?
  * @param file struct containning file name + type containing all redirections

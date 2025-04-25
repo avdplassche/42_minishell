@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 13:11:49 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/24 20:59:59 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 			close_fd_backup_and_exit(mini, cmd);
 	}
 }
-
+ 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
@@ -76,7 +76,7 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	pid = fork();
 	if (pid == -1)
 	{
-		mini->last_return = MALLOC_ERROR;
+		mini->last_return = FORK_ERROR;
 		exit_minishell(mini, cmd);
 	}
 	if (pid == 0)

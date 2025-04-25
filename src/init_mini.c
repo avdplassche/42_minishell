@@ -103,5 +103,7 @@ int	init_mini(t_mini *mini, char **envp)
 	mini->fd_backup->stdout_backup = -1;
 	mini->should_exit = false;
 	mini->cursor = 0;
+	// mini->hd_pipein;
+	// mini->hd_pipeout;
 	return (0);
 }
