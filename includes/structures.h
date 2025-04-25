@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 00:45:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:32:09 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_wildcard
 	char			**file_list;
 	bool			current;
 	int				file_amount;
+	char			*line_suffix;
 }					t_wildcard;
 
 typedef struct s_cmd t_cmd;

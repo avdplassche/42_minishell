@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:05 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:40:06 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:32:49 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_wildcard_struct(t_wildcard *w)
 		free_string_ptr(&w->suffix);
 	if (w->temp)
 		free_string_ptr(&w->temp);
+	if (w->line_suffix)
+		free_string_ptr(&w->line_suffix);
 	if (w->s_dir)
 	{
 		free(w->s_dir);

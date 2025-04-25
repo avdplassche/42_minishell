@@ -1,8 +1,11 @@
+echo */****/*
+*c
+*.c
 echo *
 ***
 *
-echo ./*
-echo *.c
+echo ./* | echo *
+echo *.c *.c
 echo s*/
 echo dhsd8*hjsahda
 echo ../*

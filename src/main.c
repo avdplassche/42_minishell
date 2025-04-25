@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 12:45:52 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:42:44 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 3)
 		loop_3args(argv, mini, cmd);
 /************************ /TEST MODE ***************************** */
-	// rl_clear_history();
+	rl_clear_history();
 	free_mini(&mini);
 	DEBUG_CLOSE;
 	return (mini.last_return);

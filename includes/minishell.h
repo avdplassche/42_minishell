@@ -101,6 +101,7 @@ char			*clean_command_quotes(t_mini *mini, char *str);
 char			last_quote(char *str, int i);
 
 char			*wildcard_handle(t_mini *mini, char *temp);
+int				need_wildcard_substitution(char *line);
 int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
 void			fill_file_list(t_mini *mini, t_wildcard *w);
 int				count_valid_files(t_wildcard *w);

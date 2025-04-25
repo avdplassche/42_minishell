@@ -1,5 +1,8 @@
 Tests :
 
+Note on wildcard : maybe I coud change back single to double
+
+
 - test valgrind echo $LOVED
 - exit print exit
 

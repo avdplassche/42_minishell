@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 17:14:10 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:16:37 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	is_last_asterisk(char *token, int i)
 
 void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
-	// int	i;
 	int	j;
 
 	if (!contain_char(line, ' '))
@@ -66,12 +65,29 @@ char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
 {
 	int		i;
 	char	*line_out;
+	t_quote	q;
 
-	i = 0;
+	init_quotes(&q);
+	i = -1;
 	if (!contain_char(line, ' '))
 		return (line);
-	while (line[i] && line[i] != ' ')
-		i++;
+	while (line[++i])
+	{
+		quote_enclosure_handle(line[i], &q);
+		if (!q.dbl && !q.sgl && line[i] == '*')
+			break ;
+	}
+	if (!line[i])
+	{
+		i = 0;
+		while (line[i] && line[i] != ' ')
+			i++;
+	}
+	else
+	{
+		while (i > 0 && line[i] != ' ')
+			i--;
+	}
 	line_out = ft_substr(line, 0, i + 1);
 	str_malloc_wildcard_check(mini, w, line_out);
 	free(line);
