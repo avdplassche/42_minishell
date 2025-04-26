@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 00:34:17 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:34:20 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:36:58 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,8 @@ int	init_mini(t_mini *mini, char **envp)
 	else
 		mini->envp = NULL;
 	set_path(mini);
-	mini->fd_backup = (t_fd_backup *)malloc(sizeof(t_fd_backup));
-	if (!mini->fd_backup)
-		return (MALLOC_ERROR);
-	mini->fd_backup->stdin_backup = -1;
-	mini->fd_backup->stdout_backup = -1;
+	mini->stdin_backup = -1;
+	mini->stdout_backup = -1;
 	mini->should_exit = false;
 	mini->cursor = 0;
 	return (0);

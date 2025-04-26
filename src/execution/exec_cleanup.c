@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:20:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:42:12 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:49:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 void	clean_fd_backup(t_mini *mini)
 {
-	if (mini->fd_backup)
+	if (mini->stdin_backup > 0)
 	{
-		if (mini->fd_backup->stdin_backup > 0)
-		{
-			close(mini->fd_backup->stdin_backup);
-			mini->fd_backup->stdin_backup = -1;
-		}
-		if (mini->fd_backup->stdout_backup > 0)
-		{
-			close(mini->fd_backup->stdout_backup);
-			mini->fd_backup->stdout_backup = -1;
-		}
+		close(mini->stdin_backup);
+		mini->stdin_backup = -1;
 	}
+	if (mini->stdout_backup > 0)
+	{
+		close(mini->stdout_backup);
+		mini->stdout_backup = -1;
+	}
+		//restore_standard_fd(mini);
 }
 
 void	close_fd_backup_and_exit(t_mini *mini)

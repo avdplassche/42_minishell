@@ -1,6 +1,10 @@
 export REDIR=">"
 echo YO $REDIR log/hard/a_out.txt
 
+echo $USER*haha
+
+echo $nothing*haha
+
 # export USER="toto"
 # ls /not_dir
 # echo "EXIT WITH $? STATUS"

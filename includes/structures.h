@@ -6,18 +6,18 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 14:11:54 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:49:30 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef struct s_fd_backup
-{
-	int				stdin_backup;
-	int				stdout_backup;
-}	t_fd_backup;
+// typedef struct s_fd_backup
+// {
+// 	int				stdin_backup;
+// 	int				stdout_backup;
+// }	t_fd_backup;
 
 typedef union u_pipefd
 {
@@ -81,9 +81,10 @@ typedef struct s_mini
 	int				last_return;
 	int				cursor;
 	bool			error;
-	t_fd_backup		*fd_backup;
-	t_pipefd		*pipes;
-	t_cmd			*cmd;
+	int				stdin_backup;
+	int				stdout_backup;
+	t_pipefd		*pipes; //array of pipes
+	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations
 	t_wildcard		w;
 	bool			should_exit;
 }					t_mini;

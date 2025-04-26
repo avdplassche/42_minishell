@@ -150,7 +150,7 @@ echo $nothing
 echo $nothing haha
 echo $nothing%haha
 echo $nothing'haha'
-echo $nothing*haha
+# echo $nothing*haha
 echo $nothing+haha
 echo $nothing,haha
 echo $nothing.haha

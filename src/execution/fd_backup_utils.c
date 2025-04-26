@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_backup_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:28 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 18:23:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:37:55 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	backup_standard_fd(t_mini *mini)
 {
-	if (mini->fd_backup->stdin_backup == -1)
-		mini->fd_backup->stdin_backup = dup(STDIN_FILENO);
-	if (mini->fd_backup->stdout_backup == -1)
-		mini->fd_backup->stdout_backup = dup(STDOUT_FILENO);
+	if (mini->stdin_backup == -1)
+		mini->stdin_backup = dup(STDIN_FILENO);
+	if (mini->stdout_backup == -1)
+		mini->stdout_backup = dup(STDOUT_FILENO);
 }
 
 void	restore_standard_fd(t_mini *mini)
 {
 	if (!mini)
-		return ;
-	if (!mini->fd_backup)
-		return ;
-	if (mini->fd_backup->stdin_backup >= 0)
+		return ;;
+	if (mini->stdin_backup >= 0)
 	{
-		dup2(mini->fd_backup->stdin_backup, STDIN_FILENO);
-		close(mini->fd_backup->stdin_backup);
-		mini->fd_backup->stdin_backup = -1;
+		dup2(mini->stdin_backup, STDIN_FILENO);
+		close(mini->stdin_backup);
+		mini->stdin_backup = -1;
 	}
-	if (mini->fd_backup->stdout_backup >= 0)
+	if (mini->stdout_backup >= 0)
 	{
-		dup2(mini->fd_backup->stdout_backup, STDOUT_FILENO);
-		close(mini->fd_backup->stdout_backup);
-		mini->fd_backup->stdout_backup = -1;
+		dup2(mini->stdout_backup, STDOUT_FILENO);
+		close(mini->stdout_backup);
+		mini->stdout_backup = -1;
 	}
 }
