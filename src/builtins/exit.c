@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:25:59 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:49:34 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:38:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	builtin_exit(t_mini *mini, t_cmd *cmd)
 		treat_exit_with_one_arg(mini, cmd);
 	else
 		mini->last_return = 0;
-	if (mini->fd_backup->stdin_backup != -1
-		|| mini->fd_backup->stdout_backup != -1)
+	if (mini->stdin_backup != -1
+		|| mini->stdout_backup != -1)
 		restore_standard_fd(mini);
 	if (mini->last_return != 0)
 		printf("exit\n");

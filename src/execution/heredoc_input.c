@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 00:28:44 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:45:50 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:00:45 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	get_heredoc_imput_in_pipe(t_mini *mini, int heredoc_fd, t_redir *redir)
 	char	*line;
 	char	*prompt;
 
-	prompt = string_array_join((char *[]){"Heredoc(", redir->name, ") > ", \
-		NULL});
+	prompt = "> ";
 	while (1)
 	{
 		line = readline(prompt);

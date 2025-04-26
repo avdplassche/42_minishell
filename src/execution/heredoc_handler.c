@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:53:31 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:54:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	
 	i = 0;
 	setup_command_signal(mini);
-	while (i < cmd->redir_amount && !mini->last_return)
+	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
 		{

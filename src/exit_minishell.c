@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:10:32 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:41:28 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,16 @@ void	free_mini(t_mini *mini)
 		free(mini->pipes);
 		mini->pipes = NULL;
 	}
-	if (mini->fd_backup)
+
+	if (mini->stdin_backup != -1)
 	{
-		if (mini->fd_backup->stdin_backup != -1)
-			close(mini->fd_backup->stdin_backup);
-		if (mini->fd_backup->stdout_backup != -1)
-			close(mini->fd_backup->stdout_backup);
-		if (mini->fd_backup)
-		{
-			free(mini->fd_backup);
-			mini->fd_backup = NULL;
-		}
+		close(mini->stdin_backup);
+		mini->stdin_backup = -1;
+	}
+	if (mini->stdout_backup != -1)
+	{
+		close(mini->stdout_backup);
+		mini->stdout_backup = -1;
 	}
 	free_string_ptr(&mini->line);
 }

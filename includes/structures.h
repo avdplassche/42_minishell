@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 12:18:59 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:36:27 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-typedef struct s_fd_backup
-{
-	int				stdin_backup;
-	int				stdout_backup;
-}	t_fd_backup;
+// typedef struct s_fd_backup
+// {
+// 	int				stdin_backup;
+// 	int				stdout_backup;
+// }	t_fd_backup;
 
 typedef union u_pipefd
 {
@@ -97,7 +97,8 @@ typedef struct s_mini
 	int				last_return;
 	int				cursor;
 	bool			error;
-	t_fd_backup		*fd_backup;
+	int				stdin_backup;
+	int				stdout_backup;
 	t_pipefd		*pipes; //array of pipes
 	t_cmd			*cmd; // cmd in a single cmd operation, and then i renamed it to cmd_array in multicmd operations
 	t_wildcard		w;
