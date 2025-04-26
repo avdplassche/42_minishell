@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:26:41 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 09:35:18 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:34:51 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	builtin_cd(t_mini *mini, t_cmd *cmd)
 
 	if (cmd->arg_amount == 0 || cmd->args[1] == NULL)
 	{
-		path = ft_get_env(mini, cmd, "HOME");
+		path = ft_get_env(mini, "HOME");
 		if (!path)
 			return (error_cd(mini, "HOME"));
 	}
 	else if (cmd->arg_amount == 1 && cmd->args[1][0] == '-')
 	{
-		path = ft_get_env(mini, cmd, "OLDPWD");
+		path = ft_get_env(mini, "OLDPWD");
 		if (!path)
 			return (error_cd(mini, "OLDPWD"));
 	}

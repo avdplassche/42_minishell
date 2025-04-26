@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:17 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:18 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:18:21 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_redirections(t_mini *mini, t_cmd *cmd)
 		return (0);
 	cmd->redir = malloc(sizeof(t_redir) * (cmd->redir_amount));
 	if (!cmd->redir)
-		exit_minishell(mini, cmd);
+		exit_minishell(mini);
 	while (is_angle_bracket(mini->line[mini->cursor]))
 		get_cmd_redirection(mini, cmd, j++);
 	return (j);

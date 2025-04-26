@@ -1,4 +1,7 @@
+export REDIR=">"
+echo YO $REDIR log/hard/a_out.txt
 
+# export USER="toto"
 # ls /not_dir
 # echo "EXIT WITH $? STATUS"
 # echo "EXIT WITH $? STATUS"
@@ -16,7 +19,7 @@
 
 # /bin/echo "text"   "$USER"    "$USER"
 
-/bin/echo
+# /bin/echo
 
 # cat /prout/prout | echo Yo
 # echo $?

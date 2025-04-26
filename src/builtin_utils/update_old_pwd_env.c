@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_old_pwd_env.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 00:44:55 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 00:45:01 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -33,7 +44,7 @@ static char	*get_original_pwd_path(t_mini *mini)
 {
 	char	*original_pwd_path;
 
-	original_pwd_path = ft_get_env(mini, NULL, "PWD");
+	original_pwd_path = ft_get_env(mini, "PWD");
 	if (!original_pwd_path)
 	{
 		original_pwd_path = get_current_workdir(mini);

@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 21:57:38 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:35:18 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	redirection_status = 0;
 	if (check_command_synthax(mini, cmd))
 		return (mini->last_return);
-	backup_standard_fd(mini);
 	if (cmd->redir_amount > 0)
 	{
 		redirection_status = setup_command_redirections(mini, cmd);
 		if (redirection_status != 0)
 		{
-			clean_fd_backup(mini, cmd);
+			clean_fd_backup(mini);
 			return (mini->last_return);
 		}
 	}
@@ -59,28 +58,28 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	return (mini->last_return);
 }
 
-int	set_minimal_env(t_mini *mini, t_cmd *cmd)
+int	set_minimal_env(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd_entry;
 
-	if (!ft_get_env(mini, cmd, "PATH"))
+	if (!ft_get_env(mini, "PATH"))
 	{
 		set_env(mini, "PATH",
 			"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
 	}
-	if (!ft_get_env(mini, cmd, "PWD") && getcwd(cwd, sizeof(cwd)))
+	if (!ft_get_env(mini, "PWD") && getcwd(cwd, sizeof(cwd)))
 	{
 		pwd_entry = ft_strjoin("PWD=", cwd);
 		if (!pwd_entry)
 		{
 			mini->last_return = 1;
-			exit_minishell(mini, cmd);
+			exit_minishell(mini);
 		}
 		set_env(mini, "PWD", pwd_entry);
 		free_string_ptr(&pwd_entry);
 	}
-	if (!ft_get_env(mini, cmd, "SHLVL"))
+	if (!ft_get_env(mini, "SHLVL"))
 		set_env(mini, "SHVL", "SHVL=1");
 	return (0);
 }
@@ -89,19 +88,20 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
 	if (*mini->envp == NULL)
 	{
-		set_minimal_env(mini, cmd);
+		set_minimal_env(mini);
 	}
-	else if (cmd->type == BUILTIN && mini->cmd_count == 1)
+	backup_standard_fd(mini);
+	handle_heredoc(mini, cmd);
+	if (cmd->type == BUILTIN && mini->cmd_count == 1)
 	{
 		return (execute_builtin(mini, cmd));
 	}
 	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
 		|| cmd->type == INVALID)
 	{
-		backup_standard_fd(mini);
 		if (check_command_synthax(mini, cmd))
 			return (mini->last_return);
-		execute_command(mini, cmd);
+		execute_command(mini);
 		restore_standard_fd(mini);
 	}
 	return (mini->last_return);

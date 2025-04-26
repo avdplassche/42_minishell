@@ -1,7 +1,6 @@
 export PROUT
 export HAHA=
 env | grep -v "_=" | grep -v "LD_" | grep -v "GLIBC" | grep -v "SHLVL" | sort
-export | grep -v "_" | grep -v "GLIBC" | grep -v "SHLVL"
 
 echo "Salut $USER"
 echo "Salut Jonas"

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:43 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 01:36:26 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -35,7 +36,7 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 	if (!s.suffix)
 	{
 		free(s.prefix);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	s.line_out = ft_strjoin(s.prefix, s.suffix);
 	free(s.prefix);

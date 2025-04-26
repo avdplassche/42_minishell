@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 13:11:49 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:51:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 static void	validate_command(t_mini *mini, t_cmd *cmd)
 {
 	check_command_access(cmd);
-	if (cmd->is_directory || cmd->error_access)
+	if (cmd->is_directory || cmd->error_access || cmd->type == INVALID)
 	{
 		handle_error(mini, cmd);
-		free_cmd(mini, cmd);
-		free_mini(mini);
-		exit(mini->last_return);
+		parent_closes_all_pipes(mini);
+		close_fd_backup_and_exit(mini);
 	}
-	DEBUG("cmd error access is worth %d\n", cmd->error_access);
 }
 
 static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
@@ -30,42 +28,34 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 	int	redir_status;
 
 	redir_status = 0;
-	handle_heredoc(mini, cmd);
-	if (cmd->command[0] == '\0')
-		close_fd_backup_and_exit(mini, cmd);
 	setup_command_pipes(mini, cmd, cmd_index);
 	if (cmd->redir_amount > 0)
 	{
 		redir_status = setup_command_redirections(mini, cmd);
 		if (redir_status != 0)
-			close_fd_backup_and_exit(mini, cmd);
+			close_fd_backup_and_exit(mini);
 	}
 }
-
+ 
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
 
-	setup_execution_environment(mini, cmd, cmd_index);
+	if (cmd->command[0] == '\0')
+		close_fd_backup_and_exit(mini);
 	validate_command(mini, cmd);
+	setup_execution_environment(mini, cmd, cmd_index);
 	if (cmd->type == BUILTIN)
 	{
 		f = get_builtin_function(cmd, cmd->command);
 		f(mini, cmd);
 		DEBUG("entered the builtin section\n");
-		exit(EXIT_SUCCESS);
+		exit_minishell(mini);
 	}
 	DEBUG("mini->last return is worth %d\n", mini->last_return);
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
-		if (errno == ENOENT)
-			mini->last_return = 127;
-		else if (errno == EACCES)
-			mini->last_return = 126;
-		else 
-			mini->last_return = 1;
-		perror(cmd->command);
-		exit(mini->last_return);
+		exit_minishell(mini);
 	}
 }
 
@@ -76,8 +66,9 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 	pid = fork();
 	if (pid == -1)
 	{
-		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
+		perror("ERROR: forking child process failed:\n");
+		mini->last_return = FORK_ERROR;
+		exit_minishell(mini);
 	}
 	if (pid == 0)
 	{
@@ -88,19 +79,20 @@ static void	fork_command_executor(t_mini *mini, t_cmd *cmd, int cmd_index)
 		cmd->pid = pid;
 }
 
-void	execute_command(t_mini *mini, t_cmd *cmd)
+void	execute_command(t_mini *mini)
 {
 	int	cmd_index;
 
 	cmd_index = 0;
-	create_pipe_array(mini, cmd);
+
+	create_pipe_array(mini);
 	setup_command_signal(mini);
 	while (cmd_index < mini->cmd_count)
 	{
-		fork_command_executor(mini, &cmd[cmd_index], cmd_index);
+		fork_command_executor(mini, &mini->cmd[cmd_index], cmd_index);
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
-	mini->last_return = wait_for_children(mini, cmd);
+	mini->last_return = wait_for_children(mini);
 	setup_command_signal(mini);
 }

@@ -6,24 +6,25 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 22:00:50 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:50:45 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_heredoc_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static void	handle_heredoc_redir(t_mini *mini, t_redir *redir)
 {
 	if (redir->heredoc_fd != -1)
 	{
 		if (redir->heredoc_fd == STDIN_FILENO)
 			return ;
-		dup2_fd(mini, cmd, redir->heredoc_fd, STDIN_FILENO);
+		dup2_fd(mini, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
+		redir->heredoc_fd = -1;
 	}
 }
 
-static int	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_out_append(t_mini *mini, t_redir *redir)
 {
 	int	fd;
 
@@ -35,19 +36,20 @@ static int	handle_out_append(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		else if (errno == EISDIR)
 			print_error("Minishell: %s: Is a directory\n", redir->name, 2);
 		else if (errno == ENOENT)
-			print_error("Minishell: %s: No such file or directory\n", \
+			print_error("Minishell: %s: No such file or directory\n",\
 				redir->name, 2);
 		else
 			print_error("Minishell: %s: Error opening file\n", redir->name, 2);
 		mini->last_return = 1;
 		return (1);
 	}
-	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
+	dup2_fd(mini, fd, STDOUT_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 
-static int	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_out_redir(t_mini *mini, t_redir *redir)
 {
 	int	fd;
 
@@ -66,12 +68,13 @@ static int	handle_out_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		mini->last_return = 1;
 		return (1);
 	}
-	dup2_fd(mini, cmd, fd, STDOUT_FILENO);
+	dup2_fd(mini, fd, STDOUT_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 
-static int	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static int	handle_in_redir(t_mini *mini, t_redir *redir)
 {
 	int	fd;
 
@@ -90,8 +93,9 @@ static int	handle_in_redir(t_mini *mini, t_cmd *cmd, t_redir *redir)
 		mini->last_return = 1;
 		return (1);
 	}
-	dup2_fd(mini, cmd, fd, STDIN_FILENO);
+	dup2_fd(mini, fd, STDIN_FILENO);
 	close(fd);
+	fd = -1;
 	return (0);
 }
 
@@ -105,13 +109,13 @@ int	setup_command_redirections(t_mini *mini, t_cmd *cmd)
 	while (i < cmd->redir_amount)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
-			handle_heredoc_redir(mini, cmd, &cmd->redir[i]);
+			handle_heredoc_redir(mini, &cmd->redir[i]);
 		else if (cmd->redir[i].type == IN_REDIR)
-			result = handle_in_redir(mini, cmd, &cmd->redir[i]);
+			result = handle_in_redir(mini, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_REDIR)
-			result = handle_out_redir(mini, cmd, &cmd->redir[i]);
+			result = handle_out_redir(mini, &cmd->redir[i]);
 		else if (cmd->redir[i].type == OUT_APPEND)
-			result = handle_out_append(mini, cmd, &cmd->redir[i]);
+			result = handle_out_append(mini, &cmd->redir[i]);
 		if (result != 0)
 			break ;
 		i++;

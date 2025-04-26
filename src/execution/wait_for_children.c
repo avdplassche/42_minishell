@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:10 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 12:56:58 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 00:58:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	handle_fork_signal(int *sig_number, int *exit_status, int wstatus)
 		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 }
 
-int	wait_for_children(t_mini *mini, t_cmd *cmd)
+int	wait_for_children(t_mini *mini)
 {
 	int		wstatus;
 	int		exit_status;
@@ -35,7 +35,7 @@ int	wait_for_children(t_mini *mini, t_cmd *cmd)
 	int i = 0;
 	while (i < mini->cmd_count)
 	{
-		w = waitpid (cmd[i].pid, &wstatus, 0);
+		w = waitpid (mini->cmd[i].pid, &wstatus, 0);
 		if (w == -1)
 		{
 			if (errno == ECHILD)
@@ -43,7 +43,7 @@ int	wait_for_children(t_mini *mini, t_cmd *cmd)
 			if (errno == EINTR)
 				continue ;
 			perror("waitpid");
-			exit_minishell(mini, cmd);
+			exit_minishell(mini);
 		}
 		if (WIFEXITED(wstatus) && !sig_number)
 			exit_status = WEXITSTATUS(wstatus);

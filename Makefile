@@ -75,6 +75,7 @@ SRCS				=	main.c \
 						fd_utils.c \
 						file_redirections.c \
 						heredoc_handler.c \
+						heredoc_input.c \
 						pipe_handling.c \
 						validate_command_access.c \
 						wait_for_children.c \
@@ -144,7 +145,6 @@ UTILS				=	contain_char.c \
 						ft_tolower.c \
 						get_debug_fd.c \
 						get_next_line.c \
-						string_array_copy.c \
 						string_array_create_key.c \
 						string_array_find_identifier.c \
 						string_array_join.c \

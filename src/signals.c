@@ -1,8 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/25 17:19:01 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
-//int g_sig = 0;
 
 void	handler(int sig)
 {
@@ -18,7 +26,7 @@ void	handler(int sig)
 
 void	setup_command_signal(t_mini *mini)
 {
-	struct	sigaction sig_ignore;
+	struct sigaction	sig_ignore;
 
 	sig_ignore.sa_handler = SIG_IGN;
 	sigemptyset(&sig_ignore.sa_mask);
@@ -26,7 +34,7 @@ void	setup_command_signal(t_mini *mini)
 	if (sigaction(SIGINT, &sig_ignore, NULL) == -1)
 	{
 		perror("sigaction: SIGQUIT");
-		exit_minishell(mini, NULL);
+		exit_minishell(mini);
 	}
 }
 
@@ -38,8 +46,8 @@ void	signal_child(void)
 
 void	setup_signal_handlers(t_mini *mini)
 {
-	struct sigaction sig_int;
-	struct sigaction sig_quit;
+	struct sigaction	sig_int;
+	struct sigaction	sig_quit;
 
 	(void)mini;
 	sig_int.sa_handler = handler;
@@ -48,7 +56,7 @@ void	setup_signal_handlers(t_mini *mini)
 	if (sigaction(SIGINT, &sig_int, NULL) == -1)
 	{
 		perror("sigaction: SIGINT");
-		exit_minishell(mini, NULL);
+		exit_minishell(mini);
 	}
 	sig_quit.sa_handler = SIG_IGN;
 	sigemptyset(&sig_quit.sa_mask);
@@ -56,6 +64,6 @@ void	setup_signal_handlers(t_mini *mini)
 	if (sigaction(SIGQUIT, &sig_quit, NULL) == -1)
 	{
 		perror("sigaction: SIGQUIT");
-		exit_minishell(mini, NULL);
+		exit_minishell(mini);
 	}
 }

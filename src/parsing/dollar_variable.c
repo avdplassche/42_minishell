@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:56 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 01:33:49 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -53,7 +54,7 @@ char	*sub_env_variable(t_mini *mini, char *line, t_alloc *s, int i)
 	if (!line_out)
 	{
 		free(suffix);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	free(s->prefix);
 	free(suffix);
@@ -83,7 +84,7 @@ char	*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i)
 	if (!s.temp)
 	{
 		free(s.var_name);
-		exit_minishell(mini, mini->cmd);
+		exit_minishell(mini);
 	}
 	s.prefix = ft_strjoin(s.temp, s.var_name);
 	free(s.var_name);

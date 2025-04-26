@@ -5,75 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:06:53 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 22:07:03 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 00:53:31 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	null_terminate_line(char **line)
+static void	heredoc_parent(t_mini *mini, t_pipefd hd_p, int *pid, t_redir *red)
 {
-	char	*cursor;
+	int		wstatus;
 
-	cursor = *line;
-	while (*cursor && *cursor != '\n')
-		cursor++;
-	*cursor = '\0';
-}
-
-static void	get_in_pipe(t_mini *mini, int *hd_pipe, t_redir *redir)
-{
-	char	*line;
-	char	*prompt;
-	char	*tmp;
-
-	prompt = "> ";
-	while (1)
+	close(hd_p.write);
+	red->heredoc_fd = hd_p.read;
+	waitpid(*pid, &wstatus, 0);
+	if (WIFSIGNALED(wstatus))
 	{
-		line = readline(prompt);
-		null_terminate_line(&line);
-		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)
+		if (WTERMSIG(wstatus) == SIGINT)
 		{
-			free_string_ptr(&line);
-			break ;
+			write(1, "\n", 1);
+			mini->last_return = 130;
 		}
-		tmp = enquote_str(line, 34);
-		free(line);
-		line = tmp;
-		tmp = NULL;
-		line = dollar_handle(mini, line);
-		line = clean_command_quotes(mini, line);
-		write(hd_pipe[1], line, ft_strlen(line));
-		write(hd_pipe[1], "\n", 1);
-		free_string_ptr(&line);
 	}
 }
 
-static void	setup_heredoc_input(t_mini *mini, t_cmd *cmd, t_redir *redir)
+static void	heredoc_child(t_mini *mini, t_pipefd hd_pipe, t_redir *redir)
 {
-	int		hd_pipe[2];
+	close(hd_pipe.read);
+	hd_pipe.read = -1;
+	get_heredoc_imput_in_pipe(mini, hd_pipe.write, redir);
+	close(hd_pipe.write);
+	exit_minishell(mini);
+}
 
-	if (pipe(hd_pipe) == -1)
+static void	create_heredoc_process(t_mini *mini, t_redir *redir)
+{
+	pid_t		pid;
+	t_pipefd	hd_pipe;
+
+	if (pipe(hd_pipe.fildes) == -1)
 	{
-		mini->last_return = PIPE_ERROR;
-		exit_minishell(mini, cmd);
+		perror("ERROR: pipe creation failed:\n");
+		mini->last_return = errno;
+		exit_minishell(mini);
 	}
-	get_in_pipe(mini, hd_pipe, redir);
-	close(hd_pipe[1]);
-	redir->heredoc_fd = hd_pipe[0];
+	pid = fork();
+	if (pid == 0)
+	{
+		signal_child();
+		heredoc_child(mini, hd_pipe, redir);
+	}
+	heredoc_parent(mini, hd_pipe, &pid, redir);
 }
 
 void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 {
-	int	i;
-
+	int i;
+	
 	i = 0;
-	while (i < cmd->redir_amount)
+	setup_command_signal(mini);
+	while (i < cmd->redir_amount && !mini->last_return)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
 		{
-			setup_heredoc_input(mini, cmd, &cmd->redir[i]);
+			create_heredoc_process(mini, &cmd->redir[i]);
+			if (mini->last_return == 130)
+				break ;
 		}
 		i++;
 	}

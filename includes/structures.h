@@ -6,9 +6,10 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 11:58:04 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:23:46 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -103,7 +104,7 @@ typedef struct s_mini
  * @param command the name of the binary to execute
  * @param path path of the command (needed for execve)
  * @param type BUILTIND if in builtins dir, USER if in PATH, else, UNVALID
- * @param args arguments given to the binary (needed for execve)
+ * @param args arguments given to  the binary (needed for execve)
  * @param arg_amount amount of arguments in the command
  * @param id id of the command (1 == first exec) // Is it needed ?
  * @param file struct containning file name + type containing all redirections

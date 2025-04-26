@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/23 19:30:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:25:28 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,27 @@ void	parent_closes_all_pipes(t_mini *mini)
 
 void	setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
-	int	i;
-
 	if (cmd_index > 0)
 	{
-		dup2_fd(mini, cmd, mini->pipes[cmd_index - 1].read, STDIN_FILENO);
+		dup2_fd(mini, cmd->pipe_in->read, STDIN_FILENO);
 	}
 	if (cmd_index < mini->cmd_count - 1)
 	{
-		dup2_fd(mini, cmd, mini->pipes[cmd_index].write, STDOUT_FILENO);
+		dup2_fd(mini, cmd->pipe_out->write, STDOUT_FILENO);
 	}
-	i = 0;
-	while (i < mini->cmd_count - 1)
-	{
-		close(mini->pipes[i].read);
-		close(mini->pipes[i].write);
-		i++;
-	}
+	parent_closes_all_pipes(mini);
 }
 
-void	create_pipe_array(t_mini *mini, t_cmd *cmd)
+void	create_pipe_array(t_mini *mini)
 {
 	int			i;
 
 	mini->pipes = ft_calloc((mini->cmd_count - 1), sizeof(*(mini->pipes)));
 	if (!mini->pipes)
 	{
-		mini->last_return = MALLOC_ERROR;
-		exit_minishell(mini, cmd);
+		perror("Error in pipe creation:");
+		mini->last_return = PIPE_ERROR;
+		exit_minishell(mini);
 	}
 	i = 0;
 	while (i < mini->cmd_count - 1)
@@ -64,10 +57,10 @@ void	create_pipe_array(t_mini *mini, t_cmd *cmd)
 		if (pipe(mini->pipes[i].fildes) == -1)
 		{
 			mini->last_return = MALLOC_ERROR;
-			exit_minishell(mini, cmd);
+			exit_minishell(mini);
 		}
-		cmd[i].pipe_out = &mini->pipes[i];
-		cmd[i + 1].pipe_in = &mini->pipes[i];
+		mini->cmd[i].pipe_out = &mini->pipes[i];
+		mini->cmd[i + 1].pipe_in = &mini->pipes[i];
 		i++;
 	}
 }
