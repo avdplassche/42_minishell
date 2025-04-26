@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 15:03:10 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:40:57 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 	expand_tildes(mini);
 	mini->line = dollar_handle(mini, mini->line);
 	mini->line = wildcard_handle(mini, mini->line);
-	// if (!mini->line[0])
-	// 	return ;
 	if (mini->line[0] && !is_valid_syntax(mini->line))
 		return (free_cmd(mini), set_return_value(mini, 2));
 	while (++i < mini->cmd_count)

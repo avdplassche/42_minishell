@@ -1,33 +1,34 @@
 
 
-// #include "minishell.h"
+#include <stdlib.h>
 #include <dirent.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 /*This file is used to test if created functions are working as intended */
 
+char	*clean_big_quotes( char *line)
+{
+	int		len;
+	char	*dest;
+	int		i;
+	int		j;
+
+	len = strlen(line);
+	dest = malloc(sizeof(char) * (len - 1));
+	i = 0;
+	j = -1;
+	while (line[++i] && i < len - 1)
+		dest[++j] = line[i];
+	dest[j] = '\0';
+	return (dest);
+}
 
 
 int main (void)
 {
-	DIR * folder;
-	char buffer[256];
-	int i = -1;
-	char *dirname = getcwd(buffer, 256);
-	struct dirent *s_dir;
-
-	printf("f = %s\n", dirname);
-	folder = opendir(dirname);
-	while (1)
-	{
-		s_dir = readdir(folder);
-		if (!s_dir)
-			break ;
-		printf("%s\n", s_dir->d_name);
-		printf("%d\n", s_dir->d_type);
-		printf("\n");
-	}
-	// perror("stream : ");
+	char *s = "\"dhahd\"";
+	printf("%s\n", clean_big_quotes(s));
 	return (0);
 }
 

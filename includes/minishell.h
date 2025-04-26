@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:20:59 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 14:46:58 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:52:15 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ void			sort_array(char **filename, int len);
 void			sort_ascii_array(char	**string_array, int len);
 bool			contain_quotes(char *s);
 char			*enquote_str(char *str, int q);
+char			*clean_big_quotes(t_mini *mini, char *line);
 int				contain_string_at_specific_index(char *haystack,
 					char *needle, int i);
 bool			is_space(char c);

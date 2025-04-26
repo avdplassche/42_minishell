@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 14:30:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 15:24:32 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	int i;
 	
 	i = 0;
-	printf("cmd coutn is worth %d\n",mini->cmd_count);
 	setup_command_signal(mini);
 	while (i < cmd->redir_amount)
 	{
