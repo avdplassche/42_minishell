@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:01 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/25 17:37:41 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:54:54 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	fill_file_list(t_mini *mini, t_wildcard *w)
 		{
 			w->temp = ft_strdup(s_dir->d_name);
 			str_malloc_wildcard_check(mini, w, w->temp);
-			w->file_list[++i] = enquote_str(w->temp, 34);  /* change it to " if not working*/
+			w->file_list[++i] = enquote_str(w->temp, 34);
 			if (!w->file_list[i])
 				return (free_wildcard_double_pointer_first_part(mini, w));
 			free_string_ptr(&w->temp);

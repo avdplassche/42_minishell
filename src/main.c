@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:25:11 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		setup_signal_handlers(&mini);
 		cmd = NULL;
-		input = readline("Prompt minishell ➤ ");
+		input = readline("Minishell ➤ ");
 		if (!input)
 			break ;
 		add_history(input);

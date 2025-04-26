@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 13:20:59 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/26 14:46:58 by alvan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define _GNU_SOURCE
@@ -50,8 +62,6 @@
 # define GREENBG "\033[42m"
 # define REDBG "\033[41m"
 
-extern int	g_sig;
-
 /* * * * * * * * * * * * * * * * INIT * * * * * * * * * * * * * * * * * * * */
 
 int				init_mini(t_mini *mini, char **envp);
@@ -85,7 +95,8 @@ int				init_redirections(t_mini *mini, t_cmd *cmd);
 int				init_arguments(t_mini *mini, t_cmd *cmd);
 
 char			*dollar_handle(t_mini *mini, char *line);
-char			*get_env_variable(t_mini *mini, char *line, int envp_i, int sub_i);
+char			*get_env_variable(t_mini *mini, char *line,
+					int envp_i, int sub_i);
 char			*empty_expand(t_mini *mini, char *temp1, t_quote q, int i);
 int				get_envp_index(t_mini *mini, char *variable);
 int				is_minishell_punct(char c);
@@ -99,12 +110,17 @@ char			*clean_command_quotes(t_mini *mini, char *str);
 char			last_quote(char *str, int i);
 
 char			*wildcard_handle(t_mini *mini, char *temp);
+char			*substitute_wildcard(t_mini *mini, char *line,
+					t_wildcard *w, int i);
 int				need_wildcard_substitution(char *line);
-int				is_valid_filename(char *token, struct dirent *s_dir, int i, int j);
+int				is_valid_filename(char *token, struct dirent *s_dir,
+					int i, int j);
 void			fill_file_list(t_mini *mini, t_wildcard *w);
 int				count_valid_files(t_wildcard *w);
 void			change_affixes(t_mini *mini, t_wildcard *w, int i);
 char			*crop_command(t_mini *mini, char *line, t_wildcard *w);
+void			set_line_suffix(t_mini *mini, char *line, t_wildcard *w, int i);
+char			*add_line_suffix(t_mini *mini, char *dest, t_wildcard *w);
 int				get_new_index(char *temp);
 int				get_dir_start(char *temp, int i);
 void			set_wildcard_directory(t_mini *mini, t_wildcard *w, int i);
@@ -115,7 +131,6 @@ void			set_sub_token(t_mini *mini, t_wildcard *w);
 void			init_wildcard_struct(t_wildcard *w);
 void			free_wildcards(char *line, t_wildcard *w);
 
-
 /* * * * * * * * * EXECUTION * * * * * * * * */
 
 int				exec_mini(t_mini *mini, t_cmd *cmd);
@@ -125,10 +140,10 @@ int				check_command_synthax(t_mini *mini, t_cmd *cmd);
 void			execute_command(t_mini *mini);
 //pipe functions
 void			handle_heredoc(t_mini *mini, t_cmd *cmd);
-void			get_heredoc_imput_in_pipe(t_mini *mini, int heredoc_fd, t_redir *redir);
+void			get_heredoc_imput_in_pipe(t_mini *mini, int heredoc_fd,
+					t_redir *redir);
 void			null_terminate_heredoc_line(char **line);
 void			treat_heredoc_line_expanssion(t_mini *mini, char **line);
-
 void			create_pipe_array(t_mini *mini);
 void			dup2_fd(t_mini *mini, int fd_to_clone, int fd_new_clone);
 void			setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index);
@@ -137,7 +152,7 @@ int				setup_command_redirections(t_mini *mini, t_cmd *cmd);
 int				wait_for_children(t_mini *mini);
 void			parent_closes_all_pipes(t_mini *mini);
 //env-i scenario
-int 			set_minimal_env(t_mini *mini);
+int				set_minimal_env(t_mini *mini);
 //standard fd backup and restore functions
 void			backup_standard_fd(t_mini *mini);
 void			restore_standard_fd(t_mini *mini);
@@ -234,7 +249,8 @@ void			sort_array(char **filename, int len);
 void			sort_ascii_array(char	**string_array, int len);
 bool			contain_quotes(char *s);
 char			*enquote_str(char *str, int q);
-int				contain_string_at_specific_index(char *haystack, char *needle, int i);
+int				contain_string_at_specific_index(char *haystack,
+					char *needle, int i);
 bool			is_space(char c);
 int				is_only_spaces(char *s);
 int				is_only_specific_char(char *s, char c);
@@ -249,7 +265,8 @@ char			*extract_identifier(t_mini *mini, char *src);
 
 /* * * * * * * * * * STRING_ARRAY_FUNCTONS * * * * * * * * * * * * */
 
-char			*string_array_find_identifier(char	**string_array, char *identifier);
+char			*string_array_find_identifier(char	**string_array,
+					char *identifier);
 void			string_array_print(t_cmd *cmd, char **string_array);
 size_t			string_array_len(char **str);
 char			*string_array_create_key(char *variable, int variable_len);
@@ -272,10 +289,12 @@ void			exit_minishell(t_mini *mini);
 void			free_string_ptr(char **str);
 void			str_malloc_check(t_mini *mini, char *str);
 void			dbl_str_malloc_check(t_mini *mini, char **str);
-void			str_malloc_wildcard_check(t_mini *mini, t_wildcard *w, char *str);
-void			wildcard_file_list_malloc_check(t_mini *mini, t_wildcard *w);
-void			free_wildcard_double_pointer_first_part(t_mini *mini, t_wildcard*w);
-
+void			str_malloc_wildcard_check(t_mini *mini,
+					t_wildcard *w, char *str);
+void			wildcard_file_list_malloc_check(t_mini *mini,
+					t_wildcard *w);
+void			free_wildcard_double_pointer_first_part(t_mini *mini,
+					t_wildcard*w);
 
 int				execute_file(t_mini *mini, char *filename);
 

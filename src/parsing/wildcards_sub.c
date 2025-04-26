@@ -6,11 +6,33 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:11 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 01:42:07 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:53:18 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_sub_token(t_mini *mini, t_wildcard *w)
+{
+	int		len;
+
+	len = 0;
+	if (w->file_amount == 1)
+	{
+		free_string_ptr(&w->wildcard);
+		w->wildcard = w->file_list[0];
+		return ;
+	}
+	while (len < w->file_amount - 1)
+	{
+		append_space_to_string(mini, w, &w->file_list[len]);
+		if (!w->file_list[len])
+			free_wildcard_double_pointer_first_part(mini, w);
+		len++;
+	}
+	free_string_ptr(&w->wildcard);
+	w->wildcard = join_n_strings_wildcards(mini, w);
+}
 
 bool	is_wildcard_cmd(char *line)
 {
@@ -30,7 +52,6 @@ bool	is_wildcard_cmd(char *line)
 	return (false);
 }
 
-
 char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 {
 	char	*final_sub;
@@ -48,30 +69,6 @@ char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 	str_malloc_wildcard_check(mini, w, final_sub);
 	free_string_ptr(&w->wildcard);
 	return (final_sub);
-}
-
-void	set_line_suffix(t_mini *mini, char *line, t_wildcard *w, int i)
-{
-	while (line[i] && line[i] != ' ')
-		i++;
-	if (line[i])
-	{
-		w->line_suffix = ft_substr(line, i, ft_strlen(line) - i);
-		str_malloc_wildcard_check(mini, w, w->line_suffix);
-	}
-}
-
-char	*add_line_suffix(t_mini *mini, char *dest, t_wildcard *w)
-{
-	char	*temp;
-
-	temp = ft_strjoin(dest, w->line_suffix);
-	free(dest);
-	str_malloc_wildcard_check(mini, w, temp);
-	dest = ft_strdup(temp);
-	free(temp);
-	str_malloc_wildcard_check(mini, w, dest);
-	return (dest);
 }
 
 char	*empty_enquote(t_mini *mini, t_wildcard *w, char *line, int i)
@@ -99,6 +96,7 @@ char	*empty_enquote(t_mini *mini, t_wildcard *w, char *line, int i)
 	line_out = join_three_strings(w->prefix, w->wildcard, w->suffix);
 	str_malloc_wildcard_check(mini, w, line_out);
 	free(line);
+	free_wildcard_struct(w);
 	return (line_out);
 }
 
@@ -127,58 +125,4 @@ char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 		dest = add_line_suffix(mini, dest, w);
 	free_wildcards(line, w);
 	return (dest);
-}
-
-/**Tests if a substitution is needed
- */
-int	need_wildcard_substitution(char *line)
-{
-	int		i;
-	t_quote	q;
-
-	init_quotes(&q);
-	i = -1;
-	while (line[++i])
-	{
-		quote_enclosure_handle(line[i], &q);
-		if (line[i] && line[i] == '*' && !q.dbl && !q.sgl)
-		{
-			if (i > 0 && line[i - 1] != 92)
-				return (i);
-			else if (i == 0)
-				return (0);
-		}
-	}
-	return (-1);
-}
-
-void	init_wildcard_struct(t_wildcard *w)
-{
-	w->wildcard = NULL;
-	w->dirname = NULL;
-	w->token = NULL;
-	w->s_dir = NULL;
-	w->prefix = NULL;
-	w->suffix = NULL;
-	w->temp = NULL;
-	w->file_list = NULL;
-	w->current = false;
-	w->line_suffix = NULL;
-}
-
-/**Go through the command and do all the substitutions
- */
-char	*wildcard_handle(t_mini *mini, char *line)
-{
-	int			i;
-	t_wildcard	w;
-
-	i = need_wildcard_substitution(line);
-	while (i != -1)
-	{
-		init_wildcard_struct(&w);
-		line = substitute_wildcard(mini, line, &w, i);
-		i = need_wildcard_substitution(line);
-	}
-	return (line);
 }

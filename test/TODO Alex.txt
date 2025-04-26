@@ -8,3 +8,8 @@ Note on wildcard : maybe I coud change back single to double
 
 - CLEAN enum and structs
 - cleanup DEBUG
+
+
+
+command 0 : must exit before exec, but after redrir
+

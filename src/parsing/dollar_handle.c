@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:22 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:30:42 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -117,7 +116,8 @@ static int	need_dollar_substitution(char *line)
 		quote_enclosure_handle(line[i], &q);
 		if (line[i] == '$' && (!q.sgl))
 		{
-			if (line[i + 1] && (line[i + 1] == '?' || (!q.dbl && line[i + 1] == 39)))
+			if (line[i + 1] && (line[i + 1] == '?'
+					|| (!q.dbl && line[i + 1] == 39)))
 				return (i);
 			if (line[i + 1]
 				&& line[i + 1] != ' '

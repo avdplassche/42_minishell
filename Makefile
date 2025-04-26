@@ -49,6 +49,7 @@ SRCS				=	main.c \
 						dollar_handle.c \
 						dollar_utils.c \
 						dollar_variable.c \
+						wildcard_handle.c \
 						wildcards_sub.c \
 						wildcards_files.c \
 						wildcards_affixes.c \
@@ -99,6 +100,7 @@ UTILS				=	contain_char.c \
 						enquote_str.c \
 						epurstring.c \
 						double_array_len.c \
+						print_unexpected_token.c \
 						ft_strcmp_alpha.c \
 						is_only_spaces.c \
 						is_only_specific_char.c \

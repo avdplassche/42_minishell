@@ -3,36 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_affixes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:54:16 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-void	set_sub_token(t_mini *mini, t_wildcard *w)
+void	set_line_suffix(t_mini *mini, char *line, t_wildcard *w, int i)
 {
-	int		len;
+	while (line[i] && line[i] != ' ')
+		i++;
+	if (line[i])
+	{
+		w->line_suffix = ft_substr(line, i, ft_strlen(line) - i);
+		str_malloc_wildcard_check(mini, w, w->line_suffix);
+	}
+}
 
-	len = 0;
-	if (w->file_amount == 1)
-	{
-		free_string_ptr(&w->wildcard);
-		w->wildcard = w->file_list[0];
-		return ;
-	}
-	while (len < w->file_amount - 1)
-	{
-		append_space_to_string(mini, w, &w->file_list[len]);
-		if (!w->file_list[len])
-			free_wildcard_double_pointer_first_part(mini, w);
-		len++;
-	}
-	free_string_ptr(&w->wildcard);
-	w->wildcard = join_n_strings_wildcards(mini, w);
+char	*add_line_suffix(t_mini *mini, char *dest, t_wildcard *w)
+{
+	char	*temp;
+
+	temp = ft_strjoin(dest, w->line_suffix);
+	free(dest);
+	str_malloc_wildcard_check(mini, w, temp);
+	dest = ft_strdup(temp);
+	free(temp);
+	str_malloc_wildcard_check(mini, w, dest);
+	return (dest);
 }
 
 void	get_prefix(t_mini *mini, t_wildcard *w, int i)

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_io.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:05 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 12:19:00 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:57:59 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 

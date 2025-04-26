@@ -6,12 +6,12 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 12:23:46 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:11:54 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "minishell.h"
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 
 typedef struct s_fd_backup
 {
@@ -26,14 +26,13 @@ typedef union u_pipefd
 	{
 		int			read;
 		int			write;
-	};
+	};	
 }			t_pipefd;
-
 
 typedef struct s_redir
 {
 	char			*name;
-	t_redirections	type;
+	int				type;
 	int				heredoc_fd;
 }					t_redir;
 
@@ -41,7 +40,7 @@ typedef struct s_quote
 {
 	int				sgl;
 	int				dbl;
-}	t_quote;
+}					t_quote;
 
 typedef struct s_alloc
 {
@@ -69,19 +68,8 @@ typedef struct s_wildcard
 	char			*line_suffix;
 }					t_wildcard;
 
-typedef struct s_cmd t_cmd;
+typedef struct s_cmd	t_cmd;
 
-/** A structure containing minishell related variables
- * @param envp local environment variables (execve's 3rd parameter for ex)
- * @param builtins list of builtins functions (present in builtins dir)
- * @param paths list of path directories to look for binaries
- * @param line current prompt to work with
- * @param cmd_amount amount of commands in the command_line (also amount of pipes)
- * @param last_return sig return of the last cmd (needed for $?)
- * @param cursor used to remember where we stopped the parsing
- * @param error to be configured
- * @param fdin
- */
 typedef struct s_mini
 {
 	char			**envp;
@@ -112,7 +100,6 @@ typedef struct s_mini
  * @param pid_t is the pid of the process
  * @param pipe_in is the pipe on the left of the command
  * @param pipe_out is the pipe on the right of the command
- *
  */
 typedef struct s_cmd
 {
@@ -137,6 +124,6 @@ typedef struct s_cmd
 /** A pointer to function for the builtin function
  * @param t_builtin_func contains the signature of all the builtin functions
  */
-typedef int (*t_builtin_func)(t_mini *, t_cmd *);
+typedef int	(*t_builtin_func)(t_mini *, t_cmd *);
 
-
+#endif

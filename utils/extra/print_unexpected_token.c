@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   print_unexpected_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 13:01:01 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 13:01:04 by alvan-de         ###   ########.fr       */
+/*   Created: 2025/04/26 14:19:24 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/26 14:19:57 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	print_unexpected_token(char *token)
 {
-	char	*cursor;
-
-	if (dest == NULL || src == NULL)
-		return (NULL);
-	cursor = dest;
-	while (*src)
-	{
-		*cursor = *src;
-		cursor++;
-		src++;
-	}
-	*cursor = '\0';
-	return (dest);
+	print_error("minishell: error near unexpected token '%s'\n", token, 2);
 }

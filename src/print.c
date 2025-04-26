@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:49 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:51 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:18:37 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	print_char_table(char **table, char *name)
 void	print_string(char *string, char *name)
 {
 	DEBUG("%s : %s\n", name, string);
-}
-
-void	print_unexpected_token(char *token)
-{
-	print_error("minishell: error near unexpected token '%s'\n", token, 2);
 }
 
 void	print_quote_statement_debug(t_mini *mini, int i, t_quote *q)

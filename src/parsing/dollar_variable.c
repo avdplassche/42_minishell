@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:56 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:34:36 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -42,7 +41,8 @@ char	*sub_env_variable(t_mini *mini, char *line, t_alloc *s, int i)
 
 	while (line[++i] && line[i] != ' ')
 	{
-		if ((s->q.dbl && (is_quote(line[i]) || is_minishell_punct(line[i])|| line[i] == '*')))
+		if ((s->q.dbl && (is_quote(line[i])
+					|| is_minishell_punct(line[i]) || line[i] == '*')))
 			break ;
 		if (!s->q.dbl && (is_minishell_punct(line[i]) || line[i] == '*'))
 			break ;

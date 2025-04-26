@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:25:43 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:57:30 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -28,7 +27,8 @@ char	*empty_expand(t_mini *mini, char *line, t_quote q, int i)
 	str_malloc_check(mini, s.prefix);
 	while (line[++i])
 		if (line[i] == ' ' || (line[i] == 34 && !q.dbl)
-			|| (line[i] == 39 && !q.sgl) || is_minishell_punct(line[i]) || line[i] == '*')
+			|| (line[i] == 39 && !q.sgl) || is_minishell_punct(line[i])
+			|| line[i] == '*')
 			break ;
 	if (line[i] == '*' && line[i - 1] == '$')
 		i++;

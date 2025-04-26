@@ -12,4 +12,4 @@
 # ./minishell test/TESTMODE_INVALID_CMD 2
 # ./minishell test/TESTMODE_BUILTINS 8
 # ./minishell test/TESTMODE_DOLLAR_WILDCARDS 3
-# ./minishell endvar 151
+./minishell test/endvar 151

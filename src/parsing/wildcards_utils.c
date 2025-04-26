@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 01:46:36 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:56:24 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,16 @@ void	tokenize_wildcard(t_mini *mini, t_wildcard *w, int start)
 
 	len = start;
 	while (start >= 0 && w->wildcard[start] != '/'
-			&& w->wildcard[start] != ' ')
+		&& w->wildcard[start] != ' ')
 		start--;
 	start++;
 	while (w->wildcard[len] && w->wildcard[len] != '/'
-			&& w->wildcard[len] != ' ')
+		&& w->wildcard[len] != ' ')
 		len++;
 	if (w->wildcard[len] == '/')
 		len ++;
 	w->token = ft_substr(w->wildcard, start, len - start);
 	str_malloc_wildcard_check(mini, w, w->token);
-}
-
-int	is_last_asterisk(char *token, int i)
-{
-	while (token[i++])
-		if (token[i] == '*')
-			return (0);
-	return (1);
 }
 
 void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
@@ -63,7 +55,7 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 
 int	get_crop_index(char *line)
 {
-	int 	i;
+	int		i;
 	t_quote	q;
 
 	i = -1;
