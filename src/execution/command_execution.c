@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:51:19 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 17:00:05 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	setup_execution_environment(t_mini *mini, t_cmd *cmd, int cmd_index)
 			close_fd_backup_and_exit(mini);
 	}
 }
- 
+
 static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 {
 	t_builtin_func	f;
@@ -84,7 +84,6 @@ void	execute_command(t_mini *mini)
 	int	cmd_index;
 
 	cmd_index = 0;
-
 	create_pipe_array(mini);
 	setup_command_signal(mini);
 	while (cmd_index < mini->cmd_count)

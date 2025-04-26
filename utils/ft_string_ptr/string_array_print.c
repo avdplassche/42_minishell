@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_array_print.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 17:04:23 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 17:05:03 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -32,7 +43,8 @@ void	string_array_print(t_cmd *cmd, char **string_array)
 		{
 			equal_pos = ft_strchr(string_array[i], '=');
 			if (equal_pos)
-				printf("declare -x %.*s=\"%s\"\n", (int)(equal_pos - string_array[i]), string_array[i],
+				printf("declare -x %.*s=\"%s\"\n", \
+					(int)(equal_pos - string_array[i]), string_array[i], \
 					(equal_pos + 1));
 			else
 				printf("declare -x %s\n", string_array[i]);

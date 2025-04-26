@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_array_join.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 17:03:45 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 17:04:11 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -5,7 +16,7 @@ static char	*get_new_array(char	**array)
 {
 	int		len;
 	int		i;
-	
+
 	len = 0;
 	i = 0;
 	while (array[i])
@@ -16,7 +27,7 @@ static char	*get_new_array(char	**array)
 	return (ft_calloc((len + 1), sizeof(char)));
 }
 
-static char *string_add(char *dst, char *content)
+static char	*string_add(char *dst, char *content)
 {
 	while (*content)
 		*(dst++) = *(content++);

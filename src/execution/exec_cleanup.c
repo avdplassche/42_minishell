@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:20:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:49:30 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 17:01:07 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	clean_fd_backup(t_mini *mini)
 		close(mini->stdout_backup);
 		mini->stdout_backup = -1;
 	}
-		//restore_standard_fd(mini);
 }
 
 void	close_fd_backup_and_exit(t_mini *mini)

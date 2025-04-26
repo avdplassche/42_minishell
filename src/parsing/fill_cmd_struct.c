@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cmd_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 15:09:01 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:34:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	if (cmd->arg_amount)
 		cmd->args[i] = NULL;
 	cmd->type = get_cmd_type(mini, cmd);
-	if (!cmd->args[i][0])
+	if (!cmd->args[0][0])
 		cmd->type = EMPTY;
 }

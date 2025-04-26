@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_build.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 17:02:59 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 17:03:28 by jrandet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
  * To create the key format of the variable in the env array
  * @param dest_ptr is an array where the two pointers will be concatenated. 
- * No allocation is done in this function, make sure to allocate and test correctly before
+ * 
  * @param prefix is the first pointer (in these cases "PATH=")
- * @param suffix is the second pointer (in these cases the path variable /bin/nwkwln etc)
+ * @param suffix is the second pointer (in these cases the 
  * @return is void because i edit the pointer directly
  *
  * @return none, void

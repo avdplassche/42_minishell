@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 14:30:26 by jrandet          ###   ########.fr       */
+/*   Created: 2025/04/26 16:59:03 by jrandet           #+#    #+#             */
+/*   Updated: 2025/04/26 16:59:37 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ static void	create_heredoc_process(t_mini *mini, t_redir *redir)
 
 void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	printf("cmd coutn is worth %d\n",mini->cmd_count);
 	setup_command_signal(mini);
 	while (i < cmd->redir_amount)
 	{
