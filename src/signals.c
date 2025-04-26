@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:19:01 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:35:46 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	handler(int sig)
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_redisplay();
+		//g_sig = 1;
 	}
 }
 

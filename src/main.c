@@ -6,9 +6,10 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/24 16:51:43 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:20:30 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -79,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 3)
 		loop_3args(argv, mini, cmd);
 /************************ /TEST MODE ***************************** */
-	// rl_clear_history();
+	rl_clear_history();
 	free_mini(&mini);
 	DEBUG_CLOSE;
 	return (mini.last_return);

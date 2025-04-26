@@ -6,17 +6,38 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:11 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 00:35:55 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 01:42:07 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+bool	is_wildcard_cmd(char *line)
+{
+	int		i;
+	t_quote	q;
+
+	init_quotes(&q);
+	i = -1;
+	while (line[++i])
+	{
+		quote_enclosure_handle(line[i], &q);
+		if (line[i] == ' ' && !q.dbl && !q.sgl)
+			break ;
+	}
+	if (!line[i])
+		return (true);
+	return (false);
+}
+
+
 char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 {
 	char	*final_sub;
+	bool	cmd;
 
-	if (is_only_specific_char(line, '*'))
+	cmd = is_wildcard_cmd(line);
+	if (is_only_specific_char(line, '*') || cmd)
 	{
 		final_sub = ft_strdup(w->wildcard);
 		str_malloc_wildcard_check(mini, w, final_sub);
@@ -29,23 +50,81 @@ char	*cat_wildcards(t_mini *mini, t_wildcard *w, char *line)
 	return (final_sub);
 }
 
+void	set_line_suffix(t_mini *mini, char *line, t_wildcard *w, int i)
+{
+	while (line[i] && line[i] != ' ')
+		i++;
+	if (line[i])
+	{
+		w->line_suffix = ft_substr(line, i, ft_strlen(line) - i);
+		str_malloc_wildcard_check(mini, w, w->line_suffix);
+	}
+}
+
+char	*add_line_suffix(t_mini *mini, char *dest, t_wildcard *w)
+{
+	char	*temp;
+
+	temp = ft_strjoin(dest, w->line_suffix);
+	free(dest);
+	str_malloc_wildcard_check(mini, w, temp);
+	dest = ft_strdup(temp);
+	free(temp);
+	str_malloc_wildcard_check(mini, w, dest);
+	return (dest);
+}
+
+char	*empty_enquote(t_mini *mini, t_wildcard *w, char *line, int i)
+{
+	int		j;
+	char	*line_out;
+
+	while (i > 0 && line[i] != ' ')
+		i--;
+	if (i > 0)
+		w->prefix = ft_substr(line, 0, ++i);
+	if (i > 0)
+		str_malloc_wildcard_check(mini, w, w->prefix);
+	j = i;
+	while (line[j] && line[j] != ' ')
+		j++;
+	w->temp = ft_substr(line, i, j - i);
+	str_malloc_wildcard_check(mini, w, w->temp);
+	w->wildcard = enquote_str(w->temp, 34);
+	str_malloc_wildcard_check(mini, w, w->wildcard);
+	if (line[j])
+		w->suffix = ft_substr(line, j, ft_strlen(line) - j);
+	if (line[j])
+		str_malloc_wildcard_check(mini, w, w->suffix);
+	line_out = join_three_strings(w->prefix, w->wildcard, w->suffix);
+	str_malloc_wildcard_check(mini, w, line_out);
+	free(line);
+	return (line_out);
+}
+
 char	*substitute_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
 	char	*dest;
 
-	set_wildcard(mini, line, w);
+	set_line_suffix(mini, line, w, i);
+	set_wildcard(mini, line, w, i);
 	i = get_new_index(w->wildcard);
 	set_wildcard_directory(mini, w, i);
 	tokenize_wildcard(mini, w, i);
 	w->file_amount = count_valid_files(w);
 	if (!w->file_amount)
-		return (free_wildcard_struct(w), line);
+	{
+		i = need_wildcard_substitution(line);
+		return (free_wildcard_struct(w), empty_enquote(mini, w, line, i));
+	}
 	fill_file_list(mini, w);
 	sort_array(w->file_list, double_array_len(w->file_list));
 	change_affixes(mini, w, i);
 	line = crop_command(mini, line, w);
 	set_sub_token(mini, w);
 	dest = cat_wildcards(mini, w, line);
+	if (w->line_suffix)
+		dest = add_line_suffix(mini, dest, w);
 	free_wildcards(line, w);
 	return (dest);
 }
@@ -84,6 +163,7 @@ void	init_wildcard_struct(t_wildcard *w)
 	w->temp = NULL;
 	w->file_list = NULL;
 	w->current = false;
+	w->line_suffix = NULL;
 }
 
 /**Go through the command and do all the substitutions
@@ -94,9 +174,11 @@ char	*wildcard_handle(t_mini *mini, char *line)
 	t_wildcard	w;
 
 	i = need_wildcard_substitution(line);
-	if (i == -1)
-		return (line);
-	init_wildcard_struct(&w);
-	line = substitute_wildcard(mini, line, &w, i);
+	while (i != -1)
+	{
+		init_wildcard_struct(&w);
+		line = substitute_wildcard(mini, line, &w, i);
+		i = need_wildcard_substitution(line);
+	}
 	return (line);
 }

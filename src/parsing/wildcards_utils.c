@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:40:37 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/24 00:39:10 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 01:46:36 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ int	is_last_asterisk(char *token, int i)
 	return (1);
 }
 
-void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
+void	set_wildcard(t_mini *mini, char *line, t_wildcard *w, int i)
 {
-	int	i;
 	int	j;
 
 	if (!contain_char(line, ' '))
@@ -49,15 +48,42 @@ void	set_wildcard(t_mini *mini, char *line, t_wildcard *w)
 		str_malloc_check(mini, w->wildcard);
 		return ;
 	}
-	i = 0;
-	while (line [i] != ' ')
-		i++;
-	i++;
+	if (i > 0)
+		while (line[i - 1] != ' ')
+			i--;
+	else
+		while (line [i] != ' ')
+			i++;
 	j = i;
 	while (line [j] && line [j] != ' ')
 		j++;
-	w->wildcard = ft_substr(line, i, ft_strlen(line) - i - j);
+	w->wildcard = ft_substr(line, i, j - i);
 	str_malloc_check(mini, w->wildcard);
+}
+
+int	get_crop_index(char *line)
+{
+	int 	i;
+	t_quote	q;
+
+	i = -1;
+	init_quotes(&q);
+	while (line[++i])
+	{
+		quote_enclosure_handle(line[i], &q);
+		if (!q.dbl && !q.sgl && line[i] == '*')
+			break ;
+	}
+	if (!line[i])
+	{
+		i = 0;
+		while (line[i] && line[i] != ' ')
+			i++;
+	}
+	else
+		while (i > 0 && line[i] != ' ')
+			i--;
+	return (i);
 }
 
 char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
@@ -65,11 +91,9 @@ char	*crop_command(t_mini *mini, char *line, t_wildcard *w)
 	int		i;
 	char	*line_out;
 
-	i = 0;
 	if (!contain_char(line, ' '))
 		return (line);
-	while (line[i] && line[i] != ' ')
-		i++;
+	i = get_crop_index(line);
 	line_out = ft_substr(line, 0, i + 1);
 	str_malloc_wildcard_check(mini, w, line_out);
 	free(line);

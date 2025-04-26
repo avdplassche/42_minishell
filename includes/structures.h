@@ -6,9 +6,10 @@
 /*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:13:00 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 12:18:59 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -69,6 +70,7 @@ typedef struct s_wildcard
 	char			**file_list;
 	bool			current;
 	int				file_amount;
+	char			*line_suffix;
 }					t_wildcard;
 
 typedef struct s_cmd t_cmd;
