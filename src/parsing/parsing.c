@@ -6,9 +6,10 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 16:47:35 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 17:16:49 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -70,8 +71,6 @@ void	parsing(t_mini *mini, t_cmd *cmd)
 	expand_tildes(mini);
 	mini->line = dollar_handle(mini, mini->line);
 	mini->line = wildcard_handle(mini, mini->line);
-	// if (!mini->line[0])
-	// 	return ;
 	if (mini->line[0] && !is_valid_syntax(mini->line))
 		return (free_cmd(mini), set_return_value(mini, 2));
 	while (++i < mini->cmd_count)
