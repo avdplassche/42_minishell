@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:39:30 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 14:50:12 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:03:10 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	cmd_fill_loop(t_mini *mini, t_cmd *cmd, int i)
 	print_cmd(*cmd, mini->line);
 	if (mini->line[mini->cursor] == '|')
 	{
-		mini->cursor++;
+		mini->cursor++; 
 		while (mini->line[mini->cursor]
 			&& mini->line[mini->cursor] == ' ')
 			mini->cursor++;

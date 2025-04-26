@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:13 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 14:12:01 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:08:55 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ enum	e_command
 	INVALID = -1,
 	USER = 0,
 	BUILTIN = 1,
+	EMPTY = 2,
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/22 12:05:36 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:09:01 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	fill_cmd_structure(t_mini *mini, t_cmd *cmd)
 	if (cmd->arg_amount)
 		cmd->args[i] = NULL;
 	cmd->type = get_cmd_type(mini, cmd);
+	if (!cmd->args[i][0])
+		cmd->type = EMPTY;
 }

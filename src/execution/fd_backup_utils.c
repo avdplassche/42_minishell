@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_backup_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:28 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:37:55 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:54:05 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	backup_standard_fd(t_mini *mini)
 void	restore_standard_fd(t_mini *mini)
 {
 	if (!mini)
-		return ;;
+		return ;
 	if (mini->stdin_backup >= 0)
 	{
 		dup2(mini->stdin_backup, STDIN_FILENO);
