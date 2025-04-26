@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:57:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 00:50:45 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:33:31 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	handle_heredoc_redir(t_mini *mini, t_redir *redir)
 {
 	if (redir->heredoc_fd != -1)
 	{
-		if (redir->heredoc_fd == STDIN_FILENO)
-			return ;
+		//if (redir->heredoc_fd == STDIN_FILENO)
+			//return ;
 		dup2_fd(mini, redir->heredoc_fd, STDIN_FILENO);
 		close(redir->heredoc_fd);
 		redir->heredoc_fd = -1;

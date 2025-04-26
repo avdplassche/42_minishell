@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:19:20 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:54:26 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:30:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	heredoc_parent(t_mini *mini, t_pipefd hd_p, int *pid, t_redir *red)
 	int		wstatus;
 
 	close(hd_p.write);
+	hd_p.write = -1;
 	red->heredoc_fd = hd_p.read;
 	waitpid(*pid, &wstatus, 0);
 	if (WIFSIGNALED(wstatus))
@@ -63,6 +64,7 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	int i;
 	
 	i = 0;
+	printf("cmd coutn is worth %d\n",mini->cmd_count);
 	setup_command_signal(mini);
 	while (i < cmd->redir_amount)
 	{
