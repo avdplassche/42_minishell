@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 14:30:53 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 19:11:08 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,21 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 int	set_minimal_env(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
-	char	*pwd_entry;
 
-	if (!ft_get_env(mini, "PATH"))
-	{
-		set_env(mini, "PATH",
-			"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
-	}
-	if (!ft_get_env(mini, "PWD") && getcwd(cwd, sizeof(cwd)))
-	{
-		pwd_entry = ft_strjoin("PWD=", cwd);
-		if (!pwd_entry)
-		{
-			mini->last_return = 1;
-			exit_minishell(mini);
-		}
-		set_env(mini, "PWD", pwd_entry);
-		free_string_ptr(&pwd_entry);
-	}
-	if (!ft_get_env(mini, "SHLVL"))
-		set_env(mini, "SHVL", "SHVL=1");
+	mini->envp = malloc(sizeof(char *) * 4);
+	mini->envp[0] = ft_strdup("PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
+	str_malloc_check(mini, mini->envp[0]);
+	getcwd(cwd, sizeof(cwd));
+	mini->envp[1] = ft_strjoin("PWD=", cwd);
+	str_malloc_check(mini, mini->envp[1]);
+	mini->envp[2] = ft_strdup("SHVL=1");
+	str_malloc_check(mini, mini->envp[2]);
+	mini->envp[3] = NULL;
 	return (0);
 }
 
 int	exec_mini(t_mini *mini, t_cmd *cmd)
 {
-	if (*mini->envp == NULL)
-	{
-		set_minimal_env(mini);
-	}
 	backup_standard_fd(mini);
 	handle_heredoc(mini, cmd);
 	if (cmd->type == BUILTIN && mini->cmd_count == 1)

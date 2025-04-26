@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 00:34:17 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:36:58 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 19:05:34 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ void	set_path(t_mini *mini)
 		free_string_array(&mini->paths);
 	env = ft_get_env(mini, "PATH");
 	if (env)
-	mini->paths = ft_split(env, ':');
 	{
+		mini->paths = ft_split(env, ':');
 		dbl_str_malloc_check(mini, mini->paths);
 	}
 	if (env)
 		free(env);
+	else
+		set_minimal_env(mini);
 }
 
 /** Fill t_mini mini's variable
