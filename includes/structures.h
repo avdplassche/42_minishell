@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:27 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:36:27 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:44:03 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,8 @@ typedef struct s_alloc
 	char			*number;
 	char			*temp;
 	char			*var_name;
-	char			*var_env;
-	char			*var_value;
-	char			*enquoted;
 	t_quote			q;
 }					t_alloc;
-
 
 typedef struct s_wildcard
 {
@@ -91,7 +87,7 @@ typedef struct s_mini
 	char			**envp;
 	char			**export;
 	char			**builtins;
-	char			**paths; //we need to take away path
+	char			**paths;
 	char			*line;
 	int				cmd_count;
 	int				last_return;

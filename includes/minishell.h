@@ -64,7 +64,6 @@ void			handler(int sig);
 void			setup_signal_handlers(t_mini *mini);
 void			handler(int sig);
 void			setup_command_signal(t_mini *mini);
-void			setup_heredoc_signal(t_mini *mini);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
