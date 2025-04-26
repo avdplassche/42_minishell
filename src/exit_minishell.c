@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:41:28 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 19:43:26 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	free_mini(t_mini *mini)
 		free(mini->pipes);
 		mini->pipes = NULL;
 	}
-
 	if (mini->stdin_backup != -1)
 	{
 		close(mini->stdin_backup);
