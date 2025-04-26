@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:57:13 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/16 11:57:16 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/26 11:51:27 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* typedef enum e_whatever         < ---- NORM for enum
-{
-	ONE,
-	TWO,
-	THREE
-}	t_whatever; */
 
 typedef enum e_error
 {
@@ -33,7 +26,6 @@ typedef enum e_redirections
 			IN_REDIR,
 			OUT_REDIR,
 			HERE_DOC,
-			//HERE_DOC_QUOTED
 			OUT_APPEND,
 }			t_redirections;
 

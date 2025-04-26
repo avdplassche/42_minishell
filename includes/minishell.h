@@ -65,7 +65,6 @@ void			handler(int sig);
 void			setup_signal_handlers(t_mini *mini);
 void			handler(int sig);
 void			setup_command_signal(t_mini *mini);
-void			set_return_and_global_signal(t_mini *mini);
 
 /* * * * * * * * * * * * * * * PARSING * * * * * * * * * * * * * * * * * * * */
 
