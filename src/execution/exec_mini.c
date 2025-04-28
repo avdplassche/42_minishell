@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:39:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:31:42 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	exec_mini(t_mini *mini, t_cmd *cmd)
 	{
 		return (execute_builtin(mini, cmd));
 	}
-	else if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
-		|| cmd->type == INVALID)
+	if (cmd->type == USER || (cmd->type == BUILTIN && mini->cmd_count > 1)
+		|| cmd->type == INVALID || cmd->type == EMPTY)
 	{
 		if (check_command_synthax(mini, cmd))
 			return (mini->last_return);

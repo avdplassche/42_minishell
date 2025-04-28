@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:20:59 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/28 10:43:18 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:19:45 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int				setup_command_redirections(t_mini *mini, t_cmd *cmd);
 //parent functions
 int				wait_for_children(t_mini *mini);
 void			parent_closes_all_pipes(t_mini *mini);
+void			parent_closes_all_redir(t_mini *mini);
 //env-i scenario
 int				set_minimal_env(t_mini *mini);
 //standard fd backup and restore functions
