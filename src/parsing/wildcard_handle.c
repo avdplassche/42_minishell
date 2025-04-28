@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:38:27 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 17:06:13 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:13:17 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*wildcard_handle(t_mini *mini, char *line)
 {
 	int			i;
 	t_wildcard	w;
-	
+
 	i = need_wildcard_substitution(line);
 	while (i != -1)
 	{

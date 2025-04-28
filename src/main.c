@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 10:43:31 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:34:22 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
-
-// void	loop_3args(char **argv, t_mini mini, t_cmd *cmd)
-// {
-// 	int fd = open(argv[1], O_RDONLY);
-// 	char buffer[10000];
-// 	int c = 0;
-// 	int r = read(fd, buffer, 9999);
-// 	char	*next_line = NULL;
-
-// 	cmd = NULL;
-// 	buffer[r] = '\0';
-// 	close(fd);
-// 	fd = open(argv[1], O_RDONLY);
-// 	if (fd == -1)
-// 		perror("error");
-// 	while (TEST_MODE == 1 && c < ft_atoi(argv[2]))
-// 	{
-// 		next_line = get_next_line(fd);
-// 		mini.line = ft_strtrim(next_line, SPACES);
-// 		free(next_line);
-// 		mini.cmd_count = count_cmd(&mini);
-// 		mini.cursor = 0;
-// 		DEBUG("\nCOMMAND LINE %d ➤ %s¶\n\n", c + 1, mini.line);
-// 		if (!(is_only_spaces(mini.line)) || mini.line[0] != '#')
-// 			parsing(&mini, cmd);
-// 		free(cmd);
-// 		free(mini.line);
-// 		mini.line = NULL;
-// 		c++;
-// 	}
-// 	close(fd);
-// }
 
 void	set_line(t_mini *mini, char *input)
 {
