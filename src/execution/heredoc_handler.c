@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:59:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 17:16:42 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:11:16 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	heredoc_parent(t_mini *mini, t_pipefd hd_p, int *pid, t_redir *red)
 static void	heredoc_child(t_mini *mini, t_pipefd hd_pipe, t_redir *redir)
 {
 	close(hd_pipe.read);
-	hd_pipe.read = -1;
 	get_heredoc_imput_in_pipe(mini, hd_pipe.write, redir);
 	close(hd_pipe.write);
+	hd_pipe.write = -1;
 	exit_minishell(mini);
 }
 

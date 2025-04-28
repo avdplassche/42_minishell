@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 00:28:44 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 13:00:45 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:59:39 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	get_heredoc_imput_in_pipe(t_mini *mini, int heredoc_fd, t_redir *redir)
 		{
 			print_error("here-doc delimited by end-of-file (wanted %s)\n", \
 				redir->name, 2);
+				break ;
 		}
 		null_terminate_heredoc_line(&line);
 		if (line[0] != 0 && ft_strcmp(line, redir->name) == 0)

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:23:53 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:34:14 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	free_mini(t_mini *mini)
 		free(mini->pipes);
 		mini->pipes = NULL;
 	}
-
 	if (mini->stdin_backup != -1)
 	{
 		close(mini->stdin_backup);
