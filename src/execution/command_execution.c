@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 20:00:42 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:45:46 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 		DEBUG("entered the builtin section\n");
 		exit_minishell(mini);
 	}
-	DEBUG("mini->last return is worth %d\n", mini->last_return);
 	if (execve(cmd->path, cmd->args, mini->envp) == -1)
 	{
 		exit_minishell(mini);
@@ -92,7 +91,6 @@ void	execute_command(t_mini *mini)
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
-	DEBUG("PARENT EXEC: heredoc fd is worth %d\n", mini->cmd->redir->heredoc_fd);
 	if (mini->cmd->redir->heredoc_fd != -1)
 	{
 		close(mini->cmd->redir->heredoc_fd);
