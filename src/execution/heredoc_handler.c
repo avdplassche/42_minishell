@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:59:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:11:16 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:55:01 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,33 @@ static void	heredoc_parent(t_mini *mini, t_pipefd hd_p, int *pid, t_redir *red)
 	}
 }
 
-static void	heredoc_child(t_mini *mini, t_pipefd hd_pipe, t_redir *redir)
+static void close_previous_herdoc(t_cmd *cmd, t_redir *redir)
+{
+	t_redir *r;
+
+	r = cmd->redir;
+	while (r != redir)
+	{
+		if (r->heredoc_fd != -1)
+		{
+			close(r->heredoc_fd);
+			r->heredoc_fd = -1;
+		}
+		r++;
+	}
+}
+
+static void	heredoc_child(t_mini *mini, t_cmd *cmd, t_pipefd hd_pipe, t_redir *redir)
 {
 	close(hd_pipe.read);
+	close_previous_herdoc(cmd, redir);
 	get_heredoc_imput_in_pipe(mini, hd_pipe.write, redir);
 	close(hd_pipe.write);
 	hd_pipe.write = -1;
 	exit_minishell(mini);
 }
 
-static void	create_heredoc_process(t_mini *mini, t_redir *redir)
+static void	create_heredoc_process(t_mini *mini, t_cmd *cmd, t_redir *redir)
 {
 	pid_t		pid;
 	t_pipefd	hd_pipe;
@@ -56,7 +73,7 @@ static void	create_heredoc_process(t_mini *mini, t_redir *redir)
 	if (pid == 0)
 	{
 		signal_child();
-		heredoc_child(mini, hd_pipe, redir);
+		heredoc_child(mini, cmd, hd_pipe, redir);
 	}
 	heredoc_parent(mini, hd_pipe, &pid, redir);
 }
@@ -71,7 +88,7 @@ void	handle_heredoc(t_mini *mini, t_cmd *cmd)
 	{
 		if (cmd->redir[i].type == HERE_DOC)
 		{
-			create_heredoc_process(mini, &cmd->redir[i]);
+			create_heredoc_process(mini, cmd, &cmd->redir[i]);
 			if (mini->last_return == 130)
 				break ;
 		}

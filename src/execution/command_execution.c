@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:44:52 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:25:34 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ static void	handle_command_execution(t_mini *mini, t_cmd *cmd, int cmd_index)
 	t_builtin_func	f;
 
 	if (cmd->command[0] == '\0')
+	{
+		setup_execution_environment(mini, cmd, cmd_index);
 		close_fd_backup_and_exit(mini);
+	}
 	validate_command(mini, cmd);
 	setup_execution_environment(mini, cmd, cmd_index);
 	if (cmd->type == BUILTIN)

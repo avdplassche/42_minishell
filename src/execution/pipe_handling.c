@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/25 21:25:28 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:22:55 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,30 @@ void	parent_closes_all_pipes(t_mini *mini)
 	{
 		close(mini->pipes[i].read);
 		close(mini->pipes[i].write);
+		i++;
+	}
+	free(mini->pipes);
+	mini->pipes = NULL;
+}
+
+void	parent_closes_all_redir(t_mini *mini)
+{
+	int	i;
+	int redir_index;
+
+	i = 0;
+	while (i < mini->cmd_count)
+	{
+		redir_index = 0;
+		while (redir_index < mini->cmd[i].redir_amount)
+		{
+			if (mini->cmd[i].redir[redir_index].heredoc_fd != -1)
+			{
+				close(mini->cmd[i].redir[redir_index].heredoc_fd);
+				mini->cmd[i].redir[redir_index].heredoc_fd = -1;
+			}
+			redir_index++;
+		}
 		i++;
 	}
 	free(mini->pipes);
