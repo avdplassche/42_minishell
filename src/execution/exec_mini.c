@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 19:11:08 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:30:42 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	set_minimal_env(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
 
+	if (mini->envp)
+		free_string_array(&mini->envp);
 	mini->envp = malloc(sizeof(char *) * 4);
 	mini->envp[0] = ft_strdup("PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
 	str_malloc_check(mini, mini->envp[0]);

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cmd_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:38:55 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/04/26 17:16:44 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:12:40 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
