@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/26 20:00:42 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:44:52 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,6 @@ void	execute_command(t_mini *mini)
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
-	DEBUG("PARENT EXEC: heredoc fd is worth %d\n", mini->cmd->redir->heredoc_fd);
-	if (mini->cmd->redir->heredoc_fd != -1)
-	{
-		close(mini->cmd->redir->heredoc_fd);
-		mini->cmd->redir->heredoc_fd = -1;
-	}
 	mini->last_return = wait_for_children(mini);
 	setup_command_signal(mini);
 }
