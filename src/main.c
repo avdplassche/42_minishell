@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:01:40 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:34:22 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:55:16 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	main(int argc, char **argv, char **envp)
 			&& mini.line[0])
 			parsing(&mini, cmd);
 		free_string_ptr(&mini.line);
+	}
+	if (argc == 2)
+	{
+		int script_status = execute_file(&mini, argv[1]);
+		mini.last_return = script_status;
 	}
 	rl_clear_history();
 	free_mini(&mini);

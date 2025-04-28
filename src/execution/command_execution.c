@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:11 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 12:32:15 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:40:53 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	execute_command(t_mini *mini)
 		cmd_index++;
 	}
 	parent_closes_all_pipes(mini);
+	parent_closes_all_redir(mini);
 	mini->last_return = wait_for_children(mini);
 	setup_command_signal(mini);
 }

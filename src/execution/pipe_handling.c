@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:07:02 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 12:32:19 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:44:33 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	parent_closes_all_pipes(t_mini *mini)
 void	parent_closes_all_redir(t_mini *mini)
 {
 	int	i;
-	int redir_index;
+	int	redir_index;
 
 	i = 0;
 	while (i < mini->cmd_count)
@@ -47,8 +47,6 @@ void	parent_closes_all_redir(t_mini *mini)
 		}
 		i++;
 	}
-	free(mini->pipes);
-	mini->pipes = NULL;
 }
 
 void	setup_command_pipes(t_mini *mini, t_cmd *cmd, int cmd_index)

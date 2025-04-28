@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:59:03 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 11:55:01 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:46:47 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	heredoc_parent(t_mini *mini, t_pipefd hd_p, int *pid, t_redir *red)
 	}
 }
 
-static void close_previous_herdoc(t_cmd *cmd, t_redir *redir)
+static void	close_previous_herdoc(t_cmd *cmd, t_redir *redir)
 {
-	t_redir *r;
+	t_redir	*r;
 
 	r = cmd->redir;
 	while (r != redir)
@@ -48,11 +48,11 @@ static void close_previous_herdoc(t_cmd *cmd, t_redir *redir)
 	}
 }
 
-static void	heredoc_child(t_mini *mini, t_cmd *cmd, t_pipefd hd_pipe, t_redir *redir)
+void	heredoc_child(t_mini *mini, t_cmd *cmd, t_pipefd hd_pipe, t_redir *r)
 {
 	close(hd_pipe.read);
-	close_previous_herdoc(cmd, redir);
-	get_heredoc_imput_in_pipe(mini, hd_pipe.write, redir);
+	close_previous_herdoc(cmd, r);
+	get_heredoc_imput_in_pipe(mini, hd_pipe.write, r);
 	close(hd_pipe.write);
 	hd_pipe.write = -1;
 	exit_minishell(mini);

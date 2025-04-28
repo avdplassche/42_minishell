@@ -6,7 +6,7 @@
 /*   By: jrandet <jrandet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:06:19 by jrandet           #+#    #+#             */
-/*   Updated: 2025/04/28 12:32:10 by jrandet          ###   ########.fr       */
+/*   Updated: 2025/04/28 12:51:19 by jrandet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ int	execute_builtin(t_mini *mini, t_cmd *cmd)
 int	set_minimal_env(t_mini *mini)
 {
 	char	cwd[PATH_MAX];
+	char	*path;
 
+	path = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.";
 	if (mini->envp)
 		free_string_array(&mini->envp);
 	mini->envp = malloc(sizeof(char *) * 4);
-	mini->envp[0] = ft_strdup("PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.");
+	mini->envp[0] = ft_strdup(path);
 	str_malloc_check(mini, mini->envp[0]);
 	getcwd(cwd, sizeof(cwd));
 	mini->envp[1] = ft_strjoin("PWD=", cwd);
