@@ -4,3 +4,9 @@ minishell
 *.out
 *.log
 log/*
+.vscode
+Dockerfile
+*.supp
+run.sh
+valgrind*
+
